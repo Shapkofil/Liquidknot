@@ -35,9 +35,10 @@ class RayMarcher(object):
         MARCH_STEPS = 48
         PLANK = .005
 
-        uv = (2 * coords - self.resolution) / self.resolution
-
         ray_origin = self.camera_pos
+
+        # ToDo calc ray_dir in a separate function
+        uv = (2 * coords - self.resolution + 1) / (self.resolution - 1)
         ray_direction = np.array([uv[0], 1., uv[1]])
 
         march_distance = .0
@@ -69,9 +70,10 @@ class RayMarcher(object):
 
     # ToDo make lambdas pressets for distance funcs
     def testing_dist(self, anchor):
-        return RayMarcher.gauss_len(anchor) - .5
+        return RayMarcher.gauss_len(anchor) - .6
 
 
 if __name__ == "__main__":
+	#testing rig
     rm = RayMarcher([9, 9], camera_pos=[.0, -1., .0])
     print(rm.march(np.array([3, 3])))

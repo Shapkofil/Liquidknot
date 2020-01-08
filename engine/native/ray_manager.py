@@ -28,5 +28,5 @@ class RayManager:
 
 
 if __name__ == "__main__":
-    rayman = RayManager([4, 4], camera_pos=[.0, -1., .0])
+    rayman = RayManager([24, 24], camera_pos=[.0, -1., .0])
     print(rayman.render())
