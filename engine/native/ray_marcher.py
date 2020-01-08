@@ -21,6 +21,10 @@ class RayMarcher(object):
         self.camera_pos = np.array(camera_pos)
         self.camera_rot = np.array(camera_rot)
 
+    def calc_ray_dir(self, coords):
+        uv = (2 * coords - self.resolution + 1) / (self.resolution - 1)
+        return np.array([uv[0], 1., uv[1]])
+
     def march(self, coords, verbose=False):
 
         # convert coords to numpy float
@@ -36,10 +40,7 @@ class RayMarcher(object):
         PLANK = .005
 
         ray_origin = self.camera_pos
-
-        # ToDo calc ray_dir in a separate function
-        uv = (2 * coords - self.resolution + 1) / (self.resolution - 1)
-        ray_direction = np.array([uv[0], 1., uv[1]])
+        ray_direction = self.calc_ray_dir(coords)
 
         march_distance = .0
         epoch = 0
@@ -64,16 +65,17 @@ class RayMarcher(object):
 
         return .0
 
+    # ToDo make an utility class
     @staticmethod
     def gauss_len(vec):
         return math.sqrt(sum([x * x for x in vec]))
 
-    # ToDo make lambdas pressets for distance funcs
+    # ToDo make lambdas pressets for distance funcs in a separate file
     def testing_dist(self, anchor):
         return RayMarcher.gauss_len(anchor) - .6
 
 
 if __name__ == "__main__":
-	#testing rig
+    # testing rig
     rm = RayMarcher([9, 9], camera_pos=[.0, -1., .0])
     print(rm.march(np.array([3, 3])))
