@@ -1,5 +1,6 @@
 import numpy as np
 import math
+from camera import Camera
 
 
 class RayMarcher(object):
@@ -7,23 +8,17 @@ class RayMarcher(object):
     def __init__(self,
                  resolution,
                  camera_pos=[.0, .0, .0],
-                 camera_rot=np.array([]),
+                 camera_rot=[.0, .0, .0],
                  scene=""):
 
         self.resolution = np.array(resolution).astype(float)
-        self.camera_pos = np.array(camera_pos).astype(float)
-        self.camera_rot = np.array(camera_rot).astype(float)
+        self.camera = Camera(
+            self.resolution,
+            position=camera_pos,
+            rotation=camera_rot)
 
         # ToDo figure out what scene is going to be
         self.scene = scene
-
-    def set_camera(self, camera_pos, camera_rot=[.0, .0, .0]):
-        self.camera_pos = np.array(camera_pos)
-        self.camera_rot = np.array(camera_rot)
-
-    def calc_ray_dir(self, coords):
-        uv = (2 * coords - self.resolution + 1) / (self.resolution - 1)
-        return np.array([uv[0], 1., uv[1]])
 
     def march(self, coords, verbose=False):
 
@@ -39,8 +34,8 @@ class RayMarcher(object):
         MARCH_STEPS = 48
         PLANK = .005
 
-        ray_origin = self.camera_pos
-        ray_direction = self.calc_ray_dir(coords)
+        ray_origin = self.camera.pos
+        ray_direction = self.camera.calc_ray_dir(coords)
 
         march_distance = .0
         epoch = 0

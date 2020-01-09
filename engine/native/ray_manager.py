@@ -7,7 +7,7 @@ class RayManager:
     def __init__(self,
                  resolution,
                  camera_pos=[.0, .0, .0],
-                 camera_rot=[],
+                 camera_rot=[.0, .0, .0],
                  scene=""):
         self.resolution = resolution
         self.camera_pos = camera_pos
@@ -18,7 +18,9 @@ class RayManager:
         result = np.zeros(self.resolution, dtype=float)
 
         # initializing ray_marcher
-        rm = RayMarcher(self.resolution, camera_pos=self.camera_pos)
+        rm = RayMarcher(self.resolution,
+                        camera_pos=self.camera_pos,
+                        camera_rot=self.camera_rot)
 
         for x in range(self.resolution[0]):
             for y in range(self.resolution[1]):
@@ -28,5 +30,7 @@ class RayManager:
 
 
 if __name__ == "__main__":
-    rayman = RayManager([24, 24], camera_pos=[.0, -1., .0])
+    rayman = RayManager([24, 24],
+                        camera_pos=[.0, -2., .0],
+                        camera_rot=[np.pi / 6, .0, 0.])
     print(rayman.render())
