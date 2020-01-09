@@ -17,7 +17,7 @@ class RayMarcher(object):
             position=camera_pos,
             rotation=camera_rot)
 
-        # ToDo figure out what scene is going to be
+        # ToDo do the scene thingies with json
         self.scene = scene
 
     def march(self, coords, verbose=False):

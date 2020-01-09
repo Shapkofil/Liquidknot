@@ -23,17 +23,19 @@ class Camera(object):
             vec = np.array(vec).astype(float)
             rot = np.array(rot).astype(float)
 
+        rot = -rot
+
         # Rotation matricies for the three world planes
         matrices = [
-            np.array([[np.cos(rot[2]), -np.sin(rot[2]), 0],
-                      [np.sin(rot[2]), np.cos(rot[2]), 0],
+            np.array([[np.cos(rot[0]), -np.sin(rot[0]), 0],
+                      [np.sin(rot[0]), np.cos(rot[0]), 0],
                       [0, 0, 1]]),
             np.array([[np.cos(rot[1]), 0, -np.sin(rot[1])],
                       [0, 1, 0],
                       [np.sin(rot[1]), 0, np.cos(rot[1])]]),
             np.array([[1, 0, 0],
-                      [0, np.cos(rot[0]), -np.sin(rot[0])],
-                      [0, np.sin(rot[0]), np.cos(rot[0])]])
+                      [0, np.cos(rot[2]), -np.sin(rot[2])],
+                      [0, np.sin(rot[2]), np.cos(rot[2])]])
         ]
 
         for rot_matrix in matrices:

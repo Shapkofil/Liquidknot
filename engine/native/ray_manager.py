@@ -31,6 +31,6 @@ class RayManager:
 
 if __name__ == "__main__":
     rayman = RayManager([24, 24],
-                        camera_pos=[.0, -2., .0],
-                        camera_rot=[np.pi / 6, .0, 0.])
+                        camera_pos=[.0, -1., .0],
+                        camera_rot=[.0, .0, np.pi/6])
     print(rayman.render())
