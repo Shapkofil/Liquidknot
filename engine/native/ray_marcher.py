@@ -1,6 +1,6 @@
 import numpy as np
 import math
-from camera import Camera
+from .camera import Camera
 
 
 class RayMarcher(object):
@@ -26,14 +26,16 @@ class RayMarcher(object):
         coords = np.array(coords).astype(float)
 
         if coords[0] >= self.resolution[0] or coords[1] >= self.resolution[1]:
-            return .0
+            return [0., 0., 0., 0.]
 
         # Hyper Params
         # ToDo get hyper params externely
-        MAX_DISTANCE = 1000.0
+        MAX_DISTANCE = 10.0
         MARCH_STEPS = 48
         PLANK = .005
 
+        if verbose:
+            print("ray calculation")
         ray_origin = self.camera.pos
         ray_direction = self.camera.calc_ray_dir(coords)
 
@@ -49,7 +51,7 @@ class RayMarcher(object):
                 break
 
             if current_rad < PLANK:
-                return 1.
+                return [1., .2, 1., 1.]
 
             ray_origin = ray_origin + current_rad * ray_direction
             epoch += 1
@@ -58,11 +60,13 @@ class RayMarcher(object):
             print("{0} steps marched".format(epoch))
             print("marched {0} units".format(march_distance))
 
-        return .0
+        return [.2, 1., 1., 1.]
 
     # ToDo make an utility class
     @staticmethod
     def gauss_len(vec):
+        print(vec)
+        vec = list(vec)
         return math.sqrt(sum([x * x for x in vec]))
 
     # ToDo make lambdas pressets for distance funcs in a separate file

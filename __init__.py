@@ -13,25 +13,19 @@ bl_info = {
     'link': 'https://github.com/s-leger/archipack',
     'support': 'COMMUNITY',
     'category': 'Rendering Engine'
-    }
+}
 
 import os
-
-if "bpy" in locals():
-	import importlib as imp
-	#reload
-
-else:
-	#initial import
-
 import bpy
+from .engine_wrap import register as register_engine , unregister as unregister_engine
 
 def register():
-	#register
+    register_engine()
+
 
 def unregister():
-	#unregister
+    unregister_engine()
+
 
 if __name__ == "__main__":
-	register()
-
+    register()

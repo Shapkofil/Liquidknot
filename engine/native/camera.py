@@ -4,7 +4,7 @@ import numpy as np
 class Camera(object):
 
     def __init__(self, resolution, position, rotation, focal_len=1.):
-        self.resolution = resolution
+        self.resolution = np.array(resolution).astype(float)
         self.pos = np.array(position).astype(float)
         self.rot = np.array(rotation).astype(float)
         self.focal_len = focal_len
@@ -13,9 +13,10 @@ class Camera(object):
         uv = (2 * coords - self.resolution + 1) / (self.resolution - 1)
 
         # Return vectorize the uv and rotate
-        return Camera.rotate_vector([uv[0], self.focal_len, uv[1]],
-                                    self.rot,
-                                    verbose=verbose)
+        # return Camera.rotate_vector([uv[0], self.focal_len, uv[1]],
+        #                             self.rot
+        #                             verbose=verbose)
+        return np.array([[uv[0], self.focal_len, uv[1]]])
 
     @staticmethod
     def rotate_vector(vec, rot, numpify=True, verbose=False):

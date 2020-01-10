@@ -1,12 +1,14 @@
 import bpy
 import bgl
+import numpy as np
+from .engine import *
 
 
-class CustomRenderEngine(bpy.types.RenderEngine):
+class LiquidknotRenderEngine(bpy.types.RenderEngine):
     # These three members are used by blender to set up the
     # RenderEngine; define its internal name, visible name and capabilities.
-    bl_idname = "CUSTOM"
-    bl_label = "Custom"
+    bl_idname = "LIQUIDKNOT"
+    bl_label = "Liquidknot"
     bl_use_preview = True
 
     # Init is called whenever a new render engine instance is created. Multiple
@@ -28,17 +30,16 @@ class CustomRenderEngine(bpy.types.RenderEngine):
         scale = scene.render.resolution_percentage / 100.0
         self.size_x = int(scene.render.resolution_x * scale)
         self.size_y = int(scene.render.resolution_y * scale)
+        self.rayman = RayManager(
+            [self.size_x, self.size_y],
+            camera_pos=[.0, -1., .0])
 
         # Fill the render result with a flat color. The framebuffer is
         # defined as a list of pixels, each pixel itself being a list of
         # R,G,B,A values.
-        if self.is_preview:
-            color = [0.1, 0.2, 0.1, 1.0]
-        else:
-            color = [0.2, 0.1, 0.1, 1.0]
-
-        pixel_count = self.size_x * self.size_y
-        rect = [color] * pixel_count
+        print([self.size_x, self.size_y])
+        rect = self.rayman.render()
+        # rect = self.rayman.render()
 
         # Here we write the pixel values to the RenderResult
         result = self.begin_result(0, 0, self.size_x, self.size_y)
@@ -100,16 +101,93 @@ class CustomRenderEngine(bpy.types.RenderEngine):
         self.bind_display_space_shader(scene)
 
         if not self.draw_data or self.draw_data.dimensions != dimensions:
-            self.draw_data = CustomDrawData(dimensions)
+            self.draw_data = LiquidknotDrawData(dimensions)
 
         self.draw_data.draw()
 
         self.unbind_display_space_shader()
         bgl.glDisable(bgl.GL_BLEND)
 
+
+class LiquidknotDrawData:
+    def __init__(self, dimensions):
+        # Generate dummy float image buffer
+        self.dimensions = dimensions
+        width, height = dimensions
+
+        pixels = [0.1, 0.2, 0.1, 1.0] * width * height
+        pixels = bgl.Buffer(bgl.GL_FLOAT, width * height * 4, pixels)
+
+        # Generate texture
+        self.texture = bgl.Buffer(bgl.GL_INT, 1)
+        bgl.glGenTextures(1, self.texture)
+        bgl.glActiveTexture(bgl.GL_TEXTURE0)
+        bgl.glBindTexture(bgl.GL_TEXTURE_2D, self.texture[0])
+        bgl.glTexImage2D(bgl.GL_TEXTURE_2D, 0, bgl.GL_RGBA16F,
+                         width, height, 0, bgl.GL_RGBA, bgl.GL_FLOAT, pixels)
+        bgl.glTexParameteri(bgl.GL_TEXTURE_2D,
+                            bgl.GL_TEXTURE_MIN_FILTER, bgl.GL_LINEAR)
+        bgl.glTexParameteri(bgl.GL_TEXTURE_2D,
+                            bgl.GL_TEXTURE_MAG_FILTER, bgl.GL_LINEAR)
+        bgl.glBindTexture(bgl.GL_TEXTURE_2D, 0)
+
+        # Bind shader that converts from scene linear to display space,
+        # use the scene's color management settings.
+        shader_program = bgl.Buffer(bgl.GL_INT, 1)
+        bgl.glGetIntegerv(bgl.GL_CURRENT_PROGRAM, shader_program)
+
+        # Generate vertex array
+        self.vertex_array = bgl.Buffer(bgl.GL_INT, 1)
+        bgl.glGenVertexArrays(1, self.vertex_array)
+        bgl.glBindVertexArray(self.vertex_array[0])
+
+        texturecoord_location = bgl.glGetAttribLocation(
+            shader_program[0], "texCoord")
+        position_location = bgl.glGetAttribLocation(shader_program[0], "pos")
+
+        bgl.glEnableVertexAttribArray(texturecoord_location)
+        bgl.glEnableVertexAttribArray(position_location)
+
+        # Generate geometry buffers for drawing textured quad
+        position = [0.0, 0.0, width, 0.0, width, height, 0.0, height]
+        position = bgl.Buffer(bgl.GL_FLOAT, len(position), position)
+        texcoord = [0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0]
+        texcoord = bgl.Buffer(bgl.GL_FLOAT, len(texcoord), texcoord)
+
+        self.vertex_buffer = bgl.Buffer(bgl.GL_INT, 2)
+
+        bgl.glGenBuffers(2, self.vertex_buffer)
+        bgl.glBindBuffer(bgl.GL_ARRAY_BUFFER, self.vertex_buffer[0])
+        bgl.glBufferData(bgl.GL_ARRAY_BUFFER, 32, position, bgl.GL_STATIC_DRAW)
+        bgl.glVertexAttribPointer(
+            position_location, 2, bgl.GL_FLOAT, bgl.GL_FALSE, 0, None)
+
+        bgl.glBindBuffer(bgl.GL_ARRAY_BUFFER, self.vertex_buffer[1])
+        bgl.glBufferData(bgl.GL_ARRAY_BUFFER, 32, texcoord, bgl.GL_STATIC_DRAW)
+        bgl.glVertexAttribPointer(
+            texturecoord_location, 2, bgl.GL_FLOAT, bgl.GL_FALSE, 0, None)
+
+        bgl.glBindBuffer(bgl.GL_ARRAY_BUFFER, 0)
+        bgl.glBindVertexArray(0)
+
+    def __del__(self):
+        bgl.glDeleteBuffers(2, self.vertex_buffer)
+        bgl.glDeleteVertexArrays(1, self.vertex_array)
+        bgl.glBindTexture(bgl.GL_TEXTURE_2D, 0)
+        bgl.glDeleteTextures(1, self.texture)
+
+    def draw(self):
+        bgl.glActiveTexture(bgl.GL_TEXTURE0)
+        bgl.glBindTexture(bgl.GL_TEXTURE_2D, self.texture[0])
+        bgl.glBindVertexArray(self.vertex_array[0])
+        bgl.glDrawArrays(bgl.GL_TRIANGLE_FAN, 0, 4)
+        bgl.glBindVertexArray(0)
+        bgl.glBindTexture(bgl.GL_TEXTURE_2D, 0)
+
+
 # RenderEngines also need to tell UI Panels that they are compatible with.
 # We recommend to enable all panels marked as BLENDER_RENDER, and then
-# exclude any panels that are replaced by custom panels registered by the
+# exclude any panels that are replaced by Liquidknot panels registered by the
 # render engine, or that are not supported.
 def get_panels():
     exclude_panels = {
@@ -128,18 +206,18 @@ def get_panels():
 
 def register():
     # Register the RenderEngine
-    bpy.utils.register_class(CustomRenderEngine)
+    bpy.utils.register_class(LiquidknotRenderEngine)
 
     for panel in get_panels():
-        panel.COMPAT_ENGINES.add('CUSTOM')
+        panel.COMPAT_ENGINES.add('LIQUIDKNOT')
 
 
 def unregister():
-    bpy.utils.unregister_class(CustomRenderEngine)
+    bpy.utils.unregister_class(LiquidknotRenderEngine)
 
     for panel in get_panels():
-        if 'CUSTOM' in panel.COMPAT_ENGINES:
-            panel.COMPAT_ENGINES.remove('CUSTOM')
+        if 'LIQUIDKNOT' in panel.COMPAT_ENGINES:
+            panel.COMPAT_ENGINES.remove('LIQUIDKNOT')
 
 
 if __name__ == "__main__":
