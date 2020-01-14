@@ -21,7 +21,7 @@ def reshape(width, height):
 
 def display():
     glClear(GL_COLOR_BUFFER_BIT)
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 3)
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4)
 
 
 def keyboard(key, x, y):
@@ -42,12 +42,6 @@ def buildBuffers(data, program):
     glEnableVertexAttribArray(loc)
     glBindBuffer(GL_ARRAY_BUFFER, buff)
     glVertexAttribPointer(loc, 2, GL_FLOAT, False, stride, offset)
-
-    offset = ctypes.c_void_p(data.dtype["position"].itemsize)
-    loc = glGetAttribLocation(program, "color")
-    glEnableVertexAttribArray(loc)
-    glBindBuffer(GL_ARRAY_BUFFER, buff)
-    glVertexAttribPointer(loc, 4, GL_FLOAT, False, stride, offset)
 
 
 if __name__ == "__main__":
@@ -72,16 +66,13 @@ if __name__ == "__main__":
 
     glfw.make_context_current(window)
 
-    data = np.zeros(3, [("position", np.float32, 2), ("color", np.float32, 4)])
-    data["position"] = [(.0, 1.), (1, -1), (-1, -1)]
-    data["color"] = [(.8, .0, .0, 1.),
-                     (.0, .8, .0, 1.),
-                     (.0, .0, .8, 1.)]
+    data = np.zeros(4, [("position", np.float32, 2)])
+    data["position"] = [(-1, 1), (-1, -1), (+1, +1), (1, -1)]
 
     program = glcu.compileProgram(vertex_code, fragment_code)
     buildBuffers(data, program)
-    loc = glGetUniformLocation(program, "color")
-    glUniform4f(loc, 0.0, 0.54, .2, 1.0)
+    loc = glGetUniformLocation(program, "resolution")
+    glUniform2f(loc, WIDTH, HEIGHT)
 
     display()
 
