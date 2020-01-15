@@ -2,31 +2,17 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 import glfw
 
-import cv2
-import gl_utils as glcu
+from . import gl_utils as glcu
 
-import sys
 import numpy as np
 import ctypes
 
-
-vertex_code = open("vertex.shader").read()
-
-fragment_code = open("fragment.shader").read()
-
-
-def reshape(width, height):
-    glViewport(0, 0, width, height)
+import os
 
 
 def display():
     glClear(GL_COLOR_BUFFER_BIT)
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4)
-
-
-def keyboard(key, x, y):
-    if key == 'q':
-        sys.exit()
 
 
 def buildBuffers(data, program):
@@ -44,12 +30,23 @@ def buildBuffers(data, program):
     glVertexAttribPointer(loc, 2, GL_FLOAT, False, stride, offset)
 
 
-if __name__ == "__main__":
+def render(resolution=(640, 480),
+           vertex_code=None,
+           fragment_code=None):
+
+    # Default shader code
+    if vertex_code is None:
+        vertex_code = open(os.path.join(
+            os.path.dirname(__file__), "vertex.shader")).read()
+
+    if fragment_code is None:
+        fragment_code = open(os.path.join(
+            os.path.dirname(__file__), "fragment.shader")).read()
 
     # Hyper Params
     # ToDo Get hyper Params externaly
-    WIDTH = 640
-    HEIGHT = 480
+    WIDTH = resolution[0]
+    HEIGHT = resolution[1]
 
     if not glfw.init():
         print("glfw failed!!!")
@@ -76,9 +73,7 @@ if __name__ == "__main__":
 
     display()
 
-    raw_read = glcu.readPixels(0, 0, WIDTH, HEIGHT)
-    refine = np.asarray(raw_read[:, :, :3] * 255, dtype=np.uint8)
-    cv2.imwrite("testrender.png", refine)
+    return glcu.readPixels(0, 0, WIDTH, HEIGHT)
 
     glfw.destroy_window(window)
     glfw.terminate()
