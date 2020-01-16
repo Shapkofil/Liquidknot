@@ -1,3 +1,4 @@
 #Sublime Anaconda Lint files
 *.pyc
 test_render.png
+.venv/
