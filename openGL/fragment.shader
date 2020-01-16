@@ -1,19 +1,40 @@
-varying vec4 v_color;
-
 // ToDo get consts from blender
 const float PLANK = .0005;
-const float MAX_DISTANCE = 100.;
-const int MAX_STEP = 128;
+const float MAX_DISTANCE = 1000.;
+const int MAX_STEP = 256;
 const float EPSILON = .001;
 
 const float ambient_factor = .1;
 
 uniform vec2 resolution;
 
-float sceneSDF(vec3 p)
+#define __pi__ 3.1415926535897932384626433832795
+
+mat3 rotMatrix(vec3 rot)
 {
-	p = mod(p ,2.) - 1.;
-	return length(p)-0.7;
+	rot = -rot;
+	mat3 XY = mat3(
+		cos(rot[2]),-sin(rot[2]),0,
+		sin(rot[2]), cos(rot[2]),0,
+		          0,           0,1);
+	mat3 XZ = mat3(
+		cos(rot[1]),0,-sin(rot[1]),
+		          0,1,           0,
+		sin(rot[1]),0, cos(rot[1]));
+	mat3 YZ = mat3(
+		1,          0,           0,
+		0,cos(rot[0]),-sin(rot[0]),
+		0,sin(rot[0]), cos(rot[0]));
+	return XY * XZ * YZ;
+
+}
+
+float sceneSDF(in vec3 p)
+{
+	p = mod(p,4.0) - 2.0;
+	vec3 b = vec3(1.,1.,1.)*.5;
+	vec3 q = abs(p) - b;
+  	return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0);
 }
 
 vec3 estimateNormal(vec3 p)
@@ -46,10 +67,10 @@ vec4 calculateSpecular(vec3 p,vec3 ligth_p,vec3 ligth_c, vec3 view, float amount
 void main(){
 	float distance = PLANK;
 
-	vec3 ro = vec3(0., 0., -1.);
+	vec3 ro = vec3(0.,0.,-1.);
 
 	vec2 uv = (2.*gl_FragCoord.xy - resolution) / resolution.y /2.;
-	vec3 rd = vec3(uv, 1.);
+	vec3 rd = vec3(uv, 1.) * rotMatrix(vec3(0, __pi__/4, 0));
 
 	vec3 ligth_p = vec3(1., 1., -1.);
 	vec3 ligth_c = vec3(.4, .4, .4);

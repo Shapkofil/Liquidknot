@@ -1,7 +1,7 @@
 import bpy
 import bgl
 import numpy as np
-from .engine import *
+from . import openGL
 
 
 class LiquidknotRenderEngine(bpy.types.RenderEngine):
@@ -11,9 +11,9 @@ class LiquidknotRenderEngine(bpy.types.RenderEngine):
     bl_label = "Liquidknot"
     bl_use_preview = True
 
-    # Init is called whenever a new render engine instance is created. Multiple
-    # instances may exist at the same time, for example for a viewport and final
-    # render.
+    # Init is called whenever a new render engine instance is created.
+    # Multiple instances may exist at the same time,
+    # for example for a viewport and final render.
     def __init__(self):
         self.scene_data = None
         self.draw_data = None
@@ -30,15 +30,12 @@ class LiquidknotRenderEngine(bpy.types.RenderEngine):
         scale = scene.render.resolution_percentage / 100.0
         self.size_x = int(scene.render.resolution_x * scale)
         self.size_y = int(scene.render.resolution_y * scale)
-        self.rayman = RayManager(
-            [self.size_x, self.size_y],
-            camera_pos=[.0, -1., .0])
 
         # Fill the render result with a flat color. The framebuffer is
         # defined as a list of pixels, each pixel itself being a list of
         # R,G,B,A values.
         print([self.size_x, self.size_y])
-        rect = self.rayman.render()
+        rect = self.openGL.render_blend(self.size_x, self.size_y)
         # rect = self.rayman.render()
 
         # Here we write the pixel values to the RenderResult
