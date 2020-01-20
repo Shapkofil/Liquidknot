@@ -90,7 +90,7 @@ void main(){
 			ambient = vec4(vec3(ambient_factor, ambient_factor, ambient_factor),.1);
 			deffuse = calculateDeffuse(ro,ligth_p,ligth_c);
 			specular = calculateSpecular(ro,ligth_p,ligth_c,rd,2.0);
-			gl_FragColor = (ambient + deffuse +specular) * vec4(.3, .1, .0, 1.);
+			gl_FragColor = (ambient + deffuse +specular) * vec4(.9, .3, .0, 1.);
 			break;
 		}
 

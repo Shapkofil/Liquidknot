@@ -1,11 +1,10 @@
 import numpy as np
-import pickle
 import subprocess
 import os
+import time
 
 
 def venvexec(venv_path, file):
-    print("trying to subprocess run")
     venv_path = os.path.join(os.path.dirname(__file__), venv_path)
     file = os.path.join(os.path.dirname(__file__), file)
     buff = subprocess.run(
@@ -20,8 +19,10 @@ def brender(resolution,
     raw_render = venvexec(".venv", "blend_parse.py")
 
     refine = np.reshape(raw_render, (resolution[0] * resolution[1], 4))
-    return refine.tolist()
+    return refine
 
 
 if __name__ == "__main__":
-    brender((1980, 1080))
+    init = time.time()
+    print(brender((1980, 1080)))
+    print("total execution time {0} sec".format(time.time() - init))

@@ -1,5 +1,6 @@
 import bpy
 import bgl
+import time
 
 from . import openGL
 
@@ -26,6 +27,7 @@ class LiquidknotRenderEngine(bpy.types.RenderEngine):
     # This is the method called by Blender for both final renders (F12) and
     # small preview for materials, world and lights.
     def render(self, depsgraph):
+
         scene = depsgraph.scene
         scale = scene.render.resolution_percentage / 100.0
         self.size_x = int(scene.render.resolution_x * scale)
@@ -34,14 +36,16 @@ class LiquidknotRenderEngine(bpy.types.RenderEngine):
         # Fill the render result with a flat color. The framebuffer is
         # defined as a list of pixels, each pixel itself being a list of
         # R,G,B,A values.
-        print([self.size_x, self.size_y])
-        rect = openGL.brender((self.size_x, self.size_y))
-        # rect = self.rayman.render()
 
         # Here we write the pixel values to the RenderResult
+
         result = self.begin_result(0, 0, self.size_x, self.size_y)
+        init = time.time()
+
         layer = result.layers[0].passes["Combined"]
-        layer.rect = rect
+
+        layer.rect = openGL.brender((self.size_x, self.size_y))
+        print("Total domination {0} sec".format(time.time() - init))
         self.end_result(result)
 
     # For viewport renders, this method gets called once at the start and
@@ -90,7 +94,7 @@ class LiquidknotRenderEngine(bpy.types.RenderEngine):
         scene = depsgraph.scene
 
         # Get viewport dimensions
-        dimensions = region.width, region.height
+        dimensions = (region.width, region.height)
 
         # Bind shader that converts from scene linear to display space,
         bgl.glEnable(bgl.GL_BLEND)
@@ -98,7 +102,7 @@ class LiquidknotRenderEngine(bpy.types.RenderEngine):
         self.bind_display_space_shader(scene)
 
         if not self.draw_data or self.draw_data.dimensions != dimensions:
-            self.draw_data = LiquidknotDrawData(dimensions)
+            self.draw_data = openGL.brender(dimensions)
 
         self.draw_data.draw()
 
