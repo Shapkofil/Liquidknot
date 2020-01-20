@@ -35,7 +35,7 @@ class LiquidknotRenderEngine(bpy.types.RenderEngine):
         # defined as a list of pixels, each pixel itself being a list of
         # R,G,B,A values.
         print([self.size_x, self.size_y])
-        rect = openGL.render_blend((self.size_x, self.size_y))
+        rect = openGL.brender((self.size_x, self.size_y))
         # rect = self.rayman.render()
 
         # Here we write the pixel values to the RenderResult

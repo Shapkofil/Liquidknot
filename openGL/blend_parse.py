@@ -1,18 +1,15 @@
 import pickle
 import os
+import sys
 import time
 
 from core import render
 
 
 def main():
-    init = time.time()
-    numren = render()
-    print("render for {0}".format(time.time() - init))
-    tmp_path = os.path.join(os.path.dirname(__file__), "temp/temp.pickle")
-    with open(tmp_path, "wb") as f:
-        pickle.dump(numren, f)
-    print("write for {0}".format(time.time() - init))
+    raw_data = render()
+    buff = memoryview(raw_data).tobytes()
+    sys.stdout.buffer.write(buff)
 
 
 # ToDo entry point
