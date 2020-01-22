@@ -30,7 +30,7 @@ def buildBuffers(data, program):
     glVertexAttribPointer(loc, 2, GL_FLOAT, False, stride, offset)
 
 
-def render(resolution=(1980, 1080),
+def render(resolution=(1920, 1080),
            vertex_code=None,
            fragment_code=None):
 
@@ -54,7 +54,7 @@ def render(resolution=(1980, 1080),
         exit()
 
     glfw.window_hint(glfw.VISIBLE, False)
-    window = glfw.create_window(WIDTH, HEIGHT, "Phantom", None, None)
+    window = glfw.create_window(WIDTH, HEIGHT, "Liquid_phantom", None, None)
     if not window:
         print("glfw window failed")
         glfw.terminate()

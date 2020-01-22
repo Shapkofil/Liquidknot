@@ -18,11 +18,15 @@ def brender(resolution,
 
     raw_render = venvexec(".venv", "blend_parse.py")
 
+    if raw_render.size == 0:
+        print("execution complete")
+        return
     refine = np.reshape(raw_render, (resolution[0] * resolution[1], 4))
+    refine = refine.astype(np.float64)
     return refine
 
 
 if __name__ == "__main__":
     init = time.time()
-    print(brender((1980, 1080)))
+    print(brender((1920, 1080)))
     print("total execution time {0} sec".format(time.time() - init))

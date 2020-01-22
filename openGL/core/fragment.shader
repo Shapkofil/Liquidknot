@@ -96,13 +96,13 @@ void main(){
 
 		if(distance > MAX_DISTANCE)
 		{
-			gl_FragColor = vec4(.01, .01, .01, 1.) ;
+			gl_FragColor = vec4(.0, .0, .0, 0.) ;
 			break;
 		}
 
 		if(step > MAX_STEP)
 		{
-			gl_FragColor = vec4(.01, .01, .01, 1.) ;
+			gl_FragColor = vec4(.0, .0, .0, 0.) ;
 			break;
 		}
 	}
