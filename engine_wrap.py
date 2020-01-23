@@ -44,7 +44,7 @@ class LiquidknotRenderEngine(bpy.types.RenderEngine):
 
         layer = result.layers[0].passes["Combined"]
 
-        layer.rect = openGL.brender((self.size_x, self.size_y))
+        layer.rect = memoryview(openGL.brender((self.size_x, self.size_y)))
         print("Total domination {0} sec".format(time.time() - init))
         self.end_result(result)
 
