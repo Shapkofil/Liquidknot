@@ -4,6 +4,7 @@ import json
 import re
 import cv2
 import numpy as np
+import os
 
 from glsl_utils.primitives import de_gen_swamp
 from glsl_utils import glsl_math as glsl
@@ -77,9 +78,10 @@ def main(resolution=(1920, 1080),
 
 # ToDo entry point
 if __name__ == "__main__":
-    with open("fragment.shader") as f:
+    file = os.path.join(os.path.dirname(__file__), "fragment.shader")
+    with open(file) as f:
         fragment_code = f.read()
-
-    fragment_code = parse_scene("scene.json", fragment_code)
+    file = os.path.join(os.path.dirname(__file__), "scene.json")
+    fragment_code = parse_scene(file, fragment_code)
     # print(fragment_code)
-    main(fragment_code=fragment_code, accelerated=True)
+    main(fragment_code=fragment_code, accelerated=False)

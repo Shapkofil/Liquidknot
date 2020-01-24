@@ -1,51 +1,71 @@
 {
-	"hyper_params":{
-		"float":{
-			"PLANK":0.0005,
-			"MAX_DISTANCE":1000.0,
-			"EPSILON":0.001,
-			"AMBIENT":0.2
-		},
-		"int":{
-			"MAX_STEP":1024
-		},
-		"vec4":{
-			"WORLD_COLOR":[0.0, 0.0, 0.0, 1.0]
-		}
-	},
-	"camera":{
-		"position":[0, 0, -1],
-		"rotation":[0, 0, 0],
-		"focal_length":1.0,
-		"field_of_view":1.0
-	},
-	"entities":[
-		{
-			"position":[-0.5, 0, 1],
-			"rotation":[0, 0, 0],
-			"params":{
-				"radius":0.4,
-				"scale":[1, 1, 1]
-			},
-			"de":"length(p) - radius",
-			"color":[]
-		},
-		{
-			"position":[0.5, 0, 1],
-			"rotation":[0, 0, 0],
-			"params":{
-				"radius":0.2,
-				"scale":[1, 1, 1]
-			},
-			"de":"length(p) - radius",
-			"color":[]
-		}
-	],
-	"lights":[
-		{
-			"position":[0, -1, -1],
-			"color":[0.8, 0.8, 0.8, 1.0],
-			"amount":1.0
-		}
-	]
+    "hyper_params": {
+        "float": {
+            "PLANK": 0.0005,
+            "MAX_DISTANCE": 1000.0,
+            "EPSILON": 0.001,
+            "AMBIENT": 0.2
+        },
+        "int": {
+            "MAX_STEP": 1024
+        },
+        "vec4": {
+            "WORLD_COLOR": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ]
+        }
+    },
+    "camera": {
+        "name": "Camera",
+        "position": [
+            0.0,
+            -6.199999809265137,
+            0.0
+        ],
+        "rotation": [
+            1.5707963705062866,
+            -0.0,
+            -0.0
+        ],
+        "focal_length": 1.0,
+        "field_of_view": 0.5
+    },
+    "entities": [
+        {
+            "name": "Cube",
+            "position": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "params": {
+                "radius": 4.0
+            },
+            "de": "length(p) - radius"
+        }
+    ],
+    "lights": [
+        {
+            "name": "Light",
+            "position": [
+                4.076245307922363,
+                1.0054539442062378,
+                5.903861999511719
+            ],
+            "color": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ]
+        }
+    ]
 }

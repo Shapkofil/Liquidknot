@@ -8,7 +8,6 @@ uniform vec2 resolution;
 
 mat3 rotMatrix(vec3 rot)
 {
-	rot = -rot;
 	mat3 XY = mat3(
 		cos(rot[2]),-sin(rot[2]),0,
 		sin(rot[2]), cos(rot[2]),0,
@@ -59,7 +58,7 @@ void main(){
 
 	vec3 ro = // pebble camera_position;
 
-	vec2 uv = (2.*gl_FragCoord.xy - resolution) / resolution.y /2.;
+	vec2 uv = (2.*gl_FragCoord.xy - resolution) / resolution.y;
 	vec3 rd = vec3(uv, 1.) * rotMatrix( pebble camera_rotation );
 
 	int step = 0;

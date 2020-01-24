@@ -8,8 +8,12 @@ def venvexec(venv_path, file):
     venv_path = os.path.join(os.path.dirname(__file__), venv_path)
     file = os.path.join(os.path.dirname(__file__), file)
     buff = subprocess.run(
-        ["{0}/bin/python".format(venv_path), file], capture_output=True).stdout
-    return np.frombuffer(buff, dtype=np.float32)
+        ["{0}/bin/python".format(venv_path), file], capture_output=True)
+    out = buff.stdout
+    err = buff.stderr
+    if err:
+        print("subscript error:\n{0}".format(err.decode()))
+    return np.frombuffer(out, dtype=np.float32)
 
 
 def brender(resolution,
@@ -17,7 +21,6 @@ def brender(resolution,
             fragment_code=None):
 
     raw_render = venvexec(".venv", "blend_parse.py")
-
     if raw_render.size == 0:
         print("execution complete")
         return
