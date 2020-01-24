@@ -68,6 +68,7 @@ void main(){
 	vec3 ro = pebble camera_position;
 
 	vec2 uv = (2.*gl_FragCoord.xy - resolution) / resolution.y;
+	uv = vec2(uv[0], -uv[1]);
 	vec3 rd = rotate_ray(normalize(vec3(uv, -pebble focal_lenght)), pebble camera_rotation);
 
 	int step = 0;
