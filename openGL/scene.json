@@ -22,15 +22,16 @@
         "name": "Camera",
         "position": [
             0.0,
-            -6.199999809265137,
-            0.0
+            0.0,
+            4.0
         ],
         "rotation": [
-            1.5707963705062866,
-            -0.0,
-            -0.0
+            1.0,
+            0.0,
+            0.0,
+            0.0
         ],
-        "focal_length": 1.0,
+        "focal_length": 4.166666666666667,
         "field_of_view": 0.5
     },
     "entities": [
@@ -47,7 +48,7 @@
                 0.0
             ],
             "params": {
-                "radius": 4.0
+                "radius": 0.8
             },
             "de": "length(p) - radius"
         }

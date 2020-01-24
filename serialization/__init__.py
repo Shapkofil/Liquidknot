@@ -10,12 +10,10 @@ def scene_to_json(scene, path_to_json=None):
 
     entities = [x for x in scene.objects if str(
         x.data.original).find("Mesh") > -1]
-    print(entities)
     entities_dict = objects_to_json(entities)
 
     lights = [x for x in scene.objects if str(
         x.data.original).find("Light") > -1]
-    print(lights)
     light_dict = lights_to_json(lights)
 
     scene_json = {

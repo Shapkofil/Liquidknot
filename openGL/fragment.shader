@@ -6,22 +6,31 @@ uniform vec2 resolution;
 
 #define __pi__ 3.1415926535897932384626433832795
 
-mat3 rotMatrix(vec3 rot)
-{
-	mat3 XY = mat3(
-		cos(rot[2]),-sin(rot[2]),0,
-		sin(rot[2]), cos(rot[2]),0,
-		          0,           0,1);
-	mat3 XZ = mat3(
-		cos(rot[1]),0,-sin(rot[1]),
-		          0,1,           0,
-		sin(rot[1]),0, cos(rot[1]));
-	mat3 YZ = mat3(
-		1,          0,           0,
-		0,cos(rot[0]),-sin(rot[0]),
-		0,sin(rot[0]), cos(rot[0]));
-	return XY * XZ * YZ;
+vec4 quat_conj(vec4 q)
+{ 
+  return vec4(-q.x, -q.y, -q.z, q.w); 
+}
+  
+vec4 quat_mult(vec4 q1, vec4 q2)
+{ 
+  vec4 qr;
+  qr.x = (q1.w * q2.x) + (q1.x * q2.w) + (q1.y * q2.z) - (q1.z * q2.y);
+  qr.y = (q1.w * q2.y) - (q1.x * q2.z) + (q1.y * q2.w) + (q1.z * q2.x);
+  qr.z = (q1.w * q2.z) + (q1.x * q2.y) - (q1.y * q2.x) + (q1.z * q2.w);
+  qr.w = (q1.w * q2.w) - (q1.x * q2.x) - (q1.y * q2.y) - (q1.z * q2.z);
+  return qr;
+}
 
+vec3 rotate_ray(vec3 position, vec4 qr)
+{ 
+	qr = vec4(qr.yzw,qr.x);
+	vec4 qr_conj = quat_conj(qr);
+	vec4 q_pos = vec4(position.x, position.y, position.z, 0);
+	  
+	vec4 q_tmp = quat_mult(qr, q_pos);
+	qr = quat_mult(q_tmp, qr_conj);
+	  
+	return vec3(qr.x, qr.y, qr.z);
 }
 
 float sceneSDF(in vec3 p)
@@ -56,10 +65,10 @@ vec4 calculateDeffuse(vec3 p)
 void main(){
 	float distance = PLANK;
 
-	vec3 ro = // pebble camera_position;
+	vec3 ro = pebble camera_position;
 
 	vec2 uv = (2.*gl_FragCoord.xy - resolution) / resolution.y;
-	vec3 rd = vec3(uv, 1.) * rotMatrix( pebble camera_rotation );
+	vec3 rd = rotate_ray(normalize(vec3(uv, -pebble focal_lenght)), pebble camera_rotation);
 
 	int step = 0;
 	float cd = PLANK;

@@ -37,11 +37,15 @@ def parse_scene(scene_path, fragment_code):
     fragment_code = re.sub(r"// pebble distance_estimator", de, fragment_code)
 
     # Loading Camera
-    fragment_code = re.sub(r"// pebble camera_position",
+    fragment_code = re.sub(r"pebble camera_position",
                            glsl.vec3(data["camera"]["position"]),
                            fragment_code)
     fragment_code = re.sub(r"pebble camera_rotation",
-                           glsl.vec3(data["camera"]["rotation"]),
+                           glsl.vec4(data["camera"]["rotation"]),
+                           fragment_code)
+
+    fragment_code = re.sub(r"pebble focal_lenght",
+                           str(data["camera"]["focal_length"]),
                            fragment_code)
 
     # Loading lights
@@ -84,4 +88,4 @@ if __name__ == "__main__":
     file = os.path.join(os.path.dirname(__file__), "scene.json")
     fragment_code = parse_scene(file, fragment_code)
     # print(fragment_code)
-    main(fragment_code=fragment_code, accelerated=False)
+    main(fragment_code=fragment_code)
