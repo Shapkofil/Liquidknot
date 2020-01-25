@@ -22,7 +22,7 @@ def scene_to_json(scene, path_to_json=None):
                 "PLANK": 0.0005,
                 "MAX_DISTANCE": 1000.0,
                 "EPSILON": 0.001,
-                "AMBIENT": 0.2
+                "AMBIENT": 0.1
             },
             "int": {
                 "MAX_STEP": 1024
