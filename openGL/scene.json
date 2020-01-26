@@ -1,4 +1,14 @@
 {
+    "RESOLUTION": [
+        640,
+        480
+    ],
+    "BOUNDS": [
+        0,
+        0,
+        640,
+        480
+    ],
     "hyper_params": {
         "float": {
             "PLANK": 0.0005,

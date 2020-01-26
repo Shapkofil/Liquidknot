@@ -71,7 +71,7 @@ void main(){
 	vec3 rd = vec3(uv, 1.) * rotMatrix(vec3(0, __pi__/4, 0));
 
 	vec3 ligth_p = vec3(1., 1., -1.);
-	vec3 ligth_c = vec3(.4, .4, .4);
+	vec3 ligth_c = vec3(.9, .9, .9);
 
 	int step = 0;
 	float cd = PLANK;
@@ -90,19 +90,19 @@ void main(){
 			ambient = vec4(vec3(ambient_factor, ambient_factor, ambient_factor),.1);
 			deffuse = calculateDeffuse(ro,ligth_p,ligth_c);
 			specular = calculateSpecular(ro,ligth_p,ligth_c,rd,2.0);
-			gl_FragColor = (ambient + deffuse +specular) * vec4(.9, .3, .0, 1.);
+			gl_FragColor = (ambient + deffuse + specular) * vec4(.8, .4, .0, 1.);
 			break;
 		}
 
 		if(distance > MAX_DISTANCE)
 		{
-			gl_FragColor = vec4(.0, .0, .0, 0.) ;
+			gl_FragColor = vec4(.0, .0, .0, 1.) ;
 			break;
 		}
 
 		if(step > MAX_STEP)
 		{
-			gl_FragColor = vec4(.0, .0, .0, 0.) ;
+			gl_FragColor = vec4(.0, .0, .0, 1.) ;
 			break;
 		}
 	}

@@ -15,6 +15,10 @@ def parse_scene(scene_path, fragment_code):
         raw = f.read()
         data = json.loads(raw)
 
+    # Load Bounds And Resolution
+    resolution = tuple(data["RESOLUTION"])
+    bounds = tuple(data["BOUNDS"])
+
     # Loading Hyper Params
     snippet = ""
     for c_type in data["hyper_params"]:
@@ -62,14 +66,15 @@ def parse_scene(scene_path, fragment_code):
     snippet += snippet_pos + snippet_cl
     fragment_code = re.sub(r"// pebble lights", snippet, fragment_code)
 
-    return fragment_code
+    return resolution, bounds, fragment_code
 
 
 def main(resolution=(1920, 1080),
+         bounds=(0, 0, 1920, 1080),
          vertex_code=None,
          fragment_code=None,
          accelerated=False):
-    raw_data = render((1920, 1080), fragment_code=fragment_code)
+    raw_data = render(resolution, bounds, fragment_code=fragment_code)
 
     if accelerated:
         refine = np.asarray(raw_data * 255, dtype=np.uint8)
@@ -82,10 +87,15 @@ def main(resolution=(1920, 1080),
 
 # ToDo entry point
 if __name__ == "__main__":
+
+    # ToDo get File Paths Externally
+
     file = os.path.join(os.path.dirname(__file__), "fragment.shader")
     with open(file) as f:
         fragment_code = f.read()
     file = os.path.join(os.path.dirname(__file__), "scene.json")
-    fragment_code = parse_scene(file, fragment_code)
-    # print(fragment_code)
-    main(fragment_code=fragment_code)
+
+    resolution, bounds, fragment_code = parse_scene(file, fragment_code)
+    # print(bounds)
+    main(resolution=resolution, bounds=bounds,
+         fragment_code=fragment_code)

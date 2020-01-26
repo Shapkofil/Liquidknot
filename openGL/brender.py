@@ -3,6 +3,8 @@ import subprocess
 import os
 import time
 
+# Execution in virtualenv
+
 
 def venvexec(venv_path, file):
     venv_path = os.path.join(os.path.dirname(__file__), venv_path)
@@ -12,19 +14,27 @@ def venvexec(venv_path, file):
     out = buff.stdout
     err = buff.stderr
     if err:
-        print("subscript error:\n{0}".format(err.decode()))
+        print("SUBSCRIPT ERROR:\n{0}".format(err.decode()))
     return np.frombuffer(out, dtype=np.float32)
 
 
-def brender(resolution,
+def brender(resolution=(1920, 1080),
+            bounds=None,
             vertex_code=None,
             fragment_code=None):
-
     raw_render = venvexec(".venv", "blend_parse.py")
+
+    # Full render cases
+    if bounds is None:
+        bounds = (0, 0, resolution[0], resolution[1])
+
     if raw_render.size == 0:
-        print("execution complete")
+        print("No Return Statement")
         return
-    refine = np.reshape(raw_render, (resolution[0] * resolution[1], 4))
+
+    # reshape the array
+    refine = np.reshape(
+        raw_render, ((bounds[2] - bounds[0]) * (bounds[3] - bounds[1]), 4))
     refine = refine.astype(np.float64)
     return refine
 

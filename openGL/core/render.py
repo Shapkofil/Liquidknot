@@ -31,6 +31,7 @@ def buildBuffers(data, program):
 
 
 def render(resolution=(1920, 1080),
+           bounds=(0, 0, 1920, 1080),
            vertex_code=None,
            fragment_code=None):
 
@@ -73,7 +74,7 @@ def render(resolution=(1920, 1080),
 
     display()
 
-    return glcu.readPixels(0, 0, WIDTH, HEIGHT)
+    return glcu.readPixels(bounds[0], bounds[1], bounds[2], bounds[3])
 
     glfw.destroy_window(window)
     glfw.terminate()

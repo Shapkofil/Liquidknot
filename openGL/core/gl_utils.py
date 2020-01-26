@@ -7,9 +7,8 @@ def compileShader(shader, shader_type):
     glCompileShader(shader)
     if not glGetShaderiv(shader, GL_COMPILE_STATUS):
         error = glGetShaderInfoLog(shader).decode()
-        st = "vertex" if shader_type == GL_VERTEX_SHADER else "fragment"
-        print("{0} shader error:\n{1}".format(st, error))
-        raise RuntimeError("{0} shader compilation error".format(st))
+        st = "VERTEX" if shader_type == GL_VERTEX_SHADER else "FRAGMENT"
+        raise RuntimeError("\n{0} SHADER ERROR:\n{1}".format(st, error))
 
 
 def compileProgram(vertex_code, fragment_code):
