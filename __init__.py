@@ -15,16 +15,18 @@ bl_info = {
     'category': 'Rendering Engine'
 }
 
-import os
-import bpy
-from .engine_wrap import register as register_engine , unregister as unregister_engine
+from .engine_wrap import register as engine_register, unregister as engine_unregister
+from .ui import register as ui_register, unregister as ui_unregister, classes as ui_classes
+
 
 def register():
-    register_engine()
+    engine_register()
+    ui_register()
 
 
 def unregister():
-    unregister_engine()
+    engine_unregister()
+    ui_unregister()
 
 
 if __name__ == "__main__":

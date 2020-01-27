@@ -5,6 +5,7 @@ import os
 
 from . import openGL
 from . import serialization as srl
+from .ui import classes as ui_classes, register as ui_register
 
 
 class LiquidknotRenderEngine(bpy.types.RenderEngine):
@@ -13,6 +14,8 @@ class LiquidknotRenderEngine(bpy.types.RenderEngine):
     bl_idname = "LIQUIDKNOT"
     bl_label = "Liquidknot"
     bl_use_preview = True
+
+    MAX_DISTANCE = 1000.0
 
     # Init is called whenever a new render engine instance is created.
     # Multiple instances may exist at the same time,
