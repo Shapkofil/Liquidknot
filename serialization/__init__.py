@@ -6,7 +6,28 @@ from .bounds_serialize import bounds_to_json
 import json
 
 
+def fetch_hyper_params(scene):
+    swamp = scene.liquidknot
+    return {
+        "float": {
+            "PLANK": swamp.plank,
+            "MAX_DISTANCE": swamp.max_dist,
+            "EPSILON": swamp.epsilon,
+            "AMBIENT": 0.1
+        },
+        "int": {
+            "MAX_STEP": swamp.max_marching_steps
+        },
+        "vec4": {
+            "WORLD_COLOR": [.0, .0, .0, 1.]
+        }
+    }
+
+
 def scene_to_json(scene, path_to_json=None):
+
+    #Fetch Hyperparams
+    hyper_params = fetch_hyper_params(scene)
 
     # Get Bounds List
     resolution, bounds = bounds_to_json(scene)
@@ -28,20 +49,7 @@ def scene_to_json(scene, path_to_json=None):
     scene_json = {
         "RESOLUTION": resolution,
         "BOUNDS": bounds,
-        "hyper_params": {
-            "float": {
-                "PLANK": 0.0005,
-                "MAX_DISTANCE": 1000.0,
-                "EPSILON": 0.001,
-                "AMBIENT": 0.1
-            },
-            "int": {
-                "MAX_STEP": 1024
-            },
-            "vec4": {
-                "WORLD_COLOR": [0.0, 0.0, 0.0, 1.0]
-            }
-        },
+        "hyper_params": hyper_params,
         "camera": camera_dict,
         "entities": entities_dict,
         "lights": light_dict

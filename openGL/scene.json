@@ -1,23 +1,23 @@
 {
     "RESOLUTION": [
-        1920,
-        1080
+        640,
+        480
     ],
     "BOUNDS": [
         0,
         0,
-        1920,
-        1080
+        640,
+        480
     ],
     "hyper_params": {
         "float": {
-            "PLANK": 0.0005,
+            "PLANK": 0.5,
             "MAX_DISTANCE": 1000.0,
-            "EPSILON": 0.001,
+            "EPSILON": 1.0,
             "AMBIENT": 0.1
         },
         "int": {
-            "MAX_STEP": 1024
+            "MAX_STEP": 2
         },
         "vec4": {
             "WORLD_COLOR": [

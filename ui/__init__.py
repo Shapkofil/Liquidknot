@@ -1,9 +1,10 @@
 import bpy
 
-from .hyperparams import HyperParamsPanel as hp_panel
-from .props import register as prop_register, LiquidknotProps as props
+from .hyperparams import classes as hp_classes
+from .props import register as prop_register
+from .objectpanel import classes as obj_classes
 
-classes = [props, hp_panel]
+classes = hp_classes + obj_classes
 
 
 def register():
