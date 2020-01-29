@@ -24,6 +24,10 @@ class LiquidknotProps(bpy.types.PropertyGroup):
         min=.00005,
         precision=5)
 
+class LiquidknotObjParams(bpy.types.PropertyGroup):
+    name: bpy.props.StringProperty(name="Name")
+
+    value: bpy.props.FloatProperty(name="Value")
 
 class LiquidknotObjProps(bpy.types.PropertyGroup):
     active: bpy.props.BoolProperty(
@@ -34,11 +38,11 @@ class LiquidknotObjProps(bpy.types.PropertyGroup):
         default="lenght(p) - radius")
 
     params: bpy.props.CollectionProperty(
-        type=dict,
+        type=LiquidknotObjParams,
         name="Parameters")
 
 
-classes = [LiquidknotProps, LiquidknotObjProps]
+classes = [LiquidknotProps, LiquidknotObjParams ,LiquidknotObjProps]
 
 
 def register():
@@ -51,3 +55,11 @@ def register():
 
     bpy.types.Object.liquidknot = \
         bpy.props.PointerProperty(type=LiquidknotObjProps)
+
+def unregister():
+    for cls in classes:
+        bpy.utils.unregister_class(cls)
+
+    bpy.types.Scene.liquidknot = None
+
+    bpy.types.Object.liquidknot = None

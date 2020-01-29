@@ -1,3 +1,10 @@
+def fetch_obj_params(obj):
+    swamp = obj.liquidknot.params
+    fetched = {}
+    for param in swamp:
+        fetched[param.name] = param.value
+    return fetched 
+
 def objects_to_json(collection):
     entities = []
 
@@ -6,7 +13,7 @@ def objects_to_json(collection):
         entity["name"] = object.name
         entity["position"] = list(object.location)
         entity["rotation"] = list(object.rotation_euler)
-        entity["params"] = {"radius": .8}
+        entity["params"] = fetch_obj_params(obj)
         entity["de"] = "length(p) - radius"
         entities.append(entity)
 
