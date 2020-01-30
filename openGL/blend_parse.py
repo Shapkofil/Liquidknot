@@ -3,7 +3,8 @@ from core import render
 import cv2
 import numpy as np
 import os
-from .parse_scene import parse_scene
+
+from parse_scene import parse_scene
 
 
 def main(resolution=(1920, 1080),

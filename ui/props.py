@@ -24,10 +24,12 @@ class LiquidknotProps(bpy.types.PropertyGroup):
         min=.00005,
         precision=5)
 
+
 class LiquidknotObjParams(bpy.types.PropertyGroup):
     name: bpy.props.StringProperty(name="Name")
 
     value: bpy.props.FloatProperty(name="Value")
+
 
 class LiquidknotObjProps(bpy.types.PropertyGroup):
     active: bpy.props.BoolProperty(
@@ -37,12 +39,15 @@ class LiquidknotObjProps(bpy.types.PropertyGroup):
         name='Distance Estimator',
         default="lenght(p) - radius")
 
+    active_param: bpy.props.IntProperty(
+        name="Active Parameter")
+
     params: bpy.props.CollectionProperty(
         type=LiquidknotObjParams,
         name="Parameters")
 
 
-classes = [LiquidknotProps, LiquidknotObjParams ,LiquidknotObjProps]
+classes = [LiquidknotProps, LiquidknotObjParams, LiquidknotObjProps]
 
 
 def register():
@@ -55,6 +60,7 @@ def register():
 
     bpy.types.Object.liquidknot = \
         bpy.props.PointerProperty(type=LiquidknotObjProps)
+
 
 def unregister():
     for cls in classes:

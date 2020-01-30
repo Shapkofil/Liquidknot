@@ -26,7 +26,7 @@ def fetch_hyper_params(scene):
 
 def scene_to_json(scene, path_to_json=None):
 
-    #Fetch Hyperparams
+    # Fetch Hyperparams
     hyper_params = fetch_hyper_params(scene)
 
     # Get Bounds List
@@ -36,8 +36,7 @@ def scene_to_json(scene, path_to_json=None):
     camera_dict = camera_to_json(scene.camera)
 
     # Entities params Fetch
-    entities = [x for x in scene.objects if str(
-        x.data.original).find("Mesh") > -1]
+    entities = [x for x in scene.objects if x.liquidknot.active]
     entities_dict = objects_to_json(entities)
 
     # Light params Fetch

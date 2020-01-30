@@ -11,13 +11,13 @@
     ],
     "hyper_params": {
         "float": {
-            "PLANK": 0.5,
+            "PLANK": 0.004999999888241291,
             "MAX_DISTANCE": 1000.0,
-            "EPSILON": 1.0,
+            "EPSILON": 0.0005000000237487257,
             "AMBIENT": 0.1
         },
         "int": {
-            "MAX_STEP": 2
+            "MAX_STEP": 256
         },
         "vec4": {
             "WORLD_COLOR": [
@@ -57,9 +57,9 @@
                 0.0
             ],
             "params": {
-                "radius": 0.8
+                "radius": 2.0
             },
-            "de": "length(p) - radius"
+            "de": "length(p)  -  radius"
         }
     ],
     "lights": [
