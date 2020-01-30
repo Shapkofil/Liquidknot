@@ -19,7 +19,7 @@ def de_gen(entity):
 def de_gen_swamp(swamp):
     de = de_gen(swamp[0])
     for entity in swamp[1:]:
-        de = "max ({0}, -({1}))".format(de_gen(entity), de)
+        de = "smin ({0}, {1})".format(de_gen(entity), de)
     de = "return {0};".format(de)
     return de
 
