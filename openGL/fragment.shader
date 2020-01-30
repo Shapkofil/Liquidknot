@@ -6,6 +6,12 @@ uniform vec2 resolution;
 
 #define __pi__ 3.1415926535897932384626433832795
 
+float smin( float a, float b, float k )
+{
+    float h = max( k-abs(a-b), 0.0 )/k;
+    return min( a, b ) - h*h*k*(1.0/4.0);
+}
+
 vec4 quat_conj(vec4 q)
 { 
   return vec4(-q.x, -q.y, -q.z, q.w); 

@@ -5,7 +5,6 @@ import os
 
 from . import openGL
 from . import serialization as srl
-from .ui import classes as ui_classes, register as ui_register
 
 
 class LiquidknotRenderEngine(bpy.types.RenderEngine):
@@ -14,8 +13,6 @@ class LiquidknotRenderEngine(bpy.types.RenderEngine):
     bl_idname = "LIQUIDKNOT"
     bl_label = "Liquidknot"
     bl_use_preview = True
-
-    MAX_DISTANCE = 1000.0
 
     # Init is called whenever a new render engine instance is created.
     # Multiple instances may exist at the same time,
@@ -42,7 +39,10 @@ class LiquidknotRenderEngine(bpy.types.RenderEngine):
         # defined as a list of pixels, each pixel itself being a list of
         # R,G,B,A values.
 
-        # Here we write the pixel values to the RenderResult
+        # Sets the scene to the correct frame
+        scene.frame_set(scene.frame_current)
+
+        # Serialize the scene
         file = os.path.join(os.path.dirname(__file__), "openGL/scene.json")
         srl.scene_to_json(scene, file)
 
