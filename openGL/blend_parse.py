@@ -35,5 +35,9 @@ if __name__ == "__main__":
 
     resolution, bounds, fragment_code = parse_scene(file, fragment_code)
     # print(bounds)
+
+    file = os.path.join(os.path.dirname(__file__), "log.shader")
+    with open(file, "w+") as f:
+        f.write(fragment_code)
     main(resolution=resolution, bounds=bounds,
          fragment_code=fragment_code)
