@@ -34,8 +34,8 @@ def brender(resolution=(1920, 1080),
 
     # reshape the array
     refine = np.reshape(
-        raw_render, ((bounds[2] - bounds[0]) * (bounds[3] - bounds[1]), 4))
-    refine = refine.astype(np.float64)
+        raw_render, ((bounds[2]) * (bounds[3]), 4))
+    refine = refine.astype(np.float32)
     return refine
 
 

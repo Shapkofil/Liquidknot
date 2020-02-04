@@ -24,16 +24,16 @@ def fetch_hyper_params(scene):
     }
 
 
-def scene_to_json(scene, path_to_json=None):
+def scene_to_json(scene, context=None, path_to_json=None):
 
     # Fetch Hyperparams
     hyper_params = fetch_hyper_params(scene)
 
     # Get Bounds List
-    resolution, bounds = bounds_to_json(scene)
+    resolution, bounds = bounds_to_json(scene, context)
 
     # Camera params Fetch
-    camera_dict = camera_to_json(scene.camera)
+    camera_dict = camera_to_json(scene.camera, context)
 
     # Entities params Fetch
     entities = [x for x in scene.objects if x.liquidknot.active]
