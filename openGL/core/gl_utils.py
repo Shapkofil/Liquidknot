@@ -40,6 +40,7 @@ def compileProgram(vertex_code, fragment_code):
 
 def readPixels(x, y, w, h, clrspace=GL_RGBA, chanels=4):
     im = glReadPixels(x, y, w, h, clrspace, GL_FLOAT)
+    print("Raw GL color buffer is {}\nwith type {}".format(im, im.shape))
     im = np.frombuffer(im, np.float32)
     im.shape = h, w, chanels
     im = im[::-1, :]

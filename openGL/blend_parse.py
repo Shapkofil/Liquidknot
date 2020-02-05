@@ -11,13 +11,15 @@ def main(resolution=(1920, 1080),
          bounds=(0, 0, 1920, 1080),
          vertex_code=None,
          fragment_code=None,
-         accelerated=False):
+         file_path=None):
     raw_data = render(resolution, bounds, fragment_code=fragment_code)
 
-    if accelerated:
+    if file_path is not None:
         refine = np.asarray(raw_data * 255, dtype=np.uint8)
         refine[:, :, :3] = refine[:, :, :3][:, :, ::-1]
-        cv2.imwrite("temp/temp.png", refine)
+        print("Saving image in {}....".format(file_path))
+        cv2.imwrite(file_path, refine)
+        print("Saved!")
     else:
         buff = memoryview(raw_data).tobytes()
         sys.stdout.buffer.write(buff)
