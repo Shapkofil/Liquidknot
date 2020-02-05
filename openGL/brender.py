@@ -3,10 +3,10 @@ import subprocess
 import os
 import time
 
-# Execution in virtualenv
-
 
 def venvexec(venv_path, file):
+    # Execution in virtualenv
+
     venv_path = os.path.join(os.path.dirname(__file__), venv_path)
     file = os.path.join(os.path.dirname(__file__), file)
     buff = subprocess.run(
@@ -15,7 +15,11 @@ def venvexec(venv_path, file):
     err = buff.stderr
     if err:
         print("SUBSCRIPT ERROR:\n{0}".format(err.decode()))
-    return np.frombuffer(out, dtype=np.float32)
+
+    file = os.path.join(os.path.dirname(__file__), "temp/output.buffer")
+    with open(file, "rb") as f:
+        byte = f.read()
+    return np.frombuffer(byte, dtype=np.float32)
 
 
 def brender(resolution=(1920, 1080),
@@ -36,10 +40,11 @@ def brender(resolution=(1920, 1080),
     refine = np.reshape(
         raw_render, ((bounds[2]) * (bounds[3]), 4))
     refine = refine.astype(np.float32)
+    refine = refine.tolist()
     return refine
 
 
 if __name__ == "__main__":
     init = time.time()
-    print(brender((1920, 1080)))
+    result = brender((1920, 1080))
     print("total execution time {0} sec".format(time.time() - init))

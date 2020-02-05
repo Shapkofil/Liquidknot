@@ -22,7 +22,9 @@ def main(resolution=(1920, 1080),
         print("Saved!")
     else:
         buff = memoryview(raw_data).tobytes()
-        sys.stdout.buffer.write(buff)
+        file = os.path.join(os.path.dirname(__file__), "temp/output.buffer")
+        with open(file, "wb") as f:
+            f.write(buff)
 
 
 # ToDo entry point
@@ -41,5 +43,6 @@ if __name__ == "__main__":
     file = os.path.join(os.path.dirname(__file__), "log.shader")
     with open(file, "w+") as f:
         f.write(fragment_code)
+
     main(resolution=resolution, bounds=bounds,
          fragment_code=fragment_code)
