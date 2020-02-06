@@ -48,13 +48,13 @@ class LiquidknotRenderEngine(bpy.types.RenderEngine):
         file = os.path.join(os.path.dirname(__file__), "openGL/scene.json")
         srl.scene_to_json(scene, path_to_json=file)
         result = self.begin_result(0, 0, self.size_x, self.size_y)
-        init = time.time()
 
-        layer = result.layers[0].passes["Combined"]
+        layer = result.layers[0]
+        file = os.path.join(os.path.dirname(__file__), "openGL/temp/temp.exr")
+        openGL.brender((self.size_x, self.size_y), filepath=file)
 
-        pixels = openGL.brender((self.size_x, self.size_y))
-        layer.rect = pixels
-        print("Total domination {0} sec".format(time.time() - init))
+        # pixels = openGL.brender((self.size_x, self.size_y))
+        layer.load_from_file(file)
         self.end_result(result)
 
     # For viewport renders, this method gets called once at the start and

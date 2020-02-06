@@ -1,4 +1,5 @@
 numpy
 PyOpenGL
 opencv-python
-pygame
+glfw
+imageio

@@ -8,7 +8,6 @@ def camera_to_json(object, context=None):
         entity["position"] = list(context.region_data.view_location)
         entity["rotation"] = list(context.region_data.view_rotation)
 
-    print(entity["rotation"])
     entity["focal_length"] = (object.data.lens /
                               object.data.sensor_height) * 2.
 

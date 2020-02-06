@@ -1,8 +1,6 @@
 from OpenGL.GL import *
 from OpenGL.GLU import *
-
-import pygame
-from pygame.locals import *
+import glfw
 
 from . import gl_utils as glcu
 
@@ -51,8 +49,20 @@ def render(resolution=(1920, 1080),
     WIDTH = resolution[0]
     HEIGHT = resolution[1]
 
-    pygame.init()
-    pygame.display.set_mode(resolution, DOUBLEBUF | OPENGL)
+    if not glfw.init():
+        print("glfw failed!!!")
+        raise RuntimeError("glfw init error")
+        exit()
+
+    glfw.window_hint(glfw.VISIBLE, False)
+    window = glfw.create_window(WIDTH, HEIGHT, "Liquid_phantom", None, None)
+    if not window:
+        print("glfw window failed")
+        glfw.terminate()
+        raise RuntimeError("glfw window error")
+        exit()
+
+    glfw.make_context_current(window)
 
     data = np.zeros(4, [("position", np.float32, 2)])
     data["position"] = [(-1, 1), (-1, -1), (+1, +1), (1, -1)]
@@ -62,11 +72,11 @@ def render(resolution=(1920, 1080),
     loc = glGetUniformLocation(program, "resolution")
     glUniform2f(loc, WIDTH, HEIGHT)
 
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     display()
 
     pixels = glcu.readPixels(bounds[0], bounds[1], bounds[2], bounds[3])
 
-    pygame.quit()
+    glfw.destroy_window(window)
+    glfw.terminate()
 
     return pixels

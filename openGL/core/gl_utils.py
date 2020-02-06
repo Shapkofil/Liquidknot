@@ -38,9 +38,7 @@ def compileProgram(vertex_code, fragment_code):
     return program
 
 
-def readPixels(x, y, w, h, clrspace=GL_RGBA, chanels=4):
+def readPixels(x, y, w, h, clrspace=GL_RGBA, channels=4):
     im = glReadPixels(x, y, w, h, clrspace, GL_FLOAT)
-    im = np.frombuffer(im, np.float32)
-    im.shape = h, w, chanels
-    im = im[::-1, :]
+    im.shape = h, w, channels
     return im
