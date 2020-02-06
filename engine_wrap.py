@@ -47,13 +47,12 @@ class LiquidknotRenderEngine(bpy.types.RenderEngine):
         # Serialize the scene
         file = os.path.join(os.path.dirname(__file__), "openGL/scene.json")
         srl.scene_to_json(scene, path_to_json=file)
-
-        pixels = openGL.brender((self.size_x, self.size_y))
         result = self.begin_result(0, 0, self.size_x, self.size_y)
         init = time.time()
 
         layer = result.layers[0].passes["Combined"]
 
+        pixels = openGL.brender((self.size_x, self.size_y))
         layer.rect = pixels
         print("Total domination {0} sec".format(time.time() - init))
         self.end_result(result)
