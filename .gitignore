@@ -3,4 +3,4 @@
 .venv/
 temp/
 log.shader
-/*.blend1
+*.blend1

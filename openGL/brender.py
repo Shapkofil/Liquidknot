@@ -4,6 +4,8 @@ import os
 import time
 import re
 
+from ..std_extentions import *
+
 
 def venvexec(venv_path, file, output_path="temp/output.buffer"):
     # Execution in virtualenv
@@ -36,7 +38,7 @@ def brender(resolution=(1920, 1080),
         bounds = (0, 0, resolution[0], resolution[1])
 
     if filepath is not None:
-        print("[Liquidknot] Saved result at {} !".format(filepath))
+        print("Saved result at {} !".format(filepath))
         return None
 
     # reshape the array
