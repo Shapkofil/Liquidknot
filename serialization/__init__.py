@@ -24,13 +24,13 @@ def fetch_hyper_params(scene):
     }
 
 
-def scene_to_json(scene, context=None, path_to_json=None):
+def scene_to_json(scene, resolution=None, bounds=None, context=None, path_to_json=None):
 
     # Fetch Hyperparams
     hyper_params = fetch_hyper_params(scene)
 
     # Get Bounds List
-    resolution, bounds = bounds_to_json(scene, context)
+    resolution, bounds = bounds_to_json(scene, resolution, bounds, context)
 
     # Camera params Fetch
     camera_dict = camera_to_json(scene.camera, context)

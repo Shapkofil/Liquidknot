@@ -69,6 +69,9 @@ class LiquidknotRenderEngine(bpy.types.RenderEngine):
         # Get viewport dimensions
         dimensions = region.width, region.height
 
+        self.size_x = region.width
+        self.size_y = region.width
+
         if not self.scene_data:
             # First time initialization
             self.scene_data = []
@@ -103,12 +106,11 @@ class LiquidknotRenderEngine(bpy.types.RenderEngine):
         scene = depsgraph.scene
 
         # Serialize the scene
-        # file = os.path.join(os.path.dirname(__file__), "openGL/scene.json")
-        # srl.scene_to_json(scene, path_to_json=file, context=context)
+        file = os.path.join(os.path.dirname(__file__), "openGL/scene.json")
+        srl.scene_to_json(resolution=(self.size_x, self.size_y), scene=scene, path_to_json=file, context=context)
 
         # Get viewport dimensions
-        dimensions = (region.width, region.height)
-        print(dimensions)
+        dimensions = (self.size_x, self.size_y)
 
         # Bind shader that converts from scene linear to display space,
         bgl.glEnable(bgl.GL_BLEND)
@@ -130,8 +132,7 @@ class LiquidknotDrawData:
         self.dimensions = dimensions
         width, height = dimensions
 
-        pixels = openGL.brender(dimensions).reshape(
-            width * height * 4).astype(np.float64).tolist()
+        pixels = openGL.brender(dimensions).reshape(width * height * 4)
         pixels = bgl.Buffer(bgl.GL_FLOAT, width * height * 4, pixels)
 
         # Generate texture

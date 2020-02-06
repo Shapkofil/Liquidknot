@@ -24,7 +24,13 @@ def main(resolution=(1920, 1080),
          filepath=None):
     raw_data = render(resolution, bounds, fragment_code=fragment_code)
 
-    if filepath is not None:
+    if filepath is None:
+        buff = memoryview(raw_data).tobytes()
+        sys.stdout.buffer.write(buff)
+        sys.stdout.buffer.flush()
+        quit()
+
+    if not re.match(r"^(.+)\.buffer$", filepath):
         saveimg(raw_data, filepath)
     else:
         buff = memoryview(raw_data).tobytes()
