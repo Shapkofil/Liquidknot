@@ -4,7 +4,10 @@ import os
 import time
 import re
 
-from ..std_extentions import *
+try:
+    from ..std_extentions import *
+except ImportError:
+    print("Stand alone mode")
 
 
 def venvexec(venv_path, file, output_path=None):
@@ -61,5 +64,5 @@ def brender(resolution=(1920, 1080),
 
 if __name__ == "__main__":
     init = time.time()
-    result = brender((1920, 1080))
+    result = brender((1920, 1080), filepath="temp/temp.exr")
     print("total execution time {0} sec".format(time.time() - init))
