@@ -20,7 +20,7 @@ def print(*args, **kwargs):
         if re.match(r"[E,e]rror", kwargs["log"]):
             color = bcolors.FAIL + bcolors.BOLD
         else:
-            color = bcolors.OKBLUE = bcolors.BOLD
+            color = bcolors.OKBLUE + bcolors.BOLD
         kwargs.pop("log")
     else:
         color = bcolors.BOLD
@@ -31,4 +31,4 @@ def print(*args, **kwargs):
 
 
 if __name__ == "__main__":
-	print("shit, \n")
+    print("fungi\nfun guy", log = "WARNING")

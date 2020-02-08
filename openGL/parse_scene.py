@@ -22,7 +22,7 @@ def de_gen_swamp(swamp):
     de_line = "{0}(p)".format(name_gen(swamp[0]["name"]))
     for entity in swamp[1:]:
         de += de_gen(entity)
-        de_line = "smin ({0}(p) , {1}, .1)".format(name_gen(entity["name"]), de_line)
+        de_line = "smin ({0}(p) , {1}, .3)".format(name_gen(entity["name"]), de_line)
     de_line = "return {0};".format(de_line)
     return de, de_line
 

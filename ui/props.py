@@ -66,6 +66,6 @@ def unregister():
     for cls in classes:
         bpy.utils.unregister_class(cls)
 
-    bpy.types.Scene.liquidknot = None
+    del bpy.types.Scene.liquidknot
 
-    bpy.types.Object.liquidknot = None
+    del bpy.types.Object.liquidknot
