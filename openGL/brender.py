@@ -63,6 +63,6 @@ def brender(resolution=(1920, 1080),
 
 
 if __name__ == "__main__":
-    init = time.time()
+    init = time.time() 
     result = brender((1920, 1080), filepath="temp/temp.exr")
     print("total execution time {0} sec".format(time.time() - init))

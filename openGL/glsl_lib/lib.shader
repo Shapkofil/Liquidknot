@@ -1,5 +1,45 @@
+// Math constants
+
+#define __pi__ 3.1415926535897932384626433832795
+
+// Utils libs
+
+float smin( float a, float b, float k )
+{
+    float h = max( k-abs(a-b), 0.0 )/k;
+    return min( a, b ) - h*h*k*(1.0/4.0);
+}
+
+vec4 quat_conj(vec4 q)
+{ 
+  return vec4(-q.x, -q.y, -q.z, q.w); 
+}
+  
+vec4 quat_mult(vec4 q1, vec4 q2)
+{ 
+  vec4 qr;
+  qr.x = (q1.w * q2.x) + (q1.x * q2.w) + (q1.y * q2.z) - (q1.z * q2.y);
+  qr.y = (q1.w * q2.y) - (q1.x * q2.z) + (q1.y * q2.w) + (q1.z * q2.x);
+  qr.z = (q1.w * q2.z) + (q1.x * q2.y) - (q1.y * q2.x) + (q1.z * q2.w);
+  qr.w = (q1.w * q2.w) - (q1.x * q2.x) - (q1.y * q2.y) - (q1.z * q2.z);
+  return qr;
+}
+
+vec3 rotate_ray(vec3 position, vec4 qr)
+{ 
+	qr = vec4(qr.yzw,qr.x);
+	vec4 qr_conj = quat_conj(qr);
+	vec4 q_pos = vec4(position.x, position.y, position.z, 0);
+	  
+	vec4 q_tmp = quat_mult(qr, q_pos);
+	qr = quat_mult(q_tmp, qr_conj);
+	  
+	return vec3(qr.x, qr.y, qr.z);
+}
+
 // Primitive DE Lib
-float sdSphere( vec3 p, floar r)
+
+float sdSphere( vec3 p, float r )
 {
 	return length(p) - r;
 }
@@ -25,7 +65,7 @@ float sdRoundBox( vec3 p, vec3 b, float r )
 
 float sdPlane( vec3 p, vec4 n )
 {
-	vec4 = norm(n)
+	n = normalize(n);
 	return dot(p,n.xyz) + n.w;
 }
 
@@ -115,23 +155,23 @@ float udTriangle( vec3 p, vec3 a, vec3 b, vec3 c )
 
 float udQuad( vec3 p, vec3 a, vec3 b, vec3 c, vec3 d )
 {
-  vec3 ba = b - a; vec3 pa = p - a;
-  vec3 cb = c - b; vec3 pb = p - b;
-  vec3 dc = d - c; vec3 pc = p - c;
-  vec3 ad = a - d; vec3 pd = p - d;
-  vec3 nor = cross( ba, ad );
+	vec3 ba = b - a; vec3 pa = p - a;
+	vec3 cb = c - b; vec3 pb = p - b;
+	vec3 dc = d - c; vec3 pc = p - c;
+	vec3 ad = a - d; vec3 pd = p - d;
+	vec3 nor = cross( ba, ad );
 
-  return sqrt(
-    (sign(dot(cross(ba,nor),pa)) +
-     sign(dot(cross(cb,nor),pb)) +
-     sign(dot(cross(dc,nor),pc)) +
-     sign(dot(cross(ad,nor),pd))<3.0)
-     ?
-     min( min( min(
-     dot2(ba*clamp(dot(ba,pa)/dot2(ba),0.0,1.0)-pa),
-     dot2(cb*clamp(dot(cb,pb)/dot2(cb),0.0,1.0)-pb) ),
-     dot2(dc*clamp(dot(dc,pc)/dot2(dc),0.0,1.0)-pc) ),
-     dot2(ad*clamp(dot(ad,pd)/dot2(ad),0.0,1.0)-pd) )
-     :
-     dot(nor,pa)*dot(nor,pa)/dot2(nor) );
+	return sqrt(
+	(sign(dot(cross(ba,nor),pa)) +
+	 sign(dot(cross(cb,nor),pb)) +
+	 sign(dot(cross(dc,nor),pc)) +
+	 sign(dot(cross(ad,nor),pd))<3.0)
+	 ?
+	 min( min( min(
+	 dot2(ba*clamp(dot(ba,pa)/dot2(ba),0.0,1.0)-pa),
+	 dot2(cb*clamp(dot(cb,pb)/dot2(cb),0.0,1.0)-pb) ),
+	 dot2(dc*clamp(dot(dc,pc)/dot2(dc),0.0,1.0)-pc) ),
+	 dot2(ad*clamp(dot(ad,pd)/dot2(ad),0.0,1.0)-pd) )
+	 :
+	 dot(nor,pa)*dot(nor,pa)/dot2(nor) );
 }

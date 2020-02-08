@@ -1,30 +1,26 @@
 import json
 import re
 
-from glsl_lib import glsl_math as glsl
+from glsl_lib import glsl_math as glsl, lib_code
 
 
 def de_gen(entity):
     de = entity["de"]
-
-    # Position sub
-    de = re.sub(r"p", "p - {0}".format(glsl.vec(entity["position"])), de)
-
-    # To Do Rotaion Sub
-
-    # Params sub
-    for name, param in entity["params"].items():
-        de = re.sub(name, str(param), de)
-
-    return de
+    for k, v in entity["params"].items():
+        print("{} {}".format(k, v))
+        de = re.sub(k, str(v), de)
+    return "{} {}( vec3 p )\n{{\n    p -= {};\n    return {};\n}}\n\n"\
+        .format("float", entity["name"], glsl.vec(entity["position"]), de)
 
 
 def de_gen_swamp(swamp):
     de = de_gen(swamp[0])
+    de_line = "{0}(p)".format(swamp[0]["name"])
     for entity in swamp[1:]:
-        de = "smin ({0}, {1}, .1)".format(de_gen(entity), de)
-    de = "return {0};".format(de)
-    return de
+        de += de_gen(entity)
+        de_line = "smin ({0}(p) , {1}, .1)".format(entity["name"], de_line)
+    de_line = "return {0};".format(de_line)
+    return de, de_line
 
 
 def parse_scene(scene_path, fragment_code):
@@ -43,37 +39,43 @@ def parse_scene(scene_path, fragment_code):
             snippet += "\nconst {0} {1} = {2};".format(c_type, k,
                                                        glsl.vec(v) if re.match(r"^vec", c_type) else v)
 
-    fragment_code = re.sub(r"// pebble hyper_params", snippet, fragment_code)
-
-    # Loading Scene DE
-
-    de = de_gen_swamp(data["entities"])
-    fragment_code = re.sub(r"// pebble distance_estimator", de, fragment_code)
-
     # Loading Camera
-    fragment_code = re.sub(r"pebble camera_position",
-                           glsl.vec(data["camera"]["position"]),
-                           fragment_code)
-    fragment_code = re.sub(r"pebble camera_rotation",
-                           glsl.vec(data["camera"]["rotation"]),
-                           fragment_code)
-
-    fragment_code = re.sub(r"pebble focal_lenght",
-                           str(data["camera"]["focal_length"]),
-                           fragment_code)
+    snippet += "\n\nconst vec3 camera_position = {0};\n".format(glsl.vec(data["camera"]["position"]))
+    snippet += "const vec4 camera_rotation = {0};\n".format(glsl.vec(data["camera"]["rotation"]))
+    snippet += "const float focal_length = {0};\n\n".format(data["camera"]["focal_length"])
 
     # Loading lights
     n = len(data["lights"])
-    snippet = "const float light_count = {0};\n".format(n)
+    snippet += "const float light_count = {0};\n".format(n)
+
+    # Light position
     snippet_pos = "const vec3 light_positions[{0}] = ".format(n) + r"{"
-    snippet_cl = "const vec4 light_colors[{0}] = ".format(n) + r"{"
     for light in data["lights"]:
         snippet_pos += "{0}, ".format(glsl.vec(light["position"]))
+    snippet_pos = snippet_pos[:-2] + r"};" + "\n"
+
+    # Light color
+    snippet_cl = "const vec4 light_colors[{0}] = ".format(n) + r"{"
     for light in data["lights"]:
         snippet_cl += "{0}, ".format(glsl.vec(light["color"]))
-    snippet_pos = snippet_pos[:-2] + r"};" + "\n"
     snippet_cl = snippet_cl[:-2] + r"};" + "\n"
-    snippet += snippet_pos + snippet_cl
-    fragment_code = re.sub(r"// pebble lights", snippet, fragment_code)
 
+    # Combine Light passes
+    snippet += snippet_pos + snippet_cl + "\n"
+
+    # Loading Scene DE
+    de_snippet, de = de_gen_swamp(data["entities"])
+    snippet += de_snippet
+    fragment_code = re.sub(r"// pebble distance_estimator", de, fragment_code)
+
+    # Assemble the fragment_code segment
+    fragment_code = lib_code + snippet + fragment_code
     return resolution, bounds, fragment_code
+
+
+if __name__ == "__main__":
+    import time
+    start = time.time()
+    with open("fragment.shader", "r") as f:
+        parse_scene("scene.json", f.read())
+    print("parsed for {} sec".format(time.time() - start))
