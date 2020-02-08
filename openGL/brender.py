@@ -5,7 +5,7 @@ import time
 import re
 
 try:
-    from ..std_extentions import *
+    from ..std_extensions import *
 except ImportError:
     print("Stand alone mode")
 
@@ -22,7 +22,7 @@ def venvexec(venv_path, file, output_path=None):
     err = buff.stderr
 
     if err:
-        print("SUBSCRIPT ERROR:\n{0}".format(err.decode()))
+        print("SUBSCRIPT ERROR:\n{0}".format(err.decode())[:-2], log="error")
 
     # Stdout Cases
     byte = buff.stdout
@@ -63,6 +63,6 @@ def brender(resolution=(1920, 1080),
 
 
 if __name__ == "__main__":
-    init = time.time() 
+    init = time.time()
     result = brender((1920, 1080), filepath="temp/temp.exr")
     print("total execution time {0} sec".format(time.time() - init))

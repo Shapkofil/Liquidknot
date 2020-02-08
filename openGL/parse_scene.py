@@ -4,21 +4,25 @@ import re
 from glsl_lib import glsl_math as glsl, lib_code
 
 
+def name_gen(name):
+    return re.sub(r"\.", "_", name)
+
+
 def de_gen(entity):
     de = entity["de"]
     for k, v in entity["params"].items():
         print("{} {}".format(k, v))
         de = re.sub(k, str(v), de)
     return "{} {}( vec3 p )\n{{\n    p -= {};\n    return {};\n}}\n\n"\
-        .format("float", entity["name"], glsl.vec(entity["position"]), de)
+        .format("float", name_gen(entity["name"]), glsl.vec(entity["position"]), de)
 
 
 def de_gen_swamp(swamp):
     de = de_gen(swamp[0])
-    de_line = "{0}(p)".format(swamp[0]["name"])
+    de_line = "{0}(p)".format(name_gen(swamp[0]["name"]))
     for entity in swamp[1:]:
         de += de_gen(entity)
-        de_line = "smin ({0}(p) , {1}, .1)".format(entity["name"], de_line)
+        de_line = "smin ({0}(p) , {1}, .1)".format(name_gen(entity["name"]), de_line)
     de_line = "return {0};".format(de_line)
     return de, de_line
 
