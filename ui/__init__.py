@@ -23,4 +23,4 @@ def unregister():
 
     # Special Cases
     prop_unregister()
-    preset_register()
+    preset_unregister()
