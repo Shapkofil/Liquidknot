@@ -16,7 +16,7 @@ soon comming for Windows and MacOS
 pip install virtualenv
 ```
 ### Installation
-#### The easy way **_(unstable)_**
+#### The easy way **_UNSTABLE_**
 - ~~Download the master branch as a zip~~
 - ~~Open Blender~~
 - ~~Go to Edit->Preferences->Addons~~
