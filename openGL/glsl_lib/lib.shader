@@ -76,6 +76,13 @@ float sdCapsule( vec3 p, vec3 a, vec3 b, float r )
 	return length( pa - ba*h ) - r;
 }
 
+float sdVerticalCapsule( vec3 p, float h, float r )
+{
+	p -= vec3(0, 0, -h/2);
+	p.z -= clamp( p.z, 0.0, h );
+	return length( p ) - r;
+}
+
 float sdCappedCylinder( vec3 p, float h, float r )
 {
 	vec2 d = abs(vec2(length(p.xz),p.y)) - vec2(h,r);
