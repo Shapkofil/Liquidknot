@@ -16,12 +16,12 @@ soon comming for Windows and MacOS
 pip install virtualenv
 ```
 ### Installation
-#### The easy way _(unstable)_
-- Download the master branch as a zip
-- Open Blender
-- Go to Edit->Preferences->Addons
-- Click the install... button (top rigth)
-- Select the __*.zip__ archive you downloaded
+#### The easy way **_(unstable)_**
+- ~~Download the master branch as a zip~~
+- ~~Open Blender~~
+- ~~Go to Edit->Preferences->Addons~~
+- ~~Click the install... button (top rigth)~~
+- ~~Select the __*.zip__ archive you downloaded~~
 #### The hard way _(but stable)_
 - **_CLONE INTO BLENDER'S scripts addons FOLDER_**  
 [https://docs.blender.org/manual/en/latest/editors/preferences/file_paths](https://docs.blender.org/manual/en/latest/editors/preferences/file_paths)
