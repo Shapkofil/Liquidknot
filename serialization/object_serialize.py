@@ -13,7 +13,7 @@ def objects_to_json(collection):
         entity = {}
         entity["name"] = object.name
         entity["position"] = list(object.location)
-        entity["rotation"] = list(object.rotation_euler)
+        entity["rotation"] = list(object.rotation_quaternion)
         entity["params"] = fetch_obj_params(object)
         entity["de"] = object.liquidknot.de
         entities.append(entity)

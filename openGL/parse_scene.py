@@ -13,8 +13,17 @@ def de_gen(entity):
     for k, v in entity["params"].items():
         print("{} {}".format(k, v))
         de = re.sub(k, str(v), de)
-    return "{} {}( vec3 p )\n{{\n    p -= {};\n    return {};\n}}\n\n"\
-        .format("float", name_gen(entity["name"]), glsl.vec(entity["position"]), de)
+    snippet = "{} {}( vec3 p )\n{{\n".format("float", name_gen(entity["name"]))
+
+    # Adjust for position
+    snippet += "    p -= {};\n".format(glsl.vec(entity["position"]))
+
+    # Adjust for rotation
+    snippet += "    p = rotate_ray(p, {1});\n".format(glsl.vec(entity["position"]), glsl.vec(entity["rotation"]))
+
+    # Main de addition
+    snippet += "    return {};\n}}\n\n".format(de)
+    return snippet
 
 
 def de_gen_swamp(swamp):

@@ -14,16 +14,21 @@ class LK_add_Sphere(Operator):
     bl_label = "Add_Sphere"
 
     def execute(self, context):
-        obj = bpy.data.objects.new('LK_Sphere', None)
+        if not context.mode == "Object":
+            obj = bpy.data.objects.new('LK_Sphere', None)
 
-        # Set location to cursor
-        obj.location = context.scene.cursor.location
+            # Set location to cursor
+            obj.location = context.scene.cursor.location
 
-        # Set Liquidknot props
-        obj.liquidknot.active = True
-        add_props({"width": 1., "height": 1., "depth": 1.}, obj)
-        obj.liquidknot.de = "sdEllipsoid(p, vec3(width, height, depth))"
-        context.scene.collection.objects.link(obj)
+            # Set Liquidknot props
+            obj.liquidknot.active = True
+            add_props({"width": 2., "height": 2., "depth": 2.}, obj)
+            obj.liquidknot.de = "sdEllipsoid(p, vec3(width, height, depth))"
+            context.scene.collection.objects.link(obj)
+
+        else:
+            self.report({'WARNING'}, "Liquidknot: Option only valid in Object mode")
+            return {'CANCELED'}
 
         return {'FINISHED'}
 
@@ -33,16 +38,45 @@ class LK_add_Cube(Operator):
     bl_label = "Add_Cube"
 
     def execute(self, context):
-        obj = bpy.data.objects.new('LK_Cube', None)
+        if not context.mode == "Object":
+            obj = bpy.data.objects.new('LK_Cube', None)
 
-        # Set location to cursor
-        obj.location = context.scene.cursor.location
+            # Set location to cursor
+            obj.location = context.scene.cursor.location
 
-        # Set Liquidknot props
-        obj.liquidknot.active = True
-        add_props({"width": 1., "height": 1., "depth": 1.}, obj)
-        obj.liquidknot.de = "sdBox(p, vec3(width, height, depth))"
-        context.scene.collection.objects.link(obj)
+            # Set Liquidknot props
+            obj.liquidknot.active = True
+            add_props({"width": 2., "height": 2., "depth": 2.}, obj)
+            obj.liquidknot.de = "sdBox(p, vec3(width, height, depth))"
+            context.scene.collection.objects.link(obj)
+
+        else:
+            self.report({'WARNING'}, "Liquidknot: Option only valid in Object mode")
+            return {'CANCELED'}
+
+        return {'FINISHED'}
+
+
+class LK_add_Torus(Operator):
+    bl_idname = "lk.add_torus"
+    bl_label = "Add_Torus"
+
+    def execute(self, context):
+        if not context.mode == "Object":
+            obj = bpy.data.objects.new('LK_Torus', None)
+
+            # Set location to cursor
+            obj.location = context.scene.cursor.location
+
+            # Set Liquidknot props
+            obj.liquidknot.active = True
+            add_props({"inner_radius": .25, "outer_radius": 1.}, obj)
+            obj.liquidknot.de = "sdTorus(p, vec2(outer_radius, inner_radius))"
+            context.scene.collection.objects.link(obj)
+
+        else:
+            self.report({'WARNING'}, "Liquidknot: Option only valid in Object mode")
+            return {'CANCELED'}
 
         return {'FINISHED'}
 
@@ -54,8 +88,9 @@ class LK_add_Menu(Menu):
     # noinspection PyUnusedLocal
     def draw(self, context):
         self.layout.operator_context = 'INVOKE_REGION_WIN'
-        self.layout.operator("lk.add_cube", text="Cube")
-        self.layout.operator("lk.add_sphere", text="Sphere")
+        self.layout.operator("lk.add_cube", text="Cube", icon="CUBE")
+        self.layout.operator("lk.add_sphere", text="Sphere", icon="SPHERE")
+        self.layout.operator("lk.add_torus", text="Torus", icon="MESH_TORUS")
 
 
 def LK_Add_Menu_func(self, context):
@@ -64,7 +99,10 @@ def LK_Add_Menu_func(self, context):
     self.layout.menu("VIEW3D_MT_mesh_custom_menu_add", icon="GROUP")
 
 
-classes = [LK_add_Cube, LK_add_Sphere, LK_add_Menu]
+classes = [LK_add_Cube,
+           LK_add_Sphere,
+           LK_add_Torus,
+           LK_add_Menu]
 
 
 def register():

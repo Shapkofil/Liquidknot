@@ -31,94 +31,94 @@
     "camera": {
         "name": "Camera.003",
         "position": [
-            10.653910636901855,
-            -11.080158233642578,
-            5.887969970703125
+            0.9732906222343445,
+            -2.904376983642578,
+            9.185554504394531
         ],
         "rotation": [
-            0.7695583701133728,
-            0.5238171815872192,
-            0.21023595333099365,
-            0.29865774512290955
+            0.9791582226753235,
+            0.14109928905963898,
+            0.02083570882678032,
+            0.14458930492401123
         ],
         "focal_length": 4.166666666666667
     },
     "entities": [
         {
-            "name": "LK_Cube",
+            "name": "LK_Torus",
             "position": [
-                0.0,
-                0.0,
+                1.0,
+                -1.0,
                 0.0
             ],
             "rotation": [
-                0.0,
+                0.7071067690849304,
+                0.7071067690849304,
                 0.0,
                 0.0
             ],
             "params": {
-                "width": 1.0,
-                "height": 1.0,
-                "depth": 1.0
+                "inner_radius": 0.30000001192092896,
+                "outer_radius": 1.0
             },
-            "de": "sdBox(p, vec3(width, height, depth))"
+            "de": "sdTorus(p, vec2(outer_radius, inner_radius))"
         },
         {
-            "name": "LK_Sphere",
+            "name": "LK_Torus.001",
             "position": [
-                0.8025144338607788,
-                0.677952766418457,
-                0.760589599609375
+                -1.0,
+                -1.0,
+                0.0
             ],
             "rotation": [
-                0.0,
+                0.7071067690849304,
+                0.7071067690849304,
                 0.0,
                 0.0
             ],
             "params": {
-                "width": 1.0,
-                "height": 1.0,
-                "depth": 1.0
+                "inner_radius": 0.30000001192092896,
+                "outer_radius": 0.699999988079071
             },
-            "de": "sdEllipsoid(p, vec3(width, height, depth))"
+            "de": "sdTorus(p, vec2(outer_radius, inner_radius))"
         },
         {
-            "name": "LK_Cube.001",
+            "name": "LK_Torus.002",
             "position": [
-                0.7102680206298828,
-                -0.3235151767730713,
-                -0.6450366973876953
+                1.0,
+                1.0,
+                0.0
             ],
             "rotation": [
-                0.0,
+                0.7071067690849304,
+                0.7071067690849304,
                 0.0,
                 0.0
             ],
             "params": {
-                "width": 1.0,
-                "height": 1.0,
-                "depth": 1.0
+                "inner_radius": 0.30000001192092896,
+                "outer_radius": 1.0
             },
-            "de": "sdBox(p, vec3(width, height, depth))"
+            "de": "sdTorus(p, vec2(outer_radius, inner_radius))"
         },
         {
-            "name": "LK_Sphere.001",
+            "name": "LK_Torus.003",
             "position": [
-                -0.011355996131896973,
-                -1.1290795803070068,
-                -0.2712351679801941
+                -1.0,
+                1.0,
+                0.0
             ],
             "rotation": [
-                0.0,
+                0.7071067690849304,
+                0.7071067690849304,
                 0.0,
                 0.0
             ],
             "params": {
-                "width": 1.0,
-                "height": 1.0,
-                "depth": 1.0
+                "inner_radius": 0.30000001192092896,
+                "outer_radius": 1.0
             },
-            "de": "sdEllipsoid(p, vec3(width, height, depth))"
+            "de": "sdTorus(p, vec2(outer_radius, inner_radius))"
         }
     ],
     "lights": [
