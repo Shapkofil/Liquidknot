@@ -12,17 +12,17 @@ float smin( float a, float b, float k )
 
 vec4 quat_conj(vec4 q)
 { 
-  return vec4(-q.x, -q.y, -q.z, q.w); 
+	return vec4(-q.x, -q.y, -q.z, q.w); 
 }
   
 vec4 quat_mult(vec4 q1, vec4 q2)
 { 
-  vec4 qr;
-  qr.x = (q1.w * q2.x) + (q1.x * q2.w) + (q1.y * q2.z) - (q1.z * q2.y);
-  qr.y = (q1.w * q2.y) - (q1.x * q2.z) + (q1.y * q2.w) + (q1.z * q2.x);
-  qr.z = (q1.w * q2.z) + (q1.x * q2.y) - (q1.y * q2.x) + (q1.z * q2.w);
-  qr.w = (q1.w * q2.w) - (q1.x * q2.x) - (q1.y * q2.y) - (q1.z * q2.z);
-  return qr;
+	vec4 qr;
+	qr.x = (q1.w * q2.x) + (q1.x * q2.w) + (q1.y * q2.z) - (q1.z * q2.y);
+	qr.y = (q1.w * q2.y) - (q1.x * q2.z) + (q1.y * q2.w) + (q1.z * q2.x);
+	qr.z = (q1.w * q2.z) + (q1.x * q2.y) - (q1.y * q2.x) + (q1.z * q2.w);
+	qr.w = (q1.w * q2.w) - (q1.x * q2.x) - (q1.y * q2.y) - (q1.z * q2.z);
+	return qr;
 }
 
 vec3 rotate_ray(vec3 position, vec4 qr)
@@ -182,3 +182,23 @@ float udQuad( vec3 p, vec3 a, vec3 b, vec3 c, vec3 d )
 	 :
 	 dot(nor,pa)*dot(nor,pa)/dot2(nor) );
 }
+
+
+// Unions lib
+float opUnion( float d1, float d2 ) {  return min(d1,d2); }
+
+float opSubtraction( float d1, float d2 ) { return max(-d1,d2); }
+
+float opIntersection( float d1, float d2 ) { return max(d1,d2); }
+
+float opSmoothUnion( float d1, float d2, float k ) {
+    float h = clamp( 0.5 + 0.5*(d2-d1)/k, 0.0, 1.0 );
+    return mix( d2, d1, h ) - k*h*(1.0-h); }
+
+float opSmoothSubtraction( float d1, float d2, float k ) {
+    float h = clamp( 0.5 - 0.5*(d2+d1)/k, 0.0, 1.0 );
+    return mix( d2, -d1, h ) + k*h*(1.0-h); }
+
+float opSmoothIntersection( float d1, float d2, float k ) {
+    float h = clamp( 0.5 - 0.5*(d2-d1)/k, 0.0, 1.0 );
+    return mix( d2, d1, h ) + k*h*(1.0-h); }

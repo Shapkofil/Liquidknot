@@ -24,6 +24,14 @@ def fetch_hyper_params(scene):
     }
 
 
+def fetch_union_pros(scene):
+    lk = scene.liquidknot
+    return {
+        "mode": lk.union_mode,
+        "value": lk.union_smoothness
+    }
+
+
 def scene_to_json(scene, resolution=None, bounds=None, context=None, path_to_json=None):
 
     # Fetch Hyperparams
@@ -50,6 +58,7 @@ def scene_to_json(scene, resolution=None, bounds=None, context=None, path_to_jso
         "hyper_params": hyper_params,
         "camera": camera_dict,
         "entities": entities_dict,
+        "default_union": fetch_union_pros(scene),
         "lights": light_dict
     }
 

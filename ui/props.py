@@ -1,6 +1,18 @@
 import bpy
 
 
+def setup_union_modes(scene, context):
+    items = [
+        ('UNION', "Union", ""),
+        ('SUBTRACTION', "Subtraction", ""),
+        ('INTERSECTION', "Intersection", ""),
+        ('SMOOTH_UNION', "Smooth Union", ""),
+        ('SMOOTH_SUBTRACTION', "Smooth Subtraction", ""),
+        ('SMOOTH_INTERSECTION', "Smooth Intersection", ""),
+    ]
+    return items
+
+
 class LiquidknotProps(bpy.types.PropertyGroup):
     max_marching_steps: bpy.props.IntProperty(
         name='Max Marching Steps',
@@ -23,6 +35,14 @@ class LiquidknotProps(bpy.types.PropertyGroup):
         default=.005,
         min=.00005,
         precision=5)
+
+    union_mode: bpy.props.EnumProperty(
+        name='Union Mode',
+        items=setup_union_modes)
+
+    union_smoothness: bpy.props.FloatProperty(
+        name="Smoothness",
+        default=.3)
 
 
 class LiquidknotObjParams(bpy.types.PropertyGroup):

@@ -4,6 +4,16 @@ import re
 from glsl_lib import glsl_math as glsl, lib_code
 
 
+union_dict = {
+    "UNION": "opUnion",
+    "SUBTRACTION": "opSubtraction",
+    "INTERSECTION": "opIntersection",
+    "SMOOTH_UNION": "opSmoothUnion",
+    "SMOOTH_SUBTRACTION": "opSmoothSubtraction",
+    "SMOOTH_INTERSECTION": "opSmoothIntersection",
+}
+
+
 def name_gen(name):
     return re.sub(r"\.", "_", name)
 
@@ -26,12 +36,14 @@ def de_gen(entity):
     return snippet
 
 
-def de_gen_swamp(swamp):
+def de_gen_swamp(swamp, union):
     de = de_gen(swamp[0])
     de_line = "{0}(p)".format(name_gen(swamp[0]["name"]))
     for entity in swamp[1:]:
         de += de_gen(entity)
-        de_line = "smin ({0}(p) , {1}, .3)".format(name_gen(entity["name"]), de_line)
+        de_line = "{0}({1}(p) , {2}{3})"\
+            .format(union_dict[union["mode"]], name_gen(entity["name"]), de_line,
+                    ", {}".format(union["value"]) if re.match(r"^SMOOTH(.+)$", union["mode"]) else " ")
     de_line = "return {0};".format(de_line)
     return de, de_line
 
@@ -77,7 +89,7 @@ def parse_scene(scene_path, fragment_code):
     snippet += snippet_pos + snippet_cl + "\n"
 
     # Loading Scene DE
-    de_snippet, de = de_gen_swamp(data["entities"])
+    de_snippet, de = de_gen_swamp(data["entities"], data["default_union"])
     snippet += de_snippet
     fragment_code = re.sub(r"// pebble distance_estimator", de, fragment_code)
 

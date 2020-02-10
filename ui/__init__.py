@@ -1,14 +1,15 @@
 import bpy
 
-from .hyperparams import classes as hp_classes
+from .main_setting import classes as ms_classes
 from .props import register as prop_register, unregister as prop_unregister
 from .objectpanel import classes as obj_classes
 from .presets import register as preset_register, unregister as preset_unregister
 
-classes = hp_classes + obj_classes
+classes = ms_classes + obj_classes
 
 
 def register():
+    print(classes)
     for cls in classes:
         bpy.utils.register_class(cls)
 

@@ -29,7 +29,6 @@ def venvexec(venv_path, file, output_path=None):
 
     # Exr Cases
     if re.match(r"^(.+)\.exr", output_path):
-        print(output_path)
         return None
     # Buffer Cases
     elif not output_path == "None":
