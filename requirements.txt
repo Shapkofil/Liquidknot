@@ -2,4 +2,3 @@ numpy
 PyOpenGL
 opencv-python
 glfw
-imageio
