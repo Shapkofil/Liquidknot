@@ -1,6 +1,6 @@
 # Liquidknot
 ---
-### Ray-Marching Rendeting Engine for Blender
+### Ray-Marching Rendering Engine for Blender
 ---
 ## Installation
 ### Requirements
