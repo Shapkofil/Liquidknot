@@ -4,6 +4,11 @@
 
 // Utils libs
 
+vec4 csdf(float sdf, vec4 color,float wash_off = 3.)
+{
+	return vec4(clamp((-sdf * wash_off) + 1., .0, 1.) * color.xyz, 1.);
+}
+
 float smin( float a, float b, float k )
 {
     float h = max( k-abs(a-b), 0.0 )/k;

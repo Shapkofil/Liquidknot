@@ -6,6 +6,12 @@ def fetch_obj_params(obj):
     return fetched
 
 
+def obj_to_preset(obj):
+    data = {}
+    data["params"] = fetch_obj_params(obj)
+    data["de"] = obj.liquidknot.de
+
+
 def objects_to_json(collection):
     entities = []
 
@@ -19,3 +25,37 @@ def objects_to_json(collection):
         entities.append(entity)
 
     return entities
+
+
+# -------------------
+# Reverced
+# -------------------
+
+def add_params(props, obj):
+    for k, v in props.items():
+        param = obj.liquidknot.params.add()
+        param.name = k
+        param.value = v
+
+
+def preset_to_lk(data, obj):
+    add_params(data["params"], obj)
+    obj.liquidknot.de = data["de"]
+
+
+def add_driver(obj, prop, index, source, source_prop, expression=''):
+    drv = obj.driver_add(prop, index)
+    var = drv.driver.variables.new()
+
+    # Proper Name
+    var.name = prop + "_var"
+    var.type = 'TRANSFORMS'
+
+    # Set up source
+    target = var.targets[0]
+    target.id = source
+    target.transform_type = source_prop
+    target.transform_space = "WORLD_SPACE"
+
+    # Set up Expression if nessesary
+    drv.driver.expression = var.name + expression

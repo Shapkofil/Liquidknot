@@ -5,6 +5,11 @@ float sceneSDF(in vec3 p)
 	// pebble distance_estimator
 }
 
+float sceneColor(in vec3 p)
+{
+	// pebble scene_color
+}
+
 vec3 estimateNormal(vec3 p)
 {
 	return normalize(vec3(
@@ -56,7 +61,7 @@ void main(){
 			ambient = vec4(vec3(AMBIENT, AMBIENT, AMBIENT),.1);
 			deffuse = calculateDeffuse(ro);
 			specular = vec4(.0, .0, .0, .1);
-			gl_FragColor = (ambient + deffuse + specular) * vec4(.9, .3, .0, 1.);
+			gl_FragColor = (ambient + deffuse + specular) * sceneColor(ro);
 			break;
 		}
 

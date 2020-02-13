@@ -39,13 +39,17 @@ def de_gen(entity):
 def de_gen_swamp(swamp, union):
     de = de_gen(swamp[0])
     de_line = "{0}(p)".format(name_gen(swamp[0]["name"]))
+    color_line = "csdf({0}(p), {1}, {2})".format(name_gen[swamp[0]["name"]], glsl.vec(swamp[0]["color"]), union["value"])
     for entity in swamp[1:]:
         de += de_gen(entity)
         de_line = "{0}({1}(p) , {2}{3})"\
             .format(union_dict[union["mode"]], name_gen(entity["name"]), de_line,
                     ", {}".format(union["value"]) if re.match(r"^SMOOTH(.+)$", union["mode"]) else " ")
+        color_line += " + " + "csdf({0}(p), {1}, {2})"\
+            .format(name_gen[swamp[0]["name"]], glsl.vec(swamp[0]["color"]), union["value"])
     de_line = "return {0};".format(de_line)
-    return de, de_line
+    color_line = "return {0};".format(color_line)
+    return de, de_line, color_line
 
 
 def parse_scene(scene_path, fragment_code):

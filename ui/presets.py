@@ -1,30 +1,7 @@
 import bpy
 from bpy.types import Operator, Menu
 
-
-def add_props(props, obj):
-    for k, v in props.items():
-        param = obj.liquidknot.params.add()
-        param.name = k
-        param.value = v
-
-
-def add_driver(obj, prop, index, source, source_prop, expression=''):
-    drv = obj.driver_add(prop, index)
-    var = drv.driver.variables.new()
-
-    # Proper Name
-    var.name = prop + "_var"
-    var.type = 'TRANSFORMS'
-
-    # Set up source
-    target = var.targets[0]
-    target.id = source
-    target.transform_type = source_prop
-    target.transform_space = "WORLD_SPACE"
-
-    # Set up Expression if nessesary
-    drv.driver.expression = var.name + expression
+from ..serialization.object_serialize import add_driver, add_params
 
 
 class LK_add_Sphere(Operator):
@@ -40,7 +17,7 @@ class LK_add_Sphere(Operator):
 
             # Set Liquidknot props
             obj.liquidknot.active = True
-            add_props({"width": 2., "height": 2., "depth": 2.}, obj)
+            add_params({"width": 2., "height": 2., "depth": 2.}, obj)
             add_driver(obj.liquidknot.params[0], 'value', -1, obj, 'SCALE_X', '')
             add_driver(obj.liquidknot.params[1], 'value', -1, obj, 'SCALE_Y', '')
             add_driver(obj.liquidknot.params[2], 'value', -1, obj, 'SCALE_Z', '')
@@ -67,7 +44,7 @@ class LK_add_Cube(Operator):
 
             # Set Liquidknot props
             obj.liquidknot.active = True
-            add_props({"width": 2., "height": 2., "depth": 2.}, obj)
+            add_params({"width": 2., "height": 2., "depth": 2.}, obj)
             add_driver(obj.liquidknot.params[0], 'value', -1, obj, 'SCALE_X', '')
             add_driver(obj.liquidknot.params[1], 'value', -1, obj, 'SCALE_Y', '')
             add_driver(obj.liquidknot.params[2], 'value', -1, obj, 'SCALE_Z', '')
@@ -94,7 +71,7 @@ class LK_add_Torus(Operator):
 
             # Set Liquidknot props
             obj.liquidknot.active = True
-            add_props({"outer_radius": 1., "inner_radius": .25}, obj)
+            add_params({"outer_radius": 1., "inner_radius": .25}, obj)
             add_driver(obj.liquidknot.params[0], 'value', -1, obj, 'SCALE_X', '')
             obj.liquidknot.de = "sdTorus(p, vec2(outer_radius, inner_radius))"
             context.scene.collection.objects.link(obj)
@@ -119,7 +96,7 @@ class LK_add_Octahedron(Operator):
 
             # Set Liquidknot props
             obj.liquidknot.active = True
-            add_props({"radius": 1.}, obj)
+            add_params({"radius": 1.}, obj)
             add_driver(obj.liquidknot.params[0], 'value', -1, obj, 'SCALE_AVG', '')
             obj.liquidknot.de = "sdOctahedton(p, radius)"
             context.scene.collection.objects.link(obj)
@@ -144,7 +121,7 @@ class LK_add_Capsule(Operator):
 
             # Set Liquidknot props
             obj.liquidknot.active = True
-            add_props({"height": 1., "radius": .2}, obj)
+            add_params({"height": 1., "radius": .2}, obj)
             add_driver(obj.liquidknot.params[0], 'value', -1, obj, 'SCALE_Z', ' * 2')
             add_driver(obj.liquidknot.params[1], 'value', -1, obj, 'SCALE_X', ' * 0.5')
             obj.liquidknot.de = "sdVerticalCapsule(p, height, radius)"
