@@ -20,13 +20,13 @@ from .ui import register as ui_register, unregister as ui_unregister, classes as
 
 
 def register():
-    engine_register()
     ui_register()
+    engine_register()
 
 
 def unregister():
-    engine_unregister()
     ui_unregister()
+    engine_unregister()
 
 
 if __name__ == "__main__":

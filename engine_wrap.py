@@ -14,7 +14,7 @@ class LiquidknotRenderEngine(bpy.types.RenderEngine):
     # RenderEngine; define its internal name, visible name and capabilities.
     bl_idname = "LIQUIDKNOT"
     bl_label = "Liquidknot"
-    bl_use_preview = True
+    bl_use_preview = False
 
     # Init is called whenever a new render engine instance is created.
     # Multiple instances may exist at the same time,
@@ -214,7 +214,7 @@ def get_panels():
 
     panels = []
     for panel in bpy.types.Panel.__subclasses__():
-        if hasattr(panel, 'COMPAT_ENGINES') and 'BLENDER_RENDER' in panel.COMPAT_ENGINES:
+        if hasattr(panel, 'COMPAT_ENGINES') and 'BLENDER_EEVEE' in panel.COMPAT_ENGINES:
             if panel.__name__ not in exclude_panels:
                 panels.append(panel)
 

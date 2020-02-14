@@ -4,9 +4,14 @@
 
 // Utils libs
 
-vec4 csdf(float sdf, vec4 color,float wash_off = 3.)
+vec3 csdf(float sdf, vec4 color,float falloff = .3, float iter = 7)
 {
-	return vec4(clamp((-sdf * wash_off) + 1., .0, 1.) * color.xyz, 1.);
+	float scalar = -sdf * sdf / falloff + 1. ;
+	if(scalar < 0)
+		scalar = 0;
+	for(int i=0; i<iter; i++)
+		scalar*= scalar;
+	return scalar * color.xyz;
 }
 
 float smin( float a, float b, float k )

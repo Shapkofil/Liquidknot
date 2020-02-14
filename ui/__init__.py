@@ -9,7 +9,6 @@ classes = ms_classes + obj_classes
 
 
 def register():
-    print(classes)
     for cls in classes:
         bpy.utils.register_class(cls)
 

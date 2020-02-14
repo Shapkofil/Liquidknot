@@ -5,7 +5,7 @@ float sceneSDF(in vec3 p)
 	// pebble distance_estimator
 }
 
-float sceneColor(in vec3 p)
+vec4 sceneColor(in vec3 p)
 {
 	// pebble scene_color
 }

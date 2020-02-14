@@ -50,7 +50,14 @@ class LK_add_Cube(Operator):
 
     def execute(self, context):
         if not context.mode == "Object":
-            obj = bpy.data.objects.new('LK_Cube', None)
+            mesh = bpy.data.meshes.new('LK_Cube')
+            obj = bpy.data.objects.new('LK_Cube', mesh)
+
+            # Construct the bmesh
+            bm = bmesh.new()
+            bmesh.ops.create_cube(bm, size=2, calc_uvs=True)
+            bm.to_mesh(mesh)
+            bm.free()
 
             # Set location to cursor
             obj.location = context.scene.cursor.location

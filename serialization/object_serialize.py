@@ -22,6 +22,7 @@ def objects_to_json(collection):
         entity["rotation"] = list(object.rotation_quaternion)
         entity["params"] = fetch_obj_params(object)
         entity["de"] = object.liquidknot.de
+        entity["color"] = list(object.active_material.diffuse_color)
         entities.append(entity)
 
     return entities

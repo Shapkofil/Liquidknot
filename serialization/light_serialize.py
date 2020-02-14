@@ -5,7 +5,7 @@ def lights_to_json(collection):
         entity = {}
         entity["name"] = object.name
         entity["position"] = list(object.location)
-        entity["color"] = list(object.data.color)
+        entity["color"] = [3., 3., 3.]
         entity["color"].append(1.)
         entities.append(entity)
 
