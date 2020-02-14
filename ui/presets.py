@@ -1,4 +1,5 @@
 import bpy
+import bmesh
 from bpy.types import Operator, Menu
 
 from ..serialization.object_serialize import add_driver, add_params
@@ -10,7 +11,14 @@ class LK_add_Sphere(Operator):
 
     def execute(self, context):
         if not context.mode == "Object":
-            obj = bpy.data.objects.new('LK_Sphere', None)
+            mesh = bpy.data.meshes.new('LK_Sphere')
+            obj = bpy.data.objects.new('LK_Sphere', mesh)
+
+            # Construct the bmesh
+            bm = bmesh.new()
+            bmesh.ops.create_uvsphere(bm, u_segments=32, v_segments=16, diameter=1)
+            bm.to_mesh(mesh)
+            bm.free()
 
             # Set location to cursor
             obj.location = context.scene.cursor.location
@@ -23,6 +31,11 @@ class LK_add_Sphere(Operator):
             add_driver(obj.liquidknot.params[2], 'value', -1, obj, 'SCALE_Z', '')
             obj.liquidknot.de = "sdEllipsoid(p, vec3(width, height, depth))"
             context.scene.collection.objects.link(obj)
+
+            # Finishing touches
+            obj.select_set(True)
+            context.view_layer.objects.active = obj
+            bpy.ops.object.shade_smooth()
 
         else:
             self.report({'WARNING'}, "Liquidknot: Option only valid in Object mode")

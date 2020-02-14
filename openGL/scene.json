@@ -45,26 +45,6 @@
     },
     "entities": [
         {
-            "name": "LK_Cube",
-            "position": [
-                0.0,
-                0.0,
-                0.0
-            ],
-            "rotation": [
-                1.0,
-                0.0,
-                0.0,
-                0.0
-            ],
-            "params": {
-                "width": 1.0,
-                "height": 1.0,
-                "depth": 1.0
-            },
-            "de": "sdBox(p, vec3(width, height, depth))"
-        },
-        {
             "name": "LK_Sphere",
             "position": [
                 0.0,
@@ -78,31 +58,11 @@
                 0.0
             ],
             "params": {
-                "width": 1.3331378698349,
-                "height": 1.3331378698349,
-                "depth": 1.3331378698349
-            },
-            "de": "sdEllipsoid(p, vec3(width, height, depth))"
-        },
-        {
-            "name": "LK_Cube.001",
-            "position": [
-                0.0,
-                0.0,
-                0.0
-            ],
-            "rotation": [
-                1.0,
-                0.0,
-                0.0,
-                0.0
-            ],
-            "params": {
                 "width": 1.0,
                 "height": 1.0,
                 "depth": 1.0
             },
-            "de": "sdBox(p, vec3(width, height, depth))"
+            "de": "sdEllipsoid(p, vec3(width, height, depth))"
         }
     ],
     "default_union": {
