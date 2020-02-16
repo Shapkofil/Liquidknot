@@ -49,7 +49,7 @@ def de_gen_swamp(swamp, union):
         color_line += " + " + "csdf({0}(p), {1}, {2})"\
             .format(name_gen(entity["name"]), glsl.vec(entity["color"]), union["value"] / 2)
     de_line = "return {0};".format(de_line)
-    color_line = "return vec4({0}, 1.);".format(color_line)
+    color_line = "return normalize({0});".format(color_line)
     return de, de_line, color_line
 
 

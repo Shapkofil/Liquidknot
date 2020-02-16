@@ -4,14 +4,14 @@
 
 // Utils libs
 
-vec3 csdf(float sdf, vec4 color,float falloff = .3, float iter = 7)
+float smooth_border(float x)
 {
-	float scalar = -sdf * sdf / falloff + 1. ;
-	if(scalar < 0)
-		scalar = 0;
-	for(int i=0; i<iter; i++)
-		scalar*= scalar;
-	return scalar * color.xyz;
+	return ( x<__pi__ && x>-__pi__ ) ? (cos(x) + 1)/2 : 0;
+}
+
+vec4 csdf(float sdf, vec4 color,float falloff = .3)
+{
+	return smooth_border((sdf * __pi__) / falloff / 2) * color;
 }
 
 float smin( float a, float b, float k )
