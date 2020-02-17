@@ -18,8 +18,11 @@ bl_info = {
 from .engine_wrap import register as engine_register, unregister as engine_unregister
 from .ui import register as ui_register, unregister as ui_unregister, classes as ui_classes
 
+from .setup import unpack
+
 
 def register():
+    unpack()
     ui_register()
     engine_register()
 

@@ -4,3 +4,5 @@
 temp/
 log.shader
 *.blend1
+*exec.sh
+*exec.bat

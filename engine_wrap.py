@@ -207,8 +207,6 @@ class LiquidknotDrawData:
 # exclude any panels that are replaced by Liquidknot panels registered by the
 # render engine, or that are not supported.
 
-from .setup import unpack
-
 
 def get_panels():
     exclude_panels = {
@@ -226,9 +224,6 @@ def get_panels():
 
 
 def register():
-    # Setup virtualenv and /temp
-    unpack()
-
     # Register the RenderEngine
     bpy.utils.register_class(LiquidknotRenderEngine)
 

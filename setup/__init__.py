@@ -1,19 +1,21 @@
 import platform
 
-from os import getcwd
-from os.path import join
+from os.path import join, dirname, abspath as ap, isdir
 from subprocess import call
 
 
 def unpack():
+    if isdir(join(dirname(ap(__file__)), '../openGL/temp')) and isdir(join(dirname(ap(__file__)), '../openGL/.venv')):
+        return
+
     if platform.system() == 'Linux':
         try:
-            with open(join(getcwd(), 'linux_setup.sh'), 'r') as f:
+            with open(join(dirname(ap(__file__)), 'linux_setup.sh'), 'r') as f:
                 old = f.read()
 
-            file = join(getcwd(), 'linux_exec.sh')
+            file = join(dirname(ap(__file__)), 'linux_exec.sh')
             with open(file, 'w') as f:
-                f.write('cd {}\n'.format(getcwd()) + old)
+                f.write('cd {}\n'.format(dirname(ap(__file__))) + old)
             call(['sh', file])
         except RuntimeError:
             print('Virtualenv not installed')
