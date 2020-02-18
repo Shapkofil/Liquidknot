@@ -1,8 +1,10 @@
 #Sublime Anaconda Lint files
 *.pyc
+
 .venv/
 temp/
 log.shader
 *.blend1
+
 *exec.sh
 *exec.bat
