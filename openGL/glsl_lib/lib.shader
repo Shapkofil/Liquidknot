@@ -9,7 +9,7 @@ float smooth_border(float x)
 	return ( x<__pi__ && x>-__pi__ ) ? (cos(x) + 1)/2 : 0;
 }
 
-vec4 csdf(float sdf, vec4 color,float falloff = .3)
+vec4 csdf(float sdf, vec4 color, float falloff)
 {
 	return smooth_border((sdf * __pi__) / falloff / 2) * color;
 }

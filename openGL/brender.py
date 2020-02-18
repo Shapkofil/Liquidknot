@@ -3,6 +3,7 @@ import subprocess
 import os
 import time
 import re
+import platform 
 
 try:
     from ..std_extensions import *
@@ -17,8 +18,12 @@ def venvexec(venv_path, file, output_path=None):
 
     venv_path = os.path.join(os.path.dirname(__file__), venv_path)
     file = os.path.join(os.path.dirname(__file__), file)
-    buff = subprocess.run(
-        ["{0}/bin/python".format(venv_path), file, output_path], capture_output=True)
+    if platform.system() == 'Linux':
+        buff = subprocess.run(
+            ["{0}/bin/python".format(venv_path), file, output_path], capture_output=True)
+    if platform.system() == 'Windows':
+        buff = subprocess.run(
+            ["{0}/Scripts/pythonw.exe".format(venv_path), file, output_path], capture_output=True)
     err = buff.stderr
 
     if err:

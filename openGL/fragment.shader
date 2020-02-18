@@ -26,8 +26,8 @@ vec4 calculateDeffuse(vec3 p)
 	{
 		vec3 normal = estimateNormal(p);
 		vec3 lightdir = normalize(light_positions[i] - p);
-		vec3 diff = max(dot(normal,lightdir),0.0);
-		deffuse += diff * light_colors[i];
+		float diff = max(dot(normal,lightdir),0.0);
+		deffuse += diff * light_colors[i].xyz;
 	}
 	return vec4(deffuse, 1.);
 }

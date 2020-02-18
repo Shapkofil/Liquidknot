@@ -28,7 +28,7 @@ def unpack():
             file = join(dirname(ap(__file__)), 'win_exec.bat')
             with open(file, 'w') as f:
                 f.write('cd {}\n'.format(dirname(ap(__file__))) + old)
-            call(['bat.exe', file])
+            call([file])
         except RuntimeError:
             print('Virtualenv might not installed')
 

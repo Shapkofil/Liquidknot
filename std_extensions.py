@@ -1,6 +1,7 @@
 import sys
 import re
 import builtins as __builtin__
+import platform
 
 
 class bcolors:
@@ -25,8 +26,17 @@ def print(*args, **kwargs):
     else:
         color = bcolors.BOLD
 
-    sys.stdout.write("{}[Liquidknot] {}".format(color, bcolors.ENDC))
-    args = tuple([re.sub("\n", "{}\n[Liquidknot] {}".format(color, bcolors.ENDC), args[0])]) + args[1:]
+    # Fix windows lack of flavor
+    default = bcolors.ENDC
+    if platform.system() == 'Windows':
+        color = ''
+        default = ''
+
+    # Place a tag at the start of every line
+    sys.stdout.write("{}[Liquidknot] {}".format(color, default))
+    args = tuple([re.sub("\n", "{}\n[Liquidknot] {}".format(color, default), args[0])]) + args[1:]
+
+    # Pass the args to the builtin print
     __builtin__.print(*args, **kwargs)
 
 
