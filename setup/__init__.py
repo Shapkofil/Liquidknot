@@ -5,7 +5,11 @@ from subprocess import call
 
 
 def unpack():
-    if isdir(join(dirname(ap(__file__)), '../openGL/temp')) and isdir(join(dirname(ap(__file__)), '../openGL/.venv')):
+    # Skip worthless
+    if not isdir(join(dirname(ap(__file__)), '../openGL/temp')):
+        call(['mkdir', join(dirname(ap(__file__)), '../openGL/temp')])
+        return
+    elif isdir(join(dirname(ap(__file__)), '../openGL/.venv')):
         return
 
     if platform.system() == 'Linux':
