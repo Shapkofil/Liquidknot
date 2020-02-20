@@ -48,7 +48,7 @@ def scene_to_json(scene, resolution=None, bounds=None, context=None, path_to_jso
     entities_dict = objects_to_json(entities)
 
     # Light params Fetch
-    lights = [x for x in scene.objects if str(x.data).find("Light") > -1]
+    lights = [x for x in scene.objects if str(x.data).find("Light(") > -1]
     light_dict = lights_to_json(lights)
 
     # Combine param fetches

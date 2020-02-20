@@ -58,6 +58,8 @@ class MarchingObjectDataPanel(bpy.types.Panel):
 
         obj = context.object
 
+        layout.prop(obj.liquidknot, "presets", text="Preset")
+
         col = layout.grid_flow(columns=2, align=True)
         col.template_list("LK_UL_deparamsList",
                           "",

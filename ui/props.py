@@ -1,5 +1,11 @@
 import bpy
 
+import json
+from os.path import abspath as ap, join, dirname
+
+from ..std_extensions import print
+from ..serialization.object_serialize import preset_to_lk
+
 
 def setup_union_modes(scene, context):
     items = [
@@ -51,6 +57,22 @@ class LiquidknotObjParams(bpy.types.PropertyGroup):
     value: bpy.props.FloatProperty(name="Value")
 
 
+# -----------------
+# Object Props
+# -----------------
+
+def update_enum_presets(self, context):
+    print("Load pre-made {} data".format(self.presets))
+    obj = context.object
+
+    # Fetch data
+    with open(join(dirname(ap(__file__)), "obj_presets.json")) as f:
+        data = json.loads(f.read())[self.presets]
+
+    obj.liquidknot.params.clear()
+    preset_to_lk(data, obj)
+
+
 class LiquidknotObjProps(bpy.types.PropertyGroup):
     active: bpy.props.BoolProperty(
         name="IsActive")
@@ -65,6 +87,16 @@ class LiquidknotObjProps(bpy.types.PropertyGroup):
     params: bpy.props.CollectionProperty(
         type=LiquidknotObjParams,
         name="Parameters")
+
+    presets: bpy.props.EnumProperty(
+        name="Presets",
+        description="Pre-made Distance Estimators",
+        items=[
+            ("CUBE", "Cube", "Load lk_Cube"),
+            ("SPHERE", "Sphere", "Load lk_Sphere"),
+        ],
+        update=update_enum_presets
+    )
 
 
 classes = [LiquidknotProps, LiquidknotObjParams, LiquidknotObjProps]
