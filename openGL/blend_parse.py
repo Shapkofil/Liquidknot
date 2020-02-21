@@ -50,7 +50,7 @@ if __name__ == "__main__":
         fragment_code = f.read()
 
     # Load Scene and Modify Shader Code
-    file = os.path.join(os.path.dirname(__file__), "scene.json")
+    file = os.path.join(os.path.dirname(__file__), "temp/scene.json")
     resolution, bounds, fragment_code = parse_scene(file, fragment_code)
     # print(bounds)
 
