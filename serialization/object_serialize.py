@@ -1,3 +1,6 @@
+import re
+
+
 def fetch_obj_params(obj):
     swamp = obj.liquidknot.params
     fetched = {}
@@ -22,7 +25,7 @@ def objects_to_json(collection):
         entity["rotation"] = list(object.rotation_quaternion)
         entity["params"] = fetch_obj_params(object)
         entity["de"] = object.liquidknot.de
-        entity["color"] = list(object.active_material.diffuse_color)
+        entity["color"] = [.8, .8, .8, 1.] if object.active_material is None else list(object.active_material.diffuse_color)
         entities.append(entity)
 
     return entities
@@ -31,18 +34,6 @@ def objects_to_json(collection):
 # -------------------
 # Reverced
 # -------------------
-
-def add_params(props, obj):
-    for k, v in props.items():
-        param = obj.liquidknot.params.add()
-        param.name = k
-        param.value = v
-
-
-def preset_to_lk(data, obj):
-    add_params(data["params"], obj)
-    obj.liquidknot.de = data["de"]
-
 
 def add_driver(obj, prop, index, source, source_prop, expression=''):
     drv = obj.driver_add(prop, index)
@@ -60,3 +51,18 @@ def add_driver(obj, prop, index, source, source_prop, expression=''):
 
     # Set up Expression if nessesary
     drv.driver.expression = var.name + expression
+
+
+def add_params(props, obj):
+    for i, (k, v) in enumerate(props.items()):
+        param = obj.liquidknot.params.add()
+        param.name = k
+        param.value = v if type(v) == float else 1.
+        if type(v) is not float:
+            exp = re.search(r"([A-Z]+_[A-Z]{1,3}) ?(.*)", v).groups()
+            add_driver(obj.liquidknot.params[i], 'value', -1, obj, exp[0], exp[1])
+
+
+def preset_to_lk(data, obj):
+    add_params(data["params"], obj)
+    obj.liquidknot.de = data["de"]

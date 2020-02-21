@@ -1,17 +1,17 @@
 {
 	"CUBE":{
 		"params": {
-                "width": 1.0,
-                "height": 1.0,
-                "depth": 1.0
+                "width": "SCALE_X",
+                "height": "SCALE_Y",
+                "depth": "SCALE_Z"
             },
         "de": "sdBox(p, vec3(width, height, depth))"
 	},
 	"SPHERE":{
 		"params": {
-                "width": 1.0,
-                "height": 1.0,
-                "depth": 1.0
+                "width": "SCALE_X",
+                "height": "SCALE_Y",
+                "depth": "SCALE_Z"
             },
         "de": "sdEllipsoid(p, vec3(width, height, depth))"
 	}
