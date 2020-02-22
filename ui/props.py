@@ -73,6 +73,13 @@ def update_enum_presets(self, context):
     preset_to_lk(data, obj)
 
 
+def load_presets():
+    with open(join(dirname(ap(__file__)), "obj_presets.json")) as f:
+        data = json.loads(f.read())
+        return [(key, key.casefold().capitalize(), "Load lk_{}".format(key.casefold().capitalize()))
+                for key in data.keys()]
+
+
 class LiquidknotObjProps(bpy.types.PropertyGroup):
     active: bpy.props.BoolProperty(
         name="IsActive")
@@ -91,10 +98,7 @@ class LiquidknotObjProps(bpy.types.PropertyGroup):
     presets: bpy.props.EnumProperty(
         name="Presets",
         description="Pre-made Distance Estimators",
-        items=[
-            ("CUBE", "Cube", "Load lk_Cube"),
-            ("SPHERE", "Sphere", "Load lk_Sphere"),
-        ],
+        items=load_presets(),
         update=update_enum_presets
     )
 

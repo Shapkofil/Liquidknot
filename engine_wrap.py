@@ -45,7 +45,7 @@ class LiquidknotRenderEngine(bpy.types.RenderEngine):
         scene.frame_set(scene.frame_current)
 
         # Serialize the scene
-        file = os.path.join(os.path.dirname(__file__), "openGL/scene.json")
+        file = os.path.join(os.path.dirname(__file__), "openGL/temp/scene.json")
         srl.scene_to_json(scene, path_to_json=file)
         result = self.begin_result(0, 0, self.size_x, self.size_y)
 

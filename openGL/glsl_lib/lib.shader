@@ -212,3 +212,31 @@ float opSmoothSubtraction( float d1, float d2, float k ) {
 float opSmoothIntersection( float d1, float d2, float k ) {
     float h = clamp( 0.5 - 0.5*(d2-d1)/k, 0.0, 1.0 );
     return mix( d2, d1, h ) + k*h*(1.0-h); }
+
+
+// Fractal Lib
+float sdMandelbulb(vec3 p, int iters, float power, float bailout)
+{
+	vec3 z = p;
+	float dr = 1.0;
+	float r = 0.0;
+	for (int i = 0; i < iters ; i++) {
+		r = length(z);
+		if (r>bailout) break;
+		
+		// convert to polar coordinates
+		float theta = acos(z.z/r);
+		float phi = atan(z.y,z.x);
+		dr =  pow( r, power-1.0)*power*dr + 1.0;
+		
+		// scale and rotate the point
+		float zr = pow( r,power);
+		theta = theta*power;
+		phi = phi*power;
+		
+		// convert back to cartesian coordinates
+		z = zr*vec3(sin(theta)*cos(phi), sin(phi)*sin(theta), cos(theta));
+		z+=p;
+	}
+	return 0.5*log(r)*r/dr;
+} 
