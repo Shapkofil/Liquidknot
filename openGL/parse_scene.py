@@ -73,6 +73,7 @@ def parse_scene(scene_path, fragment_code):
     snippet += "\n\nconst vec3 camera_position = {0};\n".format(glsl.vec(data["camera"]["position"]))
     snippet += "const vec4 camera_rotation = {0};\n".format(glsl.vec(data["camera"]["rotation"]))
     snippet += "const float focal_length = {0};\n\n".format(data["camera"]["focal_length"])
+    snippet += "const vec2 sensor = {0};\n\n".format(glsl.vec(data["camera"]["sensor"]))
 
     # Loading lights
     n = len(data["lights"])

@@ -39,9 +39,9 @@ void main(){
 
 	vec3 ro = camera_position;
 
-	vec2 uv = (2.*gl_FragCoord.xy - resolution) / resolution.y;
-	uv = vec2(uv[0], -uv[1]);
-	vec3 rd = rotate_ray(normalize(vec3(uv, -focal_length)), camera_rotation);
+	vec2 uv = (2.*gl_FragCoord.xy - resolution) / resolution.x;
+	uv *= vec2(1, -1) * (sensor/2).x;
+	vec3 rd = normalize(rotate_ray(vec3(uv, -focal_length), camera_rotation));
 
 	int step = 0;
 	float cd = PLANK;
