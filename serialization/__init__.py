@@ -19,7 +19,7 @@ def fetch_hyper_params(scene):
             "MAX_STEP": swamp.max_marching_steps
         },
         "vec4": {
-            "WORLD_COLOR": [.4, .4, .4, 1.]
+            "WORLD_COLOR": [.0, .0, .0, 1.]
         }
     }
 
