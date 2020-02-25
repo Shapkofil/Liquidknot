@@ -4,7 +4,7 @@ import json
 from os.path import abspath as ap, join, dirname
 
 from ..std_extensions import print
-from ..serialization.object_serialize import preset_to_lk
+from .presets.reflection import preset_to_lk
 
 
 def setup_union_modes(scene, context):
@@ -66,7 +66,7 @@ def update_enum_presets(self, context):
     obj = context.object
 
     # Fetch data
-    with open(join(dirname(ap(__file__)), "obj_presets.json")) as f:
+    with open(join(dirname(ap(__file__)), "presets/obj_presets.json")) as f:
         data = json.loads(f.read())[self.presets]
 
     obj.liquidknot.params.clear()
@@ -74,9 +74,10 @@ def update_enum_presets(self, context):
 
 
 def load_presets():
-    with open(join(dirname(ap(__file__)), "obj_presets.json")) as f:
+    with open(join(dirname(ap(__file__)), "presets/obj_presets.json")) as f:
         data = json.loads(f.read())
-        return [(key, key.casefold().capitalize(), "Load lk_{}".format(key.casefold().capitalize()))
+        camel = (lambda dat: ''.join("{} ".format(x.title()) for x in dat.split("_"))[:-1])
+        return [(key, camel(key), "Load lk_{}".format(key))
                 for key in data.keys()]
 
 

@@ -1,0 +1,64 @@
+{
+	"CUBE":{
+		"params": {
+                "width": "SCALE_X",
+                "height": "SCALE_Y",
+                "depth": "SCALE_Z"
+            },
+        "de": "sdBox(p, vec3(width, height, depth))"
+	},
+	"SPHERE":{
+		"params": {
+                "width": "SCALE_X",
+                "height": "SCALE_Y",
+                "depth": "SCALE_Z"
+            },
+        "de": "sdEllipsoid(p, vec3(width, height, depth))"
+	},
+    "PLANE":{
+        "params": {
+            },
+        "de": "sdPlane(p, vec4(.0, .0, 1., .0))"
+    },
+    "TORUS":{
+        "params": {
+                "outer_radius":"SCALE_AVG",
+                "inner_radius":"SCALE_Z * .25"
+            },
+        "de": "sdTorus(p, outer_radius, inner_radius)"
+    },
+    "INFINITE_CYLINDER":{
+        "params": {
+            "radius":"SCALE_X"  
+            },
+        "de": "sdCylinder(p, vec3(0.,0.,radius))"
+    },
+    "CYLINDER":{
+        "params": {
+              "height": "SCALE_Z",
+              "radius": "SCALE_X" 
+            },
+        "de": "sdCappedCylinder(p, height, radius)"
+    },
+    "CAPSULE":{
+        "params": {
+                "height": "SCALE_Y",
+                "width": "SCALE_X"    
+            },
+        "de": "sdVerticalCapsule(p, height, width)"
+    },
+    "OCTAHEDRON":{
+        "params": {
+                "radius": "SCALE_AVG"  
+            },
+        "de": "sdOctahedron(p, radius)"
+    },
+    "MANDELBULB":{
+        "params": {
+                "Power": 8.0,
+                "Iters": 10.0,
+                "Bailout": 0.001
+            },
+        "de": "sdMandelbulb(p, Iters, Power, Bailout)"
+    }
+}
