@@ -22,7 +22,7 @@ def objects_to_json(collection):
         entity = {}
         entity["name"] = object.name
         entity["position"] = list(object.location)
-        entity["rotation"] = list(object.rotation_quaternion)
+        entity["rotation"] = list(object.rotation_euler.to_quaternion())
         entity["params"] = fetch_obj_params(object)
         entity["de"] = object.liquidknot.de
         entity["color"] = [.8, .8, .8, 1.] if object.active_material is None else list(object.active_material.diffuse_color)

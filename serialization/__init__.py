@@ -4,6 +4,7 @@ from .light_serialize import lights_to_json
 from .bounds_serialize import bounds_to_json
 
 import json
+import re
 
 
 def fetch_hyper_params(scene):
@@ -28,7 +29,7 @@ def fetch_union_pros(scene):
     lk = scene.liquidknot
     return {
         "mode": lk.union_mode,
-        "value": lk.union_smoothness
+        "value": lk.union_smoothness if re.match(r"^SMOOTH_.+$", lk.union_mode) else .01
     }
 
 

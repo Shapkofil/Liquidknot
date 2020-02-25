@@ -29,7 +29,7 @@ def de_gen(entity):
     snippet += "    p -= {};\n".format(glsl.vec(entity["position"]))
 
     # Adjust for rotation
-    snippet += "    p = rotate_ray(p, {1});\n".format(glsl.vec(entity["position"]), glsl.vec(entity["rotation"]))
+    snippet += "    p = rotate_ray(p, vec4(-1., 1., 1., 1.) * {0});\n".format(glsl.vec(entity["rotation"]))
 
     # Main de addition
     snippet += "    return {};\n}}\n\n".format(de)
