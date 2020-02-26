@@ -21,7 +21,7 @@ def setup_union_modes(scene, context):
 
 class LiquidknotProps(bpy.types.PropertyGroup):
     max_marching_steps: bpy.props.IntProperty(
-        name='Max Marching Steps',
+        name='Marching Cap',
         min=1,
         default=256)
 
@@ -31,16 +31,15 @@ class LiquidknotProps(bpy.types.PropertyGroup):
         default=1000.)
 
     plank: bpy.props.FloatProperty(
-        name='Plank Distance',
-        default=.005,
-        min=.00005,
-        precision=5)
+        name='Plank',
+        default=5 / 1000,
+        subtype='DISTANCE',
+        unit='LENGTH')
 
     epsilon: bpy.props.FloatProperty(
-        name='Epsilon Constant',
-        default=.005,
-        min=.00005,
-        precision=5)
+        name='Epsilon',
+        default=5 / 1000,
+        subtype='DISTANCE')
 
     union_mode: bpy.props.EnumProperty(
         name='Union Mode',
@@ -104,7 +103,8 @@ class LiquidknotObjProps(bpy.types.PropertyGroup):
     )
 
 
-classes = [LiquidknotProps, LiquidknotObjParams, LiquidknotObjProps]
+classes = [LiquidknotProps,  # General props
+           LiquidknotObjParams, LiquidknotObjProps]  # Obj Props
 
 
 def register():

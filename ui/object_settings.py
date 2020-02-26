@@ -6,9 +6,11 @@ class LK_UL_deparamsList(bpy.types.UIList):
     def draw_item(self, context, layout, data,
                   item, icon, active_data, active_propname):
         if self.layout_type in {'DEFAULT', 'COMPACT'}:
+            layout.use_property_split = True
+            layout.use_property_decorate = False
             if item:
                 row = layout.row(align=True)
-                row.prop(item, "name", text="")
+                row.prop(item, "name", text="", emboss=False, expand=False)
                 row.prop(item, "value", text="")
             else:
                 layout.label(text="", translate=False, icon_value=icon)
@@ -42,7 +44,7 @@ class LKParamDeleteOperator(bpy.types.Operator):
 class MarchingObjectDataPanel(bpy.types.Panel):
     """Creates a Panel in the scene context of the properties editor"""
     bl_idname = "OBJECT_PT_march_data"
-    bl_label = "Object Data (liquidknot)"
+    bl_label = "LK data"
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
     bl_context = "object"
