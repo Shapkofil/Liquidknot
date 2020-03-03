@@ -63,6 +63,7 @@ float sdEllipsoid( vec3 p, vec3 r )
 
 float sdBox( vec3 p, vec3 b)
 {
+	b/=2;
 	vec3 q = abs(p) - b;
 	return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0);
 }
@@ -75,7 +76,7 @@ float sdRoundBox( vec3 p, vec3 b, float r )
 
 float sdPlane( vec3 p, vec4 n )
 {
-	n = normalize(n);
+	//n = normalize(n);
 	return dot(p,n.xyz) + n.w;
 }
 
@@ -95,18 +96,19 @@ float sdVerticalCapsule( vec3 p, float h, float r )
 
 float sdCappedCylinder( vec3 p, float h, float r )
 {
-	vec2 d = abs(vec2(length(p.xz),p.y)) - vec2(h,r);
+	vec2 d = abs(vec2(length(p.xy),p.z)) - vec2(r,h);
 	return min(max(d.x,d.y),0.0) + length(max(d,0.0));
 }
 
 float sdCylinder( vec3 p, vec3 c )
 {
-	return length(p.xz-c.xy)-c.z;
+	return length(p.xy-c.xy)-c.z;
 }
 
-float sdTorus( vec3 p, vec2 t )
+float sdTorus( vec3 p, float outer, float inner)
 {
-	vec2 q = vec2(length(p.xz)-t.x,p.y);
+	vec2 t = vec2(outer, inner);
+	vec2 q = vec2(length(p.xy)-t.x,p.z);
 	return length(q)-t.y;
 }
 
@@ -122,27 +124,6 @@ float sdOctahedron( vec3 p, float s)
 
 	float k = clamp(0.5*(q.z-q.y+s),0.0,s); 
 	return length(vec3(q.x,q.y-s+k,q.z-k)); 
-}
-
-float sdPyramid( vec3 p, float h)
-{
-	float m2 = h*h + 0.25;
-
-	p.xz = abs(p.xz);
-	p.xz = (p.z>p.x) ? p.zx : p.xz;
-	p.xz -= 0.5;
-
-	vec3 q = vec3( p.z, h*p.y - 0.5*p.x, h*p.x + 0.5*p.y);
-
-	float s = max(-q.x,0.0);
-	float t = clamp( (q.y-0.5*p.z)/(m2+0.25), 0.0, 1.0 );
-
-	float a = m2*(q.x+s)*(q.x+s) + q.y*q.y;
-	float b = m2*(q.x+0.5*t)*(q.x+0.5*t) + (q.y-m2*t)*(q.y-m2*t);
-
-	float d2 = min(q.y,-q.x*m2-q.y*0.5) > 0.0 ? 0.0 : min(a,b);
-
-	return sqrt( (d2+q.z*q.z)/m2 ) * sign(max(q.z,-p.y));
 }
 
 float dot2( vec3 v )
@@ -240,75 +221,69 @@ float sdMandelbulb(vec3 p, int iters, float power, float bailout)
 	}
 	return 0.5*log(r)*r/dr;
 } 
-
-// ToDo get consts from blender
-const float PLANK = .0005;
-const float MAX_DISTANCE = 1000.;
+const float PLANK = 0.004999999888241291;
+const float MAX_DISTANCE = 1000.0;
+const float EPSILON = 0.004999999888241291;
+const float AMBIENT = 0.1;
 const int MAX_STEP = 256;
-const float EPSILON = .001;
+const vec4 WORLD_COLOR = vec4(0.0, 0.0, 0.0, 1.0);
 
-const vec3 camera_position = vec3(-0.15561789274215698, -17.529552459716797, 3.605412483215332);
-const vec4 camera_rotation = vec4(0.758284866809845, 0.6519233584403992, 0.0, 0.0);
-const float focal_length = 4.166666666666667;
+const vec3 camera_position = vec3(7.53312349319458, -9.912906646728516, 2.522969961166382);
+const vec4 camera_rotation = vec4(0.719944417476654, 0.6214413046836853, 0.20191822946071625, 0.23392260074615479);
+const float focal_length = 50.0;
 
-const float ambient_factor = .1;
+const vec2 sensor = vec2(36.0, 24.0);
 
-uniform vec2 resolution;
-
-#define __pi__ 3.1415926535897932384626433832795
-
-mat3 rotMatrix(vec3 rot)
-{
-	rot = -rot;
-	mat3 XY = mat3(
-		cos(rot[2]),-sin(rot[2]),0,
-		sin(rot[2]), cos(rot[2]),0,
-		          0,           0,1);
-	mat3 XZ = mat3(
-		cos(rot[1]),0,-sin(rot[1]),
-		          0,1,           0,
-		sin(rot[1]),0, cos(rot[1]));
-	mat3 YZ = mat3(
-		1,          0,           0,
-		0,cos(rot[0]),-sin(rot[0]),
-		0,sin(rot[0]), cos(rot[0]));
-	return XY * XZ * YZ;
-
-}
+const float light_count = 3;
+const vec3 light_positions[3] = {vec3(-23.556310653686523, 16.937835693359375, 2.0), vec3(20.257213592529297, -20.77102279663086, 2.0), vec3(-13.044283866882324, -25.91595458984375, 2.0)};
+const vec4 light_colors[3] = {vec4(1.0, 1.0, 1.0, 1.0), vec4(1.0, 1.0, 1.0, 1.0), vec4(1.0, 1.0, 1.0, 1.0)};
 
 float LK_Cube( vec3 p )
 {
-    p -= vec3(-6.0, 0.0, 0.0);
-    p = rotate_ray(p, vec4(1.0, 0.0, 0.0, 0.0));
-    return sdBox(p, vec3(1.0, 1.0, 1.0));
+    p -= vec3(-2.0, 0.0, 1.0);
+    p = rotate_ray(p, vec4(-1., 1., 1., 1.) * vec4(1.0, 0.0, 0.0, 0.0));
+    return sdBox(p, vec3(0.5, 0.5, 3.0));
 }
 
-float LK_Sphere( vec3 p )
+float LK_Cube_001( vec3 p )
 {
-    p -= vec3(-2.0, 0.0, 0.0);
-    p = rotate_ray(p, vec4(1.0, 0.0, 0.0, 0.0));
-    return sdEllipsoid(p, vec3(1.0, 1.0, 1.0));
+    p -= vec3(-1.25, 0.0, -0.25);
+    p = rotate_ray(p, vec4(-1., 1., 1., 1.) * vec4(0.7071067690849304, 0.0, 0.7071067690849304, 0.0));
+    return sdBox(p, vec3(0.5, 0.5, 2.0));
 }
 
-float LK_Torus_001( vec3 p )
+float LK_Cube_002( vec3 p )
 {
-    p -= vec3(2.0, 0.0, 0.0);
-    p = rotate_ray(p, vec4(1.0, 0.0, 0.0, 0.0));
-    return sdTorus(p, vec2(1.0, 0.25));
+    p -= vec3(0.0, 0.0, 0.0);
+    p = rotate_ray(p, vec4(-1., 1., 1., 1.) * vec4(1.0, 0.0, 0.0, 0.0));
+    return sdBox(p, vec3(0.5, 0.5, 3.0));
 }
 
-float LK_Capsule( vec3 p )
+float LK_Cube_004( vec3 p )
 {
-    p -= vec3(6.0, 0.0, 0.0);
-    p = rotate_ray(p, vec4(1.0, 0.0, 0.0, 0.0));
-    return sdVerticalCapsule(p, 1.674194097518921, 0.4185485243797302);
+    p -= vec3(0.0, 0.8510887622833252, -0.6055018901824951);
+    p = rotate_ray(p, vec4(-1., 1., 1., 1.) * vec4(0.28462716937065125, -0.6450599431991577, 0.6505677103996277, 0.28221750259399414));
+    return sdBox(p, vec3(0.5, 0.5000000596046448, 1.8799852132797241));
 }
+
+float LK_Cube_003( vec3 p )
+{
+    p -= vec3(0.0, 0.8026113510131836, 0.7105096578598022);
+    p = rotate_ray(p, vec4(-1., 1., 1., 1.) * vec4(-0.23758260905742645, -0.6638293862342834, 0.6661657094955444, -0.24312184751033783));
+    return sdBox(p, vec3(0.5, 0.5000000596046448, 1.8799850940704346));
+}
+
+uniform vec2 resolution;
 
 float sceneSDF(in vec3 p)
 {
-	return opUnion(LK_Capsule(p) , opUnion(LK_Torus_001(p) , opUnion(LK_Sphere(p) , LK_Cube(p) ) ) );
+	return opSmoothUnion(LK_Cube_003(p) , opSmoothUnion(LK_Cube_004(p) , opSmoothUnion(LK_Cube_002(p) , opSmoothUnion(LK_Cube_001(p) , LK_Cube(p), 0.05000000074505806), 0.05000000074505806), 0.05000000074505806), 0.05000000074505806);
 }
 
+vec4 sceneColor(in vec3 p)
+{
+	return normalize(csdf(LK_Cube(p), vec4(0.8, 0.8, 0.8, 1.0), 0.05000000074505806) + csdf(LK_Cube_001(p), vec4(0.8, 0.8, 0.8, 1.0), 0.02500000037252903) + csdf(LK_Cube_002(p), vec4(0.8, 0.8, 0.8, 1.0), 0.02500000037252903) + csdf(LK_Cube_004(p), vec4(0.8, 0.8, 0.8, 1.0), 0.02500000037252903) + csdf(LK_Cube_003(p), vec4(0.8, 0.8, 0.8, 1.0), 0.02500000037252903));
+}
 
 vec3 estimateNormal(vec3 p)
 {
@@ -319,22 +294,25 @@ vec3 estimateNormal(vec3 p)
 		));
 }
 
-vec4 calculateDeffuse(vec3 p,vec3 ligth_p,vec3 ligth_c)
+vec4 calculateDeffuse(vec3 p)
 {
-	vec3 normal = estimateNormal(p);
-	vec3 ligthdir = normalize(ligth_p - p);
-	vec3 diff = max(dot(normal,ligthdir),0.0);
-	return vec4(diff * ligth_c, 1.);
+	vec3 deffuse = vec3(0, 0, 0);
+	for(int i = 0;i<light_count;i++)
+	{
+		vec3 normal = estimateNormal(p);
+		vec3 lightdir = normalize(light_positions[i] - p);
+		float diff = max(dot(normal,lightdir),0.0);
+		deffuse += diff * light_colors[i].xyz;
+	}
+	return vec4(deffuse, 1.);
 }
 
-//ToDo check proper specular
-vec4 calculateSpecular(vec3 p,vec3 ligth_p,vec3 ligth_c, vec3 view, float amount)
+vec4 colorpow(vec4 p, float value)
 {
-	vec3 normal = estimateNormal(p);
-	vec3 ligthdir = normalize(ligth_p - p);
-	vec3 reflected = reflect(-ligthdir, normal);
-	vec3 diff = pow(max(dot(view,ligthdir),.0), 256);
-	return vec4(amount * diff * ligth_c, 1.);
+	return vec4(pow(p.x,value),
+				pow(p.y,value),
+				pow(p.z,value),
+				pow(p.w,value));
 }
 
 void main(){
@@ -342,51 +320,50 @@ void main(){
 
 	vec3 ro = camera_position;
 
-	vec2 uv = (2.*gl_FragCoord.xy - resolution) / resolution.y;
-	uv = vec2(uv[0], -uv[1]);
-	vec3 rd = rotate_ray(normalize(vec3(uv, -focal_length)), camera_rotation);
-
-	vec3 ligth_p = vec3(1., 1., -1.);
-	vec3 ligth_c = vec3(.9, .9, .9);
+	vec2 uv = (2.*gl_FragCoord.xy - resolution) / resolution.x;
+	uv *= vec2(1, -1) * (sensor/2).x;
+	vec3 rd = normalize(rotate_ray(vec3(uv, -focal_length), camera_rotation));
 
 	int step = 0;
 	float cd = PLANK;
 
 	vec4 ambient;
-	vec4 deffuse = vec4(.0, .0, .0, 1.);
-	vec4 specular = vec4(.0, .0, .0, 1.);
+	vec4 deffuse;
+	vec4 specular;
+
 	float _min = 10000.;
-	float thickness = .035;
+	float thickness = .2;
 	while(true){
 
 		cd = sceneSDF(ro);
-		_min = cd < _min ? cd : _min;
 		distance = distance + cd;
 		step++;
+		_min = _min > cd ? cd : _min;
 		ro = ro + rd * cd;
 
-		if(cd < PLANK){
-			ambient = vec4(vec3(ambient_factor, ambient_factor, ambient_factor),.1);
-			deffuse = calculateDeffuse(ro,ligth_p,ligth_c);
-			specular = calculateSpecular(ro,ligth_p,ligth_c,rd,2.0);
-			gl_FragColor = (ambient + deffuse) * vec4(.15, .15, .15, 1.);
+		if(cd < PLANK)
+		{
+			ambient = vec4(vec3(AMBIENT, AMBIENT, AMBIENT),.1);
+			deffuse = calculateDeffuse(ro);
+			specular = vec4(.0, .0, .0, .1);
+			gl_FragColor = colorpow((ambient + deffuse + specular) * sceneColor(ro), 16.);
 			break;
 		}
 
 		if(distance > MAX_DISTANCE)
 		{
-			gl_FragColor = vec4(.0, .0, .0, 1.) ;
+			gl_FragColor = WORLD_COLOR ;
 			break;
 		}
 
 		if(step > MAX_STEP)
 		{
-			gl_FragColor = vec4(.0, .0, .0, 1.) ;
+			gl_FragColor = WORLD_COLOR ;
 			break;
 		}
 	}
-	if(_min>=PLANK && _min<= thickness)
+	if(_min >= PLANK && _min <= thickness)
 	{
-		gl_FragColor = vec4(.7, .7, .7, 1.);
+		gl_FragColor = colorpow(vec4(1., 1., 1., 1.) * _min/thickness * -1 + 1, 8.);
 	}
 }
