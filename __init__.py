@@ -2,15 +2,13 @@ bl_info = {
     'name': 'Liquidknot',
     'description': 'Ray Marcher',
     'author': 'Kiril Iliev (Shapkofil)',
-    'license': 'MIT',
+    'license': 'GNUv3 Affero',
     'deps': '',
     'version': (1, 0, 0),
     'blender': (2, 81, 0),
-    'location': 'View3D > Sidebar > Create > Archipack',
     'warning': '',
     'wiki_url': 'https://github.com/Shapkfil/Liquidknot',
-    'tracker_url': 'https://github.com/s-leger/archipack/issues',
-    'link': 'https://github.com/s-leger/archipack',
+    'tracker_url': 'liquidknot.blender@gmail.com',
     'support': 'COMMUNITY',
     'category': 'Rendering Engine'
 }
