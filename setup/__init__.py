@@ -17,7 +17,7 @@ def unpack():
 
             file = join(dirname(ap(__file__)), 'linux_exec.sh')
             with open(file, 'w') as f:
-                f.write('cd "{}"\n'.format(dirname(ap(__file__))) + old)
+                f.write('''cd "{}"\n'''.format(dirname(ap(__file__))) + old)
             call(['sh', file])
         except RuntimeError:
             print('Virtualenv might not installed')
@@ -29,7 +29,7 @@ def unpack():
 
             file = join(dirname(ap(__file__)), 'win_exec.bat')
             with open(file, 'w') as f:
-                f.write('cd "{}"\n'.format(dirname(ap(__file__))) + old)
+                f.write('''cd "{}"\n'''.format(dirname(ap(__file__))) + old)
             call([file])
         except RuntimeError:
             print('Virtualenv might not installed')
