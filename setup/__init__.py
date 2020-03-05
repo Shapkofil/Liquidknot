@@ -1,15 +1,17 @@
 from subprocess import call
 import sys
 from os.path import abspath as ap, dirname, join, isdir
+from os import mkdir
+
+import re
 
 
-def install_and_import(package):
+def install_and_import(python_exec, package):
     import importlib
     try:
         importlib.import_module(package)
     except ImportError:
-        import pip
-        pip.main(['install', package])
+        call([python_exec, '-m', 'pip', 'install', package, '--user'])
     finally:
         globals()[package] = importlib.import_module(package)
 
@@ -17,42 +19,39 @@ def install_and_import(package):
 def unpack():
     # Preparations
     genepool = {
-        "sudo": ("sudo", ""),
         "mkdir": ("mkdir", "md"),
+
+        "python": ("/bin/python3.7m", "/bin/python.exe"),
         "pip": ("bin/pip", "Scripts/pip.exe")
     }
-    index = int(sys.platform is 'linux')
+    index = int(not sys.platform == 'linux')
 
-    # Worthless cases
-    if isdir(join(dirname(ap(__file__)), '../openGL/temp')) and isdir(join(dirname(ap(__file__)), '../openGL/.venv')):
-        return
-
-    python_exec = sys.exec_prefix + "/bin/python3.7m"
+    python_exec = sys.exec_prefix + genepool["python"][index]
     venv_path = join(dirname(ap(__file__)), '../openGL/.venv')
     temp_path = join(dirname(ap(__file__)), '../openGL/temp')
 
-    # Fix permitions
-    # call(['chmod', '777', '-R', python_exec])
+    # Worthless cases
+    if isdir(venv_path) and isdir(temp_path):
+        return
 
     call([python_exec,
-          "{}".format(join(dirname(ap(__file__)), 'get_pip.py'))  # Path to script
+          # Path to script
+          "{}".format(join(dirname(ap(__file__)), 'get_pip.py'))
           ])
 
-    install_and_import('virtualenv')
-    print('''it's not that dumb''')
+    install_and_import(python_exec, 'virtualenv')
 
-    call([sys.exec_prefix + "/bin/python3.7m", '-m', 'virtualenv',
+    call([python_exec, '-m', 'virtualenv',
           venv_path  # Path to venv
           ])
 
     call([join(venv_path, genepool["pip"][index]),
           "install", "-r",
-          'requirements.txt'
+          join(dirname(ap(__file__)), 'requirements.txt')
           ])
 
-    call([genepool["mkdir"][index],
-          temp_path
-          ])
+    print(temp_path)
+    mkdir(temp_path)
 
 
 if __name__ == "__main__":
