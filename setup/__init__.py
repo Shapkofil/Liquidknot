@@ -1,38 +1,58 @@
-import platform
-
-from os.path import join, dirname, abspath as ap, isdir
 from subprocess import call
+import sys
+from os.path import abspath as ap, dirname, join, isdir
+
+
+def install_and_import(package):
+    import importlib
+    try:
+        importlib.import_module(package)
+    except ImportError:
+        import pip
+        pip.main(['install', package])
+    finally:
+        globals()[package] = importlib.import_module(package)
 
 
 def unpack():
-    # Skip worthless
-    if isdir(join(dirname(ap(__file__)), '../openGL/temp')) and \
-            isdir(join(dirname(ap(__file__)), '../openGL/.venv')):
+    # Preparations
+    genepool = {
+        "sudo": ("sudo", ""),
+        "mkdir": ("mkdir", "md"),
+        "pip": ("bin/pip", "Scripts/pip.exe")
+    }
+    index = int(sys.platform is 'linux')
+
+    # Worthless cases
+    if isdir(join(dirname(ap(__file__)), '../openGL/temp')) and isdir(join(dirname(ap(__file__)), '../openGL/.venv')):
         return
 
-    if platform.system() == 'Linux':
-        try:
-            with open(join(dirname(ap(__file__)), 'linux_setup.sh'), 'r') as f:
-                old = f.read()
+    python_exec = sys.exec_prefix + "/bin/python3.7m"
+    venv_path = join(dirname(ap(__file__)), '../openGL/.venv')
+    temp_path = join(dirname(ap(__file__)), '../openGL/temp')
 
-            file = join(dirname(ap(__file__)), 'linux_exec.sh')
-            with open(file, 'w') as f:
-                f.write('''cd "{}"\n'''.format(dirname(ap(__file__))) + old)
-            call(['sh', file])
-        except RuntimeError:
-            print('Virtualenv might not installed')
+    # Fix permitions
+    # call(['chmod', '777', '-R', python_exec])
 
-    if platform.system() == 'Windows':
-        try:
-            with open(join(dirname(ap(__file__)), 'win_setup.bat'), 'r') as f:
-                old = f.read()
+    call([python_exec,
+          "{}".format(join(dirname(ap(__file__)), 'get_pip.py'))  # Path to script
+          ])
 
-            file = join(dirname(ap(__file__)), 'win_exec.bat')
-            with open(file, 'w') as f:
-                f.write('''cd "{}"\n'''.format(dirname(ap(__file__))) + old)
-            call([file])
-        except RuntimeError:
-            print('Virtualenv might not installed')
+    install_and_import('virtualenv')
+    print('''it's not that dumb''')
+
+    call([sys.exec_prefix + "/bin/python3.7m", '-m', 'virtualenv',
+          venv_path  # Path to venv
+          ])
+
+    call([join(venv_path, genepool["pip"][index]),
+          "install", "-r",
+          'requirements.txt'
+          ])
+
+    call([genepool["mkdir"][index],
+          temp_path
+          ])
 
 
 if __name__ == "__main__":
