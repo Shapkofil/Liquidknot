@@ -1,0 +1,8 @@
+{
+    "FRAG_SHADER": "liquidknot/fragment.shader",
+    "LOG_SHADER": "liquidknot/temp/log.shader",
+    "RAW_BUFFER": "liquidknot/temp/output.buffer",
+    "SCENE": "liquidknot/temp/scene.json",
+    "EXR": "liquidknot/temp/temp.exr",
+    "PNG": "liquidknot/temp/temp.png"
+}

@@ -1,3 +1,11 @@
+from os.path import join, abspath, dirname
+
+from . import auto_load
+import json
+from os.path import abspath, join, dirname
+
+from .setup import unpack
+
 bl_info = {
     'name': 'Liquidknot',
     'description': 'Ray Marcher',
@@ -5,7 +13,7 @@ bl_info = {
     'license': 'GNUv3 Affero',
     'deps': '',
     'version': (1, 0, 0),
-    'blender': (2, 81, 0),
+    'blender': (2, 82, 0),
     'warning': '',
     'wiki_url': 'https://github.com/Shapkfil/Liquidknot',
     'tracker_url': 'liquidknot.blender@gmail.com',
@@ -13,21 +21,23 @@ bl_info = {
     'category': 'Rendering Engine'
 }
 
-from .engine_wrap import register as engine_register, unregister as engine_unregister
-from .ui import register as ui_register, unregister as ui_unregister, classes as ui_classes
 
-from .setup import unpack
+with open(join(dirname(abspath(__file__)), 'paths.json')) as f:
+    global PATHS
+    PATHS = json.loads(f.read())
+
+for key in PATHS.keys():
+    PATHS[key] = join(dirname(abspath(__file__)), PATHS[key])
 
 
 def register():
     unpack()
-    ui_register()
-    engine_register()
+    auto_load.init()
+    auto_load.register()
 
 
 def unregister():
-    ui_unregister()
-    engine_unregister()
+    auto_load.unregister()
 
 
 if __name__ == "__main__":

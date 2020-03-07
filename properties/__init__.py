@@ -4,7 +4,7 @@ import json
 from os.path import abspath as ap, join, dirname
 
 from ..std_extensions import print
-from .presets.reflection import preset_to_lk
+from ..ui.presets.reflection import preset_to_lk, data as preset_data
 
 
 def setup_union_modes(scene, context):
@@ -64,20 +64,14 @@ def update_enum_presets(self, context):
     print("Load pre-made {} data".format(self.presets))
     obj = context.object
 
-    # Fetch data
-    with open(join(dirname(ap(__file__)), "presets/obj_presets.json")) as f:
-        data = json.loads(f.read())[self.presets]
-
     obj.liquidknot.params.clear()
-    preset_to_lk(data, obj)
+    preset_to_lk(preset_data[self.presets], obj)
 
 
 def load_presets():
-    with open(join(dirname(ap(__file__)), "presets/obj_presets.json")) as f:
-        data = json.loads(f.read())
-        camel = (lambda dat: ''.join("{} ".format(x.title()) for x in dat.split("_"))[:-1])
-        return [(key, camel(key), "Load lk_{}".format(key))
-                for key in data.keys()]
+    camel = (lambda dat: ''.join("{} ".format(x.title()) for x in dat.split("_"))[:-1])
+    return [(key, camel(key), "Load lk_{}".format(key))
+            for key in preset_data.keys()]
 
 
 class LiquidknotObjProps(bpy.types.PropertyGroup):
@@ -103,15 +97,7 @@ class LiquidknotObjProps(bpy.types.PropertyGroup):
     )
 
 
-classes = [LiquidknotProps,  # General props
-           LiquidknotObjParams, LiquidknotObjProps]  # Obj Props
-
-
 def register():
-
-    for cls in classes:
-        bpy.utils.register_class(cls)
-
     bpy.types.Scene.liquidknot = \
         bpy.props.PointerProperty(type=LiquidknotProps)
 
@@ -120,9 +106,6 @@ def register():
 
 
 def unregister():
-    for cls in classes:
-        bpy.utils.unregister_class(cls)
-
     del bpy.types.Scene.liquidknot
 
     del bpy.types.Object.liquidknot

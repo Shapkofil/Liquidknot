@@ -15,8 +15,8 @@ def unpack():
     index = int(not sys.platform == 'linux')
 
     python_exec = sys.exec_prefix + genepool["python"][index]
-    venv_path = join(dirname(ap(__file__)), '../openGL/.venv')
-    temp_path = join(dirname(ap(__file__)), '../openGL/temp')
+    venv_path = join(dirname(ap(__file__)), '../liquidknot/.venv')
+    temp_path = join(dirname(ap(__file__)), '../liquidknot/temp')
 
     # Worthless cases
     if isdir(venv_path) and isdir(temp_path):
@@ -29,9 +29,7 @@ def unpack():
 
     call([python_exec, '-m', 'pip', 'install', 'virtualenv', '--user'])
 
-    call([python_exec, '-m', 'virtualenv',
-          venv_path  # Path to venv
-          ])
+    call([python_exec, '-m', 'virtualenv', venv_path])
 
     call([join(venv_path, genepool["pip"][index]),
           "install", "-r",

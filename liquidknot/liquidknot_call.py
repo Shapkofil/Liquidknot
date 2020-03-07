@@ -1,9 +1,10 @@
 import sys
 from core import render
 import numpy as np
-import os
+import json
 import cv2
 import re
+from os.path import join, abspath, dirname
 
 from parse_scene import parse_scene
 
@@ -34,29 +35,28 @@ def main(resolution=(1920, 1080),
         saveimg(raw_data, filepath)
     else:
         buff = memoryview(raw_data).tobytes()
-        file = os.path.join(os.path.dirname(__file__), "temp/output.buffer")
-        with open(file, "wb") as f:
+        with open(PATHS['RAW_BUFFER'], "wb") as f:
             f.write(buff)
 
 
-# ToDo entry point
+with open(join(dirname(abspath(__file__)), '../paths.json')) as f:
+    # GET PATHS
+    global PATHS
+    PATHS = json.loads(f.read())
+    for key in PATHS.keys():
+        PATHS[key] = join(dirname(abspath(__file__)), join('..', PATHS[key]))
+
 if __name__ == "__main__":
-
-    # ToDo get File Paths Externally
-
     # Load Shader Code
-    file = os.path.join(os.path.dirname(__file__), "fragment.shader")
-    with open(file) as f:
+    with open(PATHS['FRAG_SHADER']) as f:
         fragment_code = f.read()
 
     # Load Scene and Modify Shader Code
-    file = os.path.join(os.path.dirname(__file__), "temp/scene.json")
-    resolution, bounds, fragment_code = parse_scene(file, fragment_code)
+    resolution, bounds, fragment_code = parse_scene(PATHS['SCENE'], fragment_code)
     # print(bounds)
 
     # Log The Shader Code
-    file = os.path.join(os.path.dirname(__file__), "temp/log.shader")
-    with open(file, "w+") as f:
+    with open(PATHS['LOG_SHADER'], "w+") as f:
         f.write(fragment_code)
 
     # Execute Core

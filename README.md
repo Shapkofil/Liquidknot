@@ -34,8 +34,8 @@ python -m pip install virtualenv
 - (optional) You can create the virtualenv yourself:
 ```bash
 # In the main addon's directory
-virtuanenv openGL/.venv
-source openGL/.venv/bin/activate
+virtuanenv liquidknot/.venv
+source liquidknot/.venv/bin/activate
 pip install -r requirements.txt
 ```
 - Follow the steps 2-8 from User Universal Install

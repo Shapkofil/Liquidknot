@@ -3,7 +3,8 @@ import subprocess
 import os
 import time
 import re
-import platform 
+import platform
+
 
 try:
     from ..std_extensions import *
@@ -18,14 +19,19 @@ def venvexec(venv_path, file, output_path=None):
 
     venv_path = os.path.join(os.path.dirname(__file__), venv_path)
     file = os.path.join(os.path.dirname(__file__), file)
+
+    # Linux call
     if platform.system() == 'Linux':
         buff = subprocess.run(
             ["{0}/bin/python".format(venv_path), file, output_path], capture_output=True)
+
+    # Windows call
     if platform.system() == 'Windows':
         buff = subprocess.run(
             ["{0}/Scripts/pythonw.exe".format(venv_path), file, output_path], capture_output=True)
-    err = buff.stderr
 
+    # Error handling
+    err = buff.stderr
     if err:
         print("SUBSCRIPT ERROR:\n{0}".format(err.decode())[:-2], log="error")
 
@@ -35,10 +41,10 @@ def venvexec(venv_path, file, output_path=None):
     # Exr Cases
     if re.match(r"^(.+)\.exr", output_path):
         return None
+
     # Buffer Cases
     elif not output_path == "None":
-        file = os.path.join(os.path.dirname(__file__), output_path)
-        with open(file, "rb") as f:
+        with open(output_path, "rb") as f:
             byte = f.read()
 
     return np.frombuffer(byte, dtype=np.float32)
@@ -49,7 +55,7 @@ def brender(resolution=(1920, 1080),
             vertex_code=None,
             fragment_code=None,
             filepath=None):
-    raw_render = venvexec(".venv", "blend_parse.py", filepath)
+    raw_render = venvexec(".venv", "liquidknot_call.py", filepath)
 
     # Full render cases
     if bounds is None:
