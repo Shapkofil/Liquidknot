@@ -10,6 +10,8 @@ class LiquidknotRenderEngine(bpy.types.RenderEngine):
     bl_label = "Liquidknot"
     bl_use_preview = False
 
+    bl_use_shading_nodes_custom = False
+
     # Init is called whenever a new render engine instance is created.
     # Multiple instances may exist at the same time,
     # for example for a viewport and final render.
