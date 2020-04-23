@@ -10,6 +10,7 @@ import types
 import inspect
 import pkgutil
 import importlib
+from .std_extensions import print
 from pathlib import Path
 
 __all__ = (
@@ -32,6 +33,7 @@ def init():
 
 def register():
     for cls in ordered_classes:
+        print(str(cls))
         bpy.utils.register_class(cls)
 
     for module in modules:
