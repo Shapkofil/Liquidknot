@@ -18,6 +18,11 @@ class LKShaderTree(NodeTree):
     # Icon identifier
     bl_icon = 'NODETREE'
 
+    def update(self):
+        for from_socket, to_socket in self.links:
+            if hasattr(from_socket, 'value') and hasattr(to_socket, 'value'):
+                to_socket.value = from_socket.value
+
     # @classmethod
     # def poll(context):
     #     return context.scene.render.engine == 'LIQUIDKNOT'
