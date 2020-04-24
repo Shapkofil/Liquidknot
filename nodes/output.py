@@ -1,4 +1,5 @@
 import nodeitems_utils
+import bpy
 from bpy.types import ShaderNodeOutputMaterial, Node
 from nodeitems_utils import NodeItem
 
@@ -21,6 +22,11 @@ class LKShaderOutputNode(Node, LKShaderTreeNode):
     # Explicit user label overrides this, but here we can define a label dynamically
     def draw_label(self):
         return "Liquidknot Material Output"
+    
+    def update(self):
+        bpy.context.object.liquidknot.enabled = True
+        bpy.context.object.liquidknot.de = self.inputs[0].value
+
 
 
 node_categories = [

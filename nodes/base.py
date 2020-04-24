@@ -8,7 +8,7 @@ from nodeitems_utils import NodeCategory, NodeItem
 
 
 # Derived from the NodeTree base type, similar to Menu, Operator, Panel, etc.
-class LKShaderTree(NodeTree):
+class LKNodeTree(NodeTree):
     # Description string
     '''A custom node tree type that will show up in the editor type list'''
     # Optional identifier string. If not explicitly defined, the python class name is used.
@@ -19,9 +19,9 @@ class LKShaderTree(NodeTree):
     bl_icon = 'NODETREE'
 
     def update(self):
-        for from_socket, to_socket in self.links:
-            if hasattr(from_socket, 'value') and hasattr(to_socket, 'value'):
-                to_socket.value = from_socket.value
+        for link in self.links:
+            if hasattr(link.from_socket, 'value') and hasattr(link.to_socket, 'value'):
+                link.to_socket.value = link.from_socket.value
 
     # @classmethod
     # def poll(context):
@@ -47,7 +47,7 @@ class SDFSocket(NodeSocket):
 
     # Optional function for drawing the socket input value
     def draw(self, context, layout, node, text):
-        if self.is_output or self.is_linked:
+        if self.is_output:
             layout.label(text=text)
         else:
             obj = context.object
