@@ -11,7 +11,7 @@ class LKShaderOutputNode(Node, LKShaderTreeNode):
 
     bl_idname = 'LKShaderOutputNode'
 
-    bl_label = "Liquidknot Output"
+    bl_label = "LKOutput"
 
     bl_icon = 'SOUND'
 
@@ -21,7 +21,7 @@ class LKShaderOutputNode(Node, LKShaderTreeNode):
     # Optional: custom label
     # Explicit user label overrides this, but here we can define a label dynamically
     def draw_label(self):
-        return "Liquidknot Material Output"
+        return "Output"
     
     def update(self):
         bpy.context.object.liquidknot.enabled = True

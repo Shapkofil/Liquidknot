@@ -4,6 +4,8 @@ from bpy.types import NodeTree, Node, NodeSocket
 import nodeitems_utils
 from nodeitems_utils import NodeCategory, NodeItem
 
+import time
+
 # Implementation of custom nodes from Python
 
 
@@ -18,10 +20,14 @@ class LKNodeTree(NodeTree):
     # Icon identifier
     bl_icon = 'NODETREE'
 
+
     def update(self):
-        for link in self.links:
-            if hasattr(link.from_socket, 'value') and hasattr(link.to_socket, 'value'):
-                link.to_socket.value = link.from_socket.value
+        for _ in self.links:
+            for link in self.links:
+                if hasattr(link.from_socket, 'value') and hasattr(link.to_socket, 'value'):
+                    link.from_node.update()
+                    link.to_socket.value = link.from_socket.value
+                    link.to_node.update()
 
     # @classmethod
     # def poll(context):
