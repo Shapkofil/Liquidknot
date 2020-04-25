@@ -14,7 +14,7 @@ from ..base import LKShaderTreeNode, LKShaderTreeNode, LKNodeCategory
 class LKDisplaceNode(Node, LKShaderTreeNode):
     '''Node for predefined surfaces'''
     bl_idname = 'LKDisplaceNode'
-    bl_label = "Displace Node"
+    bl_label = "Displace"
     # search for a suitable icon
     bl_icon = 'CUBE'
 
@@ -30,18 +30,3 @@ class LKDisplaceNode(Node, LKShaderTreeNode):
 
     def update(self):
         self.outputs[0].value = '{} + {}'.format(self.inputs[0].value, self.inputs[1].value)    
-
-node_categories = [
-    LKNodeCategory('MODIFIERS', "Modifiers", items=[
-        NodeItem("LKDisplaceNode")
-    ])]
-
-
-def register():
-    nodeitems_utils.register_node_categories('LIQUIDKNOT_MOD_NODES', node_categories)
-
-
-def unregister():
-    nodeitems_utils.unregister_node_categories('LIQUIDKNOT_MOD_NODES')
-       
-

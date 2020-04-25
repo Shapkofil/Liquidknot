@@ -33,7 +33,7 @@ def load_presets():
 class LKAbstractSurfNode(Node, LKShaderTreeNode):
     '''Node for predefined surfaces'''
     bl_idname = 'LKAbstractSurfNode'
-    bl_label = "Abstract Surfaces Node"
+    bl_label = "Abstract Surface"
     bl_icon = 'SPHERE'
 
     abstract_type:EnumProperty(items = load_presets(), name = 'abstract_type', update = update_type)
@@ -52,16 +52,3 @@ class LKAbstractSurfNode(Node, LKShaderTreeNode):
 
     def update(self):
         self.outputs[0].value = obj_data[self.abstract_type]['de']
-
-node_categories = [
-    LKNodeCategory('ABSTRACT', "Abstract", items=[
-        NodeItem("LKAbstractSurfNode")
-    ])]
-
-
-def register():
-    nodeitems_utils.register_node_categories('LIQUIDKNOT_SURF2_NODES', node_categories)
-
-
-def unregister():
-    nodeitems_utils.unregister_node_categories('LIQUIDKNOT_SURF2_NODES')

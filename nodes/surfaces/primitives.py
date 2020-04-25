@@ -33,7 +33,7 @@ def load_presets():
 class LKPrimitiveSurfNode(Node, LKShaderTreeNode):
     '''Node for predefined surfaces'''
     bl_idname = 'LKPrimitiveSurfNode'
-    bl_label = "Primitive Surfaces Node"
+    bl_label = "Primitive Surface"
     bl_icon = 'CUBE'
 
     prim_type:EnumProperty(items = load_presets(), name = 'prim_type', update = update_type)
@@ -52,16 +52,3 @@ class LKPrimitiveSurfNode(Node, LKShaderTreeNode):
 
     def update(self):
         self.outputs[0].value = obj_data[self.prim_type]['de']
-
-node_categories = [
-    LKNodeCategory('PRIMITIVES', "Primitives", items=[
-        NodeItem("LKPrimitiveSurfNode")
-    ])]
-
-
-def register():
-    nodeitems_utils.register_node_categories('LIQUIDKNOT_SURF_NODES', node_categories)
-
-
-def unregister():
-    nodeitems_utils.unregister_node_categories('LIQUIDKNOT_SURF_NODES')
