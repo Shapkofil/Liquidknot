@@ -35,12 +35,13 @@ vec4 calculateDeffuse(vec3 p)
 // ToDo Specular Pass
 
 void main(){
+  loadLights();
 	float distance = PLANK;
 
 	vec3 ro = camera_position;
 
 	vec2 uv = (2.*gl_FragCoord.xy - resolution) / resolution.x;
-	uv *= vec2(1, -1) * (sensor/2).x;
+	uv *= vec2(1., -1.) * (sensor/2.).x;
 	vec3 rd = normalize(rotate_ray(vec3(uv, -focal_length), camera_rotation));
 
 	int step = 0;

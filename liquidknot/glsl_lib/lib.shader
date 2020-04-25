@@ -1,17 +1,17 @@
 // Math constants
 
-#define __pi__ 3.1415926535897932384626433832795
+const float pi = 3.1415926535897932384626433832795;
 
 // Utils libs
 
 float smooth_border(float x)
 {
-	return ( x<__pi__ && x>-__pi__ ) ? (cos(x) + 1)/2 : 0;
+	return ( x<pi && x> -pi) ? (cos(x) + 1.)/2. : .0;
 }
 
 vec4 csdf(float sdf, vec4 color, float falloff)
 {
-	return smooth_border((sdf * __pi__) / falloff / 2) * color;
+	return smooth_border((sdf * pi) / falloff / 2.) * color;
 }
 
 float smin( float a, float b, float k )
@@ -63,7 +63,7 @@ float sdEllipsoid( vec3 p, vec3 r )
 
 float sdBox( vec3 p, vec3 b)
 {
-	b/=2;
+	b/=2.;
 	vec3 q = abs(p) - b;
 	return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0);
 }
@@ -89,7 +89,7 @@ float sdCapsule( vec3 p, vec3 a, vec3 b, float r )
 
 float sdVerticalCapsule( vec3 p, float h, float r )
 {
-	p -= vec3(0, 0, -h/2);
+	p -= vec3(0, 0, -h/2.);
 	p.z -= clamp( p.z, 0.0, h );
 	return length( p ) - r;
 }
@@ -173,7 +173,12 @@ float udQuad( vec3 p, vec3 a, vec3 b, vec3 c, vec3 d )
 	 :
 	 dot(nor,pa)*dot(nor,pa)/dot2(nor) );
 }
+// Abstact Lib
 
+float sdSinField(vec3 p ,vec3 b)
+{
+  return sin(p.x*b.x)*sin(p.x*b.x)*sin(p.x*b.x);
+}
 
 // Unions lib
 float opUnion( float d1, float d2 ) {  return min(d1,d2); }

@@ -29,7 +29,7 @@ class LKDisplaceNode(Node, LKShaderTreeNode):
         return 'Displace'
 
     def update(self):
-        self.outputs[0].value = '{} + {}'.format(self.inputs[0].value, self.inputs[1].valu    
+        self.outputs[0].value = '{} + {}'.format(self.inputs[0].value, self.inputs[1].value)    
 
 node_categories = [
     LKNodeCategory('MODIFIERS', "Modifiers", items=[

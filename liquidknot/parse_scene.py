@@ -77,22 +77,23 @@ def parse_scene(scene_path, fragment_code):
 
     # Loading lights
     n = len(data["lights"])
-    snippet += "const float light_count = {0};\n".format(n)
+    snippet += "const int light_count = {0};\n".format(n)
 
     # Light position
-    snippet_pos = "const vec3 light_positions[{0}] = ".format(n) + r"{"
-    for light in data["lights"]:
-        snippet_pos += "{0}, ".format(glsl.vec(light["position"]))
-    snippet_pos = snippet_pos[:-2] + r"};" + "\n"
+    snippet_pos = "vec3 light_positions[{0}];\n".format(n)
 
     # Light color
-    snippet_cl = "const vec4 light_colors[{0}] = ".format(n) + r"{"
-    for light in data["lights"]:
-        snippet_cl += "{0}, ".format(glsl.vec(light["color"]))
-    snippet_cl = snippet_cl[:-2] + r"};" + "\n"
+    snippet_cl = "vec4 light_colors[{0}];\n".format(n)
+
+    # Light load func
+    snippet_func = ''
+    for i, light in enumerate(data["lights"]):
+        snippet_func += "\tlight_positions[{0}] = {1};\n".format(i, glsl.vec(light["position"]))
+        snippet_func += "\tlight_colors[{0}] = {1};\n".format(i, glsl.vec(light["color"]))
+    snippet_func = "void loadLights()\n{{\n{0}}}\n".format(snippet_func)
 
     # Combine Light passes
-    snippet += snippet_pos + snippet_cl + "\n"
+    snippet += snippet_pos + snippet_cl + snippet_func + "\n"
 
     # Loading Scene DE and Color
     de_snippet, de, color = de_gen_swamp(data["entities"], data["default_union"])

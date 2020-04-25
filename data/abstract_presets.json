@@ -1,0 +1,10 @@
+{
+	"COS_FIELD":{
+		"params": {
+                "width": "SCALE_X",
+                "height": "SCALE_Y",
+                "depth": "SCALE_Z"
+            },
+        "de": "sdSinField(p, vec3(width, height, depth))"
+	}
+}
