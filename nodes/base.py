@@ -5,9 +5,13 @@ import nodeitems_utils
 from nodeitems_utils import NodeCategory, NodeItem
 
 import time
+import re
 
 # Implementation of custom nodes from Python
-
+def complete_exp(exp, inputs):
+    for k in inputs:
+        exp = re.sub(k.name, str(k.default_value), exp)
+    return exp
 
 # Derived from the NodeTree base type, similar to Menu, Operator, Panel, etc.
 class LKNodeTree(NodeTree):

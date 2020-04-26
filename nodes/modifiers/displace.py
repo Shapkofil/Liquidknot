@@ -24,9 +24,10 @@ class LKDisplaceNode(Node, LKShaderTreeNode):
 
         self.inputs.new('NodeSocketSDF', "Base")
         self.inputs.new('NodeSocketSDF', "Displacement")
+        self.inputs.new('NodeSocketFloat', "Fac")
 
     def draw_label(self):
         return 'Displace'
 
     def update(self):
-        self.outputs[0].value = '{} + {}'.format(self.inputs[0].value, self.inputs[1].value)    
+        self.outputs[0].value = '{} + {} * {}'.format(self.inputs[0].value, self.inputs[2].default_value,self.inputs[1].value)    

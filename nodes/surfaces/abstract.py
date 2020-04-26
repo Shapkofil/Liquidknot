@@ -8,7 +8,7 @@ from bpy.types import Node
 from os.path import join, abspath, dirname
 import json
 
-from ..base import LKShaderTreeNode, LKShaderTreeNode, LKNodeCategory
+from ..base import LKShaderTreeNode, LKShaderTreeNode, LKNodeCategory, complete_exp
 
 def fetch_obj_data(path, defauth=True):
     if defauth:
@@ -51,4 +51,4 @@ class LKAbstractSurfNode(Node, LKShaderTreeNode):
         return camel(str(self.abstract_type))
 
     def update(self):
-        self.outputs[0].value = obj_data[self.abstract_type]['de']
+        self.outputs[0].value = complete_exp(obj_data[self.abstract_type]['de'], self.inputs)

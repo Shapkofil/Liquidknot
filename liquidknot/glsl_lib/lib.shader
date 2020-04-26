@@ -177,7 +177,7 @@ float udQuad( vec3 p, vec3 a, vec3 b, vec3 c, vec3 d )
 
 float sdSinField(vec3 p ,vec3 b)
 {
-  return sin(p.x*b.x)*sin(p.x*b.x)*sin(p.x*b.x);
+  return sin(p.x*b.x)*sin(p.y*b.y)*sin(p.z*b.z);
 }
 
 // Unions lib
