@@ -1,14 +1,6 @@
-import bpy
-from bpy.props import EnumProperty
-import nodeitems_utils
-from nodeitems_utils import NodeItem
-
 from bpy.types import Node
 
-from os.path import join, abspath, dirname
-import json
-
-from ..base import LKShaderTreeNode, LKShaderTreeNode, LKNodeCategory
+from ..base import LKShaderTreeNode
 
 
 class LKDisplaceNode(Node, LKShaderTreeNode):
@@ -17,7 +9,6 @@ class LKDisplaceNode(Node, LKShaderTreeNode):
     bl_label = "Displace"
     # search for a suitable icon
     bl_icon = 'CUBE'
-
 
     def init(self, context):
         self.outputs.new('NodeSocketSDF', "SDF")
@@ -30,4 +21,6 @@ class LKDisplaceNode(Node, LKShaderTreeNode):
         return 'Displace'
 
     def update(self):
-        self.outputs[0].value = '{} + {} * {}'.format(self.inputs[0].value, self.inputs[2].default_value,self.inputs[1].value)    
+        self.outputs[0].value = '{} + {} * {}'.format(
+            self.inputs[0].value, self.inputs[2].default_value,
+            self.inputs[1].value)
