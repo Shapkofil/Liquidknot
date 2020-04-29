@@ -2,16 +2,13 @@
 # https://gist.github.com/JacquesLucke/11fecc6ea86ef36ea72f76ca547e795b
 # on 25/05/2019
 
-import os
-import bpy
-import sys
-import typing
-import types
+import importlib
 import inspect
 import pkgutil
-import importlib
-from .std_extensions import print
+import typing
 from pathlib import Path
+
+import bpy
 
 __all__ = (
     "init",
@@ -30,9 +27,9 @@ def init():
     modules = get_all_submodules(Path(__file__).parent)
     ordered_classes = get_ordered_classes_to_register(modules)
 
+
 def register():
     for cls in ordered_classes:
-        print(str(cls))
         bpy.utils.register_class(cls)
 
     for module in modules:
@@ -55,6 +52,7 @@ def unregister():
 
 # Import modules
 #################################################
+
 
 def get_all_submodules(directory):
     return list(iter_submodules(directory, directory.name))
@@ -79,6 +77,7 @@ def iter_submodule_names(path, root=""):
 
 # Find classes to register
 #################################################
+
 
 def get_ordered_classes_to_register(modules):
     return toposort(get_register_deps_dict(modules))
@@ -116,7 +115,8 @@ def iter_register_deps(cls):
 
 def get_dependency_from_annotation(value):
     if isinstance(value, tuple) and len(value) == 2:
-        if value[0] in (bpy.props.PointerProperty, bpy.props.CollectionProperty):
+        if value[0] in (bpy.props.PointerProperty,
+                        bpy.props.CollectionProperty):
             return value[1]["type"]
     return None
 
@@ -144,16 +144,16 @@ def iter_classes_in_module(module):
 
 
 def get_register_base_types():
-    return set(getattr(bpy.types, name) for name in [
-        "Panel", "Operator", "PropertyGroup",
-        "AddonPreferences", "Header", "Menu",
-        "Node", "NodeSocket", "NodeTree",
-        "UIList", "RenderEngine"
-    ])
+    return set(
+        getattr(bpy.types, name) for name in [
+            "Panel", "Operator", "PropertyGroup", "AddonPreferences", "Header",
+            "Menu", "Node", "NodeSocket", "NodeTree", "UIList", "RenderEngine"
+        ])
 
 
 # Find order to register to solve dependencies
 #################################################
+
 
 def toposort(deps_dict):
     sorted_list = []
@@ -166,6 +166,9 @@ def toposort(deps_dict):
                 sorted_values.add(value)
             else:
                 unsorted.append(value)
-        deps_dict = {value: deps_dict[value] - sorted_values for value in unsorted}
+        deps_dict = {
+            value: deps_dict[value] - sorted_values
+            for value in unsorted
+        }
 
     return sorted_list
