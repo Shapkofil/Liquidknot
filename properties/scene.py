@@ -5,7 +5,7 @@ import bpy
 
 
 def setup_union_modes(scene, context):
-    with open(join(dirname(abspath(__file__)), 'union_presets.json')) as f:
+    with open(join(dirname(abspath(__file__)), 'boolean_presets.json')) as f:
         data = json.loads(f.read())
 
     camel = (lambda dat: ''.join("{} ".format(x.title())

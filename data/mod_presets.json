@@ -1,0 +1,10 @@
+{
+    "DISPLACE":{
+        "params":["BASE","DISPLACEMENT","FAC"],
+        "exp":"{} + {} * {}"
+    },
+    "SMOOTH_EDGES":{
+        "params":["SDF","FAC"],
+        "exp":"{} - {}"
+    }
+}

@@ -6,5 +6,11 @@
                 "depth": "SCALE_Z"
             },
         "de": "sdSinField(p, vec3(width, height, depth))"
+	},
+	"SIMPLEX_NOISE":{
+		  "params": {
+          "power": 7.0
+            },
+        "de": "SimplexNoise(p, power)"
 	}
 }
