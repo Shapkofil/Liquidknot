@@ -9,8 +9,12 @@
 	},
 	"SIMPLEX_NOISE":{
 		  "params": {
-          "power": 7.0
             },
-        "de": "SimplexNoise(p, power)"
+        "de": "SimplexNoise(p)"
+	},
+  "PERLIN_NOISE":{
+		  "params": {
+            },
+        "de": "PerlinNoise(p)"
 	}
 }
