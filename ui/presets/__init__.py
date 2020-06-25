@@ -6,11 +6,20 @@ import json
 
 from .reflection import classes as preset_ops
 
+def fetch_data(path, defauth=True):
+    if defauth:
+        path = join(dirname(ap(__file__)), path)
 
-# Fetch data
-with open(join(dirname(ap(__file__)), "obj_presets.json")) as f:
-    global data
-    data = json.loads(f.read())
+    with open(path) as f:
+        cont = f.read()
+        try:
+            return json.loads(cont)
+        except:
+            cont = join(dirname(ap(__file__)),cont)
+            with open(cont) as file:
+                return json.loads(file.read())
+
+data = fetch_data('obj_presets.json')
 
 
 class LK_add_Menu(Menu):

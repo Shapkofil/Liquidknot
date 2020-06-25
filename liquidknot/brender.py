@@ -28,7 +28,7 @@ def venvexec(venv_path, file, output_path=None):
     # Windows call
     if platform.system() == 'Windows':
         buff = subprocess.run(
-            ["{0}/Scripts/pythonw.exe".format(venv_path), file, output_path], capture_output=True)
+            ["{0}/Scripts/python.exe".format(venv_path), file, output_path], capture_output=True)
 
     # Error handling
     err = buff.stderr

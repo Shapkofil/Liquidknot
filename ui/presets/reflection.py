@@ -6,6 +6,18 @@ from os.path import join, abspath as ap, dirname
 import json
 import re
 
+def fetch_data(path, defauth=True):
+    if defauth:
+        path = join(dirname(ap(__file__)), path)
+
+    with open(path) as f:
+        cont = f.read()
+        try:
+            return json.loads(cont)
+        except:
+            cont = join(dirname(ap(__file__)),cont)
+            with open(cont) as file:
+                return json.loads(file.read())
 
 def add_driver(obj, prop, index, source, source_prop, expression=''):
     drv = obj.driver_add(prop, index)
@@ -45,8 +57,7 @@ flats = ["cube", "octahedron", "cylinder"]
 
 
 # Fetch data
-with open(join(dirname(ap(__file__)), "obj_presets.json")) as f:
-    data = json.loads(f.read())
+data = fetch_data('obj_presets.json')
 
 
 def shade_s(obj, mode=True):

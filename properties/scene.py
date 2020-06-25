@@ -3,10 +3,21 @@ from os.path import abspath, dirname, join
 
 import bpy
 
+def fetch_boolean_data(path, defauth=True):
+    if defauth:
+        path = join(dirname(abspath(__file__)), path)
+
+    with open(path) as f:
+        cont = f.read()
+        try:
+            return json.loads(cont)
+        except:
+            cont = join(dirname(abspath(__file__)),cont)
+            with open(cont) as file:
+                return json.loads(file.read())
 
 def setup_union_modes(scene, context):
-    with open(join(dirname(abspath(__file__)), 'boolean_presets.json')) as f:
-        data = json.loads(f.read())
+    data = fetch_boolean_data('boolean_presets.json')
 
     camel = (lambda dat: ''.join("{} ".format(x.title())
                                  for x in dat.split("_"))[:-1])

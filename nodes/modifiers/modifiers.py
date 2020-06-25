@@ -13,7 +13,13 @@ def fetch_data(path, defauth=True):
         path = join(dirname(abspath(__file__)), path)
 
     with open(path) as f:
-        return json.loads(f.read())
+        cont = f.read()
+        try:
+            return json.loads(cont)
+        except:
+            cont = join(dirname(abspath(__file__)),cont)
+            with open(cont) as file:
+                return json.loads(file.read())
 
 mod_data = fetch_data('mod_presets.json')
 
