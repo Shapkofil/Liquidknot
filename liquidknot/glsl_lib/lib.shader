@@ -541,12 +541,12 @@ float opSmoothEdges( float p , float r ){ return p - r; }
 
 
 // Fractal Lib
-float sdMandelbulb(vec3 p, int iters, float power, float bailout)
+float sdMandelbulb(vec3 p, float iters, float power, float bailout)
 {
 	vec3 z = p;
 	float dr = 1.0;
 	float r = 0.0;
-	for (int i = 0; i < iters ; i++) {
+	for (int i = 0; i < int(iters) ; i++) {
 		r = length(z);
 		if (r>bailout) break;
 		

@@ -6,5 +6,9 @@
     "SMOOTH_EDGES":{
         "params":["SDF","FAC"],
         "exp":"{} - {}"
+    },
+    "ONION_SKIN":{
+        "params":["SDF","FAC"],
+        "exp":"abs({}) - {}"
     }
 }
