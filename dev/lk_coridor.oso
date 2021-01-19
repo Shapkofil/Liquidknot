@@ -1,0 +1,4031 @@
+OpenShadingLanguage 1.00
+# Compiled by oslc 1.10.10
+# options: -o /tmp/tmp7_8y8nos.oso -I/home/shapkofil/.bfs/blender/latest/2.90/scripts/addons/cycles/shader
+shader infinate
+param	vector	ro	0 0 0		%read{9,215} %write{2147483647,-1}
+param	vector	rd	0 0 0		%read{8,214} %write{2147483647,-1}
+param	int	iter	256		%read{6,6} %write{2147483647,-1}
+param	float	plank	0.00100000005		%read{204,1635} %write{2147483647,-1}
+param	float	max_distance	20		%read{211,211} %write{2147483647,-1}
+oparam	color	FragColor	0 0 0		%read{2147483647,-1} %write{221,1657}
+oparam	float	Alpha	0		%read{2147483647,-1} %write{222,1658}
+oparam	float	Depth	0		%read{2147483647,-1} %write{210,210}
+local	vector	___363_q	%read{6,1642} %write{6,1642}
+local	float	___364_d	%read{6,1642} %write{6,1642}
+local	vector	___364_p1	%read{6,1642} %write{6,1642}
+local	float	___364_d1	%read{6,1642} %write{6,1642}
+local	float	___364_d2	%read{6,1642} %write{6,1642}
+local	float	___365_e	%read{238,1220} %write{237,237}
+local	float	___365__	%read{2147483647,-1} %write{241,1413}
+local	float	___366_res	%read{1437,1643} %write{1434,1642}
+local	float	___367_t	%read{1437,1642} %write{1436,1642}
+local	vector	___368_pos	%read{1437,1642} %write{1437,1642}
+local	float	___368__	%read{2147483647,-1} %write{1437,1642}
+local	float	___368_h	%read{1437,1642} %write{1437,1642}
+local	color	col	%read{1654,1657} %write{0,1656}
+local	float	alpha	%read{1658,1658} %write{1,1655}
+local	float	mat	%read{216,233} %write{2,209}
+local	float	t	%read{6,214} %write{3,209}
+local	int	___369_i	%read{6,209} %write{5,209}
+local	vector	___370_pos	%read{6,209} %write{6,209}
+local	float	___370_h	%read{6,209} %write{6,209}
+local	color	___371_mate	%read{1650,1652} %write{213,235}
+local	vector	___371_pos	%read{239,1431} %write{215,215}
+local	vector	___371_norm	%read{1423,1644} %write{1418,1418}
+local	vector	___371_spot_dir	%read{1423,1642} %write{1422,1422}
+local	float	___371_spot_diff	%read{1650,1650} %write{1426,1426}
+local	float	___371_spot_sha	%read{1651,1651} %write{1437,1643}
+local	float	___371_sky_diff	%read{1652,1652} %write{1649,1649}
+const	vector	$const1	0 0 0		%read{0,1533} %write{2147483647,-1}
+const	int	$const2	0		%read{1,1622} %write{2147483647,-1}
+const	float	$const3	0		%read{2,1649} %write{2147483647,-1}
+temp	int	$tmp1	%read{6,209} %write{6,209}
+temp	int	$tmp2	%read{4,209} %write{5,209}
+temp	vector	$tmp3	%read{6,209} %write{6,209}
+const	string	$const4	"map"		%read{10,1441} %write{2147483647,-1}
+const	vector	$const5	0 0 1		%read{12,1644} %write{2147483647,-1}
+temp	float	$tmp5	%read{6,209} %write{6,209}
+const	vector	$const6	3.40282347e+38 1 2		%read{15,1446} %write{2147483647,-1}
+const	string	$const7	"sdBox"		%read{13,1615} %write{2147483647,-1}
+temp	vector	$tmp7	%read{6,209} %write{6,209}
+const	int	$const8	2		%read{22,1624} %write{2147483647,-1}
+temp	vector	$tmp8	%read{6,209} %write{6,209}
+const	float	$const9	2		%read{15,1617} %write{2147483647,-1}
+temp	float	$tmp9	%read{6,209} %write{6,209}
+temp	vector	$tmp10	%read{6,209} %write{6,209}
+temp	vector	$tmp11	%read{6,209} %write{6,209}
+temp	float	$tmp12	%read{6,209} %write{6,209}
+temp	float	$tmp13	%read{6,209} %write{6,209}
+temp	float	$tmp14	%read{6,209} %write{6,209}
+temp	float	$tmp15	%read{6,209} %write{6,209}
+const	int	$const10	1		%read{21,1655} %write{2147483647,-1}
+temp	float	$tmp16	%read{6,209} %write{6,209}
+temp	float	$tmp17	%read{6,209} %write{6,209}
+temp	float	$tmp19	%read{6,209} %write{6,209}
+temp	float	$tmp20	%read{6,209} %write{6,209}
+const	float	$const11	0.5		%read{30,1611} %write{2147483647,-1}
+temp	float	$tmp21	%read{6,209} %write{6,209}
+const	float	$const12	1		%read{32,1648} %write{2147483647,-1}
+const	string	$const13	"mod"		%read{31,1601} %write{2147483647,-1}
+temp	float	$tmp22	%read{6,209} %write{6,209}
+temp	float	$tmp23	%read{6,209} %write{6,209}
+temp	float	$tmp24	%read{6,209} %write{6,209}
+temp	float	$tmp25	%read{6,209} %write{6,209}
+const	vector	$const14	0.400000006 0.400000006 0.200000003		%read{40,1471} %write{2147483647,-1}
+temp	vector	$tmp27	%read{6,209} %write{6,209}
+temp	vector	$tmp28	%read{6,209} %write{6,209}
+temp	float	$tmp29	%read{6,209} %write{6,209}
+temp	vector	$tmp30	%read{6,209} %write{6,209}
+temp	vector	$tmp31	%read{6,209} %write{6,209}
+temp	float	$tmp32	%read{6,209} %write{6,209}
+temp	float	$tmp33	%read{6,209} %write{6,209}
+temp	float	$tmp34	%read{6,209} %write{6,209}
+temp	float	$tmp35	%read{6,209} %write{6,209}
+temp	float	$tmp36	%read{6,209} %write{6,209}
+temp	float	$tmp37	%read{6,209} %write{6,209}
+temp	int	$tmp38	%read{6,209} %write{6,209}
+temp	float	$tmp39	%read{6,209} %write{6,209}
+temp	float	$tmp40	%read{6,209} %write{6,209}
+const	vector	$const15	0 0.5 -0.25		%read{60,1491} %write{2147483647,-1}
+temp	float	$tmp42	%read{6,209} %write{6,209}
+temp	float	$tmp43	%read{6,209} %write{6,209}
+const	float	$const16	1.5		%read{62,1499} %write{2147483647,-1}
+temp	float	$tmp44	%read{6,209} %write{6,209}
+const	float	$const18	3		%read{64,1612} %write{2147483647,-1}
+temp	float	$tmp45	%read{6,209} %write{6,209}
+temp	float	$tmp46	%read{6,209} %write{6,209}
+temp	float	$tmp47	%read{6,209} %write{6,209}
+temp	float	$tmp48	%read{6,209} %write{6,209}
+temp	float	$tmp49	%read{6,209} %write{6,209}
+const	vector	$const19	0.899999976 0.200000003 1.5		%read{72,1503} %write{2147483647,-1}
+temp	vector	$tmp51	%read{6,209} %write{6,209}
+temp	vector	$tmp52	%read{6,209} %write{6,209}
+temp	float	$tmp53	%read{6,209} %write{6,209}
+temp	vector	$tmp54	%read{6,209} %write{6,209}
+temp	vector	$tmp55	%read{6,209} %write{6,209}
+temp	float	$tmp56	%read{6,209} %write{6,209}
+temp	float	$tmp57	%read{6,209} %write{6,209}
+temp	float	$tmp58	%read{6,209} %write{6,209}
+temp	float	$tmp59	%read{6,209} %write{6,209}
+temp	float	$tmp60	%read{6,209} %write{6,209}
+temp	float	$tmp61	%read{6,209} %write{6,209}
+const	float	$const20	0.0199999996		%read{84,1629} %write{2147483647,-1}
+temp	float	$tmp62	%read{6,209} %write{6,209}
+const	vector	$const21	0.800000012 0.209999993 1.39999998		%read{87,1518} %write{2147483647,-1}
+temp	vector	$tmp64	%read{6,209} %write{6,209}
+temp	vector	$tmp65	%read{6,209} %write{6,209}
+temp	float	$tmp66	%read{6,209} %write{6,209}
+temp	vector	$tmp67	%read{6,209} %write{6,209}
+temp	vector	$tmp68	%read{6,209} %write{6,209}
+temp	float	$tmp69	%read{6,209} %write{6,209}
+temp	float	$tmp70	%read{6,209} %write{6,209}
+temp	float	$tmp71	%read{6,209} %write{6,209}
+temp	float	$tmp72	%read{6,209} %write{6,209}
+temp	float	$tmp73	%read{6,209} %write{6,209}
+temp	float	$tmp74	%read{6,209} %write{6,209}
+temp	float	$tmp75	%read{6,209} %write{6,209}
+temp	float	$tmp76	%read{6,209} %write{6,209}
+temp	vector	$tmp78	%read{6,209} %write{6,209}
+const	vector	$const22	0.800000012 0.100000001 1.39999998		%read{105,1536} %write{2147483647,-1}
+temp	vector	$tmp80	%read{6,209} %write{6,209}
+temp	vector	$tmp81	%read{6,209} %write{6,209}
+temp	float	$tmp82	%read{6,209} %write{6,209}
+temp	vector	$tmp83	%read{6,209} %write{6,209}
+temp	vector	$tmp84	%read{6,209} %write{6,209}
+temp	float	$tmp85	%read{6,209} %write{6,209}
+temp	float	$tmp86	%read{6,209} %write{6,209}
+temp	float	$tmp87	%read{6,209} %write{6,209}
+temp	float	$tmp88	%read{6,209} %write{6,209}
+temp	float	$tmp89	%read{6,209} %write{6,209}
+temp	float	$tmp90	%read{6,209} %write{6,209}
+temp	int	$tmp91	%read{6,209} %write{6,209}
+const	vector	$const23	0 0 -1		%read{123,1554} %write{2147483647,-1}
+temp	float	$tmp93	%read{6,209} %write{6,209}
+const	vector	$const24	3.40282347e+38 0.699999988 0.0500000007		%read{126,1557} %write{2147483647,-1}
+temp	vector	$tmp95	%read{6,209} %write{6,209}
+temp	vector	$tmp96	%read{6,209} %write{6,209}
+temp	float	$tmp97	%read{6,209} %write{6,209}
+temp	vector	$tmp98	%read{6,209} %write{6,209}
+temp	vector	$tmp99	%read{6,209} %write{6,209}
+temp	float	$tmp100	%read{6,209} %write{6,209}
+temp	float	$tmp101	%read{6,209} %write{6,209}
+temp	float	$tmp102	%read{6,209} %write{6,209}
+temp	float	$tmp103	%read{6,209} %write{6,209}
+temp	float	$tmp104	%read{6,209} %write{6,209}
+temp	float	$tmp105	%read{6,209} %write{6,209}
+temp	int	$tmp106	%read{6,209} %write{6,209}
+temp	float	$tmp108	%read{6,209} %write{6,209}
+const	vector	$const25	3.40282347e+38 1 0.00499999989		%read{146,1577} %write{2147483647,-1}
+temp	vector	$tmp110	%read{6,209} %write{6,209}
+temp	vector	$tmp111	%read{6,209} %write{6,209}
+temp	float	$tmp112	%read{6,209} %write{6,209}
+temp	vector	$tmp113	%read{6,209} %write{6,209}
+temp	vector	$tmp114	%read{6,209} %write{6,209}
+temp	float	$tmp115	%read{6,209} %write{6,209}
+temp	float	$tmp116	%read{6,209} %write{6,209}
+temp	float	$tmp117	%read{6,209} %write{6,209}
+temp	float	$tmp118	%read{6,209} %write{6,209}
+temp	float	$tmp119	%read{6,209} %write{6,209}
+temp	float	$tmp120	%read{6,209} %write{6,209}
+temp	int	$tmp121	%read{6,209} %write{6,209}
+const	float	$const26	4		%read{161,1639} %write{2147483647,-1}
+temp	float	$tmp122	%read{6,209} %write{6,209}
+temp	float	$tmp123	%read{6,209} %write{6,209}
+const	vector	$const27	0 0.5 -0.100000001		%read{167,1598} %write{2147483647,-1}
+temp	float	$tmp125	%read{6,209} %write{6,209}
+temp	float	$tmp126	%read{6,209} %write{6,209}
+const	float	$const28	4.5		%read{169,1600} %write{2147483647,-1}
+temp	float	$tmp127	%read{6,209} %write{6,209}
+const	float	$const30	9		%read{171,1604} %write{2147483647,-1}
+temp	float	$tmp128	%read{6,209} %write{6,209}
+temp	float	$tmp129	%read{6,209} %write{6,209}
+temp	float	$tmp130	%read{6,209} %write{6,209}
+temp	float	$tmp131	%read{6,209} %write{6,209}
+temp	float	$tmp132	%read{6,209} %write{6,209}
+temp	float	$tmp133	%read{6,209} %write{6,209}
+temp	float	$tmp134	%read{6,209} %write{6,209}
+temp	float	$tmp135	%read{6,209} %write{6,209}
+temp	float	$tmp136	%read{6,209} %write{6,209}
+temp	float	$tmp137	%read{6,209} %write{6,209}
+temp	float	$tmp138	%read{6,209} %write{6,209}
+temp	float	$tmp139	%read{6,209} %write{6,209}
+const	vector	$const31	0.600000024 0.300000012 0.600000024		%read{186,1617} %write{2147483647,-1}
+temp	vector	$tmp141	%read{6,209} %write{6,209}
+temp	vector	$tmp142	%read{6,209} %write{6,209}
+temp	float	$tmp143	%read{6,209} %write{6,209}
+temp	vector	$tmp144	%read{6,209} %write{6,209}
+temp	vector	$tmp145	%read{6,209} %write{6,209}
+temp	float	$tmp146	%read{6,209} %write{6,209}
+temp	float	$tmp147	%read{6,209} %write{6,209}
+temp	float	$tmp148	%read{6,209} %write{6,209}
+temp	float	$tmp149	%read{6,209} %write{6,209}
+temp	float	$tmp150	%read{6,209} %write{6,209}
+temp	float	$tmp151	%read{6,209} %write{6,209}
+temp	int	$tmp152	%read{6,209} %write{6,209}
+const	float	$const32	5		%read{201,1632} %write{2147483647,-1}
+temp	int	$tmp153	%read{6,209} %write{6,209}
+temp	int	$tmp154	%read{2147483647,-1} %write{6,209}
+temp	int	$tmp155	%read{212,212} %write{211,211}
+const	color	$const33	0.200000003 0.200000003 0.200000003		%read{213,213} %write{2147483647,-1}
+temp	vector	$tmp156	%read{215,215} %write{214,214}
+temp	int	$tmp157	%read{217,217} %write{216,216}
+const	color	$const34	0.0500000007 0.0500000007 0.0500000007		%read{218,218} %write{2147483647,-1}
+temp	int	$tmp158	%read{220,220} %write{219,219}
+const	color	$const35	8 8 8		%read{221,221} %write{2147483647,-1}
+const	float	$const36	2.5		%read{224,224} %write{2147483647,-1}
+temp	int	$tmp159	%read{225,225} %write{224,224}
+const	color	$const37	0.0399999991 0.0199999996 0.00499999989		%read{226,226} %write{2147483647,-1}
+const	float	$const38	3.5		%read{227,227} %write{2147483647,-1}
+temp	int	$tmp160	%read{228,228} %write{227,227}
+const	color	$const39	0.00999999978 0.0399999991 0.0299999993		%read{229,229} %write{2147483647,-1}
+temp	int	$tmp161	%read{231,231} %write{230,230}
+const	color	$const40	0.300000012 0.300000012 0.300000012		%read{232,232} %write{2147483647,-1}
+const	float	$const41	5.5		%read{233,233} %write{2147483647,-1}
+temp	int	$tmp162	%read{234,234} %write{233,233}
+const	color	$const42	0.600000024 0.00999999978 0.00300000003		%read{235,235} %write{2147483647,-1}
+const	string	$const43	"calcNormals"		%read{236,236} %write{2147483647,-1}
+const	float	$const44	9.99999975e-05		%read{237,237} %write{2147483647,-1}
+temp	vector	$tmp163	%read{1418,1418} %write{1417,1417}
+temp	float	$tmp164	%read{630,630} %write{433,433}
+temp	vector	$tmp165	%read{239,239} %write{238,238}
+temp	vector	$tmp166	%read{242,406} %write{239,242}
+temp	float	$tmp168	%read{257,257} %write{256,256}
+temp	vector	$tmp170	%read{246,246} %write{244,244}
+temp	vector	$tmp171	%read{246,246} %write{245,245}
+temp	float	$tmp172	%read{256,256} %write{249,249}
+temp	vector	$tmp173	%read{249,249} %write{248,248}
+temp	vector	$tmp174	%read{248,248} %write{247,247}
+temp	float	$tmp175	%read{256,256} %write{255,255}
+temp	float	$tmp176	%read{255,255} %write{254,254}
+temp	float	$tmp177	%read{254,254} %write{250,250}
+temp	float	$tmp178	%read{254,254} %write{253,253}
+temp	float	$tmp179	%read{253,253} %write{251,251}
+temp	float	$tmp180	%read{253,253} %write{252,252}
+temp	float	$tmp182	%read{266,266} %write{265,265}
+temp	float	$tmp183	%read{260,260} %write{259,259}
+temp	float	$tmp184	%read{262,265} %write{260,260}
+temp	float	$tmp185	%read{264,264} %write{263,263}
+temp	float	$tmp186	%read{263,263} %write{262,262}
+temp	float	$tmp187	%read{265,265} %write{264,264}
+temp	float	$tmp188	%read{267,267} %write{266,266}
+temp	vector	$tmp190	%read{271,271} %write{269,269}
+temp	vector	$tmp191	%read{271,271} %write{270,270}
+temp	float	$tmp192	%read{281,281} %write{274,274}
+temp	vector	$tmp193	%read{274,274} %write{273,273}
+temp	vector	$tmp194	%read{273,273} %write{272,272}
+temp	float	$tmp195	%read{281,281} %write{280,280}
+temp	float	$tmp196	%read{280,280} %write{279,279}
+temp	float	$tmp197	%read{279,279} %write{275,275}
+temp	float	$tmp198	%read{279,279} %write{278,278}
+temp	float	$tmp199	%read{278,278} %write{276,276}
+temp	float	$tmp200	%read{278,278} %write{277,277}
+temp	int	$tmp201	%read{283,283} %write{282,282}
+temp	float	$tmp202	%read{289,289} %write{288,288}
+temp	float	$tmp203	%read{288,288} %write{287,287}
+temp	float	$tmp205	%read{298,298} %write{297,297}
+temp	float	$tmp206	%read{292,292} %write{291,291}
+temp	float	$tmp207	%read{294,297} %write{292,292}
+temp	float	$tmp208	%read{296,296} %write{295,295}
+temp	float	$tmp209	%read{295,295} %write{294,294}
+temp	float	$tmp210	%read{297,297} %write{296,296}
+temp	float	$tmp211	%read{299,299} %write{298,298}
+temp	float	$tmp212	%read{314,314} %write{313,313}
+temp	vector	$tmp214	%read{303,303} %write{301,301}
+temp	vector	$tmp215	%read{303,303} %write{302,302}
+temp	float	$tmp216	%read{313,313} %write{306,306}
+temp	vector	$tmp217	%read{306,306} %write{305,305}
+temp	vector	$tmp218	%read{305,305} %write{304,304}
+temp	float	$tmp219	%read{313,313} %write{312,312}
+temp	float	$tmp220	%read{312,312} %write{311,311}
+temp	float	$tmp221	%read{311,311} %write{307,307}
+temp	float	$tmp222	%read{311,311} %write{310,310}
+temp	float	$tmp223	%read{310,310} %write{308,308}
+temp	float	$tmp224	%read{310,310} %write{309,309}
+temp	float	$tmp225	%read{329,329} %write{328,328}
+temp	vector	$tmp227	%read{318,318} %write{316,316}
+temp	vector	$tmp228	%read{318,318} %write{317,317}
+temp	float	$tmp229	%read{328,328} %write{321,321}
+temp	vector	$tmp230	%read{321,321} %write{320,320}
+temp	vector	$tmp231	%read{320,320} %write{319,319}
+temp	float	$tmp232	%read{328,328} %write{327,327}
+temp	float	$tmp233	%read{327,327} %write{326,326}
+temp	float	$tmp234	%read{326,326} %write{322,322}
+temp	float	$tmp235	%read{326,326} %write{325,325}
+temp	float	$tmp236	%read{325,325} %write{323,323}
+temp	float	$tmp237	%read{325,325} %write{324,324}
+temp	float	$tmp238	%read{331,331} %write{330,330}
+temp	float	$tmp239	%read{347,347} %write{346,346}
+temp	vector	$tmp241	%read{334,334} %write{332,332}
+temp	vector	$tmp243	%read{336,336} %write{334,334}
+temp	vector	$tmp244	%read{336,336} %write{335,335}
+temp	float	$tmp245	%read{346,346} %write{339,339}
+temp	vector	$tmp246	%read{339,339} %write{338,338}
+temp	vector	$tmp247	%read{338,338} %write{337,337}
+temp	float	$tmp248	%read{346,346} %write{345,345}
+temp	float	$tmp249	%read{345,345} %write{344,344}
+temp	float	$tmp250	%read{344,344} %write{340,340}
+temp	float	$tmp251	%read{344,344} %write{343,343}
+temp	float	$tmp252	%read{343,343} %write{341,341}
+temp	float	$tmp253	%read{343,343} %write{342,342}
+temp	int	$tmp254	%read{350,350} %write{349,349}
+temp	float	$tmp256	%read{368,368} %write{367,367}
+temp	vector	$tmp258	%read{357,357} %write{355,355}
+temp	vector	$tmp259	%read{357,357} %write{356,356}
+temp	float	$tmp260	%read{367,367} %write{360,360}
+temp	vector	$tmp261	%read{360,360} %write{359,359}
+temp	vector	$tmp262	%read{359,359} %write{358,358}
+temp	float	$tmp263	%read{367,367} %write{366,366}
+temp	float	$tmp264	%read{366,366} %write{365,365}
+temp	float	$tmp265	%read{365,365} %write{361,361}
+temp	float	$tmp266	%read{365,365} %write{364,364}
+temp	float	$tmp267	%read{364,364} %write{362,362}
+temp	float	$tmp268	%read{364,364} %write{363,363}
+temp	int	$tmp269	%read{370,370} %write{369,369}
+temp	float	$tmp271	%read{388,388} %write{387,387}
+temp	vector	$tmp273	%read{377,377} %write{375,375}
+temp	vector	$tmp274	%read{377,377} %write{376,376}
+temp	float	$tmp275	%read{387,387} %write{380,380}
+temp	vector	$tmp276	%read{380,380} %write{379,379}
+temp	vector	$tmp277	%read{379,379} %write{378,378}
+temp	float	$tmp278	%read{387,387} %write{386,386}
+temp	float	$tmp279	%read{386,386} %write{385,385}
+temp	float	$tmp280	%read{385,385} %write{381,381}
+temp	float	$tmp281	%read{385,385} %write{384,384}
+temp	float	$tmp282	%read{384,384} %write{382,382}
+temp	float	$tmp283	%read{384,384} %write{383,383}
+temp	int	$tmp284	%read{390,390} %write{389,389}
+temp	float	$tmp285	%read{396,396} %write{395,395}
+temp	float	$tmp286	%read{395,395} %write{394,394}
+temp	float	$tmp288	%read{405,405} %write{404,404}
+temp	float	$tmp289	%read{399,399} %write{398,398}
+temp	float	$tmp290	%read{401,404} %write{399,399}
+temp	float	$tmp291	%read{403,403} %write{402,402}
+temp	float	$tmp292	%read{402,402} %write{401,401}
+temp	float	$tmp293	%read{404,404} %write{403,403}
+temp	float	$tmp294	%read{412,412} %write{405,405}
+temp	float	$tmp295	%read{409,409} %write{408,408}
+temp	float	$tmp296	%read{407,407} %write{406,406}
+temp	float	$tmp297	%read{408,408} %write{407,407}
+temp	float	$tmp298	%read{410,410} %write{409,409}
+temp	float	$tmp299	%read{411,411} %write{410,410}
+temp	float	$tmp300	%read{412,412} %write{411,411}
+temp	float	$tmp301	%read{413,413} %write{412,412}
+temp	float	$tmp302	%read{428,428} %write{427,427}
+temp	vector	$tmp304	%read{417,417} %write{415,415}
+temp	vector	$tmp305	%read{417,417} %write{416,416}
+temp	float	$tmp306	%read{427,427} %write{420,420}
+temp	vector	$tmp307	%read{420,420} %write{419,419}
+temp	vector	$tmp308	%read{419,419} %write{418,418}
+temp	float	$tmp309	%read{427,427} %write{426,426}
+temp	float	$tmp310	%read{426,426} %write{425,425}
+temp	float	$tmp311	%read{425,425} %write{421,421}
+temp	float	$tmp312	%read{425,425} %write{424,424}
+temp	float	$tmp313	%read{424,424} %write{422,422}
+temp	float	$tmp314	%read{424,424} %write{423,423}
+temp	int	$tmp315	%read{430,430} %write{429,429}
+temp	float	$tmp316	%read{630,630} %write{629,629}
+temp	vector	$tmp317	%read{435,435} %write{434,434}
+temp	vector	$tmp318	%read{438,602} %write{435,438}
+temp	float	$tmp320	%read{453,453} %write{452,452}
+temp	vector	$tmp322	%read{442,442} %write{440,440}
+temp	vector	$tmp323	%read{442,442} %write{441,441}
+temp	float	$tmp324	%read{452,452} %write{445,445}
+temp	vector	$tmp325	%read{445,445} %write{444,444}
+temp	vector	$tmp326	%read{444,444} %write{443,443}
+temp	float	$tmp327	%read{452,452} %write{451,451}
+temp	float	$tmp328	%read{451,451} %write{450,450}
+temp	float	$tmp329	%read{450,450} %write{446,446}
+temp	float	$tmp330	%read{450,450} %write{449,449}
+temp	float	$tmp331	%read{449,449} %write{447,447}
+temp	float	$tmp332	%read{449,449} %write{448,448}
+temp	float	$tmp334	%read{462,462} %write{461,461}
+temp	float	$tmp335	%read{456,456} %write{455,455}
+temp	float	$tmp336	%read{458,461} %write{456,456}
+temp	float	$tmp337	%read{460,460} %write{459,459}
+temp	float	$tmp338	%read{459,459} %write{458,458}
+temp	float	$tmp339	%read{461,461} %write{460,460}
+temp	float	$tmp340	%read{463,463} %write{462,462}
+temp	vector	$tmp342	%read{467,467} %write{465,465}
+temp	vector	$tmp343	%read{467,467} %write{466,466}
+temp	float	$tmp344	%read{477,477} %write{470,470}
+temp	vector	$tmp345	%read{470,470} %write{469,469}
+temp	vector	$tmp346	%read{469,469} %write{468,468}
+temp	float	$tmp347	%read{477,477} %write{476,476}
+temp	float	$tmp348	%read{476,476} %write{475,475}
+temp	float	$tmp349	%read{475,475} %write{471,471}
+temp	float	$tmp350	%read{475,475} %write{474,474}
+temp	float	$tmp351	%read{474,474} %write{472,472}
+temp	float	$tmp352	%read{474,474} %write{473,473}
+temp	int	$tmp353	%read{479,479} %write{478,478}
+temp	float	$tmp354	%read{485,485} %write{484,484}
+temp	float	$tmp355	%read{484,484} %write{483,483}
+temp	float	$tmp357	%read{494,494} %write{493,493}
+temp	float	$tmp358	%read{488,488} %write{487,487}
+temp	float	$tmp359	%read{490,493} %write{488,488}
+temp	float	$tmp360	%read{492,492} %write{491,491}
+temp	float	$tmp361	%read{491,491} %write{490,490}
+temp	float	$tmp362	%read{493,493} %write{492,492}
+temp	float	$tmp363	%read{495,495} %write{494,494}
+temp	float	$tmp364	%read{510,510} %write{509,509}
+temp	vector	$tmp366	%read{499,499} %write{497,497}
+temp	vector	$tmp367	%read{499,499} %write{498,498}
+temp	float	$tmp368	%read{509,509} %write{502,502}
+temp	vector	$tmp369	%read{502,502} %write{501,501}
+temp	vector	$tmp370	%read{501,501} %write{500,500}
+temp	float	$tmp371	%read{509,509} %write{508,508}
+temp	float	$tmp372	%read{508,508} %write{507,507}
+temp	float	$tmp373	%read{507,507} %write{503,503}
+temp	float	$tmp374	%read{507,507} %write{506,506}
+temp	float	$tmp375	%read{506,506} %write{504,504}
+temp	float	$tmp376	%read{506,506} %write{505,505}
+temp	float	$tmp377	%read{525,525} %write{524,524}
+temp	vector	$tmp379	%read{514,514} %write{512,512}
+temp	vector	$tmp380	%read{514,514} %write{513,513}
+temp	float	$tmp381	%read{524,524} %write{517,517}
+temp	vector	$tmp382	%read{517,517} %write{516,516}
+temp	vector	$tmp383	%read{516,516} %write{515,515}
+temp	float	$tmp384	%read{524,524} %write{523,523}
+temp	float	$tmp385	%read{523,523} %write{522,522}
+temp	float	$tmp386	%read{522,522} %write{518,518}
+temp	float	$tmp387	%read{522,522} %write{521,521}
+temp	float	$tmp388	%read{521,521} %write{519,519}
+temp	float	$tmp389	%read{521,521} %write{520,520}
+temp	float	$tmp390	%read{527,527} %write{526,526}
+temp	float	$tmp391	%read{543,543} %write{542,542}
+temp	vector	$tmp393	%read{530,530} %write{528,528}
+temp	vector	$tmp395	%read{532,532} %write{530,530}
+temp	vector	$tmp396	%read{532,532} %write{531,531}
+temp	float	$tmp397	%read{542,542} %write{535,535}
+temp	vector	$tmp398	%read{535,535} %write{534,534}
+temp	vector	$tmp399	%read{534,534} %write{533,533}
+temp	float	$tmp400	%read{542,542} %write{541,541}
+temp	float	$tmp401	%read{541,541} %write{540,540}
+temp	float	$tmp402	%read{540,540} %write{536,536}
+temp	float	$tmp403	%read{540,540} %write{539,539}
+temp	float	$tmp404	%read{539,539} %write{537,537}
+temp	float	$tmp405	%read{539,539} %write{538,538}
+temp	int	$tmp406	%read{546,546} %write{545,545}
+temp	float	$tmp408	%read{564,564} %write{563,563}
+temp	vector	$tmp410	%read{553,553} %write{551,551}
+temp	vector	$tmp411	%read{553,553} %write{552,552}
+temp	float	$tmp412	%read{563,563} %write{556,556}
+temp	vector	$tmp413	%read{556,556} %write{555,555}
+temp	vector	$tmp414	%read{555,555} %write{554,554}
+temp	float	$tmp415	%read{563,563} %write{562,562}
+temp	float	$tmp416	%read{562,562} %write{561,561}
+temp	float	$tmp417	%read{561,561} %write{557,557}
+temp	float	$tmp418	%read{561,561} %write{560,560}
+temp	float	$tmp419	%read{560,560} %write{558,558}
+temp	float	$tmp420	%read{560,560} %write{559,559}
+temp	int	$tmp421	%read{566,566} %write{565,565}
+temp	float	$tmp423	%read{584,584} %write{583,583}
+temp	vector	$tmp425	%read{573,573} %write{571,571}
+temp	vector	$tmp426	%read{573,573} %write{572,572}
+temp	float	$tmp427	%read{583,583} %write{576,576}
+temp	vector	$tmp428	%read{576,576} %write{575,575}
+temp	vector	$tmp429	%read{575,575} %write{574,574}
+temp	float	$tmp430	%read{583,583} %write{582,582}
+temp	float	$tmp431	%read{582,582} %write{581,581}
+temp	float	$tmp432	%read{581,581} %write{577,577}
+temp	float	$tmp433	%read{581,581} %write{580,580}
+temp	float	$tmp434	%read{580,580} %write{578,578}
+temp	float	$tmp435	%read{580,580} %write{579,579}
+temp	int	$tmp436	%read{586,586} %write{585,585}
+temp	float	$tmp437	%read{592,592} %write{591,591}
+temp	float	$tmp438	%read{591,591} %write{590,590}
+temp	float	$tmp440	%read{601,601} %write{600,600}
+temp	float	$tmp441	%read{595,595} %write{594,594}
+temp	float	$tmp442	%read{597,600} %write{595,595}
+temp	float	$tmp443	%read{599,599} %write{598,598}
+temp	float	$tmp444	%read{598,598} %write{597,597}
+temp	float	$tmp445	%read{600,600} %write{599,599}
+temp	float	$tmp446	%read{608,608} %write{601,601}
+temp	float	$tmp447	%read{605,605} %write{604,604}
+temp	float	$tmp448	%read{603,603} %write{602,602}
+temp	float	$tmp449	%read{604,604} %write{603,603}
+temp	float	$tmp450	%read{606,606} %write{605,605}
+temp	float	$tmp451	%read{607,607} %write{606,606}
+temp	float	$tmp452	%read{608,608} %write{607,607}
+temp	float	$tmp453	%read{609,609} %write{608,608}
+temp	float	$tmp454	%read{624,624} %write{623,623}
+temp	vector	$tmp456	%read{613,613} %write{611,611}
+temp	vector	$tmp457	%read{613,613} %write{612,612}
+temp	float	$tmp458	%read{623,623} %write{616,616}
+temp	vector	$tmp459	%read{616,616} %write{615,615}
+temp	vector	$tmp460	%read{615,615} %write{614,614}
+temp	float	$tmp461	%read{623,623} %write{622,622}
+temp	float	$tmp462	%read{622,622} %write{621,621}
+temp	float	$tmp463	%read{621,621} %write{617,617}
+temp	float	$tmp464	%read{621,621} %write{620,620}
+temp	float	$tmp465	%read{620,620} %write{618,618}
+temp	float	$tmp466	%read{620,620} %write{619,619}
+temp	int	$tmp467	%read{626,626} %write{625,625}
+temp	float	$tmp468	%read{1417,1417} %write{630,630}
+temp	float	$tmp469	%read{1023,1023} %write{826,826}
+temp	vector	$tmp470	%read{632,632} %write{631,631}
+temp	vector	$tmp471	%read{635,799} %write{632,635}
+temp	float	$tmp473	%read{650,650} %write{649,649}
+temp	vector	$tmp475	%read{639,639} %write{637,637}
+temp	vector	$tmp476	%read{639,639} %write{638,638}
+temp	float	$tmp477	%read{649,649} %write{642,642}
+temp	vector	$tmp478	%read{642,642} %write{641,641}
+temp	vector	$tmp479	%read{641,641} %write{640,640}
+temp	float	$tmp480	%read{649,649} %write{648,648}
+temp	float	$tmp481	%read{648,648} %write{647,647}
+temp	float	$tmp482	%read{647,647} %write{643,643}
+temp	float	$tmp483	%read{647,647} %write{646,646}
+temp	float	$tmp484	%read{646,646} %write{644,644}
+temp	float	$tmp485	%read{646,646} %write{645,645}
+temp	float	$tmp487	%read{659,659} %write{658,658}
+temp	float	$tmp488	%read{653,653} %write{652,652}
+temp	float	$tmp489	%read{655,658} %write{653,653}
+temp	float	$tmp490	%read{657,657} %write{656,656}
+temp	float	$tmp491	%read{656,656} %write{655,655}
+temp	float	$tmp492	%read{658,658} %write{657,657}
+temp	float	$tmp493	%read{660,660} %write{659,659}
+temp	vector	$tmp495	%read{664,664} %write{662,662}
+temp	vector	$tmp496	%read{664,664} %write{663,663}
+temp	float	$tmp497	%read{674,674} %write{667,667}
+temp	vector	$tmp498	%read{667,667} %write{666,666}
+temp	vector	$tmp499	%read{666,666} %write{665,665}
+temp	float	$tmp500	%read{674,674} %write{673,673}
+temp	float	$tmp501	%read{673,673} %write{672,672}
+temp	float	$tmp502	%read{672,672} %write{668,668}
+temp	float	$tmp503	%read{672,672} %write{671,671}
+temp	float	$tmp504	%read{671,671} %write{669,669}
+temp	float	$tmp505	%read{671,671} %write{670,670}
+temp	int	$tmp506	%read{676,676} %write{675,675}
+temp	float	$tmp507	%read{682,682} %write{681,681}
+temp	float	$tmp508	%read{681,681} %write{680,680}
+temp	float	$tmp510	%read{691,691} %write{690,690}
+temp	float	$tmp511	%read{685,685} %write{684,684}
+temp	float	$tmp512	%read{687,690} %write{685,685}
+temp	float	$tmp513	%read{689,689} %write{688,688}
+temp	float	$tmp514	%read{688,688} %write{687,687}
+temp	float	$tmp515	%read{690,690} %write{689,689}
+temp	float	$tmp516	%read{692,692} %write{691,691}
+temp	float	$tmp517	%read{707,707} %write{706,706}
+temp	vector	$tmp519	%read{696,696} %write{694,694}
+temp	vector	$tmp520	%read{696,696} %write{695,695}
+temp	float	$tmp521	%read{706,706} %write{699,699}
+temp	vector	$tmp522	%read{699,699} %write{698,698}
+temp	vector	$tmp523	%read{698,698} %write{697,697}
+temp	float	$tmp524	%read{706,706} %write{705,705}
+temp	float	$tmp525	%read{705,705} %write{704,704}
+temp	float	$tmp526	%read{704,704} %write{700,700}
+temp	float	$tmp527	%read{704,704} %write{703,703}
+temp	float	$tmp528	%read{703,703} %write{701,701}
+temp	float	$tmp529	%read{703,703} %write{702,702}
+temp	float	$tmp530	%read{722,722} %write{721,721}
+temp	vector	$tmp532	%read{711,711} %write{709,709}
+temp	vector	$tmp533	%read{711,711} %write{710,710}
+temp	float	$tmp534	%read{721,721} %write{714,714}
+temp	vector	$tmp535	%read{714,714} %write{713,713}
+temp	vector	$tmp536	%read{713,713} %write{712,712}
+temp	float	$tmp537	%read{721,721} %write{720,720}
+temp	float	$tmp538	%read{720,720} %write{719,719}
+temp	float	$tmp539	%read{719,719} %write{715,715}
+temp	float	$tmp540	%read{719,719} %write{718,718}
+temp	float	$tmp541	%read{718,718} %write{716,716}
+temp	float	$tmp542	%read{718,718} %write{717,717}
+temp	float	$tmp543	%read{724,724} %write{723,723}
+temp	float	$tmp544	%read{740,740} %write{739,739}
+temp	vector	$tmp546	%read{727,727} %write{725,725}
+temp	vector	$tmp548	%read{729,729} %write{727,727}
+temp	vector	$tmp549	%read{729,729} %write{728,728}
+temp	float	$tmp550	%read{739,739} %write{732,732}
+temp	vector	$tmp551	%read{732,732} %write{731,731}
+temp	vector	$tmp552	%read{731,731} %write{730,730}
+temp	float	$tmp553	%read{739,739} %write{738,738}
+temp	float	$tmp554	%read{738,738} %write{737,737}
+temp	float	$tmp555	%read{737,737} %write{733,733}
+temp	float	$tmp556	%read{737,737} %write{736,736}
+temp	float	$tmp557	%read{736,736} %write{734,734}
+temp	float	$tmp558	%read{736,736} %write{735,735}
+temp	int	$tmp559	%read{743,743} %write{742,742}
+temp	float	$tmp561	%read{761,761} %write{760,760}
+temp	vector	$tmp563	%read{750,750} %write{748,748}
+temp	vector	$tmp564	%read{750,750} %write{749,749}
+temp	float	$tmp565	%read{760,760} %write{753,753}
+temp	vector	$tmp566	%read{753,753} %write{752,752}
+temp	vector	$tmp567	%read{752,752} %write{751,751}
+temp	float	$tmp568	%read{760,760} %write{759,759}
+temp	float	$tmp569	%read{759,759} %write{758,758}
+temp	float	$tmp570	%read{758,758} %write{754,754}
+temp	float	$tmp571	%read{758,758} %write{757,757}
+temp	float	$tmp572	%read{757,757} %write{755,755}
+temp	float	$tmp573	%read{757,757} %write{756,756}
+temp	int	$tmp574	%read{763,763} %write{762,762}
+temp	float	$tmp576	%read{781,781} %write{780,780}
+temp	vector	$tmp578	%read{770,770} %write{768,768}
+temp	vector	$tmp579	%read{770,770} %write{769,769}
+temp	float	$tmp580	%read{780,780} %write{773,773}
+temp	vector	$tmp581	%read{773,773} %write{772,772}
+temp	vector	$tmp582	%read{772,772} %write{771,771}
+temp	float	$tmp583	%read{780,780} %write{779,779}
+temp	float	$tmp584	%read{779,779} %write{778,778}
+temp	float	$tmp585	%read{778,778} %write{774,774}
+temp	float	$tmp586	%read{778,778} %write{777,777}
+temp	float	$tmp587	%read{777,777} %write{775,775}
+temp	float	$tmp588	%read{777,777} %write{776,776}
+temp	int	$tmp589	%read{783,783} %write{782,782}
+temp	float	$tmp590	%read{789,789} %write{788,788}
+temp	float	$tmp591	%read{788,788} %write{787,787}
+temp	float	$tmp593	%read{798,798} %write{797,797}
+temp	float	$tmp594	%read{792,792} %write{791,791}
+temp	float	$tmp595	%read{794,797} %write{792,792}
+temp	float	$tmp596	%read{796,796} %write{795,795}
+temp	float	$tmp597	%read{795,795} %write{794,794}
+temp	float	$tmp598	%read{797,797} %write{796,796}
+temp	float	$tmp599	%read{805,805} %write{798,798}
+temp	float	$tmp600	%read{802,802} %write{801,801}
+temp	float	$tmp601	%read{800,800} %write{799,799}
+temp	float	$tmp602	%read{801,801} %write{800,800}
+temp	float	$tmp603	%read{803,803} %write{802,802}
+temp	float	$tmp604	%read{804,804} %write{803,803}
+temp	float	$tmp605	%read{805,805} %write{804,804}
+temp	float	$tmp606	%read{806,806} %write{805,805}
+temp	float	$tmp607	%read{821,821} %write{820,820}
+temp	vector	$tmp609	%read{810,810} %write{808,808}
+temp	vector	$tmp610	%read{810,810} %write{809,809}
+temp	float	$tmp611	%read{820,820} %write{813,813}
+temp	vector	$tmp612	%read{813,813} %write{812,812}
+temp	vector	$tmp613	%read{812,812} %write{811,811}
+temp	float	$tmp614	%read{820,820} %write{819,819}
+temp	float	$tmp615	%read{819,819} %write{818,818}
+temp	float	$tmp616	%read{818,818} %write{814,814}
+temp	float	$tmp617	%read{818,818} %write{817,817}
+temp	float	$tmp618	%read{817,817} %write{815,815}
+temp	float	$tmp619	%read{817,817} %write{816,816}
+temp	int	$tmp620	%read{823,823} %write{822,822}
+temp	float	$tmp621	%read{1023,1023} %write{1022,1022}
+temp	vector	$tmp622	%read{828,828} %write{827,827}
+temp	vector	$tmp623	%read{831,995} %write{828,831}
+temp	float	$tmp625	%read{846,846} %write{845,845}
+temp	vector	$tmp627	%read{835,835} %write{833,833}
+temp	vector	$tmp628	%read{835,835} %write{834,834}
+temp	float	$tmp629	%read{845,845} %write{838,838}
+temp	vector	$tmp630	%read{838,838} %write{837,837}
+temp	vector	$tmp631	%read{837,837} %write{836,836}
+temp	float	$tmp632	%read{845,845} %write{844,844}
+temp	float	$tmp633	%read{844,844} %write{843,843}
+temp	float	$tmp634	%read{843,843} %write{839,839}
+temp	float	$tmp635	%read{843,843} %write{842,842}
+temp	float	$tmp636	%read{842,842} %write{840,840}
+temp	float	$tmp637	%read{842,842} %write{841,841}
+temp	float	$tmp639	%read{855,855} %write{854,854}
+temp	float	$tmp640	%read{849,849} %write{848,848}
+temp	float	$tmp641	%read{851,854} %write{849,849}
+temp	float	$tmp642	%read{853,853} %write{852,852}
+temp	float	$tmp643	%read{852,852} %write{851,851}
+temp	float	$tmp644	%read{854,854} %write{853,853}
+temp	float	$tmp645	%read{856,856} %write{855,855}
+temp	vector	$tmp647	%read{860,860} %write{858,858}
+temp	vector	$tmp648	%read{860,860} %write{859,859}
+temp	float	$tmp649	%read{870,870} %write{863,863}
+temp	vector	$tmp650	%read{863,863} %write{862,862}
+temp	vector	$tmp651	%read{862,862} %write{861,861}
+temp	float	$tmp652	%read{870,870} %write{869,869}
+temp	float	$tmp653	%read{869,869} %write{868,868}
+temp	float	$tmp654	%read{868,868} %write{864,864}
+temp	float	$tmp655	%read{868,868} %write{867,867}
+temp	float	$tmp656	%read{867,867} %write{865,865}
+temp	float	$tmp657	%read{867,867} %write{866,866}
+temp	int	$tmp658	%read{872,872} %write{871,871}
+temp	float	$tmp659	%read{878,878} %write{877,877}
+temp	float	$tmp660	%read{877,877} %write{876,876}
+temp	float	$tmp662	%read{887,887} %write{886,886}
+temp	float	$tmp663	%read{881,881} %write{880,880}
+temp	float	$tmp664	%read{883,886} %write{881,881}
+temp	float	$tmp665	%read{885,885} %write{884,884}
+temp	float	$tmp666	%read{884,884} %write{883,883}
+temp	float	$tmp667	%read{886,886} %write{885,885}
+temp	float	$tmp668	%read{888,888} %write{887,887}
+temp	float	$tmp669	%read{903,903} %write{902,902}
+temp	vector	$tmp671	%read{892,892} %write{890,890}
+temp	vector	$tmp672	%read{892,892} %write{891,891}
+temp	float	$tmp673	%read{902,902} %write{895,895}
+temp	vector	$tmp674	%read{895,895} %write{894,894}
+temp	vector	$tmp675	%read{894,894} %write{893,893}
+temp	float	$tmp676	%read{902,902} %write{901,901}
+temp	float	$tmp677	%read{901,901} %write{900,900}
+temp	float	$tmp678	%read{900,900} %write{896,896}
+temp	float	$tmp679	%read{900,900} %write{899,899}
+temp	float	$tmp680	%read{899,899} %write{897,897}
+temp	float	$tmp681	%read{899,899} %write{898,898}
+temp	float	$tmp682	%read{918,918} %write{917,917}
+temp	vector	$tmp684	%read{907,907} %write{905,905}
+temp	vector	$tmp685	%read{907,907} %write{906,906}
+temp	float	$tmp686	%read{917,917} %write{910,910}
+temp	vector	$tmp687	%read{910,910} %write{909,909}
+temp	vector	$tmp688	%read{909,909} %write{908,908}
+temp	float	$tmp689	%read{917,917} %write{916,916}
+temp	float	$tmp690	%read{916,916} %write{915,915}
+temp	float	$tmp691	%read{915,915} %write{911,911}
+temp	float	$tmp692	%read{915,915} %write{914,914}
+temp	float	$tmp693	%read{914,914} %write{912,912}
+temp	float	$tmp694	%read{914,914} %write{913,913}
+temp	float	$tmp695	%read{920,920} %write{919,919}
+temp	float	$tmp696	%read{936,936} %write{935,935}
+temp	vector	$tmp698	%read{923,923} %write{921,921}
+temp	vector	$tmp700	%read{925,925} %write{923,923}
+temp	vector	$tmp701	%read{925,925} %write{924,924}
+temp	float	$tmp702	%read{935,935} %write{928,928}
+temp	vector	$tmp703	%read{928,928} %write{927,927}
+temp	vector	$tmp704	%read{927,927} %write{926,926}
+temp	float	$tmp705	%read{935,935} %write{934,934}
+temp	float	$tmp706	%read{934,934} %write{933,933}
+temp	float	$tmp707	%read{933,933} %write{929,929}
+temp	float	$tmp708	%read{933,933} %write{932,932}
+temp	float	$tmp709	%read{932,932} %write{930,930}
+temp	float	$tmp710	%read{932,932} %write{931,931}
+temp	int	$tmp711	%read{939,939} %write{938,938}
+temp	float	$tmp713	%read{957,957} %write{956,956}
+temp	vector	$tmp715	%read{946,946} %write{944,944}
+temp	vector	$tmp716	%read{946,946} %write{945,945}
+temp	float	$tmp717	%read{956,956} %write{949,949}
+temp	vector	$tmp718	%read{949,949} %write{948,948}
+temp	vector	$tmp719	%read{948,948} %write{947,947}
+temp	float	$tmp720	%read{956,956} %write{955,955}
+temp	float	$tmp721	%read{955,955} %write{954,954}
+temp	float	$tmp722	%read{954,954} %write{950,950}
+temp	float	$tmp723	%read{954,954} %write{953,953}
+temp	float	$tmp724	%read{953,953} %write{951,951}
+temp	float	$tmp725	%read{953,953} %write{952,952}
+temp	int	$tmp726	%read{959,959} %write{958,958}
+temp	float	$tmp728	%read{977,977} %write{976,976}
+temp	vector	$tmp730	%read{966,966} %write{964,964}
+temp	vector	$tmp731	%read{966,966} %write{965,965}
+temp	float	$tmp732	%read{976,976} %write{969,969}
+temp	vector	$tmp733	%read{969,969} %write{968,968}
+temp	vector	$tmp734	%read{968,968} %write{967,967}
+temp	float	$tmp735	%read{976,976} %write{975,975}
+temp	float	$tmp736	%read{975,975} %write{974,974}
+temp	float	$tmp737	%read{974,974} %write{970,970}
+temp	float	$tmp738	%read{974,974} %write{973,973}
+temp	float	$tmp739	%read{973,973} %write{971,971}
+temp	float	$tmp740	%read{973,973} %write{972,972}
+temp	int	$tmp741	%read{979,979} %write{978,978}
+temp	float	$tmp742	%read{985,985} %write{984,984}
+temp	float	$tmp743	%read{984,984} %write{983,983}
+temp	float	$tmp745	%read{994,994} %write{993,993}
+temp	float	$tmp746	%read{988,988} %write{987,987}
+temp	float	$tmp747	%read{990,993} %write{988,988}
+temp	float	$tmp748	%read{992,992} %write{991,991}
+temp	float	$tmp749	%read{991,991} %write{990,990}
+temp	float	$tmp750	%read{993,993} %write{992,992}
+temp	float	$tmp751	%read{1001,1001} %write{994,994}
+temp	float	$tmp752	%read{998,998} %write{997,997}
+temp	float	$tmp753	%read{996,996} %write{995,995}
+temp	float	$tmp754	%read{997,997} %write{996,996}
+temp	float	$tmp755	%read{999,999} %write{998,998}
+temp	float	$tmp756	%read{1000,1000} %write{999,999}
+temp	float	$tmp757	%read{1001,1001} %write{1000,1000}
+temp	float	$tmp758	%read{1002,1002} %write{1001,1001}
+temp	float	$tmp759	%read{1017,1017} %write{1016,1016}
+temp	vector	$tmp761	%read{1006,1006} %write{1004,1004}
+temp	vector	$tmp762	%read{1006,1006} %write{1005,1005}
+temp	float	$tmp763	%read{1016,1016} %write{1009,1009}
+temp	vector	$tmp764	%read{1009,1009} %write{1008,1008}
+temp	vector	$tmp765	%read{1008,1008} %write{1007,1007}
+temp	float	$tmp766	%read{1016,1016} %write{1015,1015}
+temp	float	$tmp767	%read{1015,1015} %write{1014,1014}
+temp	float	$tmp768	%read{1014,1014} %write{1010,1010}
+temp	float	$tmp769	%read{1014,1014} %write{1013,1013}
+temp	float	$tmp770	%read{1013,1013} %write{1011,1011}
+temp	float	$tmp771	%read{1013,1013} %write{1012,1012}
+temp	int	$tmp772	%read{1019,1019} %write{1018,1018}
+temp	float	$tmp773	%read{1417,1417} %write{1023,1023}
+temp	float	$tmp774	%read{1416,1416} %write{1219,1219}
+temp	vector	$tmp775	%read{1025,1025} %write{1024,1024}
+temp	vector	$tmp776	%read{1028,1192} %write{1025,1028}
+temp	float	$tmp778	%read{1043,1043} %write{1042,1042}
+temp	vector	$tmp780	%read{1032,1032} %write{1030,1030}
+temp	vector	$tmp781	%read{1032,1032} %write{1031,1031}
+temp	float	$tmp782	%read{1042,1042} %write{1035,1035}
+temp	vector	$tmp783	%read{1035,1035} %write{1034,1034}
+temp	vector	$tmp784	%read{1034,1034} %write{1033,1033}
+temp	float	$tmp785	%read{1042,1042} %write{1041,1041}
+temp	float	$tmp786	%read{1041,1041} %write{1040,1040}
+temp	float	$tmp787	%read{1040,1040} %write{1036,1036}
+temp	float	$tmp788	%read{1040,1040} %write{1039,1039}
+temp	float	$tmp789	%read{1039,1039} %write{1037,1037}
+temp	float	$tmp790	%read{1039,1039} %write{1038,1038}
+temp	float	$tmp792	%read{1052,1052} %write{1051,1051}
+temp	float	$tmp793	%read{1046,1046} %write{1045,1045}
+temp	float	$tmp794	%read{1048,1051} %write{1046,1046}
+temp	float	$tmp795	%read{1050,1050} %write{1049,1049}
+temp	float	$tmp796	%read{1049,1049} %write{1048,1048}
+temp	float	$tmp797	%read{1051,1051} %write{1050,1050}
+temp	float	$tmp798	%read{1053,1053} %write{1052,1052}
+temp	vector	$tmp800	%read{1057,1057} %write{1055,1055}
+temp	vector	$tmp801	%read{1057,1057} %write{1056,1056}
+temp	float	$tmp802	%read{1067,1067} %write{1060,1060}
+temp	vector	$tmp803	%read{1060,1060} %write{1059,1059}
+temp	vector	$tmp804	%read{1059,1059} %write{1058,1058}
+temp	float	$tmp805	%read{1067,1067} %write{1066,1066}
+temp	float	$tmp806	%read{1066,1066} %write{1065,1065}
+temp	float	$tmp807	%read{1065,1065} %write{1061,1061}
+temp	float	$tmp808	%read{1065,1065} %write{1064,1064}
+temp	float	$tmp809	%read{1064,1064} %write{1062,1062}
+temp	float	$tmp810	%read{1064,1064} %write{1063,1063}
+temp	int	$tmp811	%read{1069,1069} %write{1068,1068}
+temp	float	$tmp812	%read{1075,1075} %write{1074,1074}
+temp	float	$tmp813	%read{1074,1074} %write{1073,1073}
+temp	float	$tmp815	%read{1084,1084} %write{1083,1083}
+temp	float	$tmp816	%read{1078,1078} %write{1077,1077}
+temp	float	$tmp817	%read{1080,1083} %write{1078,1078}
+temp	float	$tmp818	%read{1082,1082} %write{1081,1081}
+temp	float	$tmp819	%read{1081,1081} %write{1080,1080}
+temp	float	$tmp820	%read{1083,1083} %write{1082,1082}
+temp	float	$tmp821	%read{1085,1085} %write{1084,1084}
+temp	float	$tmp822	%read{1100,1100} %write{1099,1099}
+temp	vector	$tmp824	%read{1089,1089} %write{1087,1087}
+temp	vector	$tmp825	%read{1089,1089} %write{1088,1088}
+temp	float	$tmp826	%read{1099,1099} %write{1092,1092}
+temp	vector	$tmp827	%read{1092,1092} %write{1091,1091}
+temp	vector	$tmp828	%read{1091,1091} %write{1090,1090}
+temp	float	$tmp829	%read{1099,1099} %write{1098,1098}
+temp	float	$tmp830	%read{1098,1098} %write{1097,1097}
+temp	float	$tmp831	%read{1097,1097} %write{1093,1093}
+temp	float	$tmp832	%read{1097,1097} %write{1096,1096}
+temp	float	$tmp833	%read{1096,1096} %write{1094,1094}
+temp	float	$tmp834	%read{1096,1096} %write{1095,1095}
+temp	float	$tmp835	%read{1115,1115} %write{1114,1114}
+temp	vector	$tmp837	%read{1104,1104} %write{1102,1102}
+temp	vector	$tmp838	%read{1104,1104} %write{1103,1103}
+temp	float	$tmp839	%read{1114,1114} %write{1107,1107}
+temp	vector	$tmp840	%read{1107,1107} %write{1106,1106}
+temp	vector	$tmp841	%read{1106,1106} %write{1105,1105}
+temp	float	$tmp842	%read{1114,1114} %write{1113,1113}
+temp	float	$tmp843	%read{1113,1113} %write{1112,1112}
+temp	float	$tmp844	%read{1112,1112} %write{1108,1108}
+temp	float	$tmp845	%read{1112,1112} %write{1111,1111}
+temp	float	$tmp846	%read{1111,1111} %write{1109,1109}
+temp	float	$tmp847	%read{1111,1111} %write{1110,1110}
+temp	float	$tmp848	%read{1117,1117} %write{1116,1116}
+temp	float	$tmp849	%read{1133,1133} %write{1132,1132}
+temp	vector	$tmp851	%read{1120,1120} %write{1118,1118}
+temp	vector	$tmp853	%read{1122,1122} %write{1120,1120}
+temp	vector	$tmp854	%read{1122,1122} %write{1121,1121}
+temp	float	$tmp855	%read{1132,1132} %write{1125,1125}
+temp	vector	$tmp856	%read{1125,1125} %write{1124,1124}
+temp	vector	$tmp857	%read{1124,1124} %write{1123,1123}
+temp	float	$tmp858	%read{1132,1132} %write{1131,1131}
+temp	float	$tmp859	%read{1131,1131} %write{1130,1130}
+temp	float	$tmp860	%read{1130,1130} %write{1126,1126}
+temp	float	$tmp861	%read{1130,1130} %write{1129,1129}
+temp	float	$tmp862	%read{1129,1129} %write{1127,1127}
+temp	float	$tmp863	%read{1129,1129} %write{1128,1128}
+temp	int	$tmp864	%read{1136,1136} %write{1135,1135}
+temp	float	$tmp866	%read{1154,1154} %write{1153,1153}
+temp	vector	$tmp868	%read{1143,1143} %write{1141,1141}
+temp	vector	$tmp869	%read{1143,1143} %write{1142,1142}
+temp	float	$tmp870	%read{1153,1153} %write{1146,1146}
+temp	vector	$tmp871	%read{1146,1146} %write{1145,1145}
+temp	vector	$tmp872	%read{1145,1145} %write{1144,1144}
+temp	float	$tmp873	%read{1153,1153} %write{1152,1152}
+temp	float	$tmp874	%read{1152,1152} %write{1151,1151}
+temp	float	$tmp875	%read{1151,1151} %write{1147,1147}
+temp	float	$tmp876	%read{1151,1151} %write{1150,1150}
+temp	float	$tmp877	%read{1150,1150} %write{1148,1148}
+temp	float	$tmp878	%read{1150,1150} %write{1149,1149}
+temp	int	$tmp879	%read{1156,1156} %write{1155,1155}
+temp	float	$tmp881	%read{1174,1174} %write{1173,1173}
+temp	vector	$tmp883	%read{1163,1163} %write{1161,1161}
+temp	vector	$tmp884	%read{1163,1163} %write{1162,1162}
+temp	float	$tmp885	%read{1173,1173} %write{1166,1166}
+temp	vector	$tmp886	%read{1166,1166} %write{1165,1165}
+temp	vector	$tmp887	%read{1165,1165} %write{1164,1164}
+temp	float	$tmp888	%read{1173,1173} %write{1172,1172}
+temp	float	$tmp889	%read{1172,1172} %write{1171,1171}
+temp	float	$tmp890	%read{1171,1171} %write{1167,1167}
+temp	float	$tmp891	%read{1171,1171} %write{1170,1170}
+temp	float	$tmp892	%read{1170,1170} %write{1168,1168}
+temp	float	$tmp893	%read{1170,1170} %write{1169,1169}
+temp	int	$tmp894	%read{1176,1176} %write{1175,1175}
+temp	float	$tmp895	%read{1182,1182} %write{1181,1181}
+temp	float	$tmp896	%read{1181,1181} %write{1180,1180}
+temp	float	$tmp898	%read{1191,1191} %write{1190,1190}
+temp	float	$tmp899	%read{1185,1185} %write{1184,1184}
+temp	float	$tmp900	%read{1187,1190} %write{1185,1185}
+temp	float	$tmp901	%read{1189,1189} %write{1188,1188}
+temp	float	$tmp902	%read{1188,1188} %write{1187,1187}
+temp	float	$tmp903	%read{1190,1190} %write{1189,1189}
+temp	float	$tmp904	%read{1198,1198} %write{1191,1191}
+temp	float	$tmp905	%read{1195,1195} %write{1194,1194}
+temp	float	$tmp906	%read{1193,1193} %write{1192,1192}
+temp	float	$tmp907	%read{1194,1194} %write{1193,1193}
+temp	float	$tmp908	%read{1196,1196} %write{1195,1195}
+temp	float	$tmp909	%read{1197,1197} %write{1196,1196}
+temp	float	$tmp910	%read{1198,1198} %write{1197,1197}
+temp	float	$tmp911	%read{1199,1199} %write{1198,1198}
+temp	float	$tmp912	%read{1214,1214} %write{1213,1213}
+temp	vector	$tmp914	%read{1203,1203} %write{1201,1201}
+temp	vector	$tmp915	%read{1203,1203} %write{1202,1202}
+temp	float	$tmp916	%read{1213,1213} %write{1206,1206}
+temp	vector	$tmp917	%read{1206,1206} %write{1205,1205}
+temp	vector	$tmp918	%read{1205,1205} %write{1204,1204}
+temp	float	$tmp919	%read{1213,1213} %write{1212,1212}
+temp	float	$tmp920	%read{1212,1212} %write{1211,1211}
+temp	float	$tmp921	%read{1211,1211} %write{1207,1207}
+temp	float	$tmp922	%read{1211,1211} %write{1210,1210}
+temp	float	$tmp923	%read{1210,1210} %write{1208,1208}
+temp	float	$tmp924	%read{1210,1210} %write{1209,1209}
+temp	int	$tmp925	%read{1216,1216} %write{1215,1215}
+temp	float	$tmp926	%read{1416,1416} %write{1415,1415}
+temp	vector	$tmp927	%read{1221,1221} %write{1220,1220}
+temp	vector	$tmp928	%read{1224,1388} %write{1221,1224}
+temp	float	$tmp930	%read{1239,1239} %write{1238,1238}
+temp	vector	$tmp932	%read{1228,1228} %write{1226,1226}
+temp	vector	$tmp933	%read{1228,1228} %write{1227,1227}
+temp	float	$tmp934	%read{1238,1238} %write{1231,1231}
+temp	vector	$tmp935	%read{1231,1231} %write{1230,1230}
+temp	vector	$tmp936	%read{1230,1230} %write{1229,1229}
+temp	float	$tmp937	%read{1238,1238} %write{1237,1237}
+temp	float	$tmp938	%read{1237,1237} %write{1236,1236}
+temp	float	$tmp939	%read{1236,1236} %write{1232,1232}
+temp	float	$tmp940	%read{1236,1236} %write{1235,1235}
+temp	float	$tmp941	%read{1235,1235} %write{1233,1233}
+temp	float	$tmp942	%read{1235,1235} %write{1234,1234}
+temp	float	$tmp944	%read{1248,1248} %write{1247,1247}
+temp	float	$tmp945	%read{1242,1242} %write{1241,1241}
+temp	float	$tmp946	%read{1244,1247} %write{1242,1242}
+temp	float	$tmp947	%read{1246,1246} %write{1245,1245}
+temp	float	$tmp948	%read{1245,1245} %write{1244,1244}
+temp	float	$tmp949	%read{1247,1247} %write{1246,1246}
+temp	float	$tmp950	%read{1249,1249} %write{1248,1248}
+temp	vector	$tmp952	%read{1253,1253} %write{1251,1251}
+temp	vector	$tmp953	%read{1253,1253} %write{1252,1252}
+temp	float	$tmp954	%read{1263,1263} %write{1256,1256}
+temp	vector	$tmp955	%read{1256,1256} %write{1255,1255}
+temp	vector	$tmp956	%read{1255,1255} %write{1254,1254}
+temp	float	$tmp957	%read{1263,1263} %write{1262,1262}
+temp	float	$tmp958	%read{1262,1262} %write{1261,1261}
+temp	float	$tmp959	%read{1261,1261} %write{1257,1257}
+temp	float	$tmp960	%read{1261,1261} %write{1260,1260}
+temp	float	$tmp961	%read{1260,1260} %write{1258,1258}
+temp	float	$tmp962	%read{1260,1260} %write{1259,1259}
+temp	int	$tmp963	%read{1265,1265} %write{1264,1264}
+temp	float	$tmp964	%read{1271,1271} %write{1270,1270}
+temp	float	$tmp965	%read{1270,1270} %write{1269,1269}
+temp	float	$tmp967	%read{1280,1280} %write{1279,1279}
+temp	float	$tmp968	%read{1274,1274} %write{1273,1273}
+temp	float	$tmp969	%read{1276,1279} %write{1274,1274}
+temp	float	$tmp970	%read{1278,1278} %write{1277,1277}
+temp	float	$tmp971	%read{1277,1277} %write{1276,1276}
+temp	float	$tmp972	%read{1279,1279} %write{1278,1278}
+temp	float	$tmp973	%read{1281,1281} %write{1280,1280}
+temp	float	$tmp974	%read{1296,1296} %write{1295,1295}
+temp	vector	$tmp976	%read{1285,1285} %write{1283,1283}
+temp	vector	$tmp977	%read{1285,1285} %write{1284,1284}
+temp	float	$tmp978	%read{1295,1295} %write{1288,1288}
+temp	vector	$tmp979	%read{1288,1288} %write{1287,1287}
+temp	vector	$tmp980	%read{1287,1287} %write{1286,1286}
+temp	float	$tmp981	%read{1295,1295} %write{1294,1294}
+temp	float	$tmp982	%read{1294,1294} %write{1293,1293}
+temp	float	$tmp983	%read{1293,1293} %write{1289,1289}
+temp	float	$tmp984	%read{1293,1293} %write{1292,1292}
+temp	float	$tmp985	%read{1292,1292} %write{1290,1290}
+temp	float	$tmp986	%read{1292,1292} %write{1291,1291}
+temp	float	$tmp987	%read{1311,1311} %write{1310,1310}
+temp	vector	$tmp989	%read{1300,1300} %write{1298,1298}
+temp	vector	$tmp990	%read{1300,1300} %write{1299,1299}
+temp	float	$tmp991	%read{1310,1310} %write{1303,1303}
+temp	vector	$tmp992	%read{1303,1303} %write{1302,1302}
+temp	vector	$tmp993	%read{1302,1302} %write{1301,1301}
+temp	float	$tmp994	%read{1310,1310} %write{1309,1309}
+temp	float	$tmp995	%read{1309,1309} %write{1308,1308}
+temp	float	$tmp996	%read{1308,1308} %write{1304,1304}
+temp	float	$tmp997	%read{1308,1308} %write{1307,1307}
+temp	float	$tmp998	%read{1307,1307} %write{1305,1305}
+temp	float	$tmp999	%read{1307,1307} %write{1306,1306}
+temp	float	$tmp1000	%read{1313,1313} %write{1312,1312}
+temp	float	$tmp1001	%read{1329,1329} %write{1328,1328}
+temp	vector	$tmp1003	%read{1316,1316} %write{1314,1314}
+temp	vector	$tmp1005	%read{1318,1318} %write{1316,1316}
+temp	vector	$tmp1006	%read{1318,1318} %write{1317,1317}
+temp	float	$tmp1007	%read{1328,1328} %write{1321,1321}
+temp	vector	$tmp1008	%read{1321,1321} %write{1320,1320}
+temp	vector	$tmp1009	%read{1320,1320} %write{1319,1319}
+temp	float	$tmp1010	%read{1328,1328} %write{1327,1327}
+temp	float	$tmp1011	%read{1327,1327} %write{1326,1326}
+temp	float	$tmp1012	%read{1326,1326} %write{1322,1322}
+temp	float	$tmp1013	%read{1326,1326} %write{1325,1325}
+temp	float	$tmp1014	%read{1325,1325} %write{1323,1323}
+temp	float	$tmp1015	%read{1325,1325} %write{1324,1324}
+temp	int	$tmp1016	%read{1332,1332} %write{1331,1331}
+temp	float	$tmp1018	%read{1350,1350} %write{1349,1349}
+temp	vector	$tmp1020	%read{1339,1339} %write{1337,1337}
+temp	vector	$tmp1021	%read{1339,1339} %write{1338,1338}
+temp	float	$tmp1022	%read{1349,1349} %write{1342,1342}
+temp	vector	$tmp1023	%read{1342,1342} %write{1341,1341}
+temp	vector	$tmp1024	%read{1341,1341} %write{1340,1340}
+temp	float	$tmp1025	%read{1349,1349} %write{1348,1348}
+temp	float	$tmp1026	%read{1348,1348} %write{1347,1347}
+temp	float	$tmp1027	%read{1347,1347} %write{1343,1343}
+temp	float	$tmp1028	%read{1347,1347} %write{1346,1346}
+temp	float	$tmp1029	%read{1346,1346} %write{1344,1344}
+temp	float	$tmp1030	%read{1346,1346} %write{1345,1345}
+temp	int	$tmp1031	%read{1352,1352} %write{1351,1351}
+temp	float	$tmp1033	%read{1370,1370} %write{1369,1369}
+temp	vector	$tmp1035	%read{1359,1359} %write{1357,1357}
+temp	vector	$tmp1036	%read{1359,1359} %write{1358,1358}
+temp	float	$tmp1037	%read{1369,1369} %write{1362,1362}
+temp	vector	$tmp1038	%read{1362,1362} %write{1361,1361}
+temp	vector	$tmp1039	%read{1361,1361} %write{1360,1360}
+temp	float	$tmp1040	%read{1369,1369} %write{1368,1368}
+temp	float	$tmp1041	%read{1368,1368} %write{1367,1367}
+temp	float	$tmp1042	%read{1367,1367} %write{1363,1363}
+temp	float	$tmp1043	%read{1367,1367} %write{1366,1366}
+temp	float	$tmp1044	%read{1366,1366} %write{1364,1364}
+temp	float	$tmp1045	%read{1366,1366} %write{1365,1365}
+temp	int	$tmp1046	%read{1372,1372} %write{1371,1371}
+temp	float	$tmp1047	%read{1378,1378} %write{1377,1377}
+temp	float	$tmp1048	%read{1377,1377} %write{1376,1376}
+temp	float	$tmp1050	%read{1387,1387} %write{1386,1386}
+temp	float	$tmp1051	%read{1381,1381} %write{1380,1380}
+temp	float	$tmp1052	%read{1383,1386} %write{1381,1381}
+temp	float	$tmp1053	%read{1385,1385} %write{1384,1384}
+temp	float	$tmp1054	%read{1384,1384} %write{1383,1383}
+temp	float	$tmp1055	%read{1386,1386} %write{1385,1385}
+temp	float	$tmp1056	%read{1394,1394} %write{1387,1387}
+temp	float	$tmp1057	%read{1391,1391} %write{1390,1390}
+temp	float	$tmp1058	%read{1389,1389} %write{1388,1388}
+temp	float	$tmp1059	%read{1390,1390} %write{1389,1389}
+temp	float	$tmp1060	%read{1392,1392} %write{1391,1391}
+temp	float	$tmp1061	%read{1393,1393} %write{1392,1392}
+temp	float	$tmp1062	%read{1394,1394} %write{1393,1393}
+temp	float	$tmp1063	%read{1395,1395} %write{1394,1394}
+temp	float	$tmp1064	%read{1410,1410} %write{1409,1409}
+temp	vector	$tmp1066	%read{1399,1399} %write{1397,1397}
+temp	vector	$tmp1067	%read{1399,1399} %write{1398,1398}
+temp	float	$tmp1068	%read{1409,1409} %write{1402,1402}
+temp	vector	$tmp1069	%read{1402,1402} %write{1401,1401}
+temp	vector	$tmp1070	%read{1401,1401} %write{1400,1400}
+temp	float	$tmp1071	%read{1409,1409} %write{1408,1408}
+temp	float	$tmp1072	%read{1408,1408} %write{1407,1407}
+temp	float	$tmp1073	%read{1407,1407} %write{1403,1403}
+temp	float	$tmp1074	%read{1407,1407} %write{1406,1406}
+temp	float	$tmp1075	%read{1406,1406} %write{1404,1404}
+temp	float	$tmp1076	%read{1406,1406} %write{1405,1405}
+temp	int	$tmp1077	%read{1412,1412} %write{1411,1411}
+temp	float	$tmp1078	%read{1417,1417} %write{1416,1416}
+temp	vector	$tmp1079	%read{1421,1421} %write{1420,1420}
+temp	float	$tmp1080	%read{1420,1420} %write{1419,1419}
+const	float	$const45	1.70000005		%read{1420,1430} %write{2147483647,-1}
+temp	vector	$tmp1081	%read{1422,1422} %write{1421,1421}
+temp	float	$tmp1082	%read{1425,1425} %write{1423,1423}
+const	string	$const46	"clamp"		%read{1424,1647} %write{2147483647,-1}
+temp	float	$tmp1083	%read{1426,1426} %write{1425,1425}
+temp	vector	$tmp1084	%read{1428,1428} %write{1427,1427}
+temp	vector	$tmp1085	%read{1437,1642} %write{1428,1428}
+temp	float	$tmp1086	%read{1437,1642} %write{1432,1432}
+temp	vector	$tmp1087	%read{1431,1431} %write{1430,1430}
+temp	float	$tmp1088	%read{1430,1430} %write{1429,1429}
+temp	vector	$tmp1089	%read{1432,1432} %write{1431,1431}
+const	string	$const48	"castShadow"		%read{1433,1433} %write{2147483647,-1}
+temp	int	$tmp1090	%read{1437,1642} %write{1437,1642}
+temp	int	$tmp1091	%read{1435,1642} %write{1436,1642}
+temp	vector	$tmp1092	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1094	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1096	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1097	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1098	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1099	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1100	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1101	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1102	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1103	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1104	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1105	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1106	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1108	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1109	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1110	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1111	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1112	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1113	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1114	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1116	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1117	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1118	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1119	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1120	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1121	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1122	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1123	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1124	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1125	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1126	%read{1437,1642} %write{1437,1642}
+temp	int	$tmp1127	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1128	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1129	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1131	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1132	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1133	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1134	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1135	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1136	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1137	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1138	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1140	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1141	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1142	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1143	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1144	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1145	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1146	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1147	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1148	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1149	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1150	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1151	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1153	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1154	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1155	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1156	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1157	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1158	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1159	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1160	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1161	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1162	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1163	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1164	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1165	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1167	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1169	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1170	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1171	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1172	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1173	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1174	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1175	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1176	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1177	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1178	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1179	%read{1437,1642} %write{1437,1642}
+temp	int	$tmp1180	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1182	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1184	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1185	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1186	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1187	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1188	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1189	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1190	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1191	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1192	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1193	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1194	%read{1437,1642} %write{1437,1642}
+temp	int	$tmp1195	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1197	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1199	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1200	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1201	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1202	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1203	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1204	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1205	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1206	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1207	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1208	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1209	%read{1437,1642} %write{1437,1642}
+temp	int	$tmp1210	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1211	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1212	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1214	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1215	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1216	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1217	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1218	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1219	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1220	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1221	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1222	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1223	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1224	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1225	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1226	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1227	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1228	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1230	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1231	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1232	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1233	%read{1437,1642} %write{1437,1642}
+temp	vector	$tmp1234	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1235	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1236	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1237	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1238	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1239	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1240	%read{1437,1642} %write{1437,1642}
+temp	int	$tmp1241	%read{1437,1642} %write{1437,1642}
+temp	int	$tmp1242	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1243	%read{1437,1642} %write{1437,1642}
+temp	float	$tmp1244	%read{1437,1642} %write{1437,1642}
+const	float	$const49	0.600000024		%read{1646,1646} %write{2147483647,-1}
+const	float	$const50	0.400000006		%read{1645,1645} %write{2147483647,-1}
+temp	float	$tmp1245	%read{1645,1645} %write{1644,1644}
+temp	float	$tmp1247	%read{1646,1646} %write{1645,1645}
+temp	float	$tmp1248	%read{1648,1648} %write{1646,1646}
+temp	float	$tmp1249	%read{1649,1649} %write{1648,1648}
+temp	color	$tmp1250	%read{1651,1651} %write{1650,1650}
+temp	color	$tmp1251	%read{1653,1653} %write{1652,1652}
+const	vector	$const51	0.050999999 0.050999999 0.050999999		%read{1653,1653} %write{2147483647,-1}
+temp	color	$tmp1253	%read{1654,1654} %write{1653,1653}
+const	float	$const52	0.45449999		%read{1656,1656} %write{2147483647,-1}
+code ___main___
+# code/blender/liquidknot/dev/lk_coridor.osl:111
+#   float alpha = 0;
+	assign		col $const1 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{111} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:112
+#   float mat = 0.0;
+	assign		alpha $const2 	%line{112} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:113
+# 
+	assign		mat $const3 	%line{113} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:115
+#   for ( int i=0; i<iter; i++){
+	assign		t $const3 	%line{115} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:116
+#     vector pos = ro + rd * t;
+	for		$tmp2 6 8 208 210 	%line{116} %argrw{"r"}
+	assign		___369_i $const2 	%argrw{"wr"}
+	lt		$tmp1 ___369_i iter 	%argrw{"wrr"}
+	neq		$tmp2 $tmp1 $const2 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:117
+# 
+	mul		$tmp3 rd t 	%line{117} %argrw{"wrr"}
+	add		___370_pos ro $tmp3 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:120
+# 
+	functioncall	$const4 204 	%line{120} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:10
+#   pos -= vector(0,0,1);
+	assign		mat $const3 	%line{10} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:11
+#   float d = -sdBox(pos, vector(INFINITY,1,2));
+	sub		___370_pos ___370_pos $const5 	%line{11} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:12
+# 
+	functioncall	$const7 27 	%line{12} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp7 ___370_pos 	%line{5} %argrw{"wr"}
+	div		$tmp8 $const6 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp7 $tmp8 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp11 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp10 ___363_q $tmp11 	%argrw{"wrr"}
+	length		$tmp9 $tmp10 	%argrw{"wr"}
+	compref		$tmp14 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp16 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp17 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp15 $tmp16 $tmp17 	%argrw{"wrr"}
+	max		$tmp13 $tmp14 $tmp15 	%argrw{"wrr"}
+	min		$tmp12 $tmp13 $const3 	%argrw{"wrr"}
+	add		$tmp5 $tmp9 $tmp12 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:12
+# 
+	neg		___364_d $tmp5 	%line{12} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:15
+#   p1[0] = mod(p1[0] + .5, 1) - .5 ;
+	sub		___364_p1 ___370_pos $const5 	%line{15} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:16
+#   float d1 = sdBox(p1, vector(.4,.4,.2));
+	compref		$tmp20 ___364_p1 $const2 	%line{16} %argrw{"wrr"}
+	add		$tmp21 $tmp20 $const11 	%argrw{"wrr"}
+	functioncall	$const13 36 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp23 $tmp21 $const12 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp22 $tmp23 	%argrw{"wr"}
+	mul		$tmp24 $const12 $tmp22 	%argrw{"wrr"}
+	sub		$tmp19 $tmp21 $tmp24 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:16
+#   float d1 = sdBox(p1, vector(.4,.4,.2));
+	sub		$tmp25 $tmp19 $const11 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{16} %argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp25 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:17
+# 
+	functioncall	$const7 52 	%line{17} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp27 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp28 $const14 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp27 $tmp28 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp31 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp30 ___363_q $tmp31 	%argrw{"wrr"}
+	length		$tmp29 $tmp30 	%argrw{"wr"}
+	compref		$tmp34 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp36 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp37 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp35 $tmp36 $tmp37 	%argrw{"wrr"}
+	max		$tmp33 $tmp34 $tmp35 	%argrw{"wrr"}
+	min		$tmp32 $tmp33 $const3 	%argrw{"wrr"}
+	add		___364_d1 $tmp29 $tmp32 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:19
+#   d = min(d, d1);
+	lt		$tmp38 ___364_d1 ___364_d 	%line{19} %argrw{"wrr"}
+	if		$tmp38 55 55 	%argrw{"r"}
+	assign		mat $const12 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:20
+# 
+	min		___364_d ___364_d ___364_d1 	%line{20} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:24
+#   p1[1] = abs(p1[1]);
+	assign		___364_p1 ___370_pos 	%line{24} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:25
+#   p1 = p1 - vector(0,.5,-.25);
+	compref		$tmp40 ___364_p1 $const10 	%line{25} %argrw{"wrr"}
+	abs		$tmp39 $tmp40 	%argrw{"wr"}
+	compassign	___364_p1 $const10 $tmp39 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:26
+#   p1[0] = mod(p1[0] + 1.5, 3) - 1.5 ;
+	sub		___364_p1 ___364_p1 $const15 	%line{26} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:27
+#   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
+	compref		$tmp43 ___364_p1 $const2 	%line{27} %argrw{"wrr"}
+	add		$tmp44 $tmp43 $const16 	%argrw{"wrr"}
+	functioncall	$const13 68 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp46 $tmp44 $const18 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp45 $tmp46 	%argrw{"wr"}
+	mul		$tmp47 $const18 $tmp45 	%argrw{"wrr"}
+	sub		$tmp42 $tmp44 $tmp47 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:27
+#   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
+	sub		$tmp48 $tmp42 $const16 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{27} %argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp48 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:28
+#   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
+	functioncall	$const7 84 	%line{28} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp51 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp52 $const19 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp51 $tmp52 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp55 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp54 ___363_q $tmp55 	%argrw{"wrr"}
+	length		$tmp53 $tmp54 	%argrw{"wr"}
+	compref		$tmp58 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp60 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp61 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp59 $tmp60 $tmp61 	%argrw{"wrr"}
+	max		$tmp57 $tmp58 $tmp59 	%argrw{"wrr"}
+	min		$tmp56 $tmp57 $const3 	%argrw{"wrr"}
+	add		$tmp49 $tmp53 $tmp56 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:28
+#   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
+	sub		___364_d1 $tmp49 $const20 	%line{28} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:29
+#   d1 = max(d1, -d2);
+	functioncall	$const7 99 	%line{29} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp64 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp65 $const21 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp64 $tmp65 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp68 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp67 ___363_q $tmp68 	%argrw{"wrr"}
+	length		$tmp66 $tmp67 	%argrw{"wr"}
+	compref		$tmp71 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp73 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp74 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp72 $tmp73 $tmp74 	%argrw{"wrr"}
+	max		$tmp70 $tmp71 $tmp72 	%argrw{"wrr"}
+	min		$tmp69 $tmp70 $const3 	%argrw{"wrr"}
+	add		$tmp62 $tmp66 $tmp69 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:29
+#   d1 = max(d1, -d2);
+	sub		___364_d2 $tmp62 $const20 	%line{29} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:30
+#   d2 = sdBox(p1 - vector(0,0,0), vector(.8,.1,1.4)) - .02;
+	neg		$tmp75 ___364_d2 	%line{30} %argrw{"wr"}
+	max		___364_d1 ___364_d1 $tmp75 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:31
+#   d1 = min(d1,d2);
+	sub		$tmp78 ___364_p1 $const1 	%line{31} %argrw{"wrr"}
+	functioncall	$const7 117 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp80 $tmp78 	%line{5} %argrw{"wr"}
+	div		$tmp81 $const22 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp80 $tmp81 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp84 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp83 ___363_q $tmp84 	%argrw{"wrr"}
+	length		$tmp82 $tmp83 	%argrw{"wr"}
+	compref		$tmp87 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp89 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp90 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp88 $tmp89 $tmp90 	%argrw{"wrr"}
+	max		$tmp86 $tmp87 $tmp88 	%argrw{"wrr"}
+	min		$tmp85 $tmp86 $const3 	%argrw{"wrr"}
+	add		$tmp76 $tmp82 $tmp85 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:31
+#   d1 = min(d1,d2);
+	sub		___364_d2 $tmp76 $const20 	%line{31} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:32
+# 
+	min		___364_d1 ___364_d1 ___364_d2 	%line{32} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:34
+#   d = min(d, d1);
+	lt		$tmp91 ___364_d1 ___364_d 	%line{34} %argrw{"wrr"}
+	if		$tmp91 122 122 	%argrw{"r"}
+	assign		mat $const9 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:35
+# 
+	min		___364_d ___364_d ___364_d1 	%line{35} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:38
+#   d1 = sdBox(p1, vector(INFINITY,.7,.05)) - .02;
+	sub		___364_p1 ___370_pos $const23 	%line{38} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:39
+# 
+	functioncall	$const7 138 	%line{39} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp95 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp96 $const24 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp95 $tmp96 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp99 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp98 ___363_q $tmp99 	%argrw{"wrr"}
+	length		$tmp97 $tmp98 	%argrw{"wr"}
+	compref		$tmp102 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp104 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp105 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp103 $tmp104 $tmp105 	%argrw{"wrr"}
+	max		$tmp101 $tmp102 $tmp103 	%argrw{"wrr"}
+	min		$tmp100 $tmp101 $const3 	%argrw{"wrr"}
+	add		$tmp93 $tmp97 $tmp100 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:39
+# 
+	sub		___364_d1 $tmp93 $const20 	%line{39} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:41
+#   d = min(d, d1);
+	lt		$tmp106 ___364_d1 ___364_d 	%line{41} %argrw{"wrr"}
+	if		$tmp106 142 142 	%argrw{"r"}
+	assign		mat $const18 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:42
+# 
+	min		___364_d ___364_d ___364_d1 	%line{42} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:45
+#   d1 = sdBox(p1, vector(INFINITY,1,.005)) - .02;
+	sub		___364_p1 ___370_pos $const5 	%line{45} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:46
+# 
+	functioncall	$const7 158 	%line{46} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp110 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp111 $const25 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp110 $tmp111 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp114 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp113 ___363_q $tmp114 	%argrw{"wrr"}
+	length		$tmp112 $tmp113 	%argrw{"wr"}
+	compref		$tmp117 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp119 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp120 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp118 $tmp119 $tmp120 	%argrw{"wrr"}
+	max		$tmp116 $tmp117 $tmp118 	%argrw{"wrr"}
+	min		$tmp115 $tmp116 $const3 	%argrw{"wrr"}
+	add		$tmp108 $tmp112 $tmp115 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:46
+# 
+	sub		___364_d1 $tmp108 $const20 	%line{46} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:48
+#   d = min(d, d1);
+	lt		$tmp121 ___364_d1 ___364_d 	%line{48} %argrw{"wrr"}
+	if		$tmp121 162 162 	%argrw{"r"}
+	assign		mat $const26 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:49
+# 
+	min		___364_d ___364_d ___364_d1 	%line{49} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:52
+#   p1[1] = abs(p1[1]);
+	assign		___364_p1 ___370_pos 	%line{52} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:53
+#   p1 = p1 - vector(0,.5,-.1);
+	compref		$tmp123 ___364_p1 $const10 	%line{53} %argrw{"wrr"}
+	abs		$tmp122 $tmp123 	%argrw{"wr"}
+	compassign	___364_p1 $const10 $tmp122 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:54
+#   p1[0] = mod(p1[0] + 4.5 , 9) - 3 + 3*(sign(-pos[1])/2 + .5) ;
+	sub		___364_p1 ___364_p1 $const27 	%line{54} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:55
+#   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
+	compref		$tmp126 ___364_p1 $const2 	%line{55} %argrw{"wrr"}
+	add		$tmp127 $tmp126 $const28 	%argrw{"wrr"}
+	functioncall	$const13 175 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp129 $tmp127 $const30 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp128 $tmp129 	%argrw{"wr"}
+	mul		$tmp130 $const30 $tmp128 	%argrw{"wrr"}
+	sub		$tmp125 $tmp127 $tmp130 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:55
+#   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
+	sub		$tmp131 $tmp125 $const18 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{55} %argrw{"wrr"}
+	compref		$tmp133 ___370_pos $const10 	%argrw{"wrr"}
+	neg		$tmp134 $tmp133 	%argrw{"wr"}
+	sign		$tmp132 $tmp134 	%argrw{"wr"}
+	div		$tmp135 $tmp132 $const9 	%argrw{"wrr"}
+	add		$tmp136 $tmp135 $const11 	%argrw{"wrr"}
+	mul		$tmp137 $const18 $tmp136 	%argrw{"wrr"}
+	add		$tmp138 $tmp131 $tmp137 	%argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp138 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:56
+# 
+	functioncall	$const7 198 	%line{56} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp141 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp142 $const31 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp141 $tmp142 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp145 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp144 ___363_q $tmp145 	%argrw{"wrr"}
+	length		$tmp143 $tmp144 	%argrw{"wr"}
+	compref		$tmp148 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp150 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp151 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp149 $tmp150 $tmp151 	%argrw{"wrr"}
+	max		$tmp147 $tmp148 $tmp149 	%argrw{"wrr"}
+	min		$tmp146 $tmp147 $const3 	%argrw{"wrr"}
+	add		$tmp139 $tmp143 $tmp146 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:56
+# 
+	sub		___364_d1 $tmp139 $const20 	%line{56} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:58
+#   d = min(d, d1);
+	lt		$tmp152 ___364_d1 ___364_d 	%line{58} %argrw{"wrr"}
+	if		$tmp152 202 202 	%argrw{"r"}
+	assign		mat $const32 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:59
+# 
+	min		___364_d ___364_d ___364_d1 	%line{59} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:61
+# }
+	assign		___370_h ___364_d 	%line{61} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:122
+#       break;
+	lt		$tmp153 ___370_h plank 	%line{122} %argrw{"wrr"}
+	if		$tmp153 207 207 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:123
+# 
+	break	%line{123}
+# code/blender/liquidknot/dev/lk_coridor.osl:125
+#   }
+	add		t t ___370_h 	%line{125} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:116
+#     vector pos = ro + rd * t;
+	assign		$tmp154 ___369_i 	%line{116} %argrw{"wr"}
+	add		___369_i ___369_i $const10 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:127
+# 
+	assign		Depth t 	%line{127} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:129
+#     color mate = color(.2);
+	lt		$tmp155 t max_distance 	%line{129} %argrw{"wrr"}
+	if		$tmp155 1656 1656 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:130
+#     vector pos = ro + rd * t;
+	assign		___371_mate $const33 	%line{130} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:131
+# 
+	mul		$tmp156 rd t 	%line{131} %argrw{"wrr"}
+	add		___371_pos ro $tmp156 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:133
+#       mate = color(.05);
+	lt		$tmp157 mat $const11 	%line{133} %argrw{"wrr"}
+	if		$tmp157 219 236 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:134
+#     else if( mat < 1.5)
+	assign		___371_mate $const34 	%line{134} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:135
+#     {
+	lt		$tmp158 mat $const16 	%line{135} %argrw{"wrr"}
+	if		$tmp158 224 236 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:137
+#         Alpha = 1;
+	assign		FragColor $const35 	%line{137} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:138
+#         return;
+	assign		Alpha $const10 	%line{138} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:139
+#     }
+	exit	%line{139}
+# code/blender/liquidknot/dev/lk_coridor.osl:141
+#       mate = color(.04, .02, .005);
+	lt		$tmp159 mat $const36 	%line{141} %argrw{"wrr"}
+	if		$tmp159 227 236 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:142
+#     else if( mat < 3.5)
+	assign		___371_mate $const37 	%line{142} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:143
+#       mate = color(.01, .04, .03);
+	lt		$tmp160 mat $const38 	%line{143} %argrw{"wrr"}
+	if		$tmp160 230 236 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:144
+#     else if( mat < 4.5)
+	assign		___371_mate $const39 	%line{144} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:145
+#       mate = color(.3);
+	lt		$tmp161 mat $const28 	%line{145} %argrw{"wrr"}
+	if		$tmp161 233 236 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:146
+#     else if( mat < 5.5)
+	assign		___371_mate $const40 	%line{146} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:147
+#       mate = color(.6,.01,.003);
+	lt		$tmp162 mat $const41 	%line{147} %argrw{"wrr"}
+	if		$tmp162 236 236 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:148
+# 
+	assign		___371_mate $const42 	%line{148} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:150
+#     vector spot_dir = normalize(vector(pos[0],0,1.7) - pos);
+	functioncall	$const43 1419 	%line{150} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:65
+#   float _;
+	assign		___365_e $const44 	%line{65} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:68
+#                           map(pos + vector(0,e,0),_) - map(pos - vector(0,e,0),_),
+	vector		$tmp165 ___365_e $const3 $const3 	%line{68} %argrw{"wrrr"}
+	add		$tmp166 ___371_pos $tmp165 	%argrw{"wrr"}
+	functioncall	$const4 434 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:10
+#   pos -= vector(0,0,1);
+	assign		___365__ $const3 	%line{10} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:11
+#   float d = -sdBox(pos, vector(INFINITY,1,2));
+	sub		$tmp166 $tmp166 $const5 	%line{11} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:12
+# 
+	functioncall	$const7 257 	%line{12} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp170 $tmp166 	%line{5} %argrw{"wr"}
+	div		$tmp171 $const6 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp170 $tmp171 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp174 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp173 ___363_q $tmp174 	%argrw{"wrr"}
+	length		$tmp172 $tmp173 	%argrw{"wr"}
+	compref		$tmp177 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp179 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp180 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp178 $tmp179 $tmp180 	%argrw{"wrr"}
+	max		$tmp176 $tmp177 $tmp178 	%argrw{"wrr"}
+	min		$tmp175 $tmp176 $const3 	%argrw{"wrr"}
+	add		$tmp168 $tmp172 $tmp175 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:12
+# 
+	neg		___364_d $tmp168 	%line{12} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:15
+#   p1[0] = mod(p1[0] + .5, 1) - .5 ;
+	sub		___364_p1 $tmp166 $const5 	%line{15} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:16
+#   float d1 = sdBox(p1, vector(.4,.4,.2));
+	compref		$tmp183 ___364_p1 $const2 	%line{16} %argrw{"wrr"}
+	add		$tmp184 $tmp183 $const11 	%argrw{"wrr"}
+	functioncall	$const13 266 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp186 $tmp184 $const12 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp185 $tmp186 	%argrw{"wr"}
+	mul		$tmp187 $const12 $tmp185 	%argrw{"wrr"}
+	sub		$tmp182 $tmp184 $tmp187 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:16
+#   float d1 = sdBox(p1, vector(.4,.4,.2));
+	sub		$tmp188 $tmp182 $const11 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{16} %argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp188 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:17
+# 
+	functioncall	$const7 282 	%line{17} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp190 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp191 $const14 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp190 $tmp191 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp194 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp193 ___363_q $tmp194 	%argrw{"wrr"}
+	length		$tmp192 $tmp193 	%argrw{"wr"}
+	compref		$tmp197 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp199 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp200 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp198 $tmp199 $tmp200 	%argrw{"wrr"}
+	max		$tmp196 $tmp197 $tmp198 	%argrw{"wrr"}
+	min		$tmp195 $tmp196 $const3 	%argrw{"wrr"}
+	add		___364_d1 $tmp192 $tmp195 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:19
+#   d = min(d, d1);
+	lt		$tmp201 ___364_d1 ___364_d 	%line{19} %argrw{"wrr"}
+	if		$tmp201 285 285 	%argrw{"r"}
+	assign		___365__ $const12 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:20
+# 
+	min		___364_d ___364_d ___364_d1 	%line{20} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:24
+#   p1[1] = abs(p1[1]);
+	assign		___364_p1 $tmp166 	%line{24} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:25
+#   p1 = p1 - vector(0,.5,-.25);
+	compref		$tmp203 ___364_p1 $const10 	%line{25} %argrw{"wrr"}
+	abs		$tmp202 $tmp203 	%argrw{"wr"}
+	compassign	___364_p1 $const10 $tmp202 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:26
+#   p1[0] = mod(p1[0] + 1.5, 3) - 1.5 ;
+	sub		___364_p1 ___364_p1 $const15 	%line{26} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:27
+#   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
+	compref		$tmp206 ___364_p1 $const2 	%line{27} %argrw{"wrr"}
+	add		$tmp207 $tmp206 $const16 	%argrw{"wrr"}
+	functioncall	$const13 298 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp209 $tmp207 $const18 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp208 $tmp209 	%argrw{"wr"}
+	mul		$tmp210 $const18 $tmp208 	%argrw{"wrr"}
+	sub		$tmp205 $tmp207 $tmp210 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:27
+#   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
+	sub		$tmp211 $tmp205 $const16 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{27} %argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp211 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:28
+#   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
+	functioncall	$const7 314 	%line{28} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp214 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp215 $const19 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp214 $tmp215 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp218 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp217 ___363_q $tmp218 	%argrw{"wrr"}
+	length		$tmp216 $tmp217 	%argrw{"wr"}
+	compref		$tmp221 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp223 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp224 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp222 $tmp223 $tmp224 	%argrw{"wrr"}
+	max		$tmp220 $tmp221 $tmp222 	%argrw{"wrr"}
+	min		$tmp219 $tmp220 $const3 	%argrw{"wrr"}
+	add		$tmp212 $tmp216 $tmp219 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:28
+#   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
+	sub		___364_d1 $tmp212 $const20 	%line{28} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:29
+#   d1 = max(d1, -d2);
+	functioncall	$const7 329 	%line{29} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp227 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp228 $const21 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp227 $tmp228 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp231 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp230 ___363_q $tmp231 	%argrw{"wrr"}
+	length		$tmp229 $tmp230 	%argrw{"wr"}
+	compref		$tmp234 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp236 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp237 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp235 $tmp236 $tmp237 	%argrw{"wrr"}
+	max		$tmp233 $tmp234 $tmp235 	%argrw{"wrr"}
+	min		$tmp232 $tmp233 $const3 	%argrw{"wrr"}
+	add		$tmp225 $tmp229 $tmp232 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:29
+#   d1 = max(d1, -d2);
+	sub		___364_d2 $tmp225 $const20 	%line{29} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:30
+#   d2 = sdBox(p1 - vector(0,0,0), vector(.8,.1,1.4)) - .02;
+	neg		$tmp238 ___364_d2 	%line{30} %argrw{"wr"}
+	max		___364_d1 ___364_d1 $tmp238 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:31
+#   d1 = min(d1,d2);
+	sub		$tmp241 ___364_p1 $const1 	%line{31} %argrw{"wrr"}
+	functioncall	$const7 347 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp243 $tmp241 	%line{5} %argrw{"wr"}
+	div		$tmp244 $const22 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp243 $tmp244 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp247 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp246 ___363_q $tmp247 	%argrw{"wrr"}
+	length		$tmp245 $tmp246 	%argrw{"wr"}
+	compref		$tmp250 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp252 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp253 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp251 $tmp252 $tmp253 	%argrw{"wrr"}
+	max		$tmp249 $tmp250 $tmp251 	%argrw{"wrr"}
+	min		$tmp248 $tmp249 $const3 	%argrw{"wrr"}
+	add		$tmp239 $tmp245 $tmp248 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:31
+#   d1 = min(d1,d2);
+	sub		___364_d2 $tmp239 $const20 	%line{31} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:32
+# 
+	min		___364_d1 ___364_d1 ___364_d2 	%line{32} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:34
+#   d = min(d, d1);
+	lt		$tmp254 ___364_d1 ___364_d 	%line{34} %argrw{"wrr"}
+	if		$tmp254 352 352 	%argrw{"r"}
+	assign		___365__ $const9 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:35
+# 
+	min		___364_d ___364_d ___364_d1 	%line{35} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:38
+#   d1 = sdBox(p1, vector(INFINITY,.7,.05)) - .02;
+	sub		___364_p1 $tmp166 $const23 	%line{38} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:39
+# 
+	functioncall	$const7 368 	%line{39} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp258 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp259 $const24 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp258 $tmp259 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp262 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp261 ___363_q $tmp262 	%argrw{"wrr"}
+	length		$tmp260 $tmp261 	%argrw{"wr"}
+	compref		$tmp265 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp267 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp268 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp266 $tmp267 $tmp268 	%argrw{"wrr"}
+	max		$tmp264 $tmp265 $tmp266 	%argrw{"wrr"}
+	min		$tmp263 $tmp264 $const3 	%argrw{"wrr"}
+	add		$tmp256 $tmp260 $tmp263 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:39
+# 
+	sub		___364_d1 $tmp256 $const20 	%line{39} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:41
+#   d = min(d, d1);
+	lt		$tmp269 ___364_d1 ___364_d 	%line{41} %argrw{"wrr"}
+	if		$tmp269 372 372 	%argrw{"r"}
+	assign		___365__ $const18 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:42
+# 
+	min		___364_d ___364_d ___364_d1 	%line{42} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:45
+#   d1 = sdBox(p1, vector(INFINITY,1,.005)) - .02;
+	sub		___364_p1 $tmp166 $const5 	%line{45} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:46
+# 
+	functioncall	$const7 388 	%line{46} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp273 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp274 $const25 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp273 $tmp274 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp277 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp276 ___363_q $tmp277 	%argrw{"wrr"}
+	length		$tmp275 $tmp276 	%argrw{"wr"}
+	compref		$tmp280 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp282 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp283 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp281 $tmp282 $tmp283 	%argrw{"wrr"}
+	max		$tmp279 $tmp280 $tmp281 	%argrw{"wrr"}
+	min		$tmp278 $tmp279 $const3 	%argrw{"wrr"}
+	add		$tmp271 $tmp275 $tmp278 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:46
+# 
+	sub		___364_d1 $tmp271 $const20 	%line{46} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:48
+#   d = min(d, d1);
+	lt		$tmp284 ___364_d1 ___364_d 	%line{48} %argrw{"wrr"}
+	if		$tmp284 392 392 	%argrw{"r"}
+	assign		___365__ $const26 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:49
+# 
+	min		___364_d ___364_d ___364_d1 	%line{49} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:52
+#   p1[1] = abs(p1[1]);
+	assign		___364_p1 $tmp166 	%line{52} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:53
+#   p1 = p1 - vector(0,.5,-.1);
+	compref		$tmp286 ___364_p1 $const10 	%line{53} %argrw{"wrr"}
+	abs		$tmp285 $tmp286 	%argrw{"wr"}
+	compassign	___364_p1 $const10 $tmp285 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:54
+#   p1[0] = mod(p1[0] + 4.5 , 9) - 3 + 3*(sign(-pos[1])/2 + .5) ;
+	sub		___364_p1 ___364_p1 $const27 	%line{54} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:55
+#   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
+	compref		$tmp289 ___364_p1 $const2 	%line{55} %argrw{"wrr"}
+	add		$tmp290 $tmp289 $const28 	%argrw{"wrr"}
+	functioncall	$const13 405 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp292 $tmp290 $const30 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp291 $tmp292 	%argrw{"wr"}
+	mul		$tmp293 $const30 $tmp291 	%argrw{"wrr"}
+	sub		$tmp288 $tmp290 $tmp293 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:55
+#   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
+	sub		$tmp294 $tmp288 $const18 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{55} %argrw{"wrr"}
+	compref		$tmp296 $tmp166 $const10 	%argrw{"wrr"}
+	neg		$tmp297 $tmp296 	%argrw{"wr"}
+	sign		$tmp295 $tmp297 	%argrw{"wr"}
+	div		$tmp298 $tmp295 $const9 	%argrw{"wrr"}
+	add		$tmp299 $tmp298 $const11 	%argrw{"wrr"}
+	mul		$tmp300 $const18 $tmp299 	%argrw{"wrr"}
+	add		$tmp301 $tmp294 $tmp300 	%argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp301 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:56
+# 
+	functioncall	$const7 428 	%line{56} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp304 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp305 $const31 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp304 $tmp305 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp308 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp307 ___363_q $tmp308 	%argrw{"wrr"}
+	length		$tmp306 $tmp307 	%argrw{"wr"}
+	compref		$tmp311 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp313 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp314 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp312 $tmp313 $tmp314 	%argrw{"wrr"}
+	max		$tmp310 $tmp311 $tmp312 	%argrw{"wrr"}
+	min		$tmp309 $tmp310 $const3 	%argrw{"wrr"}
+	add		$tmp302 $tmp306 $tmp309 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:56
+# 
+	sub		___364_d1 $tmp302 $const20 	%line{56} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:58
+#   d = min(d, d1);
+	lt		$tmp315 ___364_d1 ___364_d 	%line{58} %argrw{"wrr"}
+	if		$tmp315 432 432 	%argrw{"r"}
+	assign		___365__ $const32 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:59
+# 
+	min		___364_d ___364_d ___364_d1 	%line{59} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:61
+# }
+	assign		$tmp164 ___364_d 	%line{61} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:68
+#                           map(pos + vector(0,e,0),_) - map(pos - vector(0,e,0),_),
+	vector		$tmp317 ___365_e $const3 $const3 	%line{68} %argrw{"wrrr"}
+	sub		$tmp318 ___371_pos $tmp317 	%argrw{"wrr"}
+	functioncall	$const4 630 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:10
+#   pos -= vector(0,0,1);
+	assign		___365__ $const3 	%line{10} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:11
+#   float d = -sdBox(pos, vector(INFINITY,1,2));
+	sub		$tmp318 $tmp318 $const5 	%line{11} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:12
+# 
+	functioncall	$const7 453 	%line{12} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp322 $tmp318 	%line{5} %argrw{"wr"}
+	div		$tmp323 $const6 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp322 $tmp323 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp326 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp325 ___363_q $tmp326 	%argrw{"wrr"}
+	length		$tmp324 $tmp325 	%argrw{"wr"}
+	compref		$tmp329 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp331 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp332 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp330 $tmp331 $tmp332 	%argrw{"wrr"}
+	max		$tmp328 $tmp329 $tmp330 	%argrw{"wrr"}
+	min		$tmp327 $tmp328 $const3 	%argrw{"wrr"}
+	add		$tmp320 $tmp324 $tmp327 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:12
+# 
+	neg		___364_d $tmp320 	%line{12} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:15
+#   p1[0] = mod(p1[0] + .5, 1) - .5 ;
+	sub		___364_p1 $tmp318 $const5 	%line{15} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:16
+#   float d1 = sdBox(p1, vector(.4,.4,.2));
+	compref		$tmp335 ___364_p1 $const2 	%line{16} %argrw{"wrr"}
+	add		$tmp336 $tmp335 $const11 	%argrw{"wrr"}
+	functioncall	$const13 462 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp338 $tmp336 $const12 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp337 $tmp338 	%argrw{"wr"}
+	mul		$tmp339 $const12 $tmp337 	%argrw{"wrr"}
+	sub		$tmp334 $tmp336 $tmp339 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:16
+#   float d1 = sdBox(p1, vector(.4,.4,.2));
+	sub		$tmp340 $tmp334 $const11 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{16} %argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp340 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:17
+# 
+	functioncall	$const7 478 	%line{17} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp342 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp343 $const14 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp342 $tmp343 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp346 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp345 ___363_q $tmp346 	%argrw{"wrr"}
+	length		$tmp344 $tmp345 	%argrw{"wr"}
+	compref		$tmp349 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp351 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp352 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp350 $tmp351 $tmp352 	%argrw{"wrr"}
+	max		$tmp348 $tmp349 $tmp350 	%argrw{"wrr"}
+	min		$tmp347 $tmp348 $const3 	%argrw{"wrr"}
+	add		___364_d1 $tmp344 $tmp347 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:19
+#   d = min(d, d1);
+	lt		$tmp353 ___364_d1 ___364_d 	%line{19} %argrw{"wrr"}
+	if		$tmp353 481 481 	%argrw{"r"}
+	assign		___365__ $const12 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:20
+# 
+	min		___364_d ___364_d ___364_d1 	%line{20} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:24
+#   p1[1] = abs(p1[1]);
+	assign		___364_p1 $tmp318 	%line{24} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:25
+#   p1 = p1 - vector(0,.5,-.25);
+	compref		$tmp355 ___364_p1 $const10 	%line{25} %argrw{"wrr"}
+	abs		$tmp354 $tmp355 	%argrw{"wr"}
+	compassign	___364_p1 $const10 $tmp354 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:26
+#   p1[0] = mod(p1[0] + 1.5, 3) - 1.5 ;
+	sub		___364_p1 ___364_p1 $const15 	%line{26} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:27
+#   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
+	compref		$tmp358 ___364_p1 $const2 	%line{27} %argrw{"wrr"}
+	add		$tmp359 $tmp358 $const16 	%argrw{"wrr"}
+	functioncall	$const13 494 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp361 $tmp359 $const18 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp360 $tmp361 	%argrw{"wr"}
+	mul		$tmp362 $const18 $tmp360 	%argrw{"wrr"}
+	sub		$tmp357 $tmp359 $tmp362 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:27
+#   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
+	sub		$tmp363 $tmp357 $const16 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{27} %argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp363 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:28
+#   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
+	functioncall	$const7 510 	%line{28} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp366 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp367 $const19 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp366 $tmp367 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp370 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp369 ___363_q $tmp370 	%argrw{"wrr"}
+	length		$tmp368 $tmp369 	%argrw{"wr"}
+	compref		$tmp373 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp375 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp376 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp374 $tmp375 $tmp376 	%argrw{"wrr"}
+	max		$tmp372 $tmp373 $tmp374 	%argrw{"wrr"}
+	min		$tmp371 $tmp372 $const3 	%argrw{"wrr"}
+	add		$tmp364 $tmp368 $tmp371 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:28
+#   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
+	sub		___364_d1 $tmp364 $const20 	%line{28} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:29
+#   d1 = max(d1, -d2);
+	functioncall	$const7 525 	%line{29} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp379 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp380 $const21 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp379 $tmp380 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp383 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp382 ___363_q $tmp383 	%argrw{"wrr"}
+	length		$tmp381 $tmp382 	%argrw{"wr"}
+	compref		$tmp386 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp388 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp389 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp387 $tmp388 $tmp389 	%argrw{"wrr"}
+	max		$tmp385 $tmp386 $tmp387 	%argrw{"wrr"}
+	min		$tmp384 $tmp385 $const3 	%argrw{"wrr"}
+	add		$tmp377 $tmp381 $tmp384 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:29
+#   d1 = max(d1, -d2);
+	sub		___364_d2 $tmp377 $const20 	%line{29} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:30
+#   d2 = sdBox(p1 - vector(0,0,0), vector(.8,.1,1.4)) - .02;
+	neg		$tmp390 ___364_d2 	%line{30} %argrw{"wr"}
+	max		___364_d1 ___364_d1 $tmp390 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:31
+#   d1 = min(d1,d2);
+	sub		$tmp393 ___364_p1 $const1 	%line{31} %argrw{"wrr"}
+	functioncall	$const7 543 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp395 $tmp393 	%line{5} %argrw{"wr"}
+	div		$tmp396 $const22 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp395 $tmp396 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp399 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp398 ___363_q $tmp399 	%argrw{"wrr"}
+	length		$tmp397 $tmp398 	%argrw{"wr"}
+	compref		$tmp402 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp404 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp405 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp403 $tmp404 $tmp405 	%argrw{"wrr"}
+	max		$tmp401 $tmp402 $tmp403 	%argrw{"wrr"}
+	min		$tmp400 $tmp401 $const3 	%argrw{"wrr"}
+	add		$tmp391 $tmp397 $tmp400 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:31
+#   d1 = min(d1,d2);
+	sub		___364_d2 $tmp391 $const20 	%line{31} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:32
+# 
+	min		___364_d1 ___364_d1 ___364_d2 	%line{32} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:34
+#   d = min(d, d1);
+	lt		$tmp406 ___364_d1 ___364_d 	%line{34} %argrw{"wrr"}
+	if		$tmp406 548 548 	%argrw{"r"}
+	assign		___365__ $const9 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:35
+# 
+	min		___364_d ___364_d ___364_d1 	%line{35} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:38
+#   d1 = sdBox(p1, vector(INFINITY,.7,.05)) - .02;
+	sub		___364_p1 $tmp318 $const23 	%line{38} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:39
+# 
+	functioncall	$const7 564 	%line{39} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp410 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp411 $const24 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp410 $tmp411 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp414 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp413 ___363_q $tmp414 	%argrw{"wrr"}
+	length		$tmp412 $tmp413 	%argrw{"wr"}
+	compref		$tmp417 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp419 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp420 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp418 $tmp419 $tmp420 	%argrw{"wrr"}
+	max		$tmp416 $tmp417 $tmp418 	%argrw{"wrr"}
+	min		$tmp415 $tmp416 $const3 	%argrw{"wrr"}
+	add		$tmp408 $tmp412 $tmp415 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:39
+# 
+	sub		___364_d1 $tmp408 $const20 	%line{39} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:41
+#   d = min(d, d1);
+	lt		$tmp421 ___364_d1 ___364_d 	%line{41} %argrw{"wrr"}
+	if		$tmp421 568 568 	%argrw{"r"}
+	assign		___365__ $const18 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:42
+# 
+	min		___364_d ___364_d ___364_d1 	%line{42} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:45
+#   d1 = sdBox(p1, vector(INFINITY,1,.005)) - .02;
+	sub		___364_p1 $tmp318 $const5 	%line{45} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:46
+# 
+	functioncall	$const7 584 	%line{46} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp425 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp426 $const25 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp425 $tmp426 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp429 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp428 ___363_q $tmp429 	%argrw{"wrr"}
+	length		$tmp427 $tmp428 	%argrw{"wr"}
+	compref		$tmp432 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp434 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp435 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp433 $tmp434 $tmp435 	%argrw{"wrr"}
+	max		$tmp431 $tmp432 $tmp433 	%argrw{"wrr"}
+	min		$tmp430 $tmp431 $const3 	%argrw{"wrr"}
+	add		$tmp423 $tmp427 $tmp430 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:46
+# 
+	sub		___364_d1 $tmp423 $const20 	%line{46} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:48
+#   d = min(d, d1);
+	lt		$tmp436 ___364_d1 ___364_d 	%line{48} %argrw{"wrr"}
+	if		$tmp436 588 588 	%argrw{"r"}
+	assign		___365__ $const26 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:49
+# 
+	min		___364_d ___364_d ___364_d1 	%line{49} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:52
+#   p1[1] = abs(p1[1]);
+	assign		___364_p1 $tmp318 	%line{52} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:53
+#   p1 = p1 - vector(0,.5,-.1);
+	compref		$tmp438 ___364_p1 $const10 	%line{53} %argrw{"wrr"}
+	abs		$tmp437 $tmp438 	%argrw{"wr"}
+	compassign	___364_p1 $const10 $tmp437 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:54
+#   p1[0] = mod(p1[0] + 4.5 , 9) - 3 + 3*(sign(-pos[1])/2 + .5) ;
+	sub		___364_p1 ___364_p1 $const27 	%line{54} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:55
+#   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
+	compref		$tmp441 ___364_p1 $const2 	%line{55} %argrw{"wrr"}
+	add		$tmp442 $tmp441 $const28 	%argrw{"wrr"}
+	functioncall	$const13 601 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp444 $tmp442 $const30 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp443 $tmp444 	%argrw{"wr"}
+	mul		$tmp445 $const30 $tmp443 	%argrw{"wrr"}
+	sub		$tmp440 $tmp442 $tmp445 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:55
+#   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
+	sub		$tmp446 $tmp440 $const18 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{55} %argrw{"wrr"}
+	compref		$tmp448 $tmp318 $const10 	%argrw{"wrr"}
+	neg		$tmp449 $tmp448 	%argrw{"wr"}
+	sign		$tmp447 $tmp449 	%argrw{"wr"}
+	div		$tmp450 $tmp447 $const9 	%argrw{"wrr"}
+	add		$tmp451 $tmp450 $const11 	%argrw{"wrr"}
+	mul		$tmp452 $const18 $tmp451 	%argrw{"wrr"}
+	add		$tmp453 $tmp446 $tmp452 	%argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp453 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:56
+# 
+	functioncall	$const7 624 	%line{56} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp456 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp457 $const31 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp456 $tmp457 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp460 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp459 ___363_q $tmp460 	%argrw{"wrr"}
+	length		$tmp458 $tmp459 	%argrw{"wr"}
+	compref		$tmp463 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp465 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp466 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp464 $tmp465 $tmp466 	%argrw{"wrr"}
+	max		$tmp462 $tmp463 $tmp464 	%argrw{"wrr"}
+	min		$tmp461 $tmp462 $const3 	%argrw{"wrr"}
+	add		$tmp454 $tmp458 $tmp461 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:56
+# 
+	sub		___364_d1 $tmp454 $const20 	%line{56} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:58
+#   d = min(d, d1);
+	lt		$tmp467 ___364_d1 ___364_d 	%line{58} %argrw{"wrr"}
+	if		$tmp467 628 628 	%argrw{"r"}
+	assign		___365__ $const32 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:59
+# 
+	min		___364_d ___364_d ___364_d1 	%line{59} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:61
+# }
+	assign		$tmp316 ___364_d 	%line{61} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:68
+#                           map(pos + vector(0,e,0),_) - map(pos - vector(0,e,0),_),
+	sub		$tmp468 $tmp164 $tmp316 	%line{68} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:69
+#                           map(pos + vector(0,0,e),_) - map(pos - vector(0,0,e),_)
+	vector		$tmp470 $const3 ___365_e $const3 	%line{69} %argrw{"wrrr"}
+	add		$tmp471 ___371_pos $tmp470 	%argrw{"wrr"}
+	functioncall	$const4 827 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:10
+#   pos -= vector(0,0,1);
+	assign		___365__ $const3 	%line{10} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:11
+#   float d = -sdBox(pos, vector(INFINITY,1,2));
+	sub		$tmp471 $tmp471 $const5 	%line{11} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:12
+# 
+	functioncall	$const7 650 	%line{12} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp475 $tmp471 	%line{5} %argrw{"wr"}
+	div		$tmp476 $const6 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp475 $tmp476 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp479 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp478 ___363_q $tmp479 	%argrw{"wrr"}
+	length		$tmp477 $tmp478 	%argrw{"wr"}
+	compref		$tmp482 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp484 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp485 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp483 $tmp484 $tmp485 	%argrw{"wrr"}
+	max		$tmp481 $tmp482 $tmp483 	%argrw{"wrr"}
+	min		$tmp480 $tmp481 $const3 	%argrw{"wrr"}
+	add		$tmp473 $tmp477 $tmp480 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:12
+# 
+	neg		___364_d $tmp473 	%line{12} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:15
+#   p1[0] = mod(p1[0] + .5, 1) - .5 ;
+	sub		___364_p1 $tmp471 $const5 	%line{15} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:16
+#   float d1 = sdBox(p1, vector(.4,.4,.2));
+	compref		$tmp488 ___364_p1 $const2 	%line{16} %argrw{"wrr"}
+	add		$tmp489 $tmp488 $const11 	%argrw{"wrr"}
+	functioncall	$const13 659 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp491 $tmp489 $const12 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp490 $tmp491 	%argrw{"wr"}
+	mul		$tmp492 $const12 $tmp490 	%argrw{"wrr"}
+	sub		$tmp487 $tmp489 $tmp492 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:16
+#   float d1 = sdBox(p1, vector(.4,.4,.2));
+	sub		$tmp493 $tmp487 $const11 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{16} %argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp493 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:17
+# 
+	functioncall	$const7 675 	%line{17} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp495 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp496 $const14 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp495 $tmp496 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp499 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp498 ___363_q $tmp499 	%argrw{"wrr"}
+	length		$tmp497 $tmp498 	%argrw{"wr"}
+	compref		$tmp502 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp504 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp505 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp503 $tmp504 $tmp505 	%argrw{"wrr"}
+	max		$tmp501 $tmp502 $tmp503 	%argrw{"wrr"}
+	min		$tmp500 $tmp501 $const3 	%argrw{"wrr"}
+	add		___364_d1 $tmp497 $tmp500 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:19
+#   d = min(d, d1);
+	lt		$tmp506 ___364_d1 ___364_d 	%line{19} %argrw{"wrr"}
+	if		$tmp506 678 678 	%argrw{"r"}
+	assign		___365__ $const12 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:20
+# 
+	min		___364_d ___364_d ___364_d1 	%line{20} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:24
+#   p1[1] = abs(p1[1]);
+	assign		___364_p1 $tmp471 	%line{24} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:25
+#   p1 = p1 - vector(0,.5,-.25);
+	compref		$tmp508 ___364_p1 $const10 	%line{25} %argrw{"wrr"}
+	abs		$tmp507 $tmp508 	%argrw{"wr"}
+	compassign	___364_p1 $const10 $tmp507 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:26
+#   p1[0] = mod(p1[0] + 1.5, 3) - 1.5 ;
+	sub		___364_p1 ___364_p1 $const15 	%line{26} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:27
+#   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
+	compref		$tmp511 ___364_p1 $const2 	%line{27} %argrw{"wrr"}
+	add		$tmp512 $tmp511 $const16 	%argrw{"wrr"}
+	functioncall	$const13 691 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp514 $tmp512 $const18 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp513 $tmp514 	%argrw{"wr"}
+	mul		$tmp515 $const18 $tmp513 	%argrw{"wrr"}
+	sub		$tmp510 $tmp512 $tmp515 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:27
+#   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
+	sub		$tmp516 $tmp510 $const16 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{27} %argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp516 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:28
+#   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
+	functioncall	$const7 707 	%line{28} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp519 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp520 $const19 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp519 $tmp520 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp523 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp522 ___363_q $tmp523 	%argrw{"wrr"}
+	length		$tmp521 $tmp522 	%argrw{"wr"}
+	compref		$tmp526 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp528 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp529 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp527 $tmp528 $tmp529 	%argrw{"wrr"}
+	max		$tmp525 $tmp526 $tmp527 	%argrw{"wrr"}
+	min		$tmp524 $tmp525 $const3 	%argrw{"wrr"}
+	add		$tmp517 $tmp521 $tmp524 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:28
+#   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
+	sub		___364_d1 $tmp517 $const20 	%line{28} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:29
+#   d1 = max(d1, -d2);
+	functioncall	$const7 722 	%line{29} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp532 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp533 $const21 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp532 $tmp533 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp536 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp535 ___363_q $tmp536 	%argrw{"wrr"}
+	length		$tmp534 $tmp535 	%argrw{"wr"}
+	compref		$tmp539 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp541 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp542 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp540 $tmp541 $tmp542 	%argrw{"wrr"}
+	max		$tmp538 $tmp539 $tmp540 	%argrw{"wrr"}
+	min		$tmp537 $tmp538 $const3 	%argrw{"wrr"}
+	add		$tmp530 $tmp534 $tmp537 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:29
+#   d1 = max(d1, -d2);
+	sub		___364_d2 $tmp530 $const20 	%line{29} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:30
+#   d2 = sdBox(p1 - vector(0,0,0), vector(.8,.1,1.4)) - .02;
+	neg		$tmp543 ___364_d2 	%line{30} %argrw{"wr"}
+	max		___364_d1 ___364_d1 $tmp543 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:31
+#   d1 = min(d1,d2);
+	sub		$tmp546 ___364_p1 $const1 	%line{31} %argrw{"wrr"}
+	functioncall	$const7 740 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp548 $tmp546 	%line{5} %argrw{"wr"}
+	div		$tmp549 $const22 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp548 $tmp549 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp552 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp551 ___363_q $tmp552 	%argrw{"wrr"}
+	length		$tmp550 $tmp551 	%argrw{"wr"}
+	compref		$tmp555 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp557 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp558 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp556 $tmp557 $tmp558 	%argrw{"wrr"}
+	max		$tmp554 $tmp555 $tmp556 	%argrw{"wrr"}
+	min		$tmp553 $tmp554 $const3 	%argrw{"wrr"}
+	add		$tmp544 $tmp550 $tmp553 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:31
+#   d1 = min(d1,d2);
+	sub		___364_d2 $tmp544 $const20 	%line{31} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:32
+# 
+	min		___364_d1 ___364_d1 ___364_d2 	%line{32} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:34
+#   d = min(d, d1);
+	lt		$tmp559 ___364_d1 ___364_d 	%line{34} %argrw{"wrr"}
+	if		$tmp559 745 745 	%argrw{"r"}
+	assign		___365__ $const9 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:35
+# 
+	min		___364_d ___364_d ___364_d1 	%line{35} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:38
+#   d1 = sdBox(p1, vector(INFINITY,.7,.05)) - .02;
+	sub		___364_p1 $tmp471 $const23 	%line{38} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:39
+# 
+	functioncall	$const7 761 	%line{39} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp563 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp564 $const24 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp563 $tmp564 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp567 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp566 ___363_q $tmp567 	%argrw{"wrr"}
+	length		$tmp565 $tmp566 	%argrw{"wr"}
+	compref		$tmp570 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp572 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp573 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp571 $tmp572 $tmp573 	%argrw{"wrr"}
+	max		$tmp569 $tmp570 $tmp571 	%argrw{"wrr"}
+	min		$tmp568 $tmp569 $const3 	%argrw{"wrr"}
+	add		$tmp561 $tmp565 $tmp568 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:39
+# 
+	sub		___364_d1 $tmp561 $const20 	%line{39} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:41
+#   d = min(d, d1);
+	lt		$tmp574 ___364_d1 ___364_d 	%line{41} %argrw{"wrr"}
+	if		$tmp574 765 765 	%argrw{"r"}
+	assign		___365__ $const18 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:42
+# 
+	min		___364_d ___364_d ___364_d1 	%line{42} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:45
+#   d1 = sdBox(p1, vector(INFINITY,1,.005)) - .02;
+	sub		___364_p1 $tmp471 $const5 	%line{45} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:46
+# 
+	functioncall	$const7 781 	%line{46} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp578 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp579 $const25 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp578 $tmp579 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp582 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp581 ___363_q $tmp582 	%argrw{"wrr"}
+	length		$tmp580 $tmp581 	%argrw{"wr"}
+	compref		$tmp585 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp587 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp588 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp586 $tmp587 $tmp588 	%argrw{"wrr"}
+	max		$tmp584 $tmp585 $tmp586 	%argrw{"wrr"}
+	min		$tmp583 $tmp584 $const3 	%argrw{"wrr"}
+	add		$tmp576 $tmp580 $tmp583 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:46
+# 
+	sub		___364_d1 $tmp576 $const20 	%line{46} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:48
+#   d = min(d, d1);
+	lt		$tmp589 ___364_d1 ___364_d 	%line{48} %argrw{"wrr"}
+	if		$tmp589 785 785 	%argrw{"r"}
+	assign		___365__ $const26 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:49
+# 
+	min		___364_d ___364_d ___364_d1 	%line{49} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:52
+#   p1[1] = abs(p1[1]);
+	assign		___364_p1 $tmp471 	%line{52} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:53
+#   p1 = p1 - vector(0,.5,-.1);
+	compref		$tmp591 ___364_p1 $const10 	%line{53} %argrw{"wrr"}
+	abs		$tmp590 $tmp591 	%argrw{"wr"}
+	compassign	___364_p1 $const10 $tmp590 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:54
+#   p1[0] = mod(p1[0] + 4.5 , 9) - 3 + 3*(sign(-pos[1])/2 + .5) ;
+	sub		___364_p1 ___364_p1 $const27 	%line{54} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:55
+#   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
+	compref		$tmp594 ___364_p1 $const2 	%line{55} %argrw{"wrr"}
+	add		$tmp595 $tmp594 $const28 	%argrw{"wrr"}
+	functioncall	$const13 798 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp597 $tmp595 $const30 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp596 $tmp597 	%argrw{"wr"}
+	mul		$tmp598 $const30 $tmp596 	%argrw{"wrr"}
+	sub		$tmp593 $tmp595 $tmp598 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:55
+#   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
+	sub		$tmp599 $tmp593 $const18 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{55} %argrw{"wrr"}
+	compref		$tmp601 $tmp471 $const10 	%argrw{"wrr"}
+	neg		$tmp602 $tmp601 	%argrw{"wr"}
+	sign		$tmp600 $tmp602 	%argrw{"wr"}
+	div		$tmp603 $tmp600 $const9 	%argrw{"wrr"}
+	add		$tmp604 $tmp603 $const11 	%argrw{"wrr"}
+	mul		$tmp605 $const18 $tmp604 	%argrw{"wrr"}
+	add		$tmp606 $tmp599 $tmp605 	%argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp606 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:56
+# 
+	functioncall	$const7 821 	%line{56} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp609 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp610 $const31 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp609 $tmp610 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp613 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp612 ___363_q $tmp613 	%argrw{"wrr"}
+	length		$tmp611 $tmp612 	%argrw{"wr"}
+	compref		$tmp616 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp618 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp619 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp617 $tmp618 $tmp619 	%argrw{"wrr"}
+	max		$tmp615 $tmp616 $tmp617 	%argrw{"wrr"}
+	min		$tmp614 $tmp615 $const3 	%argrw{"wrr"}
+	add		$tmp607 $tmp611 $tmp614 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:56
+# 
+	sub		___364_d1 $tmp607 $const20 	%line{56} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:58
+#   d = min(d, d1);
+	lt		$tmp620 ___364_d1 ___364_d 	%line{58} %argrw{"wrr"}
+	if		$tmp620 825 825 	%argrw{"r"}
+	assign		___365__ $const32 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:59
+# 
+	min		___364_d ___364_d ___364_d1 	%line{59} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:61
+# }
+	assign		$tmp469 ___364_d 	%line{61} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:69
+#                           map(pos + vector(0,0,e),_) - map(pos - vector(0,0,e),_)
+	vector		$tmp622 $const3 ___365_e $const3 	%line{69} %argrw{"wrrr"}
+	sub		$tmp623 ___371_pos $tmp622 	%argrw{"wrr"}
+	functioncall	$const4 1023 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:10
+#   pos -= vector(0,0,1);
+	assign		___365__ $const3 	%line{10} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:11
+#   float d = -sdBox(pos, vector(INFINITY,1,2));
+	sub		$tmp623 $tmp623 $const5 	%line{11} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:12
+# 
+	functioncall	$const7 846 	%line{12} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp627 $tmp623 	%line{5} %argrw{"wr"}
+	div		$tmp628 $const6 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp627 $tmp628 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp631 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp630 ___363_q $tmp631 	%argrw{"wrr"}
+	length		$tmp629 $tmp630 	%argrw{"wr"}
+	compref		$tmp634 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp636 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp637 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp635 $tmp636 $tmp637 	%argrw{"wrr"}
+	max		$tmp633 $tmp634 $tmp635 	%argrw{"wrr"}
+	min		$tmp632 $tmp633 $const3 	%argrw{"wrr"}
+	add		$tmp625 $tmp629 $tmp632 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:12
+# 
+	neg		___364_d $tmp625 	%line{12} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:15
+#   p1[0] = mod(p1[0] + .5, 1) - .5 ;
+	sub		___364_p1 $tmp623 $const5 	%line{15} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:16
+#   float d1 = sdBox(p1, vector(.4,.4,.2));
+	compref		$tmp640 ___364_p1 $const2 	%line{16} %argrw{"wrr"}
+	add		$tmp641 $tmp640 $const11 	%argrw{"wrr"}
+	functioncall	$const13 855 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp643 $tmp641 $const12 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp642 $tmp643 	%argrw{"wr"}
+	mul		$tmp644 $const12 $tmp642 	%argrw{"wrr"}
+	sub		$tmp639 $tmp641 $tmp644 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:16
+#   float d1 = sdBox(p1, vector(.4,.4,.2));
+	sub		$tmp645 $tmp639 $const11 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{16} %argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp645 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:17
+# 
+	functioncall	$const7 871 	%line{17} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp647 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp648 $const14 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp647 $tmp648 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp651 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp650 ___363_q $tmp651 	%argrw{"wrr"}
+	length		$tmp649 $tmp650 	%argrw{"wr"}
+	compref		$tmp654 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp656 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp657 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp655 $tmp656 $tmp657 	%argrw{"wrr"}
+	max		$tmp653 $tmp654 $tmp655 	%argrw{"wrr"}
+	min		$tmp652 $tmp653 $const3 	%argrw{"wrr"}
+	add		___364_d1 $tmp649 $tmp652 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:19
+#   d = min(d, d1);
+	lt		$tmp658 ___364_d1 ___364_d 	%line{19} %argrw{"wrr"}
+	if		$tmp658 874 874 	%argrw{"r"}
+	assign		___365__ $const12 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:20
+# 
+	min		___364_d ___364_d ___364_d1 	%line{20} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:24
+#   p1[1] = abs(p1[1]);
+	assign		___364_p1 $tmp623 	%line{24} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:25
+#   p1 = p1 - vector(0,.5,-.25);
+	compref		$tmp660 ___364_p1 $const10 	%line{25} %argrw{"wrr"}
+	abs		$tmp659 $tmp660 	%argrw{"wr"}
+	compassign	___364_p1 $const10 $tmp659 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:26
+#   p1[0] = mod(p1[0] + 1.5, 3) - 1.5 ;
+	sub		___364_p1 ___364_p1 $const15 	%line{26} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:27
+#   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
+	compref		$tmp663 ___364_p1 $const2 	%line{27} %argrw{"wrr"}
+	add		$tmp664 $tmp663 $const16 	%argrw{"wrr"}
+	functioncall	$const13 887 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp666 $tmp664 $const18 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp665 $tmp666 	%argrw{"wr"}
+	mul		$tmp667 $const18 $tmp665 	%argrw{"wrr"}
+	sub		$tmp662 $tmp664 $tmp667 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:27
+#   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
+	sub		$tmp668 $tmp662 $const16 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{27} %argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp668 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:28
+#   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
+	functioncall	$const7 903 	%line{28} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp671 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp672 $const19 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp671 $tmp672 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp675 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp674 ___363_q $tmp675 	%argrw{"wrr"}
+	length		$tmp673 $tmp674 	%argrw{"wr"}
+	compref		$tmp678 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp680 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp681 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp679 $tmp680 $tmp681 	%argrw{"wrr"}
+	max		$tmp677 $tmp678 $tmp679 	%argrw{"wrr"}
+	min		$tmp676 $tmp677 $const3 	%argrw{"wrr"}
+	add		$tmp669 $tmp673 $tmp676 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:28
+#   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
+	sub		___364_d1 $tmp669 $const20 	%line{28} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:29
+#   d1 = max(d1, -d2);
+	functioncall	$const7 918 	%line{29} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp684 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp685 $const21 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp684 $tmp685 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp688 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp687 ___363_q $tmp688 	%argrw{"wrr"}
+	length		$tmp686 $tmp687 	%argrw{"wr"}
+	compref		$tmp691 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp693 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp694 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp692 $tmp693 $tmp694 	%argrw{"wrr"}
+	max		$tmp690 $tmp691 $tmp692 	%argrw{"wrr"}
+	min		$tmp689 $tmp690 $const3 	%argrw{"wrr"}
+	add		$tmp682 $tmp686 $tmp689 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:29
+#   d1 = max(d1, -d2);
+	sub		___364_d2 $tmp682 $const20 	%line{29} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:30
+#   d2 = sdBox(p1 - vector(0,0,0), vector(.8,.1,1.4)) - .02;
+	neg		$tmp695 ___364_d2 	%line{30} %argrw{"wr"}
+	max		___364_d1 ___364_d1 $tmp695 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:31
+#   d1 = min(d1,d2);
+	sub		$tmp698 ___364_p1 $const1 	%line{31} %argrw{"wrr"}
+	functioncall	$const7 936 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp700 $tmp698 	%line{5} %argrw{"wr"}
+	div		$tmp701 $const22 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp700 $tmp701 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp704 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp703 ___363_q $tmp704 	%argrw{"wrr"}
+	length		$tmp702 $tmp703 	%argrw{"wr"}
+	compref		$tmp707 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp709 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp710 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp708 $tmp709 $tmp710 	%argrw{"wrr"}
+	max		$tmp706 $tmp707 $tmp708 	%argrw{"wrr"}
+	min		$tmp705 $tmp706 $const3 	%argrw{"wrr"}
+	add		$tmp696 $tmp702 $tmp705 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:31
+#   d1 = min(d1,d2);
+	sub		___364_d2 $tmp696 $const20 	%line{31} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:32
+# 
+	min		___364_d1 ___364_d1 ___364_d2 	%line{32} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:34
+#   d = min(d, d1);
+	lt		$tmp711 ___364_d1 ___364_d 	%line{34} %argrw{"wrr"}
+	if		$tmp711 941 941 	%argrw{"r"}
+	assign		___365__ $const9 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:35
+# 
+	min		___364_d ___364_d ___364_d1 	%line{35} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:38
+#   d1 = sdBox(p1, vector(INFINITY,.7,.05)) - .02;
+	sub		___364_p1 $tmp623 $const23 	%line{38} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:39
+# 
+	functioncall	$const7 957 	%line{39} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp715 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp716 $const24 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp715 $tmp716 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp719 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp718 ___363_q $tmp719 	%argrw{"wrr"}
+	length		$tmp717 $tmp718 	%argrw{"wr"}
+	compref		$tmp722 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp724 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp725 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp723 $tmp724 $tmp725 	%argrw{"wrr"}
+	max		$tmp721 $tmp722 $tmp723 	%argrw{"wrr"}
+	min		$tmp720 $tmp721 $const3 	%argrw{"wrr"}
+	add		$tmp713 $tmp717 $tmp720 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:39
+# 
+	sub		___364_d1 $tmp713 $const20 	%line{39} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:41
+#   d = min(d, d1);
+	lt		$tmp726 ___364_d1 ___364_d 	%line{41} %argrw{"wrr"}
+	if		$tmp726 961 961 	%argrw{"r"}
+	assign		___365__ $const18 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:42
+# 
+	min		___364_d ___364_d ___364_d1 	%line{42} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:45
+#   d1 = sdBox(p1, vector(INFINITY,1,.005)) - .02;
+	sub		___364_p1 $tmp623 $const5 	%line{45} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:46
+# 
+	functioncall	$const7 977 	%line{46} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp730 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp731 $const25 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp730 $tmp731 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp734 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp733 ___363_q $tmp734 	%argrw{"wrr"}
+	length		$tmp732 $tmp733 	%argrw{"wr"}
+	compref		$tmp737 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp739 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp740 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp738 $tmp739 $tmp740 	%argrw{"wrr"}
+	max		$tmp736 $tmp737 $tmp738 	%argrw{"wrr"}
+	min		$tmp735 $tmp736 $const3 	%argrw{"wrr"}
+	add		$tmp728 $tmp732 $tmp735 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:46
+# 
+	sub		___364_d1 $tmp728 $const20 	%line{46} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:48
+#   d = min(d, d1);
+	lt		$tmp741 ___364_d1 ___364_d 	%line{48} %argrw{"wrr"}
+	if		$tmp741 981 981 	%argrw{"r"}
+	assign		___365__ $const26 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:49
+# 
+	min		___364_d ___364_d ___364_d1 	%line{49} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:52
+#   p1[1] = abs(p1[1]);
+	assign		___364_p1 $tmp623 	%line{52} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:53
+#   p1 = p1 - vector(0,.5,-.1);
+	compref		$tmp743 ___364_p1 $const10 	%line{53} %argrw{"wrr"}
+	abs		$tmp742 $tmp743 	%argrw{"wr"}
+	compassign	___364_p1 $const10 $tmp742 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:54
+#   p1[0] = mod(p1[0] + 4.5 , 9) - 3 + 3*(sign(-pos[1])/2 + .5) ;
+	sub		___364_p1 ___364_p1 $const27 	%line{54} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:55
+#   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
+	compref		$tmp746 ___364_p1 $const2 	%line{55} %argrw{"wrr"}
+	add		$tmp747 $tmp746 $const28 	%argrw{"wrr"}
+	functioncall	$const13 994 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp749 $tmp747 $const30 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp748 $tmp749 	%argrw{"wr"}
+	mul		$tmp750 $const30 $tmp748 	%argrw{"wrr"}
+	sub		$tmp745 $tmp747 $tmp750 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:55
+#   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
+	sub		$tmp751 $tmp745 $const18 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{55} %argrw{"wrr"}
+	compref		$tmp753 $tmp623 $const10 	%argrw{"wrr"}
+	neg		$tmp754 $tmp753 	%argrw{"wr"}
+	sign		$tmp752 $tmp754 	%argrw{"wr"}
+	div		$tmp755 $tmp752 $const9 	%argrw{"wrr"}
+	add		$tmp756 $tmp755 $const11 	%argrw{"wrr"}
+	mul		$tmp757 $const18 $tmp756 	%argrw{"wrr"}
+	add		$tmp758 $tmp751 $tmp757 	%argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp758 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:56
+# 
+	functioncall	$const7 1017 	%line{56} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp761 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp762 $const31 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp761 $tmp762 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp765 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp764 ___363_q $tmp765 	%argrw{"wrr"}
+	length		$tmp763 $tmp764 	%argrw{"wr"}
+	compref		$tmp768 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp770 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp771 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp769 $tmp770 $tmp771 	%argrw{"wrr"}
+	max		$tmp767 $tmp768 $tmp769 	%argrw{"wrr"}
+	min		$tmp766 $tmp767 $const3 	%argrw{"wrr"}
+	add		$tmp759 $tmp763 $tmp766 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:56
+# 
+	sub		___364_d1 $tmp759 $const20 	%line{56} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:58
+#   d = min(d, d1);
+	lt		$tmp772 ___364_d1 ___364_d 	%line{58} %argrw{"wrr"}
+	if		$tmp772 1021 1021 	%argrw{"r"}
+	assign		___365__ $const32 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:59
+# 
+	min		___364_d ___364_d ___364_d1 	%line{59} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:61
+# }
+	assign		$tmp621 ___364_d 	%line{61} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:69
+#                           map(pos + vector(0,0,e),_) - map(pos - vector(0,0,e),_)
+	sub		$tmp773 $tmp469 $tmp621 	%line{69} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:70
+#                           ));
+	vector		$tmp775 $const3 $const3 ___365_e 	%line{70} %argrw{"wrrr"}
+	add		$tmp776 ___371_pos $tmp775 	%argrw{"wrr"}
+	functioncall	$const4 1220 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:10
+#   pos -= vector(0,0,1);
+	assign		___365__ $const3 	%line{10} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:11
+#   float d = -sdBox(pos, vector(INFINITY,1,2));
+	sub		$tmp776 $tmp776 $const5 	%line{11} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:12
+# 
+	functioncall	$const7 1043 	%line{12} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp780 $tmp776 	%line{5} %argrw{"wr"}
+	div		$tmp781 $const6 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp780 $tmp781 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp784 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp783 ___363_q $tmp784 	%argrw{"wrr"}
+	length		$tmp782 $tmp783 	%argrw{"wr"}
+	compref		$tmp787 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp789 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp790 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp788 $tmp789 $tmp790 	%argrw{"wrr"}
+	max		$tmp786 $tmp787 $tmp788 	%argrw{"wrr"}
+	min		$tmp785 $tmp786 $const3 	%argrw{"wrr"}
+	add		$tmp778 $tmp782 $tmp785 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:12
+# 
+	neg		___364_d $tmp778 	%line{12} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:15
+#   p1[0] = mod(p1[0] + .5, 1) - .5 ;
+	sub		___364_p1 $tmp776 $const5 	%line{15} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:16
+#   float d1 = sdBox(p1, vector(.4,.4,.2));
+	compref		$tmp793 ___364_p1 $const2 	%line{16} %argrw{"wrr"}
+	add		$tmp794 $tmp793 $const11 	%argrw{"wrr"}
+	functioncall	$const13 1052 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp796 $tmp794 $const12 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp795 $tmp796 	%argrw{"wr"}
+	mul		$tmp797 $const12 $tmp795 	%argrw{"wrr"}
+	sub		$tmp792 $tmp794 $tmp797 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:16
+#   float d1 = sdBox(p1, vector(.4,.4,.2));
+	sub		$tmp798 $tmp792 $const11 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{16} %argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp798 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:17
+# 
+	functioncall	$const7 1068 	%line{17} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp800 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp801 $const14 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp800 $tmp801 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp804 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp803 ___363_q $tmp804 	%argrw{"wrr"}
+	length		$tmp802 $tmp803 	%argrw{"wr"}
+	compref		$tmp807 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp809 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp810 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp808 $tmp809 $tmp810 	%argrw{"wrr"}
+	max		$tmp806 $tmp807 $tmp808 	%argrw{"wrr"}
+	min		$tmp805 $tmp806 $const3 	%argrw{"wrr"}
+	add		___364_d1 $tmp802 $tmp805 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:19
+#   d = min(d, d1);
+	lt		$tmp811 ___364_d1 ___364_d 	%line{19} %argrw{"wrr"}
+	if		$tmp811 1071 1071 	%argrw{"r"}
+	assign		___365__ $const12 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:20
+# 
+	min		___364_d ___364_d ___364_d1 	%line{20} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:24
+#   p1[1] = abs(p1[1]);
+	assign		___364_p1 $tmp776 	%line{24} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:25
+#   p1 = p1 - vector(0,.5,-.25);
+	compref		$tmp813 ___364_p1 $const10 	%line{25} %argrw{"wrr"}
+	abs		$tmp812 $tmp813 	%argrw{"wr"}
+	compassign	___364_p1 $const10 $tmp812 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:26
+#   p1[0] = mod(p1[0] + 1.5, 3) - 1.5 ;
+	sub		___364_p1 ___364_p1 $const15 	%line{26} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:27
+#   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
+	compref		$tmp816 ___364_p1 $const2 	%line{27} %argrw{"wrr"}
+	add		$tmp817 $tmp816 $const16 	%argrw{"wrr"}
+	functioncall	$const13 1084 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp819 $tmp817 $const18 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp818 $tmp819 	%argrw{"wr"}
+	mul		$tmp820 $const18 $tmp818 	%argrw{"wrr"}
+	sub		$tmp815 $tmp817 $tmp820 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:27
+#   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
+	sub		$tmp821 $tmp815 $const16 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{27} %argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp821 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:28
+#   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
+	functioncall	$const7 1100 	%line{28} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp824 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp825 $const19 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp824 $tmp825 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp828 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp827 ___363_q $tmp828 	%argrw{"wrr"}
+	length		$tmp826 $tmp827 	%argrw{"wr"}
+	compref		$tmp831 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp833 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp834 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp832 $tmp833 $tmp834 	%argrw{"wrr"}
+	max		$tmp830 $tmp831 $tmp832 	%argrw{"wrr"}
+	min		$tmp829 $tmp830 $const3 	%argrw{"wrr"}
+	add		$tmp822 $tmp826 $tmp829 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:28
+#   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
+	sub		___364_d1 $tmp822 $const20 	%line{28} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:29
+#   d1 = max(d1, -d2);
+	functioncall	$const7 1115 	%line{29} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp837 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp838 $const21 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp837 $tmp838 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp841 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp840 ___363_q $tmp841 	%argrw{"wrr"}
+	length		$tmp839 $tmp840 	%argrw{"wr"}
+	compref		$tmp844 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp846 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp847 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp845 $tmp846 $tmp847 	%argrw{"wrr"}
+	max		$tmp843 $tmp844 $tmp845 	%argrw{"wrr"}
+	min		$tmp842 $tmp843 $const3 	%argrw{"wrr"}
+	add		$tmp835 $tmp839 $tmp842 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:29
+#   d1 = max(d1, -d2);
+	sub		___364_d2 $tmp835 $const20 	%line{29} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:30
+#   d2 = sdBox(p1 - vector(0,0,0), vector(.8,.1,1.4)) - .02;
+	neg		$tmp848 ___364_d2 	%line{30} %argrw{"wr"}
+	max		___364_d1 ___364_d1 $tmp848 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:31
+#   d1 = min(d1,d2);
+	sub		$tmp851 ___364_p1 $const1 	%line{31} %argrw{"wrr"}
+	functioncall	$const7 1133 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp853 $tmp851 	%line{5} %argrw{"wr"}
+	div		$tmp854 $const22 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp853 $tmp854 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp857 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp856 ___363_q $tmp857 	%argrw{"wrr"}
+	length		$tmp855 $tmp856 	%argrw{"wr"}
+	compref		$tmp860 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp862 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp863 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp861 $tmp862 $tmp863 	%argrw{"wrr"}
+	max		$tmp859 $tmp860 $tmp861 	%argrw{"wrr"}
+	min		$tmp858 $tmp859 $const3 	%argrw{"wrr"}
+	add		$tmp849 $tmp855 $tmp858 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:31
+#   d1 = min(d1,d2);
+	sub		___364_d2 $tmp849 $const20 	%line{31} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:32
+# 
+	min		___364_d1 ___364_d1 ___364_d2 	%line{32} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:34
+#   d = min(d, d1);
+	lt		$tmp864 ___364_d1 ___364_d 	%line{34} %argrw{"wrr"}
+	if		$tmp864 1138 1138 	%argrw{"r"}
+	assign		___365__ $const9 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:35
+# 
+	min		___364_d ___364_d ___364_d1 	%line{35} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:38
+#   d1 = sdBox(p1, vector(INFINITY,.7,.05)) - .02;
+	sub		___364_p1 $tmp776 $const23 	%line{38} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:39
+# 
+	functioncall	$const7 1154 	%line{39} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp868 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp869 $const24 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp868 $tmp869 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp872 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp871 ___363_q $tmp872 	%argrw{"wrr"}
+	length		$tmp870 $tmp871 	%argrw{"wr"}
+	compref		$tmp875 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp877 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp878 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp876 $tmp877 $tmp878 	%argrw{"wrr"}
+	max		$tmp874 $tmp875 $tmp876 	%argrw{"wrr"}
+	min		$tmp873 $tmp874 $const3 	%argrw{"wrr"}
+	add		$tmp866 $tmp870 $tmp873 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:39
+# 
+	sub		___364_d1 $tmp866 $const20 	%line{39} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:41
+#   d = min(d, d1);
+	lt		$tmp879 ___364_d1 ___364_d 	%line{41} %argrw{"wrr"}
+	if		$tmp879 1158 1158 	%argrw{"r"}
+	assign		___365__ $const18 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:42
+# 
+	min		___364_d ___364_d ___364_d1 	%line{42} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:45
+#   d1 = sdBox(p1, vector(INFINITY,1,.005)) - .02;
+	sub		___364_p1 $tmp776 $const5 	%line{45} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:46
+# 
+	functioncall	$const7 1174 	%line{46} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp883 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp884 $const25 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp883 $tmp884 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp887 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp886 ___363_q $tmp887 	%argrw{"wrr"}
+	length		$tmp885 $tmp886 	%argrw{"wr"}
+	compref		$tmp890 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp892 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp893 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp891 $tmp892 $tmp893 	%argrw{"wrr"}
+	max		$tmp889 $tmp890 $tmp891 	%argrw{"wrr"}
+	min		$tmp888 $tmp889 $const3 	%argrw{"wrr"}
+	add		$tmp881 $tmp885 $tmp888 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:46
+# 
+	sub		___364_d1 $tmp881 $const20 	%line{46} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:48
+#   d = min(d, d1);
+	lt		$tmp894 ___364_d1 ___364_d 	%line{48} %argrw{"wrr"}
+	if		$tmp894 1178 1178 	%argrw{"r"}
+	assign		___365__ $const26 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:49
+# 
+	min		___364_d ___364_d ___364_d1 	%line{49} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:52
+#   p1[1] = abs(p1[1]);
+	assign		___364_p1 $tmp776 	%line{52} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:53
+#   p1 = p1 - vector(0,.5,-.1);
+	compref		$tmp896 ___364_p1 $const10 	%line{53} %argrw{"wrr"}
+	abs		$tmp895 $tmp896 	%argrw{"wr"}
+	compassign	___364_p1 $const10 $tmp895 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:54
+#   p1[0] = mod(p1[0] + 4.5 , 9) - 3 + 3*(sign(-pos[1])/2 + .5) ;
+	sub		___364_p1 ___364_p1 $const27 	%line{54} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:55
+#   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
+	compref		$tmp899 ___364_p1 $const2 	%line{55} %argrw{"wrr"}
+	add		$tmp900 $tmp899 $const28 	%argrw{"wrr"}
+	functioncall	$const13 1191 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp902 $tmp900 $const30 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp901 $tmp902 	%argrw{"wr"}
+	mul		$tmp903 $const30 $tmp901 	%argrw{"wrr"}
+	sub		$tmp898 $tmp900 $tmp903 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:55
+#   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
+	sub		$tmp904 $tmp898 $const18 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{55} %argrw{"wrr"}
+	compref		$tmp906 $tmp776 $const10 	%argrw{"wrr"}
+	neg		$tmp907 $tmp906 	%argrw{"wr"}
+	sign		$tmp905 $tmp907 	%argrw{"wr"}
+	div		$tmp908 $tmp905 $const9 	%argrw{"wrr"}
+	add		$tmp909 $tmp908 $const11 	%argrw{"wrr"}
+	mul		$tmp910 $const18 $tmp909 	%argrw{"wrr"}
+	add		$tmp911 $tmp904 $tmp910 	%argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp911 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:56
+# 
+	functioncall	$const7 1214 	%line{56} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp914 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp915 $const31 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp914 $tmp915 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp918 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp917 ___363_q $tmp918 	%argrw{"wrr"}
+	length		$tmp916 $tmp917 	%argrw{"wr"}
+	compref		$tmp921 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp923 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp924 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp922 $tmp923 $tmp924 	%argrw{"wrr"}
+	max		$tmp920 $tmp921 $tmp922 	%argrw{"wrr"}
+	min		$tmp919 $tmp920 $const3 	%argrw{"wrr"}
+	add		$tmp912 $tmp916 $tmp919 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:56
+# 
+	sub		___364_d1 $tmp912 $const20 	%line{56} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:58
+#   d = min(d, d1);
+	lt		$tmp925 ___364_d1 ___364_d 	%line{58} %argrw{"wrr"}
+	if		$tmp925 1218 1218 	%argrw{"r"}
+	assign		___365__ $const32 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:59
+# 
+	min		___364_d ___364_d ___364_d1 	%line{59} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:61
+# }
+	assign		$tmp774 ___364_d 	%line{61} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:70
+#                           ));
+	vector		$tmp927 $const3 $const3 ___365_e 	%line{70} %argrw{"wrrr"}
+	sub		$tmp928 ___371_pos $tmp927 	%argrw{"wrr"}
+	functioncall	$const4 1416 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:10
+#   pos -= vector(0,0,1);
+	assign		___365__ $const3 	%line{10} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:11
+#   float d = -sdBox(pos, vector(INFINITY,1,2));
+	sub		$tmp928 $tmp928 $const5 	%line{11} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:12
+# 
+	functioncall	$const7 1239 	%line{12} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp932 $tmp928 	%line{5} %argrw{"wr"}
+	div		$tmp933 $const6 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp932 $tmp933 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp936 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp935 ___363_q $tmp936 	%argrw{"wrr"}
+	length		$tmp934 $tmp935 	%argrw{"wr"}
+	compref		$tmp939 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp941 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp942 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp940 $tmp941 $tmp942 	%argrw{"wrr"}
+	max		$tmp938 $tmp939 $tmp940 	%argrw{"wrr"}
+	min		$tmp937 $tmp938 $const3 	%argrw{"wrr"}
+	add		$tmp930 $tmp934 $tmp937 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:12
+# 
+	neg		___364_d $tmp930 	%line{12} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:15
+#   p1[0] = mod(p1[0] + .5, 1) - .5 ;
+	sub		___364_p1 $tmp928 $const5 	%line{15} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:16
+#   float d1 = sdBox(p1, vector(.4,.4,.2));
+	compref		$tmp945 ___364_p1 $const2 	%line{16} %argrw{"wrr"}
+	add		$tmp946 $tmp945 $const11 	%argrw{"wrr"}
+	functioncall	$const13 1248 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp948 $tmp946 $const12 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp947 $tmp948 	%argrw{"wr"}
+	mul		$tmp949 $const12 $tmp947 	%argrw{"wrr"}
+	sub		$tmp944 $tmp946 $tmp949 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:16
+#   float d1 = sdBox(p1, vector(.4,.4,.2));
+	sub		$tmp950 $tmp944 $const11 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{16} %argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp950 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:17
+# 
+	functioncall	$const7 1264 	%line{17} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp952 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp953 $const14 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp952 $tmp953 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp956 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp955 ___363_q $tmp956 	%argrw{"wrr"}
+	length		$tmp954 $tmp955 	%argrw{"wr"}
+	compref		$tmp959 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp961 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp962 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp960 $tmp961 $tmp962 	%argrw{"wrr"}
+	max		$tmp958 $tmp959 $tmp960 	%argrw{"wrr"}
+	min		$tmp957 $tmp958 $const3 	%argrw{"wrr"}
+	add		___364_d1 $tmp954 $tmp957 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:19
+#   d = min(d, d1);
+	lt		$tmp963 ___364_d1 ___364_d 	%line{19} %argrw{"wrr"}
+	if		$tmp963 1267 1267 	%argrw{"r"}
+	assign		___365__ $const12 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:20
+# 
+	min		___364_d ___364_d ___364_d1 	%line{20} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:24
+#   p1[1] = abs(p1[1]);
+	assign		___364_p1 $tmp928 	%line{24} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:25
+#   p1 = p1 - vector(0,.5,-.25);
+	compref		$tmp965 ___364_p1 $const10 	%line{25} %argrw{"wrr"}
+	abs		$tmp964 $tmp965 	%argrw{"wr"}
+	compassign	___364_p1 $const10 $tmp964 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:26
+#   p1[0] = mod(p1[0] + 1.5, 3) - 1.5 ;
+	sub		___364_p1 ___364_p1 $const15 	%line{26} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:27
+#   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
+	compref		$tmp968 ___364_p1 $const2 	%line{27} %argrw{"wrr"}
+	add		$tmp969 $tmp968 $const16 	%argrw{"wrr"}
+	functioncall	$const13 1280 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp971 $tmp969 $const18 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp970 $tmp971 	%argrw{"wr"}
+	mul		$tmp972 $const18 $tmp970 	%argrw{"wrr"}
+	sub		$tmp967 $tmp969 $tmp972 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:27
+#   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
+	sub		$tmp973 $tmp967 $const16 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{27} %argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp973 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:28
+#   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
+	functioncall	$const7 1296 	%line{28} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp976 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp977 $const19 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp976 $tmp977 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp980 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp979 ___363_q $tmp980 	%argrw{"wrr"}
+	length		$tmp978 $tmp979 	%argrw{"wr"}
+	compref		$tmp983 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp985 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp986 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp984 $tmp985 $tmp986 	%argrw{"wrr"}
+	max		$tmp982 $tmp983 $tmp984 	%argrw{"wrr"}
+	min		$tmp981 $tmp982 $const3 	%argrw{"wrr"}
+	add		$tmp974 $tmp978 $tmp981 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:28
+#   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
+	sub		___364_d1 $tmp974 $const20 	%line{28} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:29
+#   d1 = max(d1, -d2);
+	functioncall	$const7 1311 	%line{29} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp989 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp990 $const21 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp989 $tmp990 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp993 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp992 ___363_q $tmp993 	%argrw{"wrr"}
+	length		$tmp991 $tmp992 	%argrw{"wr"}
+	compref		$tmp996 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp998 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp999 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp997 $tmp998 $tmp999 	%argrw{"wrr"}
+	max		$tmp995 $tmp996 $tmp997 	%argrw{"wrr"}
+	min		$tmp994 $tmp995 $const3 	%argrw{"wrr"}
+	add		$tmp987 $tmp991 $tmp994 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:29
+#   d1 = max(d1, -d2);
+	sub		___364_d2 $tmp987 $const20 	%line{29} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:30
+#   d2 = sdBox(p1 - vector(0,0,0), vector(.8,.1,1.4)) - .02;
+	neg		$tmp1000 ___364_d2 	%line{30} %argrw{"wr"}
+	max		___364_d1 ___364_d1 $tmp1000 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:31
+#   d1 = min(d1,d2);
+	sub		$tmp1003 ___364_p1 $const1 	%line{31} %argrw{"wrr"}
+	functioncall	$const7 1329 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp1005 $tmp1003 	%line{5} %argrw{"wr"}
+	div		$tmp1006 $const22 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp1005 $tmp1006 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp1009 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp1008 ___363_q $tmp1009 	%argrw{"wrr"}
+	length		$tmp1007 $tmp1008 	%argrw{"wr"}
+	compref		$tmp1012 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp1014 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp1015 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp1013 $tmp1014 $tmp1015 	%argrw{"wrr"}
+	max		$tmp1011 $tmp1012 $tmp1013 	%argrw{"wrr"}
+	min		$tmp1010 $tmp1011 $const3 	%argrw{"wrr"}
+	add		$tmp1001 $tmp1007 $tmp1010 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:31
+#   d1 = min(d1,d2);
+	sub		___364_d2 $tmp1001 $const20 	%line{31} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:32
+# 
+	min		___364_d1 ___364_d1 ___364_d2 	%line{32} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:34
+#   d = min(d, d1);
+	lt		$tmp1016 ___364_d1 ___364_d 	%line{34} %argrw{"wrr"}
+	if		$tmp1016 1334 1334 	%argrw{"r"}
+	assign		___365__ $const9 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:35
+# 
+	min		___364_d ___364_d ___364_d1 	%line{35} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:38
+#   d1 = sdBox(p1, vector(INFINITY,.7,.05)) - .02;
+	sub		___364_p1 $tmp928 $const23 	%line{38} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:39
+# 
+	functioncall	$const7 1350 	%line{39} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp1020 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp1021 $const24 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp1020 $tmp1021 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp1024 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp1023 ___363_q $tmp1024 	%argrw{"wrr"}
+	length		$tmp1022 $tmp1023 	%argrw{"wr"}
+	compref		$tmp1027 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp1029 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp1030 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp1028 $tmp1029 $tmp1030 	%argrw{"wrr"}
+	max		$tmp1026 $tmp1027 $tmp1028 	%argrw{"wrr"}
+	min		$tmp1025 $tmp1026 $const3 	%argrw{"wrr"}
+	add		$tmp1018 $tmp1022 $tmp1025 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:39
+# 
+	sub		___364_d1 $tmp1018 $const20 	%line{39} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:41
+#   d = min(d, d1);
+	lt		$tmp1031 ___364_d1 ___364_d 	%line{41} %argrw{"wrr"}
+	if		$tmp1031 1354 1354 	%argrw{"r"}
+	assign		___365__ $const18 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:42
+# 
+	min		___364_d ___364_d ___364_d1 	%line{42} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:45
+#   d1 = sdBox(p1, vector(INFINITY,1,.005)) - .02;
+	sub		___364_p1 $tmp928 $const5 	%line{45} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:46
+# 
+	functioncall	$const7 1370 	%line{46} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp1035 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp1036 $const25 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp1035 $tmp1036 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp1039 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp1038 ___363_q $tmp1039 	%argrw{"wrr"}
+	length		$tmp1037 $tmp1038 	%argrw{"wr"}
+	compref		$tmp1042 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp1044 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp1045 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp1043 $tmp1044 $tmp1045 	%argrw{"wrr"}
+	max		$tmp1041 $tmp1042 $tmp1043 	%argrw{"wrr"}
+	min		$tmp1040 $tmp1041 $const3 	%argrw{"wrr"}
+	add		$tmp1033 $tmp1037 $tmp1040 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:46
+# 
+	sub		___364_d1 $tmp1033 $const20 	%line{46} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:48
+#   d = min(d, d1);
+	lt		$tmp1046 ___364_d1 ___364_d 	%line{48} %argrw{"wrr"}
+	if		$tmp1046 1374 1374 	%argrw{"r"}
+	assign		___365__ $const26 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:49
+# 
+	min		___364_d ___364_d ___364_d1 	%line{49} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:52
+#   p1[1] = abs(p1[1]);
+	assign		___364_p1 $tmp928 	%line{52} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:53
+#   p1 = p1 - vector(0,.5,-.1);
+	compref		$tmp1048 ___364_p1 $const10 	%line{53} %argrw{"wrr"}
+	abs		$tmp1047 $tmp1048 	%argrw{"wr"}
+	compassign	___364_p1 $const10 $tmp1047 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:54
+#   p1[0] = mod(p1[0] + 4.5 , 9) - 3 + 3*(sign(-pos[1])/2 + .5) ;
+	sub		___364_p1 ___364_p1 $const27 	%line{54} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:55
+#   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
+	compref		$tmp1051 ___364_p1 $const2 	%line{55} %argrw{"wrr"}
+	add		$tmp1052 $tmp1051 $const28 	%argrw{"wrr"}
+	functioncall	$const13 1387 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp1054 $tmp1052 $const30 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp1053 $tmp1054 	%argrw{"wr"}
+	mul		$tmp1055 $const30 $tmp1053 	%argrw{"wrr"}
+	sub		$tmp1050 $tmp1052 $tmp1055 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:55
+#   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
+	sub		$tmp1056 $tmp1050 $const18 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{55} %argrw{"wrr"}
+	compref		$tmp1058 $tmp928 $const10 	%argrw{"wrr"}
+	neg		$tmp1059 $tmp1058 	%argrw{"wr"}
+	sign		$tmp1057 $tmp1059 	%argrw{"wr"}
+	div		$tmp1060 $tmp1057 $const9 	%argrw{"wrr"}
+	add		$tmp1061 $tmp1060 $const11 	%argrw{"wrr"}
+	mul		$tmp1062 $const18 $tmp1061 	%argrw{"wrr"}
+	add		$tmp1063 $tmp1056 $tmp1062 	%argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp1063 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:56
+# 
+	functioncall	$const7 1410 	%line{56} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp1066 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp1067 $const31 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp1066 $tmp1067 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp1070 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp1069 ___363_q $tmp1070 	%argrw{"wrr"}
+	length		$tmp1068 $tmp1069 	%argrw{"wr"}
+	compref		$tmp1073 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp1075 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp1076 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp1074 $tmp1075 $tmp1076 	%argrw{"wrr"}
+	max		$tmp1072 $tmp1073 $tmp1074 	%argrw{"wrr"}
+	min		$tmp1071 $tmp1072 $const3 	%argrw{"wrr"}
+	add		$tmp1064 $tmp1068 $tmp1071 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:56
+# 
+	sub		___364_d1 $tmp1064 $const20 	%line{56} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:58
+#   d = min(d, d1);
+	lt		$tmp1077 ___364_d1 ___364_d 	%line{58} %argrw{"wrr"}
+	if		$tmp1077 1414 1414 	%argrw{"r"}
+	assign		___365__ $const32 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:59
+# 
+	min		___364_d ___364_d ___364_d1 	%line{59} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:61
+# }
+	assign		$tmp926 ___364_d 	%line{61} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:70
+#                           ));
+	sub		$tmp1078 $tmp774 $tmp926 	%line{70} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:67
+#                           map(pos + vector(e,0,0),_) - map(pos - vector(e,0,0),_),
+	vector		$tmp163 $tmp468 $tmp773 $tmp1078 	%line{67} %argrw{"wrrr"}
+	normalize	___371_norm $tmp163 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:151
+#     float spot_diff = clamp(dot(norm, spot_dir), 0.0, 1.0);
+	compref		$tmp1080 ___371_pos $const2 	%line{151} %argrw{"wrr"}
+	vector		$tmp1079 $tmp1080 $const3 $const45 	%argrw{"wrrr"}
+	sub		$tmp1081 $tmp1079 ___371_pos 	%argrw{"wrr"}
+	normalize	___371_spot_dir $tmp1081 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:152
+#     float spot_sha = castShadow(pos + plank*norm, spot_dir, plank,
+	dot		$tmp1082 ___371_norm ___371_spot_dir 	%line{152} %argrw{"wrr"}
+	functioncall	$const46 1427 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:163
+# float  clamp (float x, float minval, float maxval) { return max(min(x,maxval),minval); }
+	min		$tmp1083 $tmp1082 $const12 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{163} %argrw{"wrr"}
+	max		___371_spot_diff $tmp1083 $const3 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:153
+#                                  length(vector(pos[0],0,1.7) - pos), 4);
+	mul		$tmp1084 plank ___371_norm 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{153} %argrw{"wrr"}
+	add		$tmp1085 ___371_pos $tmp1084 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:154
+#     float sky_diff = clamp(.6 + .4*dot(norm, vector(0,0,1)), 0.0, 1.0);
+	compref		$tmp1088 ___371_pos $const2 	%line{154} %argrw{"wrr"}
+	vector		$tmp1087 $tmp1088 $const3 $const45 	%argrw{"wrrr"}
+	sub		$tmp1089 $tmp1087 ___371_pos 	%argrw{"wrr"}
+	length		$tmp1086 $tmp1089 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:153
+#                                  length(vector(pos[0],0,1.7) - pos), 4);
+	functioncall	$const48 1644 	%line{153} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:83
+#   for ( float t=plank; t<tmax; ){
+	assign		___366_res $const12 	%line{83} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:84
+#     vector pos = ro + rd * t;
+	for		$tmp1091 1437 1439 1643 1643 	%line{84} %argrw{"r"}
+	assign		___367_t plank 	%argrw{"wr"}
+	lt		$tmp1090 ___367_t $tmp1086 	%argrw{"wrr"}
+	neq		$tmp1091 $tmp1090 $const2 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:85
+# 
+	mul		$tmp1092 ___371_spot_dir ___367_t 	%line{85} %argrw{"wrr"}
+	add		___368_pos $tmp1085 $tmp1092 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:88
+# 
+	functioncall	$const4 1635 	%line{88} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:10
+#   pos -= vector(0,0,1);
+	assign		___368__ $const3 	%line{10} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:11
+#   float d = -sdBox(pos, vector(INFINITY,1,2));
+	sub		___368_pos ___368_pos $const5 	%line{11} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:12
+# 
+	functioncall	$const7 1458 	%line{12} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp1096 ___368_pos 	%line{5} %argrw{"wr"}
+	div		$tmp1097 $const6 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp1096 $tmp1097 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp1100 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp1099 ___363_q $tmp1100 	%argrw{"wrr"}
+	length		$tmp1098 $tmp1099 	%argrw{"wr"}
+	compref		$tmp1103 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp1105 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp1106 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp1104 $tmp1105 $tmp1106 	%argrw{"wrr"}
+	max		$tmp1102 $tmp1103 $tmp1104 	%argrw{"wrr"}
+	min		$tmp1101 $tmp1102 $const3 	%argrw{"wrr"}
+	add		$tmp1094 $tmp1098 $tmp1101 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:12
+# 
+	neg		___364_d $tmp1094 	%line{12} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:15
+#   p1[0] = mod(p1[0] + .5, 1) - .5 ;
+	sub		___364_p1 ___368_pos $const5 	%line{15} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:16
+#   float d1 = sdBox(p1, vector(.4,.4,.2));
+	compref		$tmp1109 ___364_p1 $const2 	%line{16} %argrw{"wrr"}
+	add		$tmp1110 $tmp1109 $const11 	%argrw{"wrr"}
+	functioncall	$const13 1467 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp1112 $tmp1110 $const12 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp1111 $tmp1112 	%argrw{"wr"}
+	mul		$tmp1113 $const12 $tmp1111 	%argrw{"wrr"}
+	sub		$tmp1108 $tmp1110 $tmp1113 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:16
+#   float d1 = sdBox(p1, vector(.4,.4,.2));
+	sub		$tmp1114 $tmp1108 $const11 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{16} %argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp1114 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:17
+# 
+	functioncall	$const7 1483 	%line{17} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp1116 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp1117 $const14 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp1116 $tmp1117 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp1120 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp1119 ___363_q $tmp1120 	%argrw{"wrr"}
+	length		$tmp1118 $tmp1119 	%argrw{"wr"}
+	compref		$tmp1123 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp1125 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp1126 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp1124 $tmp1125 $tmp1126 	%argrw{"wrr"}
+	max		$tmp1122 $tmp1123 $tmp1124 	%argrw{"wrr"}
+	min		$tmp1121 $tmp1122 $const3 	%argrw{"wrr"}
+	add		___364_d1 $tmp1118 $tmp1121 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:19
+#   d = min(d, d1);
+	lt		$tmp1127 ___364_d1 ___364_d 	%line{19} %argrw{"wrr"}
+	if		$tmp1127 1486 1486 	%argrw{"r"}
+	assign		___368__ $const12 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:20
+# 
+	min		___364_d ___364_d ___364_d1 	%line{20} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:24
+#   p1[1] = abs(p1[1]);
+	assign		___364_p1 ___368_pos 	%line{24} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:25
+#   p1 = p1 - vector(0,.5,-.25);
+	compref		$tmp1129 ___364_p1 $const10 	%line{25} %argrw{"wrr"}
+	abs		$tmp1128 $tmp1129 	%argrw{"wr"}
+	compassign	___364_p1 $const10 $tmp1128 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:26
+#   p1[0] = mod(p1[0] + 1.5, 3) - 1.5 ;
+	sub		___364_p1 ___364_p1 $const15 	%line{26} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:27
+#   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
+	compref		$tmp1132 ___364_p1 $const2 	%line{27} %argrw{"wrr"}
+	add		$tmp1133 $tmp1132 $const16 	%argrw{"wrr"}
+	functioncall	$const13 1499 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp1135 $tmp1133 $const18 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp1134 $tmp1135 	%argrw{"wr"}
+	mul		$tmp1136 $const18 $tmp1134 	%argrw{"wrr"}
+	sub		$tmp1131 $tmp1133 $tmp1136 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:27
+#   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
+	sub		$tmp1137 $tmp1131 $const16 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{27} %argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp1137 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:28
+#   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
+	functioncall	$const7 1515 	%line{28} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp1140 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp1141 $const19 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp1140 $tmp1141 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp1144 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp1143 ___363_q $tmp1144 	%argrw{"wrr"}
+	length		$tmp1142 $tmp1143 	%argrw{"wr"}
+	compref		$tmp1147 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp1149 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp1150 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp1148 $tmp1149 $tmp1150 	%argrw{"wrr"}
+	max		$tmp1146 $tmp1147 $tmp1148 	%argrw{"wrr"}
+	min		$tmp1145 $tmp1146 $const3 	%argrw{"wrr"}
+	add		$tmp1138 $tmp1142 $tmp1145 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:28
+#   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
+	sub		___364_d1 $tmp1138 $const20 	%line{28} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:29
+#   d1 = max(d1, -d2);
+	functioncall	$const7 1530 	%line{29} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp1153 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp1154 $const21 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp1153 $tmp1154 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp1157 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp1156 ___363_q $tmp1157 	%argrw{"wrr"}
+	length		$tmp1155 $tmp1156 	%argrw{"wr"}
+	compref		$tmp1160 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp1162 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp1163 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp1161 $tmp1162 $tmp1163 	%argrw{"wrr"}
+	max		$tmp1159 $tmp1160 $tmp1161 	%argrw{"wrr"}
+	min		$tmp1158 $tmp1159 $const3 	%argrw{"wrr"}
+	add		$tmp1151 $tmp1155 $tmp1158 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:29
+#   d1 = max(d1, -d2);
+	sub		___364_d2 $tmp1151 $const20 	%line{29} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:30
+#   d2 = sdBox(p1 - vector(0,0,0), vector(.8,.1,1.4)) - .02;
+	neg		$tmp1164 ___364_d2 	%line{30} %argrw{"wr"}
+	max		___364_d1 ___364_d1 $tmp1164 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:31
+#   d1 = min(d1,d2);
+	sub		$tmp1167 ___364_p1 $const1 	%line{31} %argrw{"wrr"}
+	functioncall	$const7 1548 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp1169 $tmp1167 	%line{5} %argrw{"wr"}
+	div		$tmp1170 $const22 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp1169 $tmp1170 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp1173 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp1172 ___363_q $tmp1173 	%argrw{"wrr"}
+	length		$tmp1171 $tmp1172 	%argrw{"wr"}
+	compref		$tmp1176 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp1178 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp1179 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp1177 $tmp1178 $tmp1179 	%argrw{"wrr"}
+	max		$tmp1175 $tmp1176 $tmp1177 	%argrw{"wrr"}
+	min		$tmp1174 $tmp1175 $const3 	%argrw{"wrr"}
+	add		$tmp1165 $tmp1171 $tmp1174 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:31
+#   d1 = min(d1,d2);
+	sub		___364_d2 $tmp1165 $const20 	%line{31} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:32
+# 
+	min		___364_d1 ___364_d1 ___364_d2 	%line{32} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:34
+#   d = min(d, d1);
+	lt		$tmp1180 ___364_d1 ___364_d 	%line{34} %argrw{"wrr"}
+	if		$tmp1180 1553 1553 	%argrw{"r"}
+	assign		___368__ $const9 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:35
+# 
+	min		___364_d ___364_d ___364_d1 	%line{35} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:38
+#   d1 = sdBox(p1, vector(INFINITY,.7,.05)) - .02;
+	sub		___364_p1 ___368_pos $const23 	%line{38} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:39
+# 
+	functioncall	$const7 1569 	%line{39} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp1184 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp1185 $const24 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp1184 $tmp1185 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp1188 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp1187 ___363_q $tmp1188 	%argrw{"wrr"}
+	length		$tmp1186 $tmp1187 	%argrw{"wr"}
+	compref		$tmp1191 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp1193 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp1194 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp1192 $tmp1193 $tmp1194 	%argrw{"wrr"}
+	max		$tmp1190 $tmp1191 $tmp1192 	%argrw{"wrr"}
+	min		$tmp1189 $tmp1190 $const3 	%argrw{"wrr"}
+	add		$tmp1182 $tmp1186 $tmp1189 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:39
+# 
+	sub		___364_d1 $tmp1182 $const20 	%line{39} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:41
+#   d = min(d, d1);
+	lt		$tmp1195 ___364_d1 ___364_d 	%line{41} %argrw{"wrr"}
+	if		$tmp1195 1573 1573 	%argrw{"r"}
+	assign		___368__ $const18 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:42
+# 
+	min		___364_d ___364_d ___364_d1 	%line{42} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:45
+#   d1 = sdBox(p1, vector(INFINITY,1,.005)) - .02;
+	sub		___364_p1 ___368_pos $const5 	%line{45} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:46
+# 
+	functioncall	$const7 1589 	%line{46} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp1199 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp1200 $const25 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp1199 $tmp1200 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp1203 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp1202 ___363_q $tmp1203 	%argrw{"wrr"}
+	length		$tmp1201 $tmp1202 	%argrw{"wr"}
+	compref		$tmp1206 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp1208 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp1209 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp1207 $tmp1208 $tmp1209 	%argrw{"wrr"}
+	max		$tmp1205 $tmp1206 $tmp1207 	%argrw{"wrr"}
+	min		$tmp1204 $tmp1205 $const3 	%argrw{"wrr"}
+	add		$tmp1197 $tmp1201 $tmp1204 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:46
+# 
+	sub		___364_d1 $tmp1197 $const20 	%line{46} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:48
+#   d = min(d, d1);
+	lt		$tmp1210 ___364_d1 ___364_d 	%line{48} %argrw{"wrr"}
+	if		$tmp1210 1593 1593 	%argrw{"r"}
+	assign		___368__ $const26 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:49
+# 
+	min		___364_d ___364_d ___364_d1 	%line{49} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:52
+#   p1[1] = abs(p1[1]);
+	assign		___364_p1 ___368_pos 	%line{52} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:53
+#   p1 = p1 - vector(0,.5,-.1);
+	compref		$tmp1212 ___364_p1 $const10 	%line{53} %argrw{"wrr"}
+	abs		$tmp1211 $tmp1212 	%argrw{"wr"}
+	compassign	___364_p1 $const10 $tmp1211 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:54
+#   p1[0] = mod(p1[0] + 4.5 , 9) - 3 + 3*(sign(-pos[1])/2 + .5) ;
+	sub		___364_p1 ___364_p1 $const27 	%line{54} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:55
+#   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
+	compref		$tmp1215 ___364_p1 $const2 	%line{55} %argrw{"wrr"}
+	add		$tmp1216 $tmp1215 $const28 	%argrw{"wrr"}
+	functioncall	$const13 1606 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:154
+# float  mod (float  a, float  b) { return a - b*floor(a/b); }
+	div		$tmp1218 $tmp1216 $const30 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{154} %argrw{"wrr"}
+	floor		$tmp1217 $tmp1218 	%argrw{"wr"}
+	mul		$tmp1219 $const30 $tmp1217 	%argrw{"wrr"}
+	sub		$tmp1214 $tmp1216 $tmp1219 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:55
+#   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
+	sub		$tmp1220 $tmp1214 $const18 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{55} %argrw{"wrr"}
+	compref		$tmp1222 ___368_pos $const10 	%argrw{"wrr"}
+	neg		$tmp1223 $tmp1222 	%argrw{"wr"}
+	sign		$tmp1221 $tmp1223 	%argrw{"wr"}
+	div		$tmp1224 $tmp1221 $const9 	%argrw{"wrr"}
+	add		$tmp1225 $tmp1224 $const11 	%argrw{"wrr"}
+	mul		$tmp1226 $const18 $tmp1225 	%argrw{"wrr"}
+	add		$tmp1227 $tmp1220 $tmp1226 	%argrw{"wrr"}
+	compassign	___364_p1 $const2 $tmp1227 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:56
+# 
+	functioncall	$const7 1629 	%line{56} %argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:5
+#   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+	abs		$tmp1230 ___364_p1 	%line{5} %argrw{"wr"}
+	div		$tmp1231 $const31 $const9 	%argrw{"wrr"}
+	sub		___363_q $tmp1230 $tmp1231 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:6
+# }
+	assign		$tmp1234 $const3 	%line{6} %argrw{"wr"}
+	max		$tmp1233 ___363_q $tmp1234 	%argrw{"wrr"}
+	length		$tmp1232 $tmp1233 	%argrw{"wr"}
+	compref		$tmp1237 ___363_q $const2 	%argrw{"wrr"}
+	compref		$tmp1239 ___363_q $const10 	%argrw{"wrr"}
+	compref		$tmp1240 ___363_q $const8 	%argrw{"wrr"}
+	max		$tmp1238 $tmp1239 $tmp1240 	%argrw{"wrr"}
+	max		$tmp1236 $tmp1237 $tmp1238 	%argrw{"wrr"}
+	min		$tmp1235 $tmp1236 $const3 	%argrw{"wrr"}
+	add		$tmp1228 $tmp1232 $tmp1235 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:56
+# 
+	sub		___364_d1 $tmp1228 $const20 	%line{56} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:58
+#   d = min(d, d1);
+	lt		$tmp1241 ___364_d1 ___364_d 	%line{58} %argrw{"wrr"}
+	if		$tmp1241 1633 1633 	%argrw{"r"}
+	assign		___368__ $const32 	%argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:59
+# 
+	min		___364_d ___364_d ___364_d1 	%line{59} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:61
+# }
+	assign		___368_h ___364_d 	%line{61} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:90
+#       return 0.0;
+	lt		$tmp1242 ___368_h plank 	%line{90} %argrw{"wrr"}
+	if		$tmp1242 1639 1639 	%argrw{"r"}
+# code/blender/liquidknot/dev/lk_coridor.osl:91
+# 
+	assign		___371_spot_sha $const3 	%line{91} %argrw{"wr"}
+	return
+# code/blender/liquidknot/dev/lk_coridor.osl:93
+# 
+	mul		$tmp1243 $const26 ___368_h 	%line{93} %argrw{"wrr"}
+	div		$tmp1244 $tmp1243 ___367_t 	%argrw{"wrr"}
+	min		___366_res ___366_res $tmp1244 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:95
+#   }
+	add		___367_t ___367_t ___368_h 	%line{95} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:97
+# }
+	assign		___371_spot_sha ___366_res 	%line{97} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:155
+# 
+	dot		$tmp1245 ___371_norm $const5 	%line{155} %argrw{"wrr"}
+	mul		$tmp1247 $const50 $tmp1245 	%argrw{"wrr"}
+	add		$tmp1248 $const49 $tmp1247 	%argrw{"wrr"}
+	functioncall	$const46 1650 	%argrw{"r"}
+# .bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h:163
+# float  clamp (float x, float minval, float maxval) { return max(min(x,maxval),minval); }
+	min		$tmp1249 $tmp1248 $const12 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{163} %argrw{"wrr"}
+	max		___371_sky_diff $tmp1249 $const3 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:157
+#     col += mate * sky_diff * vector(0.051);
+	mul		$tmp1250 ___371_mate ___371_spot_diff 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{157} %argrw{"wrr"}
+	mul		col $tmp1250 ___371_spot_sha 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:158
+# 
+	mul		$tmp1251 ___371_mate ___371_sky_diff 	%line{158} %argrw{"wrr"}
+	mul		$tmp1253 $tmp1251 $const51 	%argrw{"wrr"}
+	add		col col $tmp1253 	%argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:160
+#   }
+	assign		alpha $const10 	%line{160} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:163
+# 
+	pow		col col $const52 	%line{163} %argrw{"wrr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:165
+#   Alpha = alpha;
+	assign		FragColor col 	%line{165} %argrw{"wr"}
+# code/blender/liquidknot/dev/lk_coridor.osl:166
+# }
+	assign		Alpha alpha 	%line{166} %argrw{"wr"}
+	end

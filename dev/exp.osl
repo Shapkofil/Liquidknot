@@ -1,0 +1,61 @@
+float sdSphere( vector p, float r)
+{
+  return length(p) - r;
+}
+
+float map( vector pos )
+{
+  float d = sdSphere(pos, 0.8);
+
+  return d;
+}
+
+vector calcNormal(vector pos)
+{
+  float e = 0.001;
+  return normalize( vector(
+                           map(pos + vector(e,0.0,0.0)) - map(pos - vector(e,0.0,0.0)),
+                           map(pos + vector(0.0,e,0.0)) - map(pos - vector(0.0,e,0.0)),
+                           map(pos + vector(0.0,0.0,e)) - map(pos - vector(0.0,0.0,e))
+                           ));
+}
+
+
+shader raymarcher(
+                  vector ro = vector(0.0),
+                  vector rd = vector(0.0),
+                  output color FragColor = 0,
+                  output float Alpha = 0
+)
+{
+  vector col = vector(rd);
+
+  float t = 0.0;
+  vector pos;
+    for( int i=0; i<24; i++){
+        pos = ro + t * rd;
+
+        float h = map( pos );
+
+        if(h<0.001){
+          break;
+        }
+
+        t+=h;
+    }
+    if(t<20.0)
+    {
+      vector pos = ro + t * rd;
+
+      vector mate = vector(.2);
+      vector norm = calcNormal( pos );
+      vector sundir = normalize(vector(1.0));
+      float sundiff = dot( sundir, norm );
+
+      col = mate * sundiff;
+      Alpha = 1;
+    }
+
+    FragColor = color(col);
+}
+

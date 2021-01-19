@@ -1,0 +1,118 @@
+#define INFINITY 3.402823466e+38
+
+float sdBox( vector p, vector b){
+  vector q = abs(p) - b / 2;
+  return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
+}
+
+float map( vector pos , output float mat){
+  vector p1= mod(pos + 2,4) - 2;
+  float d = length(p1) - 1.0;
+
+  return d;
+}
+
+vector calcNormals( vector pos ){
+  float e = 0.0001;
+  float _;
+  return normalize(vector(
+                          map(pos + vector(e,0,0),_) - map(pos - vector(e,0,0),_),
+                          map(pos + vector(0,e,0),_) - map(pos - vector(0,e,0),_),
+                          map(pos + vector(0,0,e),_) - map(pos - vector(0,0,e),_)
+                          ));
+
+}
+
+float castShadow(
+                 vector ro,
+                 vector rd,
+                 float plank,
+                 float tmax,
+                 float k
+                 )
+{
+  float res = 1.0;
+  for ( float t=plank; t<tmax; ){
+    vector pos = ro + rd * t;
+
+    float _;
+    float h = map( pos , _);
+
+    if ( h < plank)
+      return 0.0;
+
+    res = min(res, k*h/t);
+
+    t+=h;
+  }
+  return res;
+}
+
+shader infinate(
+                vector ro = 0,
+                vector rd = 0,
+                int iter = 256,
+                float plank = 0.001,
+                float max_distance = 20.0,
+                output color FragColor = 0,
+                output float Alpha = 0,
+                output float Depth = 0
+                )
+{
+  color col = vector(0);
+  float alpha = 0;
+  float mat = 0.0;
+
+  float t = 0.0;
+  for ( int i=0; i<iter; i++){
+    vector pos = ro + rd * t;
+
+    ;
+    float h = map( pos , mat);
+
+    if ( h < plank)
+      break;
+
+    t+=h;
+  }
+  Depth = t;
+
+  if ( t< max_distance){
+    color mate = color(.2);
+    vector pos = ro + rd * t;
+
+    if(mat < 0.5)
+      mate = color(.05);
+    else if( mat < 1.5)
+    {
+        FragColor = color(8.0);
+        Alpha = 1;
+        return;
+    }
+    else if( mat < 2.5)
+      mate = color(.04, .02, .005);
+    else if( mat < 3.5)
+      mate = color(.01, .04, .03);
+    else if( mat < 4.5)
+      mate = color(.3);
+    else if( mat < 5.5)
+      mate = color(.6,.01,.003);
+
+    vector norm = calcNormals(pos);
+    vector spot_dir = normalize(vector(3, 0,0) - pos);
+    float spot_diff = clamp(dot(norm, spot_dir), 0.0, 1.0);
+    float spot_sha = castShadow(pos + plank*norm, spot_dir, plank,
+                                 length(vector(pos[0],0,1.7) - pos), 4);
+    float sky_diff = clamp(.6 + .4*dot(norm, vector(0,0,1)), 0.0, 1.0);
+
+    col = mate * spot_diff * spot_sha;
+    col += mate * sky_diff * vector(0.051);
+
+    alpha = 1;
+  }
+
+  col = pow(col, .4545);
+
+  FragColor = color(col);
+  Alpha = alpha;
+}
