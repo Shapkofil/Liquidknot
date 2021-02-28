@@ -1,6 +1,6 @@
 OpenShadingLanguage 1.00
 # Compiled by oslc 1.10.10
-# options: -o /tmp/tmp6huise9e.oso -I/home/shapkofil/.bfs/blender/latest/2.90/scripts/addons/cycles/shader
+# options: -o /tmp/tmp0etwauh1.oso -I/home/shapkofil/.bfs/blender/latest/2.90/scripts/addons/cycles/shader
 shader infinate
 param	vector	ro	0 0 0		%read{9,32} %write{2147483647,-1}
 param	vector	rd	0 0 0		%read{8,31} %write{2147483647,-1}
@@ -170,32 +170,32 @@ const	vector	$const34	0.050999999 0.050999999 0.050999999		%read{187,187} %write
 temp	color	$tmp108	%read{188,188} %write{187,187}
 const	float	$const35	0.45449999		%read{190,190} %write{2147483647,-1}
 code ___main___
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:63
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:63
 #   float alpha = 0;
-	assign		col $const1 	%filename{"code/blender/liquidknot/dev/lk_domain_repetition.osl"} %line{63} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:64
+	assign		col $const1 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl"} %line{63} %argrw{"wr"}
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:64
 #   float mat = 0.0;
 	assign		alpha $const2 	%line{64} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:65
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:65
 # 
 	assign		mat $const3 	%line{65} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:67
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:67
 #   for ( int i=0; i<iter; i++){
 	assign		t $const3 	%line{67} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:68
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:68
 #     vector pos = ro + rd * t;
 	for		$tmp2 6 8 25 27 	%line{68} %argrw{"r"}
 	assign		___369_i $const2 	%argrw{"wr"}
 	lt		$tmp1 ___369_i iter 	%argrw{"wrr"}
 	neq		$tmp2 $tmp1 $const2 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:69
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:69
 # 
 	mul		$tmp3 rd t 	%line{69} %argrw{"wrr"}
 	add		___370_pos ro $tmp3 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:72
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:72
 # 
 	functioncall	$const4 21 	%line{72} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:10
 #   float d = length(p1) - 1.0;
 	add		$tmp5 ___370_pos $const6 	%line{10} %argrw{"wrr"}
 	functioncall	$const9 17 	%argrw{"r"}
@@ -205,104 +205,104 @@ code ___main___
 	floor		$tmp6 $tmp7 	%argrw{"wr"}
 	mul		$tmp8 $const8 $tmp6 	%argrw{"wrr"}
 	sub		$tmp4 $tmp5 $tmp8 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:10
 #   float d = length(p1) - 1.0;
-	sub		___364_p1 $tmp4 $const6 	%filename{"code/blender/liquidknot/dev/lk_domain_repetition.osl"} %line{10} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:11
+	sub		___364_p1 $tmp4 $const6 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl"} %line{10} %argrw{"wrr"}
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:11
 # 
 	length		$tmp9 ___364_p1 	%line{11} %argrw{"wr"}
 	sub		___364_d $tmp9 $const10 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:13
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:13
 # }
 	assign		___370_h ___364_d 	%line{13} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:74
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:74
 #       break;
 	lt		$tmp10 ___370_h plank 	%line{74} %argrw{"wrr"}
 	if		$tmp10 24 24 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:75
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:75
 # 
 	break	%line{75}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:77
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:77
 #   }
 	add		t t ___370_h 	%line{77} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:68
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:68
 #     vector pos = ro + rd * t;
 	assign		$tmp11 ___369_i 	%line{68} %argrw{"wr"}
 	add		___369_i ___369_i $const11 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:79
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:79
 # 
 	assign		Depth t 	%line{79} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:81
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:81
 #     color mate = color(.2);
 	lt		$tmp12 t max_distance 	%line{81} %argrw{"wrr"}
 	if		$tmp12 190 190 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:82
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:82
 #     vector pos = ro + rd * t;
 	assign		___371_mate $const12 	%line{82} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:83
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:83
 # 
 	mul		$tmp13 rd t 	%line{83} %argrw{"wrr"}
 	add		___371_pos ro $tmp13 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:85
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:85
 #       mate = color(.05);
 	lt		$tmp14 mat $const13 	%line{85} %argrw{"wrr"}
 	if		$tmp14 36 53 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:86
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:86
 #     else if( mat < 1.5)
 	assign		___371_mate $const14 	%line{86} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:87
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:87
 #     {
 	lt		$tmp15 mat $const15 	%line{87} %argrw{"wrr"}
 	if		$tmp15 41 53 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:89
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:89
 #         Alpha = 1;
 	assign		FragColor $const16 	%line{89} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:90
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:90
 #         return;
 	assign		Alpha $const11 	%line{90} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:91
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:91
 #     }
 	exit	%line{91}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:93
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:93
 #       mate = color(.04, .02, .005);
 	lt		$tmp16 mat $const17 	%line{93} %argrw{"wrr"}
 	if		$tmp16 44 53 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:94
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:94
 #     else if( mat < 3.5)
 	assign		___371_mate $const18 	%line{94} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:95
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:95
 #       mate = color(.01, .04, .03);
 	lt		$tmp17 mat $const19 	%line{95} %argrw{"wrr"}
 	if		$tmp17 47 53 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:96
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:96
 #     else if( mat < 4.5)
 	assign		___371_mate $const20 	%line{96} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:97
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:97
 #       mate = color(.3);
 	lt		$tmp18 mat $const21 	%line{97} %argrw{"wrr"}
 	if		$tmp18 50 53 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:98
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:98
 #     else if( mat < 5.5)
 	assign		___371_mate $const22 	%line{98} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:99
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:99
 #       mate = color(.6,.01,.003);
 	lt		$tmp19 mat $const23 	%line{99} %argrw{"wrr"}
 	if		$tmp19 53 53 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:100
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:100
 # 
 	assign		___371_mate $const24 	%line{100} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:102
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:102
 #     vector spot_dir = normalize(vector(3, 0,0) - pos);
 	functioncall	$const25 138 	%line{102} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:17
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:17
 #   float _;
 	assign		___365_e $const26 	%line{17} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:20
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:20
 #                           map(pos + vector(0,e,0),_) - map(pos - vector(0,e,0),_),
 	vector		$tmp22 ___365_e $const3 $const3 	%line{20} %argrw{"wrrr"}
 	add		$tmp23 ___371_pos $tmp22 	%argrw{"wrr"}
 	functioncall	$const4 68 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:10
 #   float d = length(p1) - 1.0;
 	add		$tmp25 $tmp23 $const6 	%line{10} %argrw{"wrr"}
 	functioncall	$const9 64 	%argrw{"r"}
@@ -312,22 +312,22 @@ code ___main___
 	floor		$tmp26 $tmp27 	%argrw{"wr"}
 	mul		$tmp28 $const8 $tmp26 	%argrw{"wrr"}
 	sub		$tmp24 $tmp25 $tmp28 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:10
 #   float d = length(p1) - 1.0;
-	sub		___364_p1 $tmp24 $const6 	%filename{"code/blender/liquidknot/dev/lk_domain_repetition.osl"} %line{10} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:11
+	sub		___364_p1 $tmp24 $const6 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl"} %line{10} %argrw{"wrr"}
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:11
 # 
 	length		$tmp29 ___364_p1 	%line{11} %argrw{"wr"}
 	sub		___364_d $tmp29 $const10 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:13
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:13
 # }
 	assign		$tmp21 ___364_d 	%line{13} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:20
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:20
 #                           map(pos + vector(0,e,0),_) - map(pos - vector(0,e,0),_),
 	vector		$tmp31 ___365_e $const3 $const3 	%line{20} %argrw{"wrrr"}
 	sub		$tmp32 ___371_pos $tmp31 	%argrw{"wrr"}
 	functioncall	$const4 81 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:10
 #   float d = length(p1) - 1.0;
 	add		$tmp34 $tmp32 $const6 	%line{10} %argrw{"wrr"}
 	functioncall	$const9 77 	%argrw{"r"}
@@ -337,25 +337,25 @@ code ___main___
 	floor		$tmp35 $tmp36 	%argrw{"wr"}
 	mul		$tmp37 $const8 $tmp35 	%argrw{"wrr"}
 	sub		$tmp33 $tmp34 $tmp37 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:10
 #   float d = length(p1) - 1.0;
-	sub		___364_p1 $tmp33 $const6 	%filename{"code/blender/liquidknot/dev/lk_domain_repetition.osl"} %line{10} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:11
+	sub		___364_p1 $tmp33 $const6 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl"} %line{10} %argrw{"wrr"}
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:11
 # 
 	length		$tmp38 ___364_p1 	%line{11} %argrw{"wr"}
 	sub		___364_d $tmp38 $const10 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:13
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:13
 # }
 	assign		$tmp30 ___364_d 	%line{13} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:20
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:20
 #                           map(pos + vector(0,e,0),_) - map(pos - vector(0,e,0),_),
 	sub		$tmp39 $tmp21 $tmp30 	%line{20} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:21
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:21
 #                           map(pos + vector(0,0,e),_) - map(pos - vector(0,0,e),_)
 	vector		$tmp41 $const3 ___365_e $const3 	%line{21} %argrw{"wrrr"}
 	add		$tmp42 ___371_pos $tmp41 	%argrw{"wrr"}
 	functioncall	$const4 95 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:10
 #   float d = length(p1) - 1.0;
 	add		$tmp44 $tmp42 $const6 	%line{10} %argrw{"wrr"}
 	functioncall	$const9 91 	%argrw{"r"}
@@ -365,22 +365,22 @@ code ___main___
 	floor		$tmp45 $tmp46 	%argrw{"wr"}
 	mul		$tmp47 $const8 $tmp45 	%argrw{"wrr"}
 	sub		$tmp43 $tmp44 $tmp47 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:10
 #   float d = length(p1) - 1.0;
-	sub		___364_p1 $tmp43 $const6 	%filename{"code/blender/liquidknot/dev/lk_domain_repetition.osl"} %line{10} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:11
+	sub		___364_p1 $tmp43 $const6 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl"} %line{10} %argrw{"wrr"}
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:11
 # 
 	length		$tmp48 ___364_p1 	%line{11} %argrw{"wr"}
 	sub		___364_d $tmp48 $const10 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:13
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:13
 # }
 	assign		$tmp40 ___364_d 	%line{13} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:21
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:21
 #                           map(pos + vector(0,0,e),_) - map(pos - vector(0,0,e),_)
 	vector		$tmp50 $const3 ___365_e $const3 	%line{21} %argrw{"wrrr"}
 	sub		$tmp51 ___371_pos $tmp50 	%argrw{"wrr"}
 	functioncall	$const4 108 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:10
 #   float d = length(p1) - 1.0;
 	add		$tmp53 $tmp51 $const6 	%line{10} %argrw{"wrr"}
 	functioncall	$const9 104 	%argrw{"r"}
@@ -390,25 +390,25 @@ code ___main___
 	floor		$tmp54 $tmp55 	%argrw{"wr"}
 	mul		$tmp56 $const8 $tmp54 	%argrw{"wrr"}
 	sub		$tmp52 $tmp53 $tmp56 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:10
 #   float d = length(p1) - 1.0;
-	sub		___364_p1 $tmp52 $const6 	%filename{"code/blender/liquidknot/dev/lk_domain_repetition.osl"} %line{10} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:11
+	sub		___364_p1 $tmp52 $const6 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl"} %line{10} %argrw{"wrr"}
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:11
 # 
 	length		$tmp57 ___364_p1 	%line{11} %argrw{"wr"}
 	sub		___364_d $tmp57 $const10 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:13
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:13
 # }
 	assign		$tmp49 ___364_d 	%line{13} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:21
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:21
 #                           map(pos + vector(0,0,e),_) - map(pos - vector(0,0,e),_)
 	sub		$tmp58 $tmp40 $tmp49 	%line{21} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:22
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:22
 #                           ));
 	vector		$tmp60 $const3 $const3 ___365_e 	%line{22} %argrw{"wrrr"}
 	add		$tmp61 ___371_pos $tmp60 	%argrw{"wrr"}
 	functioncall	$const4 122 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:10
 #   float d = length(p1) - 1.0;
 	add		$tmp63 $tmp61 $const6 	%line{10} %argrw{"wrr"}
 	functioncall	$const9 118 	%argrw{"r"}
@@ -418,22 +418,22 @@ code ___main___
 	floor		$tmp64 $tmp65 	%argrw{"wr"}
 	mul		$tmp66 $const8 $tmp64 	%argrw{"wrr"}
 	sub		$tmp62 $tmp63 $tmp66 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:10
 #   float d = length(p1) - 1.0;
-	sub		___364_p1 $tmp62 $const6 	%filename{"code/blender/liquidknot/dev/lk_domain_repetition.osl"} %line{10} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:11
+	sub		___364_p1 $tmp62 $const6 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl"} %line{10} %argrw{"wrr"}
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:11
 # 
 	length		$tmp67 ___364_p1 	%line{11} %argrw{"wr"}
 	sub		___364_d $tmp67 $const10 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:13
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:13
 # }
 	assign		$tmp59 ___364_d 	%line{13} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:22
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:22
 #                           ));
 	vector		$tmp69 $const3 $const3 ___365_e 	%line{22} %argrw{"wrrr"}
 	sub		$tmp70 ___371_pos $tmp69 	%argrw{"wrr"}
 	functioncall	$const4 135 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:10
 #   float d = length(p1) - 1.0;
 	add		$tmp72 $tmp70 $const6 	%line{10} %argrw{"wrr"}
 	functioncall	$const9 131 	%argrw{"r"}
@@ -443,28 +443,28 @@ code ___main___
 	floor		$tmp73 $tmp74 	%argrw{"wr"}
 	mul		$tmp75 $const8 $tmp73 	%argrw{"wrr"}
 	sub		$tmp71 $tmp72 $tmp75 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:10
 #   float d = length(p1) - 1.0;
-	sub		___364_p1 $tmp71 $const6 	%filename{"code/blender/liquidknot/dev/lk_domain_repetition.osl"} %line{10} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:11
+	sub		___364_p1 $tmp71 $const6 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl"} %line{10} %argrw{"wrr"}
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:11
 # 
 	length		$tmp76 ___364_p1 	%line{11} %argrw{"wr"}
 	sub		___364_d $tmp76 $const10 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:13
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:13
 # }
 	assign		$tmp68 ___364_d 	%line{13} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:22
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:22
 #                           ));
 	sub		$tmp77 $tmp59 $tmp68 	%line{22} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:19
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:19
 #                           map(pos + vector(e,0,0),_) - map(pos - vector(e,0,0),_),
 	vector		$tmp20 $tmp39 $tmp58 $tmp77 	%line{19} %argrw{"wrrr"}
 	normalize	___371_norm $tmp20 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:103
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:103
 #     float spot_diff = clamp(dot(norm, spot_dir), 0.0, 1.0);
 	sub		$tmp79 $const27 ___371_pos 	%line{103} %argrw{"wrr"}
 	normalize	___371_spot_dir $tmp79 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:104
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:104
 #     float spot_sha = castShadow(pos + plank*norm, spot_dir, plank,
 	dot		$tmp80 ___371_norm ___371_spot_dir 	%line{104} %argrw{"wrr"}
 	functioncall	$const28 144 	%argrw{"r"}
@@ -472,36 +472,36 @@ code ___main___
 # float  clamp (float x, float minval, float maxval) { return max(min(x,maxval),minval); }
 	min		$tmp81 $tmp80 $const10 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{163} %argrw{"wrr"}
 	max		___371_spot_diff $tmp81 $const3 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:105
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:105
 #                                  length(vector(pos[0],0,1.7) - pos), 4);
-	mul		$tmp82 plank ___371_norm 	%filename{"code/blender/liquidknot/dev/lk_domain_repetition.osl"} %line{105} %argrw{"wrr"}
+	mul		$tmp82 plank ___371_norm 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl"} %line{105} %argrw{"wrr"}
 	add		$tmp83 ___371_pos $tmp82 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:106
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:106
 #     float sky_diff = clamp(.6 + .4*dot(norm, vector(0,0,1)), 0.0, 1.0);
 	compref		$tmp86 ___371_pos $const2 	%line{106} %argrw{"wrr"}
 	vector		$tmp85 $tmp86 $const3 $const29 	%argrw{"wrrr"}
 	sub		$tmp87 $tmp85 ___371_pos 	%argrw{"wrr"}
 	length		$tmp84 $tmp87 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:105
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:105
 #                                  length(vector(pos[0],0,1.7) - pos), 4);
 	functioncall	$const30 178 	%line{105} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:35
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:35
 #   for ( float t=plank; t<tmax; ){
 	assign		___366_res $const10 	%line{35} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:36
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:36
 #     vector pos = ro + rd * t;
 	for		$tmp89 154 156 177 177 	%line{36} %argrw{"r"}
 	assign		___367_t plank 	%argrw{"wr"}
 	lt		$tmp88 ___367_t $tmp84 	%argrw{"wrr"}
 	neq		$tmp89 $tmp88 $const2 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:37
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:37
 # 
 	mul		$tmp90 ___371_spot_dir ___367_t 	%line{37} %argrw{"wrr"}
 	add		___368_pos $tmp83 $tmp90 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:40
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:40
 # 
 	functioncall	$const4 169 	%line{40} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:10
 #   float d = length(p1) - 1.0;
 	add		$tmp92 ___368_pos $const6 	%line{10} %argrw{"wrr"}
 	functioncall	$const9 165 	%argrw{"r"}
@@ -511,36 +511,36 @@ code ___main___
 	floor		$tmp93 $tmp94 	%argrw{"wr"}
 	mul		$tmp95 $const8 $tmp93 	%argrw{"wrr"}
 	sub		$tmp91 $tmp92 $tmp95 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:10
 #   float d = length(p1) - 1.0;
-	sub		___364_p1 $tmp91 $const6 	%filename{"code/blender/liquidknot/dev/lk_domain_repetition.osl"} %line{10} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:11
+	sub		___364_p1 $tmp91 $const6 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl"} %line{10} %argrw{"wrr"}
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:11
 # 
 	length		$tmp96 ___364_p1 	%line{11} %argrw{"wr"}
 	sub		___364_d $tmp96 $const10 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:13
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:13
 # }
 	assign		___368_h ___364_d 	%line{13} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:42
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:42
 #       return 0.0;
 	lt		$tmp97 ___368_h plank 	%line{42} %argrw{"wrr"}
 	if		$tmp97 173 173 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:43
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:43
 # 
 	assign		___371_spot_sha $const3 	%line{43} %argrw{"wr"}
 	return
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:45
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:45
 # 
 	mul		$tmp98 $const8 ___368_h 	%line{45} %argrw{"wrr"}
 	div		$tmp99 $tmp98 ___367_t 	%argrw{"wrr"}
 	min		___366_res ___366_res $tmp99 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:47
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:47
 #   }
 	add		___367_t ___367_t ___368_h 	%line{47} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:49
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:49
 # }
 	assign		___371_spot_sha ___366_res 	%line{49} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:107
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:107
 # 
 	dot		$tmp100 ___371_norm $const33 	%line{107} %argrw{"wrr"}
 	mul		$tmp102 $const32 $tmp100 	%argrw{"wrr"}
@@ -550,25 +550,25 @@ code ___main___
 # float  clamp (float x, float minval, float maxval) { return max(min(x,maxval),minval); }
 	min		$tmp104 $tmp103 $const10 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{163} %argrw{"wrr"}
 	max		___371_sky_diff $tmp104 $const3 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:109
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:109
 #     col += mate * sky_diff * vector(0.051);
-	mul		$tmp105 ___371_mate ___371_spot_diff 	%filename{"code/blender/liquidknot/dev/lk_domain_repetition.osl"} %line{109} %argrw{"wrr"}
+	mul		$tmp105 ___371_mate ___371_spot_diff 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl"} %line{109} %argrw{"wrr"}
 	mul		col $tmp105 ___371_spot_sha 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:110
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:110
 # 
 	mul		$tmp106 ___371_mate ___371_sky_diff 	%line{110} %argrw{"wrr"}
 	mul		$tmp108 $tmp106 $const34 	%argrw{"wrr"}
 	add		col col $tmp108 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:112
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:112
 #   }
 	assign		alpha $const11 	%line{112} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:115
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:115
 # 
 	pow		col col $const35 	%line{115} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:117
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:117
 #   Alpha = alpha;
 	assign		FragColor col 	%line{117} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_domain_repetition.osl:118
+# code/blender/liquidknot/dev/blend/../osl/lk_domain_repetition.osl:118
 # }
 	assign		Alpha alpha 	%line{118} %argrw{"wr"}
 	end

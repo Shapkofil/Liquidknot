@@ -1,6 +1,6 @@
 OpenShadingLanguage 1.00
 # Compiled by oslc 1.10.10
-# options: -o /tmp/tmp7_8y8nos.oso -I/home/shapkofil/.bfs/blender/latest/2.90/scripts/addons/cycles/shader
+# options: -o /tmp/tmpu4o1sa7_.oso -I/home/shapkofil/.bfs/blender/latest/2.90/scripts/addons/cycles/shader
 shader infinate
 param	vector	ro	0 0 0		%read{9,215} %write{2147483647,-1}
 param	vector	rd	0 0 0		%read{8,214} %write{2147483647,-1}
@@ -1217,46 +1217,46 @@ const	vector	$const51	0.050999999 0.050999999 0.050999999		%read{1653,1653} %wri
 temp	color	$tmp1253	%read{1654,1654} %write{1653,1653}
 const	float	$const52	0.45449999		%read{1656,1656} %write{2147483647,-1}
 code ___main___
-# code/blender/liquidknot/dev/lk_coridor.osl:111
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:111
 #   float alpha = 0;
-	assign		col $const1 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{111} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:112
+	assign		col $const1 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{111} %argrw{"wr"}
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:112
 #   float mat = 0.0;
 	assign		alpha $const2 	%line{112} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:113
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:113
 # 
 	assign		mat $const3 	%line{113} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:115
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:115
 #   for ( int i=0; i<iter; i++){
 	assign		t $const3 	%line{115} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:116
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:116
 #     vector pos = ro + rd * t;
 	for		$tmp2 6 8 208 210 	%line{116} %argrw{"r"}
 	assign		___369_i $const2 	%argrw{"wr"}
 	lt		$tmp1 ___369_i iter 	%argrw{"wrr"}
 	neq		$tmp2 $tmp1 $const2 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:117
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:117
 # 
 	mul		$tmp3 rd t 	%line{117} %argrw{"wrr"}
 	add		___370_pos ro $tmp3 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:120
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:120
 # 
 	functioncall	$const4 204 	%line{120} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:10
 #   pos -= vector(0,0,1);
 	assign		mat $const3 	%line{10} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:11
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:11
 #   float d = -sdBox(pos, vector(INFINITY,1,2));
 	sub		___370_pos ___370_pos $const5 	%line{11} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:12
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:12
 # 
 	functioncall	$const7 27 	%line{12} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp7 ___370_pos 	%line{5} %argrw{"wr"}
 	div		$tmp8 $const6 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp7 $tmp8 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp11 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp10 ___363_q $tmp11 	%argrw{"wrr"}
@@ -1268,13 +1268,13 @@ code ___main___
 	max		$tmp13 $tmp14 $tmp15 	%argrw{"wrr"}
 	min		$tmp12 $tmp13 $const3 	%argrw{"wrr"}
 	add		$tmp5 $tmp9 $tmp12 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:12
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:12
 # 
 	neg		___364_d $tmp5 	%line{12} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:15
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:15
 #   p1[0] = mod(p1[0] + .5, 1) - .5 ;
 	sub		___364_p1 ___370_pos $const5 	%line{15} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:16
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:16
 #   float d1 = sdBox(p1, vector(.4,.4,.2));
 	compref		$tmp20 ___364_p1 $const2 	%line{16} %argrw{"wrr"}
 	add		$tmp21 $tmp20 $const11 	%argrw{"wrr"}
@@ -1285,19 +1285,19 @@ code ___main___
 	floor		$tmp22 $tmp23 	%argrw{"wr"}
 	mul		$tmp24 $const12 $tmp22 	%argrw{"wrr"}
 	sub		$tmp19 $tmp21 $tmp24 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:16
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:16
 #   float d1 = sdBox(p1, vector(.4,.4,.2));
-	sub		$tmp25 $tmp19 $const11 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{16} %argrw{"wrr"}
+	sub		$tmp25 $tmp19 $const11 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{16} %argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp25 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:17
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:17
 # 
 	functioncall	$const7 52 	%line{17} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp27 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp28 $const14 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp27 $tmp28 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp31 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp30 ___363_q $tmp31 	%argrw{"wrr"}
@@ -1309,26 +1309,26 @@ code ___main___
 	max		$tmp33 $tmp34 $tmp35 	%argrw{"wrr"}
 	min		$tmp32 $tmp33 $const3 	%argrw{"wrr"}
 	add		___364_d1 $tmp29 $tmp32 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:19
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:19
 #   d = min(d, d1);
 	lt		$tmp38 ___364_d1 ___364_d 	%line{19} %argrw{"wrr"}
 	if		$tmp38 55 55 	%argrw{"r"}
 	assign		mat $const12 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:20
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:20
 # 
 	min		___364_d ___364_d ___364_d1 	%line{20} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:24
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:24
 #   p1[1] = abs(p1[1]);
 	assign		___364_p1 ___370_pos 	%line{24} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:25
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:25
 #   p1 = p1 - vector(0,.5,-.25);
 	compref		$tmp40 ___364_p1 $const10 	%line{25} %argrw{"wrr"}
 	abs		$tmp39 $tmp40 	%argrw{"wr"}
 	compassign	___364_p1 $const10 $tmp39 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:26
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:26
 #   p1[0] = mod(p1[0] + 1.5, 3) - 1.5 ;
 	sub		___364_p1 ___364_p1 $const15 	%line{26} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:27
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:27
 #   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
 	compref		$tmp43 ___364_p1 $const2 	%line{27} %argrw{"wrr"}
 	add		$tmp44 $tmp43 $const16 	%argrw{"wrr"}
@@ -1339,19 +1339,19 @@ code ___main___
 	floor		$tmp45 $tmp46 	%argrw{"wr"}
 	mul		$tmp47 $const18 $tmp45 	%argrw{"wrr"}
 	sub		$tmp42 $tmp44 $tmp47 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:27
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:27
 #   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
-	sub		$tmp48 $tmp42 $const16 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{27} %argrw{"wrr"}
+	sub		$tmp48 $tmp42 $const16 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{27} %argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp48 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:28
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:28
 #   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
 	functioncall	$const7 84 	%line{28} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp51 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp52 $const19 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp51 $tmp52 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp55 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp54 ___363_q $tmp55 	%argrw{"wrr"}
@@ -1363,18 +1363,18 @@ code ___main___
 	max		$tmp57 $tmp58 $tmp59 	%argrw{"wrr"}
 	min		$tmp56 $tmp57 $const3 	%argrw{"wrr"}
 	add		$tmp49 $tmp53 $tmp56 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:28
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:28
 #   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
 	sub		___364_d1 $tmp49 $const20 	%line{28} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:29
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:29
 #   d1 = max(d1, -d2);
 	functioncall	$const7 99 	%line{29} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp64 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp65 $const21 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp64 $tmp65 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp68 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp67 ___363_q $tmp68 	%argrw{"wrr"}
@@ -1386,23 +1386,23 @@ code ___main___
 	max		$tmp70 $tmp71 $tmp72 	%argrw{"wrr"}
 	min		$tmp69 $tmp70 $const3 	%argrw{"wrr"}
 	add		$tmp62 $tmp66 $tmp69 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:29
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:29
 #   d1 = max(d1, -d2);
 	sub		___364_d2 $tmp62 $const20 	%line{29} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:30
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:30
 #   d2 = sdBox(p1 - vector(0,0,0), vector(.8,.1,1.4)) - .02;
 	neg		$tmp75 ___364_d2 	%line{30} %argrw{"wr"}
 	max		___364_d1 ___364_d1 $tmp75 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:31
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:31
 #   d1 = min(d1,d2);
 	sub		$tmp78 ___364_p1 $const1 	%line{31} %argrw{"wrr"}
 	functioncall	$const7 117 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp80 $tmp78 	%line{5} %argrw{"wr"}
 	div		$tmp81 $const22 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp80 $tmp81 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp84 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp83 ___363_q $tmp84 	%argrw{"wrr"}
@@ -1414,32 +1414,32 @@ code ___main___
 	max		$tmp86 $tmp87 $tmp88 	%argrw{"wrr"}
 	min		$tmp85 $tmp86 $const3 	%argrw{"wrr"}
 	add		$tmp76 $tmp82 $tmp85 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:31
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:31
 #   d1 = min(d1,d2);
 	sub		___364_d2 $tmp76 $const20 	%line{31} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:32
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:32
 # 
 	min		___364_d1 ___364_d1 ___364_d2 	%line{32} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:34
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:34
 #   d = min(d, d1);
 	lt		$tmp91 ___364_d1 ___364_d 	%line{34} %argrw{"wrr"}
 	if		$tmp91 122 122 	%argrw{"r"}
 	assign		mat $const9 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:35
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:35
 # 
 	min		___364_d ___364_d ___364_d1 	%line{35} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:38
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:38
 #   d1 = sdBox(p1, vector(INFINITY,.7,.05)) - .02;
 	sub		___364_p1 ___370_pos $const23 	%line{38} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:39
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:39
 # 
 	functioncall	$const7 138 	%line{39} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp95 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp96 $const24 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp95 $tmp96 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp99 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp98 ___363_q $tmp99 	%argrw{"wrr"}
@@ -1451,29 +1451,29 @@ code ___main___
 	max		$tmp101 $tmp102 $tmp103 	%argrw{"wrr"}
 	min		$tmp100 $tmp101 $const3 	%argrw{"wrr"}
 	add		$tmp93 $tmp97 $tmp100 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:39
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:39
 # 
 	sub		___364_d1 $tmp93 $const20 	%line{39} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:41
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:41
 #   d = min(d, d1);
 	lt		$tmp106 ___364_d1 ___364_d 	%line{41} %argrw{"wrr"}
 	if		$tmp106 142 142 	%argrw{"r"}
 	assign		mat $const18 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:42
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:42
 # 
 	min		___364_d ___364_d ___364_d1 	%line{42} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:45
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:45
 #   d1 = sdBox(p1, vector(INFINITY,1,.005)) - .02;
 	sub		___364_p1 ___370_pos $const5 	%line{45} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:46
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:46
 # 
 	functioncall	$const7 158 	%line{46} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp110 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp111 $const25 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp110 $tmp111 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp114 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp113 ___363_q $tmp114 	%argrw{"wrr"}
@@ -1485,29 +1485,29 @@ code ___main___
 	max		$tmp116 $tmp117 $tmp118 	%argrw{"wrr"}
 	min		$tmp115 $tmp116 $const3 	%argrw{"wrr"}
 	add		$tmp108 $tmp112 $tmp115 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:46
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:46
 # 
 	sub		___364_d1 $tmp108 $const20 	%line{46} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:48
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:48
 #   d = min(d, d1);
 	lt		$tmp121 ___364_d1 ___364_d 	%line{48} %argrw{"wrr"}
 	if		$tmp121 162 162 	%argrw{"r"}
 	assign		mat $const26 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:49
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:49
 # 
 	min		___364_d ___364_d ___364_d1 	%line{49} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:52
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:52
 #   p1[1] = abs(p1[1]);
 	assign		___364_p1 ___370_pos 	%line{52} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:53
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:53
 #   p1 = p1 - vector(0,.5,-.1);
 	compref		$tmp123 ___364_p1 $const10 	%line{53} %argrw{"wrr"}
 	abs		$tmp122 $tmp123 	%argrw{"wr"}
 	compassign	___364_p1 $const10 $tmp122 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:54
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:54
 #   p1[0] = mod(p1[0] + 4.5 , 9) - 3 + 3*(sign(-pos[1])/2 + .5) ;
 	sub		___364_p1 ___364_p1 $const27 	%line{54} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:55
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:55
 #   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
 	compref		$tmp126 ___364_p1 $const2 	%line{55} %argrw{"wrr"}
 	add		$tmp127 $tmp126 $const28 	%argrw{"wrr"}
@@ -1518,9 +1518,9 @@ code ___main___
 	floor		$tmp128 $tmp129 	%argrw{"wr"}
 	mul		$tmp130 $const30 $tmp128 	%argrw{"wrr"}
 	sub		$tmp125 $tmp127 $tmp130 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:55
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:55
 #   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
-	sub		$tmp131 $tmp125 $const18 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{55} %argrw{"wrr"}
+	sub		$tmp131 $tmp125 $const18 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{55} %argrw{"wrr"}
 	compref		$tmp133 ___370_pos $const10 	%argrw{"wrr"}
 	neg		$tmp134 $tmp133 	%argrw{"wr"}
 	sign		$tmp132 $tmp134 	%argrw{"wr"}
@@ -1529,15 +1529,15 @@ code ___main___
 	mul		$tmp137 $const18 $tmp136 	%argrw{"wrr"}
 	add		$tmp138 $tmp131 $tmp137 	%argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp138 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:56
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:56
 # 
 	functioncall	$const7 198 	%line{56} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp141 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp142 $const31 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp141 $tmp142 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp145 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp144 ___363_q $tmp145 	%argrw{"wrr"}
@@ -1549,122 +1549,122 @@ code ___main___
 	max		$tmp147 $tmp148 $tmp149 	%argrw{"wrr"}
 	min		$tmp146 $tmp147 $const3 	%argrw{"wrr"}
 	add		$tmp139 $tmp143 $tmp146 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:56
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:56
 # 
 	sub		___364_d1 $tmp139 $const20 	%line{56} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:58
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:58
 #   d = min(d, d1);
 	lt		$tmp152 ___364_d1 ___364_d 	%line{58} %argrw{"wrr"}
 	if		$tmp152 202 202 	%argrw{"r"}
 	assign		mat $const32 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:59
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:59
 # 
 	min		___364_d ___364_d ___364_d1 	%line{59} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:61
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:61
 # }
 	assign		___370_h ___364_d 	%line{61} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:122
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:122
 #       break;
 	lt		$tmp153 ___370_h plank 	%line{122} %argrw{"wrr"}
 	if		$tmp153 207 207 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:123
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:123
 # 
 	break	%line{123}
-# code/blender/liquidknot/dev/lk_coridor.osl:125
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:125
 #   }
 	add		t t ___370_h 	%line{125} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:116
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:116
 #     vector pos = ro + rd * t;
 	assign		$tmp154 ___369_i 	%line{116} %argrw{"wr"}
 	add		___369_i ___369_i $const10 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:127
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:127
 # 
 	assign		Depth t 	%line{127} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:129
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:129
 #     color mate = color(.2);
 	lt		$tmp155 t max_distance 	%line{129} %argrw{"wrr"}
 	if		$tmp155 1656 1656 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:130
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:130
 #     vector pos = ro + rd * t;
 	assign		___371_mate $const33 	%line{130} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:131
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:131
 # 
 	mul		$tmp156 rd t 	%line{131} %argrw{"wrr"}
 	add		___371_pos ro $tmp156 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:133
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:133
 #       mate = color(.05);
 	lt		$tmp157 mat $const11 	%line{133} %argrw{"wrr"}
 	if		$tmp157 219 236 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:134
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:134
 #     else if( mat < 1.5)
 	assign		___371_mate $const34 	%line{134} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:135
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:135
 #     {
 	lt		$tmp158 mat $const16 	%line{135} %argrw{"wrr"}
 	if		$tmp158 224 236 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:137
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:137
 #         Alpha = 1;
 	assign		FragColor $const35 	%line{137} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:138
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:138
 #         return;
 	assign		Alpha $const10 	%line{138} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:139
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:139
 #     }
 	exit	%line{139}
-# code/blender/liquidknot/dev/lk_coridor.osl:141
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:141
 #       mate = color(.04, .02, .005);
 	lt		$tmp159 mat $const36 	%line{141} %argrw{"wrr"}
 	if		$tmp159 227 236 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:142
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:142
 #     else if( mat < 3.5)
 	assign		___371_mate $const37 	%line{142} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:143
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:143
 #       mate = color(.01, .04, .03);
 	lt		$tmp160 mat $const38 	%line{143} %argrw{"wrr"}
 	if		$tmp160 230 236 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:144
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:144
 #     else if( mat < 4.5)
 	assign		___371_mate $const39 	%line{144} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:145
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:145
 #       mate = color(.3);
 	lt		$tmp161 mat $const28 	%line{145} %argrw{"wrr"}
 	if		$tmp161 233 236 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:146
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:146
 #     else if( mat < 5.5)
 	assign		___371_mate $const40 	%line{146} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:147
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:147
 #       mate = color(.6,.01,.003);
 	lt		$tmp162 mat $const41 	%line{147} %argrw{"wrr"}
 	if		$tmp162 236 236 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:148
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:148
 # 
 	assign		___371_mate $const42 	%line{148} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:150
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:150
 #     vector spot_dir = normalize(vector(pos[0],0,1.7) - pos);
 	functioncall	$const43 1419 	%line{150} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:65
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:65
 #   float _;
 	assign		___365_e $const44 	%line{65} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:68
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:68
 #                           map(pos + vector(0,e,0),_) - map(pos - vector(0,e,0),_),
 	vector		$tmp165 ___365_e $const3 $const3 	%line{68} %argrw{"wrrr"}
 	add		$tmp166 ___371_pos $tmp165 	%argrw{"wrr"}
 	functioncall	$const4 434 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:10
 #   pos -= vector(0,0,1);
 	assign		___365__ $const3 	%line{10} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:11
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:11
 #   float d = -sdBox(pos, vector(INFINITY,1,2));
 	sub		$tmp166 $tmp166 $const5 	%line{11} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:12
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:12
 # 
 	functioncall	$const7 257 	%line{12} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp170 $tmp166 	%line{5} %argrw{"wr"}
 	div		$tmp171 $const6 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp170 $tmp171 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp174 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp173 ___363_q $tmp174 	%argrw{"wrr"}
@@ -1676,13 +1676,13 @@ code ___main___
 	max		$tmp176 $tmp177 $tmp178 	%argrw{"wrr"}
 	min		$tmp175 $tmp176 $const3 	%argrw{"wrr"}
 	add		$tmp168 $tmp172 $tmp175 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:12
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:12
 # 
 	neg		___364_d $tmp168 	%line{12} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:15
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:15
 #   p1[0] = mod(p1[0] + .5, 1) - .5 ;
 	sub		___364_p1 $tmp166 $const5 	%line{15} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:16
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:16
 #   float d1 = sdBox(p1, vector(.4,.4,.2));
 	compref		$tmp183 ___364_p1 $const2 	%line{16} %argrw{"wrr"}
 	add		$tmp184 $tmp183 $const11 	%argrw{"wrr"}
@@ -1693,19 +1693,19 @@ code ___main___
 	floor		$tmp185 $tmp186 	%argrw{"wr"}
 	mul		$tmp187 $const12 $tmp185 	%argrw{"wrr"}
 	sub		$tmp182 $tmp184 $tmp187 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:16
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:16
 #   float d1 = sdBox(p1, vector(.4,.4,.2));
-	sub		$tmp188 $tmp182 $const11 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{16} %argrw{"wrr"}
+	sub		$tmp188 $tmp182 $const11 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{16} %argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp188 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:17
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:17
 # 
 	functioncall	$const7 282 	%line{17} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp190 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp191 $const14 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp190 $tmp191 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp194 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp193 ___363_q $tmp194 	%argrw{"wrr"}
@@ -1717,26 +1717,26 @@ code ___main___
 	max		$tmp196 $tmp197 $tmp198 	%argrw{"wrr"}
 	min		$tmp195 $tmp196 $const3 	%argrw{"wrr"}
 	add		___364_d1 $tmp192 $tmp195 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:19
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:19
 #   d = min(d, d1);
 	lt		$tmp201 ___364_d1 ___364_d 	%line{19} %argrw{"wrr"}
 	if		$tmp201 285 285 	%argrw{"r"}
 	assign		___365__ $const12 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:20
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:20
 # 
 	min		___364_d ___364_d ___364_d1 	%line{20} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:24
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:24
 #   p1[1] = abs(p1[1]);
 	assign		___364_p1 $tmp166 	%line{24} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:25
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:25
 #   p1 = p1 - vector(0,.5,-.25);
 	compref		$tmp203 ___364_p1 $const10 	%line{25} %argrw{"wrr"}
 	abs		$tmp202 $tmp203 	%argrw{"wr"}
 	compassign	___364_p1 $const10 $tmp202 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:26
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:26
 #   p1[0] = mod(p1[0] + 1.5, 3) - 1.5 ;
 	sub		___364_p1 ___364_p1 $const15 	%line{26} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:27
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:27
 #   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
 	compref		$tmp206 ___364_p1 $const2 	%line{27} %argrw{"wrr"}
 	add		$tmp207 $tmp206 $const16 	%argrw{"wrr"}
@@ -1747,19 +1747,19 @@ code ___main___
 	floor		$tmp208 $tmp209 	%argrw{"wr"}
 	mul		$tmp210 $const18 $tmp208 	%argrw{"wrr"}
 	sub		$tmp205 $tmp207 $tmp210 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:27
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:27
 #   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
-	sub		$tmp211 $tmp205 $const16 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{27} %argrw{"wrr"}
+	sub		$tmp211 $tmp205 $const16 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{27} %argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp211 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:28
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:28
 #   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
 	functioncall	$const7 314 	%line{28} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp214 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp215 $const19 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp214 $tmp215 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp218 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp217 ___363_q $tmp218 	%argrw{"wrr"}
@@ -1771,18 +1771,18 @@ code ___main___
 	max		$tmp220 $tmp221 $tmp222 	%argrw{"wrr"}
 	min		$tmp219 $tmp220 $const3 	%argrw{"wrr"}
 	add		$tmp212 $tmp216 $tmp219 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:28
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:28
 #   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
 	sub		___364_d1 $tmp212 $const20 	%line{28} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:29
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:29
 #   d1 = max(d1, -d2);
 	functioncall	$const7 329 	%line{29} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp227 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp228 $const21 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp227 $tmp228 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp231 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp230 ___363_q $tmp231 	%argrw{"wrr"}
@@ -1794,23 +1794,23 @@ code ___main___
 	max		$tmp233 $tmp234 $tmp235 	%argrw{"wrr"}
 	min		$tmp232 $tmp233 $const3 	%argrw{"wrr"}
 	add		$tmp225 $tmp229 $tmp232 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:29
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:29
 #   d1 = max(d1, -d2);
 	sub		___364_d2 $tmp225 $const20 	%line{29} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:30
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:30
 #   d2 = sdBox(p1 - vector(0,0,0), vector(.8,.1,1.4)) - .02;
 	neg		$tmp238 ___364_d2 	%line{30} %argrw{"wr"}
 	max		___364_d1 ___364_d1 $tmp238 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:31
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:31
 #   d1 = min(d1,d2);
 	sub		$tmp241 ___364_p1 $const1 	%line{31} %argrw{"wrr"}
 	functioncall	$const7 347 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp243 $tmp241 	%line{5} %argrw{"wr"}
 	div		$tmp244 $const22 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp243 $tmp244 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp247 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp246 ___363_q $tmp247 	%argrw{"wrr"}
@@ -1822,32 +1822,32 @@ code ___main___
 	max		$tmp249 $tmp250 $tmp251 	%argrw{"wrr"}
 	min		$tmp248 $tmp249 $const3 	%argrw{"wrr"}
 	add		$tmp239 $tmp245 $tmp248 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:31
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:31
 #   d1 = min(d1,d2);
 	sub		___364_d2 $tmp239 $const20 	%line{31} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:32
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:32
 # 
 	min		___364_d1 ___364_d1 ___364_d2 	%line{32} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:34
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:34
 #   d = min(d, d1);
 	lt		$tmp254 ___364_d1 ___364_d 	%line{34} %argrw{"wrr"}
 	if		$tmp254 352 352 	%argrw{"r"}
 	assign		___365__ $const9 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:35
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:35
 # 
 	min		___364_d ___364_d ___364_d1 	%line{35} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:38
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:38
 #   d1 = sdBox(p1, vector(INFINITY,.7,.05)) - .02;
 	sub		___364_p1 $tmp166 $const23 	%line{38} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:39
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:39
 # 
 	functioncall	$const7 368 	%line{39} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp258 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp259 $const24 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp258 $tmp259 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp262 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp261 ___363_q $tmp262 	%argrw{"wrr"}
@@ -1859,29 +1859,29 @@ code ___main___
 	max		$tmp264 $tmp265 $tmp266 	%argrw{"wrr"}
 	min		$tmp263 $tmp264 $const3 	%argrw{"wrr"}
 	add		$tmp256 $tmp260 $tmp263 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:39
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:39
 # 
 	sub		___364_d1 $tmp256 $const20 	%line{39} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:41
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:41
 #   d = min(d, d1);
 	lt		$tmp269 ___364_d1 ___364_d 	%line{41} %argrw{"wrr"}
 	if		$tmp269 372 372 	%argrw{"r"}
 	assign		___365__ $const18 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:42
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:42
 # 
 	min		___364_d ___364_d ___364_d1 	%line{42} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:45
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:45
 #   d1 = sdBox(p1, vector(INFINITY,1,.005)) - .02;
 	sub		___364_p1 $tmp166 $const5 	%line{45} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:46
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:46
 # 
 	functioncall	$const7 388 	%line{46} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp273 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp274 $const25 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp273 $tmp274 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp277 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp276 ___363_q $tmp277 	%argrw{"wrr"}
@@ -1893,29 +1893,29 @@ code ___main___
 	max		$tmp279 $tmp280 $tmp281 	%argrw{"wrr"}
 	min		$tmp278 $tmp279 $const3 	%argrw{"wrr"}
 	add		$tmp271 $tmp275 $tmp278 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:46
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:46
 # 
 	sub		___364_d1 $tmp271 $const20 	%line{46} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:48
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:48
 #   d = min(d, d1);
 	lt		$tmp284 ___364_d1 ___364_d 	%line{48} %argrw{"wrr"}
 	if		$tmp284 392 392 	%argrw{"r"}
 	assign		___365__ $const26 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:49
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:49
 # 
 	min		___364_d ___364_d ___364_d1 	%line{49} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:52
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:52
 #   p1[1] = abs(p1[1]);
 	assign		___364_p1 $tmp166 	%line{52} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:53
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:53
 #   p1 = p1 - vector(0,.5,-.1);
 	compref		$tmp286 ___364_p1 $const10 	%line{53} %argrw{"wrr"}
 	abs		$tmp285 $tmp286 	%argrw{"wr"}
 	compassign	___364_p1 $const10 $tmp285 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:54
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:54
 #   p1[0] = mod(p1[0] + 4.5 , 9) - 3 + 3*(sign(-pos[1])/2 + .5) ;
 	sub		___364_p1 ___364_p1 $const27 	%line{54} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:55
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:55
 #   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
 	compref		$tmp289 ___364_p1 $const2 	%line{55} %argrw{"wrr"}
 	add		$tmp290 $tmp289 $const28 	%argrw{"wrr"}
@@ -1926,9 +1926,9 @@ code ___main___
 	floor		$tmp291 $tmp292 	%argrw{"wr"}
 	mul		$tmp293 $const30 $tmp291 	%argrw{"wrr"}
 	sub		$tmp288 $tmp290 $tmp293 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:55
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:55
 #   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
-	sub		$tmp294 $tmp288 $const18 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{55} %argrw{"wrr"}
+	sub		$tmp294 $tmp288 $const18 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{55} %argrw{"wrr"}
 	compref		$tmp296 $tmp166 $const10 	%argrw{"wrr"}
 	neg		$tmp297 $tmp296 	%argrw{"wr"}
 	sign		$tmp295 $tmp297 	%argrw{"wr"}
@@ -1937,15 +1937,15 @@ code ___main___
 	mul		$tmp300 $const18 $tmp299 	%argrw{"wrr"}
 	add		$tmp301 $tmp294 $tmp300 	%argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp301 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:56
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:56
 # 
 	functioncall	$const7 428 	%line{56} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp304 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp305 $const31 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp304 $tmp305 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp308 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp307 ___363_q $tmp308 	%argrw{"wrr"}
@@ -1957,40 +1957,40 @@ code ___main___
 	max		$tmp310 $tmp311 $tmp312 	%argrw{"wrr"}
 	min		$tmp309 $tmp310 $const3 	%argrw{"wrr"}
 	add		$tmp302 $tmp306 $tmp309 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:56
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:56
 # 
 	sub		___364_d1 $tmp302 $const20 	%line{56} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:58
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:58
 #   d = min(d, d1);
 	lt		$tmp315 ___364_d1 ___364_d 	%line{58} %argrw{"wrr"}
 	if		$tmp315 432 432 	%argrw{"r"}
 	assign		___365__ $const32 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:59
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:59
 # 
 	min		___364_d ___364_d ___364_d1 	%line{59} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:61
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:61
 # }
 	assign		$tmp164 ___364_d 	%line{61} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:68
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:68
 #                           map(pos + vector(0,e,0),_) - map(pos - vector(0,e,0),_),
 	vector		$tmp317 ___365_e $const3 $const3 	%line{68} %argrw{"wrrr"}
 	sub		$tmp318 ___371_pos $tmp317 	%argrw{"wrr"}
 	functioncall	$const4 630 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:10
 #   pos -= vector(0,0,1);
 	assign		___365__ $const3 	%line{10} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:11
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:11
 #   float d = -sdBox(pos, vector(INFINITY,1,2));
 	sub		$tmp318 $tmp318 $const5 	%line{11} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:12
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:12
 # 
 	functioncall	$const7 453 	%line{12} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp322 $tmp318 	%line{5} %argrw{"wr"}
 	div		$tmp323 $const6 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp322 $tmp323 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp326 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp325 ___363_q $tmp326 	%argrw{"wrr"}
@@ -2002,13 +2002,13 @@ code ___main___
 	max		$tmp328 $tmp329 $tmp330 	%argrw{"wrr"}
 	min		$tmp327 $tmp328 $const3 	%argrw{"wrr"}
 	add		$tmp320 $tmp324 $tmp327 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:12
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:12
 # 
 	neg		___364_d $tmp320 	%line{12} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:15
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:15
 #   p1[0] = mod(p1[0] + .5, 1) - .5 ;
 	sub		___364_p1 $tmp318 $const5 	%line{15} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:16
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:16
 #   float d1 = sdBox(p1, vector(.4,.4,.2));
 	compref		$tmp335 ___364_p1 $const2 	%line{16} %argrw{"wrr"}
 	add		$tmp336 $tmp335 $const11 	%argrw{"wrr"}
@@ -2019,19 +2019,19 @@ code ___main___
 	floor		$tmp337 $tmp338 	%argrw{"wr"}
 	mul		$tmp339 $const12 $tmp337 	%argrw{"wrr"}
 	sub		$tmp334 $tmp336 $tmp339 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:16
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:16
 #   float d1 = sdBox(p1, vector(.4,.4,.2));
-	sub		$tmp340 $tmp334 $const11 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{16} %argrw{"wrr"}
+	sub		$tmp340 $tmp334 $const11 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{16} %argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp340 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:17
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:17
 # 
 	functioncall	$const7 478 	%line{17} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp342 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp343 $const14 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp342 $tmp343 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp346 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp345 ___363_q $tmp346 	%argrw{"wrr"}
@@ -2043,26 +2043,26 @@ code ___main___
 	max		$tmp348 $tmp349 $tmp350 	%argrw{"wrr"}
 	min		$tmp347 $tmp348 $const3 	%argrw{"wrr"}
 	add		___364_d1 $tmp344 $tmp347 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:19
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:19
 #   d = min(d, d1);
 	lt		$tmp353 ___364_d1 ___364_d 	%line{19} %argrw{"wrr"}
 	if		$tmp353 481 481 	%argrw{"r"}
 	assign		___365__ $const12 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:20
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:20
 # 
 	min		___364_d ___364_d ___364_d1 	%line{20} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:24
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:24
 #   p1[1] = abs(p1[1]);
 	assign		___364_p1 $tmp318 	%line{24} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:25
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:25
 #   p1 = p1 - vector(0,.5,-.25);
 	compref		$tmp355 ___364_p1 $const10 	%line{25} %argrw{"wrr"}
 	abs		$tmp354 $tmp355 	%argrw{"wr"}
 	compassign	___364_p1 $const10 $tmp354 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:26
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:26
 #   p1[0] = mod(p1[0] + 1.5, 3) - 1.5 ;
 	sub		___364_p1 ___364_p1 $const15 	%line{26} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:27
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:27
 #   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
 	compref		$tmp358 ___364_p1 $const2 	%line{27} %argrw{"wrr"}
 	add		$tmp359 $tmp358 $const16 	%argrw{"wrr"}
@@ -2073,19 +2073,19 @@ code ___main___
 	floor		$tmp360 $tmp361 	%argrw{"wr"}
 	mul		$tmp362 $const18 $tmp360 	%argrw{"wrr"}
 	sub		$tmp357 $tmp359 $tmp362 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:27
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:27
 #   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
-	sub		$tmp363 $tmp357 $const16 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{27} %argrw{"wrr"}
+	sub		$tmp363 $tmp357 $const16 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{27} %argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp363 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:28
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:28
 #   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
 	functioncall	$const7 510 	%line{28} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp366 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp367 $const19 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp366 $tmp367 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp370 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp369 ___363_q $tmp370 	%argrw{"wrr"}
@@ -2097,18 +2097,18 @@ code ___main___
 	max		$tmp372 $tmp373 $tmp374 	%argrw{"wrr"}
 	min		$tmp371 $tmp372 $const3 	%argrw{"wrr"}
 	add		$tmp364 $tmp368 $tmp371 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:28
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:28
 #   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
 	sub		___364_d1 $tmp364 $const20 	%line{28} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:29
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:29
 #   d1 = max(d1, -d2);
 	functioncall	$const7 525 	%line{29} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp379 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp380 $const21 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp379 $tmp380 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp383 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp382 ___363_q $tmp383 	%argrw{"wrr"}
@@ -2120,23 +2120,23 @@ code ___main___
 	max		$tmp385 $tmp386 $tmp387 	%argrw{"wrr"}
 	min		$tmp384 $tmp385 $const3 	%argrw{"wrr"}
 	add		$tmp377 $tmp381 $tmp384 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:29
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:29
 #   d1 = max(d1, -d2);
 	sub		___364_d2 $tmp377 $const20 	%line{29} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:30
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:30
 #   d2 = sdBox(p1 - vector(0,0,0), vector(.8,.1,1.4)) - .02;
 	neg		$tmp390 ___364_d2 	%line{30} %argrw{"wr"}
 	max		___364_d1 ___364_d1 $tmp390 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:31
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:31
 #   d1 = min(d1,d2);
 	sub		$tmp393 ___364_p1 $const1 	%line{31} %argrw{"wrr"}
 	functioncall	$const7 543 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp395 $tmp393 	%line{5} %argrw{"wr"}
 	div		$tmp396 $const22 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp395 $tmp396 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp399 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp398 ___363_q $tmp399 	%argrw{"wrr"}
@@ -2148,32 +2148,32 @@ code ___main___
 	max		$tmp401 $tmp402 $tmp403 	%argrw{"wrr"}
 	min		$tmp400 $tmp401 $const3 	%argrw{"wrr"}
 	add		$tmp391 $tmp397 $tmp400 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:31
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:31
 #   d1 = min(d1,d2);
 	sub		___364_d2 $tmp391 $const20 	%line{31} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:32
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:32
 # 
 	min		___364_d1 ___364_d1 ___364_d2 	%line{32} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:34
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:34
 #   d = min(d, d1);
 	lt		$tmp406 ___364_d1 ___364_d 	%line{34} %argrw{"wrr"}
 	if		$tmp406 548 548 	%argrw{"r"}
 	assign		___365__ $const9 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:35
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:35
 # 
 	min		___364_d ___364_d ___364_d1 	%line{35} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:38
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:38
 #   d1 = sdBox(p1, vector(INFINITY,.7,.05)) - .02;
 	sub		___364_p1 $tmp318 $const23 	%line{38} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:39
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:39
 # 
 	functioncall	$const7 564 	%line{39} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp410 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp411 $const24 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp410 $tmp411 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp414 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp413 ___363_q $tmp414 	%argrw{"wrr"}
@@ -2185,29 +2185,29 @@ code ___main___
 	max		$tmp416 $tmp417 $tmp418 	%argrw{"wrr"}
 	min		$tmp415 $tmp416 $const3 	%argrw{"wrr"}
 	add		$tmp408 $tmp412 $tmp415 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:39
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:39
 # 
 	sub		___364_d1 $tmp408 $const20 	%line{39} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:41
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:41
 #   d = min(d, d1);
 	lt		$tmp421 ___364_d1 ___364_d 	%line{41} %argrw{"wrr"}
 	if		$tmp421 568 568 	%argrw{"r"}
 	assign		___365__ $const18 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:42
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:42
 # 
 	min		___364_d ___364_d ___364_d1 	%line{42} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:45
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:45
 #   d1 = sdBox(p1, vector(INFINITY,1,.005)) - .02;
 	sub		___364_p1 $tmp318 $const5 	%line{45} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:46
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:46
 # 
 	functioncall	$const7 584 	%line{46} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp425 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp426 $const25 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp425 $tmp426 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp429 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp428 ___363_q $tmp429 	%argrw{"wrr"}
@@ -2219,29 +2219,29 @@ code ___main___
 	max		$tmp431 $tmp432 $tmp433 	%argrw{"wrr"}
 	min		$tmp430 $tmp431 $const3 	%argrw{"wrr"}
 	add		$tmp423 $tmp427 $tmp430 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:46
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:46
 # 
 	sub		___364_d1 $tmp423 $const20 	%line{46} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:48
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:48
 #   d = min(d, d1);
 	lt		$tmp436 ___364_d1 ___364_d 	%line{48} %argrw{"wrr"}
 	if		$tmp436 588 588 	%argrw{"r"}
 	assign		___365__ $const26 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:49
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:49
 # 
 	min		___364_d ___364_d ___364_d1 	%line{49} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:52
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:52
 #   p1[1] = abs(p1[1]);
 	assign		___364_p1 $tmp318 	%line{52} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:53
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:53
 #   p1 = p1 - vector(0,.5,-.1);
 	compref		$tmp438 ___364_p1 $const10 	%line{53} %argrw{"wrr"}
 	abs		$tmp437 $tmp438 	%argrw{"wr"}
 	compassign	___364_p1 $const10 $tmp437 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:54
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:54
 #   p1[0] = mod(p1[0] + 4.5 , 9) - 3 + 3*(sign(-pos[1])/2 + .5) ;
 	sub		___364_p1 ___364_p1 $const27 	%line{54} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:55
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:55
 #   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
 	compref		$tmp441 ___364_p1 $const2 	%line{55} %argrw{"wrr"}
 	add		$tmp442 $tmp441 $const28 	%argrw{"wrr"}
@@ -2252,9 +2252,9 @@ code ___main___
 	floor		$tmp443 $tmp444 	%argrw{"wr"}
 	mul		$tmp445 $const30 $tmp443 	%argrw{"wrr"}
 	sub		$tmp440 $tmp442 $tmp445 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:55
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:55
 #   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
-	sub		$tmp446 $tmp440 $const18 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{55} %argrw{"wrr"}
+	sub		$tmp446 $tmp440 $const18 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{55} %argrw{"wrr"}
 	compref		$tmp448 $tmp318 $const10 	%argrw{"wrr"}
 	neg		$tmp449 $tmp448 	%argrw{"wr"}
 	sign		$tmp447 $tmp449 	%argrw{"wr"}
@@ -2263,15 +2263,15 @@ code ___main___
 	mul		$tmp452 $const18 $tmp451 	%argrw{"wrr"}
 	add		$tmp453 $tmp446 $tmp452 	%argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp453 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:56
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:56
 # 
 	functioncall	$const7 624 	%line{56} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp456 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp457 $const31 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp456 $tmp457 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp460 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp459 ___363_q $tmp460 	%argrw{"wrr"}
@@ -2283,43 +2283,43 @@ code ___main___
 	max		$tmp462 $tmp463 $tmp464 	%argrw{"wrr"}
 	min		$tmp461 $tmp462 $const3 	%argrw{"wrr"}
 	add		$tmp454 $tmp458 $tmp461 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:56
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:56
 # 
 	sub		___364_d1 $tmp454 $const20 	%line{56} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:58
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:58
 #   d = min(d, d1);
 	lt		$tmp467 ___364_d1 ___364_d 	%line{58} %argrw{"wrr"}
 	if		$tmp467 628 628 	%argrw{"r"}
 	assign		___365__ $const32 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:59
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:59
 # 
 	min		___364_d ___364_d ___364_d1 	%line{59} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:61
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:61
 # }
 	assign		$tmp316 ___364_d 	%line{61} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:68
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:68
 #                           map(pos + vector(0,e,0),_) - map(pos - vector(0,e,0),_),
 	sub		$tmp468 $tmp164 $tmp316 	%line{68} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:69
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:69
 #                           map(pos + vector(0,0,e),_) - map(pos - vector(0,0,e),_)
 	vector		$tmp470 $const3 ___365_e $const3 	%line{69} %argrw{"wrrr"}
 	add		$tmp471 ___371_pos $tmp470 	%argrw{"wrr"}
 	functioncall	$const4 827 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:10
 #   pos -= vector(0,0,1);
 	assign		___365__ $const3 	%line{10} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:11
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:11
 #   float d = -sdBox(pos, vector(INFINITY,1,2));
 	sub		$tmp471 $tmp471 $const5 	%line{11} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:12
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:12
 # 
 	functioncall	$const7 650 	%line{12} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp475 $tmp471 	%line{5} %argrw{"wr"}
 	div		$tmp476 $const6 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp475 $tmp476 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp479 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp478 ___363_q $tmp479 	%argrw{"wrr"}
@@ -2331,13 +2331,13 @@ code ___main___
 	max		$tmp481 $tmp482 $tmp483 	%argrw{"wrr"}
 	min		$tmp480 $tmp481 $const3 	%argrw{"wrr"}
 	add		$tmp473 $tmp477 $tmp480 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:12
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:12
 # 
 	neg		___364_d $tmp473 	%line{12} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:15
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:15
 #   p1[0] = mod(p1[0] + .5, 1) - .5 ;
 	sub		___364_p1 $tmp471 $const5 	%line{15} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:16
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:16
 #   float d1 = sdBox(p1, vector(.4,.4,.2));
 	compref		$tmp488 ___364_p1 $const2 	%line{16} %argrw{"wrr"}
 	add		$tmp489 $tmp488 $const11 	%argrw{"wrr"}
@@ -2348,19 +2348,19 @@ code ___main___
 	floor		$tmp490 $tmp491 	%argrw{"wr"}
 	mul		$tmp492 $const12 $tmp490 	%argrw{"wrr"}
 	sub		$tmp487 $tmp489 $tmp492 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:16
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:16
 #   float d1 = sdBox(p1, vector(.4,.4,.2));
-	sub		$tmp493 $tmp487 $const11 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{16} %argrw{"wrr"}
+	sub		$tmp493 $tmp487 $const11 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{16} %argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp493 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:17
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:17
 # 
 	functioncall	$const7 675 	%line{17} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp495 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp496 $const14 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp495 $tmp496 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp499 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp498 ___363_q $tmp499 	%argrw{"wrr"}
@@ -2372,26 +2372,26 @@ code ___main___
 	max		$tmp501 $tmp502 $tmp503 	%argrw{"wrr"}
 	min		$tmp500 $tmp501 $const3 	%argrw{"wrr"}
 	add		___364_d1 $tmp497 $tmp500 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:19
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:19
 #   d = min(d, d1);
 	lt		$tmp506 ___364_d1 ___364_d 	%line{19} %argrw{"wrr"}
 	if		$tmp506 678 678 	%argrw{"r"}
 	assign		___365__ $const12 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:20
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:20
 # 
 	min		___364_d ___364_d ___364_d1 	%line{20} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:24
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:24
 #   p1[1] = abs(p1[1]);
 	assign		___364_p1 $tmp471 	%line{24} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:25
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:25
 #   p1 = p1 - vector(0,.5,-.25);
 	compref		$tmp508 ___364_p1 $const10 	%line{25} %argrw{"wrr"}
 	abs		$tmp507 $tmp508 	%argrw{"wr"}
 	compassign	___364_p1 $const10 $tmp507 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:26
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:26
 #   p1[0] = mod(p1[0] + 1.5, 3) - 1.5 ;
 	sub		___364_p1 ___364_p1 $const15 	%line{26} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:27
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:27
 #   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
 	compref		$tmp511 ___364_p1 $const2 	%line{27} %argrw{"wrr"}
 	add		$tmp512 $tmp511 $const16 	%argrw{"wrr"}
@@ -2402,19 +2402,19 @@ code ___main___
 	floor		$tmp513 $tmp514 	%argrw{"wr"}
 	mul		$tmp515 $const18 $tmp513 	%argrw{"wrr"}
 	sub		$tmp510 $tmp512 $tmp515 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:27
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:27
 #   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
-	sub		$tmp516 $tmp510 $const16 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{27} %argrw{"wrr"}
+	sub		$tmp516 $tmp510 $const16 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{27} %argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp516 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:28
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:28
 #   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
 	functioncall	$const7 707 	%line{28} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp519 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp520 $const19 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp519 $tmp520 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp523 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp522 ___363_q $tmp523 	%argrw{"wrr"}
@@ -2426,18 +2426,18 @@ code ___main___
 	max		$tmp525 $tmp526 $tmp527 	%argrw{"wrr"}
 	min		$tmp524 $tmp525 $const3 	%argrw{"wrr"}
 	add		$tmp517 $tmp521 $tmp524 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:28
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:28
 #   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
 	sub		___364_d1 $tmp517 $const20 	%line{28} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:29
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:29
 #   d1 = max(d1, -d2);
 	functioncall	$const7 722 	%line{29} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp532 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp533 $const21 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp532 $tmp533 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp536 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp535 ___363_q $tmp536 	%argrw{"wrr"}
@@ -2449,23 +2449,23 @@ code ___main___
 	max		$tmp538 $tmp539 $tmp540 	%argrw{"wrr"}
 	min		$tmp537 $tmp538 $const3 	%argrw{"wrr"}
 	add		$tmp530 $tmp534 $tmp537 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:29
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:29
 #   d1 = max(d1, -d2);
 	sub		___364_d2 $tmp530 $const20 	%line{29} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:30
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:30
 #   d2 = sdBox(p1 - vector(0,0,0), vector(.8,.1,1.4)) - .02;
 	neg		$tmp543 ___364_d2 	%line{30} %argrw{"wr"}
 	max		___364_d1 ___364_d1 $tmp543 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:31
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:31
 #   d1 = min(d1,d2);
 	sub		$tmp546 ___364_p1 $const1 	%line{31} %argrw{"wrr"}
 	functioncall	$const7 740 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp548 $tmp546 	%line{5} %argrw{"wr"}
 	div		$tmp549 $const22 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp548 $tmp549 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp552 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp551 ___363_q $tmp552 	%argrw{"wrr"}
@@ -2477,32 +2477,32 @@ code ___main___
 	max		$tmp554 $tmp555 $tmp556 	%argrw{"wrr"}
 	min		$tmp553 $tmp554 $const3 	%argrw{"wrr"}
 	add		$tmp544 $tmp550 $tmp553 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:31
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:31
 #   d1 = min(d1,d2);
 	sub		___364_d2 $tmp544 $const20 	%line{31} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:32
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:32
 # 
 	min		___364_d1 ___364_d1 ___364_d2 	%line{32} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:34
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:34
 #   d = min(d, d1);
 	lt		$tmp559 ___364_d1 ___364_d 	%line{34} %argrw{"wrr"}
 	if		$tmp559 745 745 	%argrw{"r"}
 	assign		___365__ $const9 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:35
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:35
 # 
 	min		___364_d ___364_d ___364_d1 	%line{35} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:38
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:38
 #   d1 = sdBox(p1, vector(INFINITY,.7,.05)) - .02;
 	sub		___364_p1 $tmp471 $const23 	%line{38} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:39
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:39
 # 
 	functioncall	$const7 761 	%line{39} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp563 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp564 $const24 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp563 $tmp564 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp567 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp566 ___363_q $tmp567 	%argrw{"wrr"}
@@ -2514,29 +2514,29 @@ code ___main___
 	max		$tmp569 $tmp570 $tmp571 	%argrw{"wrr"}
 	min		$tmp568 $tmp569 $const3 	%argrw{"wrr"}
 	add		$tmp561 $tmp565 $tmp568 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:39
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:39
 # 
 	sub		___364_d1 $tmp561 $const20 	%line{39} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:41
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:41
 #   d = min(d, d1);
 	lt		$tmp574 ___364_d1 ___364_d 	%line{41} %argrw{"wrr"}
 	if		$tmp574 765 765 	%argrw{"r"}
 	assign		___365__ $const18 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:42
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:42
 # 
 	min		___364_d ___364_d ___364_d1 	%line{42} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:45
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:45
 #   d1 = sdBox(p1, vector(INFINITY,1,.005)) - .02;
 	sub		___364_p1 $tmp471 $const5 	%line{45} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:46
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:46
 # 
 	functioncall	$const7 781 	%line{46} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp578 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp579 $const25 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp578 $tmp579 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp582 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp581 ___363_q $tmp582 	%argrw{"wrr"}
@@ -2548,29 +2548,29 @@ code ___main___
 	max		$tmp584 $tmp585 $tmp586 	%argrw{"wrr"}
 	min		$tmp583 $tmp584 $const3 	%argrw{"wrr"}
 	add		$tmp576 $tmp580 $tmp583 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:46
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:46
 # 
 	sub		___364_d1 $tmp576 $const20 	%line{46} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:48
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:48
 #   d = min(d, d1);
 	lt		$tmp589 ___364_d1 ___364_d 	%line{48} %argrw{"wrr"}
 	if		$tmp589 785 785 	%argrw{"r"}
 	assign		___365__ $const26 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:49
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:49
 # 
 	min		___364_d ___364_d ___364_d1 	%line{49} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:52
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:52
 #   p1[1] = abs(p1[1]);
 	assign		___364_p1 $tmp471 	%line{52} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:53
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:53
 #   p1 = p1 - vector(0,.5,-.1);
 	compref		$tmp591 ___364_p1 $const10 	%line{53} %argrw{"wrr"}
 	abs		$tmp590 $tmp591 	%argrw{"wr"}
 	compassign	___364_p1 $const10 $tmp590 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:54
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:54
 #   p1[0] = mod(p1[0] + 4.5 , 9) - 3 + 3*(sign(-pos[1])/2 + .5) ;
 	sub		___364_p1 ___364_p1 $const27 	%line{54} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:55
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:55
 #   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
 	compref		$tmp594 ___364_p1 $const2 	%line{55} %argrw{"wrr"}
 	add		$tmp595 $tmp594 $const28 	%argrw{"wrr"}
@@ -2581,9 +2581,9 @@ code ___main___
 	floor		$tmp596 $tmp597 	%argrw{"wr"}
 	mul		$tmp598 $const30 $tmp596 	%argrw{"wrr"}
 	sub		$tmp593 $tmp595 $tmp598 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:55
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:55
 #   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
-	sub		$tmp599 $tmp593 $const18 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{55} %argrw{"wrr"}
+	sub		$tmp599 $tmp593 $const18 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{55} %argrw{"wrr"}
 	compref		$tmp601 $tmp471 $const10 	%argrw{"wrr"}
 	neg		$tmp602 $tmp601 	%argrw{"wr"}
 	sign		$tmp600 $tmp602 	%argrw{"wr"}
@@ -2592,15 +2592,15 @@ code ___main___
 	mul		$tmp605 $const18 $tmp604 	%argrw{"wrr"}
 	add		$tmp606 $tmp599 $tmp605 	%argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp606 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:56
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:56
 # 
 	functioncall	$const7 821 	%line{56} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp609 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp610 $const31 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp609 $tmp610 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp613 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp612 ___363_q $tmp613 	%argrw{"wrr"}
@@ -2612,40 +2612,40 @@ code ___main___
 	max		$tmp615 $tmp616 $tmp617 	%argrw{"wrr"}
 	min		$tmp614 $tmp615 $const3 	%argrw{"wrr"}
 	add		$tmp607 $tmp611 $tmp614 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:56
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:56
 # 
 	sub		___364_d1 $tmp607 $const20 	%line{56} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:58
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:58
 #   d = min(d, d1);
 	lt		$tmp620 ___364_d1 ___364_d 	%line{58} %argrw{"wrr"}
 	if		$tmp620 825 825 	%argrw{"r"}
 	assign		___365__ $const32 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:59
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:59
 # 
 	min		___364_d ___364_d ___364_d1 	%line{59} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:61
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:61
 # }
 	assign		$tmp469 ___364_d 	%line{61} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:69
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:69
 #                           map(pos + vector(0,0,e),_) - map(pos - vector(0,0,e),_)
 	vector		$tmp622 $const3 ___365_e $const3 	%line{69} %argrw{"wrrr"}
 	sub		$tmp623 ___371_pos $tmp622 	%argrw{"wrr"}
 	functioncall	$const4 1023 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:10
 #   pos -= vector(0,0,1);
 	assign		___365__ $const3 	%line{10} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:11
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:11
 #   float d = -sdBox(pos, vector(INFINITY,1,2));
 	sub		$tmp623 $tmp623 $const5 	%line{11} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:12
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:12
 # 
 	functioncall	$const7 846 	%line{12} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp627 $tmp623 	%line{5} %argrw{"wr"}
 	div		$tmp628 $const6 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp627 $tmp628 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp631 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp630 ___363_q $tmp631 	%argrw{"wrr"}
@@ -2657,13 +2657,13 @@ code ___main___
 	max		$tmp633 $tmp634 $tmp635 	%argrw{"wrr"}
 	min		$tmp632 $tmp633 $const3 	%argrw{"wrr"}
 	add		$tmp625 $tmp629 $tmp632 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:12
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:12
 # 
 	neg		___364_d $tmp625 	%line{12} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:15
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:15
 #   p1[0] = mod(p1[0] + .5, 1) - .5 ;
 	sub		___364_p1 $tmp623 $const5 	%line{15} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:16
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:16
 #   float d1 = sdBox(p1, vector(.4,.4,.2));
 	compref		$tmp640 ___364_p1 $const2 	%line{16} %argrw{"wrr"}
 	add		$tmp641 $tmp640 $const11 	%argrw{"wrr"}
@@ -2674,19 +2674,19 @@ code ___main___
 	floor		$tmp642 $tmp643 	%argrw{"wr"}
 	mul		$tmp644 $const12 $tmp642 	%argrw{"wrr"}
 	sub		$tmp639 $tmp641 $tmp644 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:16
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:16
 #   float d1 = sdBox(p1, vector(.4,.4,.2));
-	sub		$tmp645 $tmp639 $const11 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{16} %argrw{"wrr"}
+	sub		$tmp645 $tmp639 $const11 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{16} %argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp645 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:17
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:17
 # 
 	functioncall	$const7 871 	%line{17} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp647 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp648 $const14 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp647 $tmp648 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp651 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp650 ___363_q $tmp651 	%argrw{"wrr"}
@@ -2698,26 +2698,26 @@ code ___main___
 	max		$tmp653 $tmp654 $tmp655 	%argrw{"wrr"}
 	min		$tmp652 $tmp653 $const3 	%argrw{"wrr"}
 	add		___364_d1 $tmp649 $tmp652 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:19
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:19
 #   d = min(d, d1);
 	lt		$tmp658 ___364_d1 ___364_d 	%line{19} %argrw{"wrr"}
 	if		$tmp658 874 874 	%argrw{"r"}
 	assign		___365__ $const12 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:20
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:20
 # 
 	min		___364_d ___364_d ___364_d1 	%line{20} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:24
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:24
 #   p1[1] = abs(p1[1]);
 	assign		___364_p1 $tmp623 	%line{24} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:25
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:25
 #   p1 = p1 - vector(0,.5,-.25);
 	compref		$tmp660 ___364_p1 $const10 	%line{25} %argrw{"wrr"}
 	abs		$tmp659 $tmp660 	%argrw{"wr"}
 	compassign	___364_p1 $const10 $tmp659 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:26
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:26
 #   p1[0] = mod(p1[0] + 1.5, 3) - 1.5 ;
 	sub		___364_p1 ___364_p1 $const15 	%line{26} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:27
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:27
 #   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
 	compref		$tmp663 ___364_p1 $const2 	%line{27} %argrw{"wrr"}
 	add		$tmp664 $tmp663 $const16 	%argrw{"wrr"}
@@ -2728,19 +2728,19 @@ code ___main___
 	floor		$tmp665 $tmp666 	%argrw{"wr"}
 	mul		$tmp667 $const18 $tmp665 	%argrw{"wrr"}
 	sub		$tmp662 $tmp664 $tmp667 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:27
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:27
 #   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
-	sub		$tmp668 $tmp662 $const16 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{27} %argrw{"wrr"}
+	sub		$tmp668 $tmp662 $const16 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{27} %argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp668 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:28
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:28
 #   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
 	functioncall	$const7 903 	%line{28} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp671 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp672 $const19 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp671 $tmp672 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp675 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp674 ___363_q $tmp675 	%argrw{"wrr"}
@@ -2752,18 +2752,18 @@ code ___main___
 	max		$tmp677 $tmp678 $tmp679 	%argrw{"wrr"}
 	min		$tmp676 $tmp677 $const3 	%argrw{"wrr"}
 	add		$tmp669 $tmp673 $tmp676 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:28
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:28
 #   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
 	sub		___364_d1 $tmp669 $const20 	%line{28} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:29
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:29
 #   d1 = max(d1, -d2);
 	functioncall	$const7 918 	%line{29} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp684 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp685 $const21 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp684 $tmp685 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp688 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp687 ___363_q $tmp688 	%argrw{"wrr"}
@@ -2775,23 +2775,23 @@ code ___main___
 	max		$tmp690 $tmp691 $tmp692 	%argrw{"wrr"}
 	min		$tmp689 $tmp690 $const3 	%argrw{"wrr"}
 	add		$tmp682 $tmp686 $tmp689 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:29
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:29
 #   d1 = max(d1, -d2);
 	sub		___364_d2 $tmp682 $const20 	%line{29} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:30
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:30
 #   d2 = sdBox(p1 - vector(0,0,0), vector(.8,.1,1.4)) - .02;
 	neg		$tmp695 ___364_d2 	%line{30} %argrw{"wr"}
 	max		___364_d1 ___364_d1 $tmp695 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:31
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:31
 #   d1 = min(d1,d2);
 	sub		$tmp698 ___364_p1 $const1 	%line{31} %argrw{"wrr"}
 	functioncall	$const7 936 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp700 $tmp698 	%line{5} %argrw{"wr"}
 	div		$tmp701 $const22 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp700 $tmp701 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp704 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp703 ___363_q $tmp704 	%argrw{"wrr"}
@@ -2803,32 +2803,32 @@ code ___main___
 	max		$tmp706 $tmp707 $tmp708 	%argrw{"wrr"}
 	min		$tmp705 $tmp706 $const3 	%argrw{"wrr"}
 	add		$tmp696 $tmp702 $tmp705 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:31
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:31
 #   d1 = min(d1,d2);
 	sub		___364_d2 $tmp696 $const20 	%line{31} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:32
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:32
 # 
 	min		___364_d1 ___364_d1 ___364_d2 	%line{32} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:34
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:34
 #   d = min(d, d1);
 	lt		$tmp711 ___364_d1 ___364_d 	%line{34} %argrw{"wrr"}
 	if		$tmp711 941 941 	%argrw{"r"}
 	assign		___365__ $const9 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:35
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:35
 # 
 	min		___364_d ___364_d ___364_d1 	%line{35} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:38
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:38
 #   d1 = sdBox(p1, vector(INFINITY,.7,.05)) - .02;
 	sub		___364_p1 $tmp623 $const23 	%line{38} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:39
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:39
 # 
 	functioncall	$const7 957 	%line{39} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp715 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp716 $const24 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp715 $tmp716 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp719 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp718 ___363_q $tmp719 	%argrw{"wrr"}
@@ -2840,29 +2840,29 @@ code ___main___
 	max		$tmp721 $tmp722 $tmp723 	%argrw{"wrr"}
 	min		$tmp720 $tmp721 $const3 	%argrw{"wrr"}
 	add		$tmp713 $tmp717 $tmp720 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:39
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:39
 # 
 	sub		___364_d1 $tmp713 $const20 	%line{39} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:41
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:41
 #   d = min(d, d1);
 	lt		$tmp726 ___364_d1 ___364_d 	%line{41} %argrw{"wrr"}
 	if		$tmp726 961 961 	%argrw{"r"}
 	assign		___365__ $const18 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:42
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:42
 # 
 	min		___364_d ___364_d ___364_d1 	%line{42} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:45
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:45
 #   d1 = sdBox(p1, vector(INFINITY,1,.005)) - .02;
 	sub		___364_p1 $tmp623 $const5 	%line{45} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:46
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:46
 # 
 	functioncall	$const7 977 	%line{46} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp730 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp731 $const25 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp730 $tmp731 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp734 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp733 ___363_q $tmp734 	%argrw{"wrr"}
@@ -2874,29 +2874,29 @@ code ___main___
 	max		$tmp736 $tmp737 $tmp738 	%argrw{"wrr"}
 	min		$tmp735 $tmp736 $const3 	%argrw{"wrr"}
 	add		$tmp728 $tmp732 $tmp735 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:46
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:46
 # 
 	sub		___364_d1 $tmp728 $const20 	%line{46} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:48
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:48
 #   d = min(d, d1);
 	lt		$tmp741 ___364_d1 ___364_d 	%line{48} %argrw{"wrr"}
 	if		$tmp741 981 981 	%argrw{"r"}
 	assign		___365__ $const26 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:49
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:49
 # 
 	min		___364_d ___364_d ___364_d1 	%line{49} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:52
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:52
 #   p1[1] = abs(p1[1]);
 	assign		___364_p1 $tmp623 	%line{52} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:53
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:53
 #   p1 = p1 - vector(0,.5,-.1);
 	compref		$tmp743 ___364_p1 $const10 	%line{53} %argrw{"wrr"}
 	abs		$tmp742 $tmp743 	%argrw{"wr"}
 	compassign	___364_p1 $const10 $tmp742 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:54
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:54
 #   p1[0] = mod(p1[0] + 4.5 , 9) - 3 + 3*(sign(-pos[1])/2 + .5) ;
 	sub		___364_p1 ___364_p1 $const27 	%line{54} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:55
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:55
 #   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
 	compref		$tmp746 ___364_p1 $const2 	%line{55} %argrw{"wrr"}
 	add		$tmp747 $tmp746 $const28 	%argrw{"wrr"}
@@ -2907,9 +2907,9 @@ code ___main___
 	floor		$tmp748 $tmp749 	%argrw{"wr"}
 	mul		$tmp750 $const30 $tmp748 	%argrw{"wrr"}
 	sub		$tmp745 $tmp747 $tmp750 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:55
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:55
 #   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
-	sub		$tmp751 $tmp745 $const18 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{55} %argrw{"wrr"}
+	sub		$tmp751 $tmp745 $const18 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{55} %argrw{"wrr"}
 	compref		$tmp753 $tmp623 $const10 	%argrw{"wrr"}
 	neg		$tmp754 $tmp753 	%argrw{"wr"}
 	sign		$tmp752 $tmp754 	%argrw{"wr"}
@@ -2918,15 +2918,15 @@ code ___main___
 	mul		$tmp757 $const18 $tmp756 	%argrw{"wrr"}
 	add		$tmp758 $tmp751 $tmp757 	%argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp758 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:56
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:56
 # 
 	functioncall	$const7 1017 	%line{56} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp761 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp762 $const31 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp761 $tmp762 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp765 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp764 ___363_q $tmp765 	%argrw{"wrr"}
@@ -2938,43 +2938,43 @@ code ___main___
 	max		$tmp767 $tmp768 $tmp769 	%argrw{"wrr"}
 	min		$tmp766 $tmp767 $const3 	%argrw{"wrr"}
 	add		$tmp759 $tmp763 $tmp766 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:56
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:56
 # 
 	sub		___364_d1 $tmp759 $const20 	%line{56} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:58
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:58
 #   d = min(d, d1);
 	lt		$tmp772 ___364_d1 ___364_d 	%line{58} %argrw{"wrr"}
 	if		$tmp772 1021 1021 	%argrw{"r"}
 	assign		___365__ $const32 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:59
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:59
 # 
 	min		___364_d ___364_d ___364_d1 	%line{59} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:61
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:61
 # }
 	assign		$tmp621 ___364_d 	%line{61} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:69
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:69
 #                           map(pos + vector(0,0,e),_) - map(pos - vector(0,0,e),_)
 	sub		$tmp773 $tmp469 $tmp621 	%line{69} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:70
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:70
 #                           ));
 	vector		$tmp775 $const3 $const3 ___365_e 	%line{70} %argrw{"wrrr"}
 	add		$tmp776 ___371_pos $tmp775 	%argrw{"wrr"}
 	functioncall	$const4 1220 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:10
 #   pos -= vector(0,0,1);
 	assign		___365__ $const3 	%line{10} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:11
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:11
 #   float d = -sdBox(pos, vector(INFINITY,1,2));
 	sub		$tmp776 $tmp776 $const5 	%line{11} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:12
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:12
 # 
 	functioncall	$const7 1043 	%line{12} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp780 $tmp776 	%line{5} %argrw{"wr"}
 	div		$tmp781 $const6 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp780 $tmp781 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp784 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp783 ___363_q $tmp784 	%argrw{"wrr"}
@@ -2986,13 +2986,13 @@ code ___main___
 	max		$tmp786 $tmp787 $tmp788 	%argrw{"wrr"}
 	min		$tmp785 $tmp786 $const3 	%argrw{"wrr"}
 	add		$tmp778 $tmp782 $tmp785 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:12
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:12
 # 
 	neg		___364_d $tmp778 	%line{12} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:15
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:15
 #   p1[0] = mod(p1[0] + .5, 1) - .5 ;
 	sub		___364_p1 $tmp776 $const5 	%line{15} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:16
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:16
 #   float d1 = sdBox(p1, vector(.4,.4,.2));
 	compref		$tmp793 ___364_p1 $const2 	%line{16} %argrw{"wrr"}
 	add		$tmp794 $tmp793 $const11 	%argrw{"wrr"}
@@ -3003,19 +3003,19 @@ code ___main___
 	floor		$tmp795 $tmp796 	%argrw{"wr"}
 	mul		$tmp797 $const12 $tmp795 	%argrw{"wrr"}
 	sub		$tmp792 $tmp794 $tmp797 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:16
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:16
 #   float d1 = sdBox(p1, vector(.4,.4,.2));
-	sub		$tmp798 $tmp792 $const11 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{16} %argrw{"wrr"}
+	sub		$tmp798 $tmp792 $const11 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{16} %argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp798 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:17
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:17
 # 
 	functioncall	$const7 1068 	%line{17} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp800 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp801 $const14 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp800 $tmp801 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp804 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp803 ___363_q $tmp804 	%argrw{"wrr"}
@@ -3027,26 +3027,26 @@ code ___main___
 	max		$tmp806 $tmp807 $tmp808 	%argrw{"wrr"}
 	min		$tmp805 $tmp806 $const3 	%argrw{"wrr"}
 	add		___364_d1 $tmp802 $tmp805 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:19
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:19
 #   d = min(d, d1);
 	lt		$tmp811 ___364_d1 ___364_d 	%line{19} %argrw{"wrr"}
 	if		$tmp811 1071 1071 	%argrw{"r"}
 	assign		___365__ $const12 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:20
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:20
 # 
 	min		___364_d ___364_d ___364_d1 	%line{20} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:24
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:24
 #   p1[1] = abs(p1[1]);
 	assign		___364_p1 $tmp776 	%line{24} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:25
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:25
 #   p1 = p1 - vector(0,.5,-.25);
 	compref		$tmp813 ___364_p1 $const10 	%line{25} %argrw{"wrr"}
 	abs		$tmp812 $tmp813 	%argrw{"wr"}
 	compassign	___364_p1 $const10 $tmp812 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:26
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:26
 #   p1[0] = mod(p1[0] + 1.5, 3) - 1.5 ;
 	sub		___364_p1 ___364_p1 $const15 	%line{26} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:27
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:27
 #   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
 	compref		$tmp816 ___364_p1 $const2 	%line{27} %argrw{"wrr"}
 	add		$tmp817 $tmp816 $const16 	%argrw{"wrr"}
@@ -3057,19 +3057,19 @@ code ___main___
 	floor		$tmp818 $tmp819 	%argrw{"wr"}
 	mul		$tmp820 $const18 $tmp818 	%argrw{"wrr"}
 	sub		$tmp815 $tmp817 $tmp820 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:27
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:27
 #   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
-	sub		$tmp821 $tmp815 $const16 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{27} %argrw{"wrr"}
+	sub		$tmp821 $tmp815 $const16 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{27} %argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp821 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:28
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:28
 #   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
 	functioncall	$const7 1100 	%line{28} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp824 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp825 $const19 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp824 $tmp825 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp828 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp827 ___363_q $tmp828 	%argrw{"wrr"}
@@ -3081,18 +3081,18 @@ code ___main___
 	max		$tmp830 $tmp831 $tmp832 	%argrw{"wrr"}
 	min		$tmp829 $tmp830 $const3 	%argrw{"wrr"}
 	add		$tmp822 $tmp826 $tmp829 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:28
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:28
 #   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
 	sub		___364_d1 $tmp822 $const20 	%line{28} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:29
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:29
 #   d1 = max(d1, -d2);
 	functioncall	$const7 1115 	%line{29} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp837 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp838 $const21 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp837 $tmp838 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp841 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp840 ___363_q $tmp841 	%argrw{"wrr"}
@@ -3104,23 +3104,23 @@ code ___main___
 	max		$tmp843 $tmp844 $tmp845 	%argrw{"wrr"}
 	min		$tmp842 $tmp843 $const3 	%argrw{"wrr"}
 	add		$tmp835 $tmp839 $tmp842 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:29
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:29
 #   d1 = max(d1, -d2);
 	sub		___364_d2 $tmp835 $const20 	%line{29} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:30
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:30
 #   d2 = sdBox(p1 - vector(0,0,0), vector(.8,.1,1.4)) - .02;
 	neg		$tmp848 ___364_d2 	%line{30} %argrw{"wr"}
 	max		___364_d1 ___364_d1 $tmp848 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:31
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:31
 #   d1 = min(d1,d2);
 	sub		$tmp851 ___364_p1 $const1 	%line{31} %argrw{"wrr"}
 	functioncall	$const7 1133 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp853 $tmp851 	%line{5} %argrw{"wr"}
 	div		$tmp854 $const22 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp853 $tmp854 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp857 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp856 ___363_q $tmp857 	%argrw{"wrr"}
@@ -3132,32 +3132,32 @@ code ___main___
 	max		$tmp859 $tmp860 $tmp861 	%argrw{"wrr"}
 	min		$tmp858 $tmp859 $const3 	%argrw{"wrr"}
 	add		$tmp849 $tmp855 $tmp858 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:31
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:31
 #   d1 = min(d1,d2);
 	sub		___364_d2 $tmp849 $const20 	%line{31} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:32
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:32
 # 
 	min		___364_d1 ___364_d1 ___364_d2 	%line{32} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:34
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:34
 #   d = min(d, d1);
 	lt		$tmp864 ___364_d1 ___364_d 	%line{34} %argrw{"wrr"}
 	if		$tmp864 1138 1138 	%argrw{"r"}
 	assign		___365__ $const9 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:35
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:35
 # 
 	min		___364_d ___364_d ___364_d1 	%line{35} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:38
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:38
 #   d1 = sdBox(p1, vector(INFINITY,.7,.05)) - .02;
 	sub		___364_p1 $tmp776 $const23 	%line{38} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:39
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:39
 # 
 	functioncall	$const7 1154 	%line{39} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp868 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp869 $const24 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp868 $tmp869 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp872 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp871 ___363_q $tmp872 	%argrw{"wrr"}
@@ -3169,29 +3169,29 @@ code ___main___
 	max		$tmp874 $tmp875 $tmp876 	%argrw{"wrr"}
 	min		$tmp873 $tmp874 $const3 	%argrw{"wrr"}
 	add		$tmp866 $tmp870 $tmp873 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:39
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:39
 # 
 	sub		___364_d1 $tmp866 $const20 	%line{39} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:41
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:41
 #   d = min(d, d1);
 	lt		$tmp879 ___364_d1 ___364_d 	%line{41} %argrw{"wrr"}
 	if		$tmp879 1158 1158 	%argrw{"r"}
 	assign		___365__ $const18 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:42
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:42
 # 
 	min		___364_d ___364_d ___364_d1 	%line{42} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:45
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:45
 #   d1 = sdBox(p1, vector(INFINITY,1,.005)) - .02;
 	sub		___364_p1 $tmp776 $const5 	%line{45} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:46
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:46
 # 
 	functioncall	$const7 1174 	%line{46} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp883 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp884 $const25 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp883 $tmp884 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp887 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp886 ___363_q $tmp887 	%argrw{"wrr"}
@@ -3203,29 +3203,29 @@ code ___main___
 	max		$tmp889 $tmp890 $tmp891 	%argrw{"wrr"}
 	min		$tmp888 $tmp889 $const3 	%argrw{"wrr"}
 	add		$tmp881 $tmp885 $tmp888 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:46
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:46
 # 
 	sub		___364_d1 $tmp881 $const20 	%line{46} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:48
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:48
 #   d = min(d, d1);
 	lt		$tmp894 ___364_d1 ___364_d 	%line{48} %argrw{"wrr"}
 	if		$tmp894 1178 1178 	%argrw{"r"}
 	assign		___365__ $const26 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:49
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:49
 # 
 	min		___364_d ___364_d ___364_d1 	%line{49} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:52
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:52
 #   p1[1] = abs(p1[1]);
 	assign		___364_p1 $tmp776 	%line{52} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:53
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:53
 #   p1 = p1 - vector(0,.5,-.1);
 	compref		$tmp896 ___364_p1 $const10 	%line{53} %argrw{"wrr"}
 	abs		$tmp895 $tmp896 	%argrw{"wr"}
 	compassign	___364_p1 $const10 $tmp895 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:54
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:54
 #   p1[0] = mod(p1[0] + 4.5 , 9) - 3 + 3*(sign(-pos[1])/2 + .5) ;
 	sub		___364_p1 ___364_p1 $const27 	%line{54} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:55
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:55
 #   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
 	compref		$tmp899 ___364_p1 $const2 	%line{55} %argrw{"wrr"}
 	add		$tmp900 $tmp899 $const28 	%argrw{"wrr"}
@@ -3236,9 +3236,9 @@ code ___main___
 	floor		$tmp901 $tmp902 	%argrw{"wr"}
 	mul		$tmp903 $const30 $tmp901 	%argrw{"wrr"}
 	sub		$tmp898 $tmp900 $tmp903 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:55
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:55
 #   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
-	sub		$tmp904 $tmp898 $const18 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{55} %argrw{"wrr"}
+	sub		$tmp904 $tmp898 $const18 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{55} %argrw{"wrr"}
 	compref		$tmp906 $tmp776 $const10 	%argrw{"wrr"}
 	neg		$tmp907 $tmp906 	%argrw{"wr"}
 	sign		$tmp905 $tmp907 	%argrw{"wr"}
@@ -3247,15 +3247,15 @@ code ___main___
 	mul		$tmp910 $const18 $tmp909 	%argrw{"wrr"}
 	add		$tmp911 $tmp904 $tmp910 	%argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp911 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:56
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:56
 # 
 	functioncall	$const7 1214 	%line{56} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp914 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp915 $const31 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp914 $tmp915 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp918 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp917 ___363_q $tmp918 	%argrw{"wrr"}
@@ -3267,40 +3267,40 @@ code ___main___
 	max		$tmp920 $tmp921 $tmp922 	%argrw{"wrr"}
 	min		$tmp919 $tmp920 $const3 	%argrw{"wrr"}
 	add		$tmp912 $tmp916 $tmp919 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:56
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:56
 # 
 	sub		___364_d1 $tmp912 $const20 	%line{56} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:58
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:58
 #   d = min(d, d1);
 	lt		$tmp925 ___364_d1 ___364_d 	%line{58} %argrw{"wrr"}
 	if		$tmp925 1218 1218 	%argrw{"r"}
 	assign		___365__ $const32 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:59
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:59
 # 
 	min		___364_d ___364_d ___364_d1 	%line{59} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:61
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:61
 # }
 	assign		$tmp774 ___364_d 	%line{61} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:70
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:70
 #                           ));
 	vector		$tmp927 $const3 $const3 ___365_e 	%line{70} %argrw{"wrrr"}
 	sub		$tmp928 ___371_pos $tmp927 	%argrw{"wrr"}
 	functioncall	$const4 1416 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:10
 #   pos -= vector(0,0,1);
 	assign		___365__ $const3 	%line{10} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:11
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:11
 #   float d = -sdBox(pos, vector(INFINITY,1,2));
 	sub		$tmp928 $tmp928 $const5 	%line{11} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:12
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:12
 # 
 	functioncall	$const7 1239 	%line{12} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp932 $tmp928 	%line{5} %argrw{"wr"}
 	div		$tmp933 $const6 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp932 $tmp933 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp936 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp935 ___363_q $tmp936 	%argrw{"wrr"}
@@ -3312,13 +3312,13 @@ code ___main___
 	max		$tmp938 $tmp939 $tmp940 	%argrw{"wrr"}
 	min		$tmp937 $tmp938 $const3 	%argrw{"wrr"}
 	add		$tmp930 $tmp934 $tmp937 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:12
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:12
 # 
 	neg		___364_d $tmp930 	%line{12} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:15
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:15
 #   p1[0] = mod(p1[0] + .5, 1) - .5 ;
 	sub		___364_p1 $tmp928 $const5 	%line{15} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:16
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:16
 #   float d1 = sdBox(p1, vector(.4,.4,.2));
 	compref		$tmp945 ___364_p1 $const2 	%line{16} %argrw{"wrr"}
 	add		$tmp946 $tmp945 $const11 	%argrw{"wrr"}
@@ -3329,19 +3329,19 @@ code ___main___
 	floor		$tmp947 $tmp948 	%argrw{"wr"}
 	mul		$tmp949 $const12 $tmp947 	%argrw{"wrr"}
 	sub		$tmp944 $tmp946 $tmp949 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:16
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:16
 #   float d1 = sdBox(p1, vector(.4,.4,.2));
-	sub		$tmp950 $tmp944 $const11 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{16} %argrw{"wrr"}
+	sub		$tmp950 $tmp944 $const11 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{16} %argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp950 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:17
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:17
 # 
 	functioncall	$const7 1264 	%line{17} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp952 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp953 $const14 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp952 $tmp953 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp956 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp955 ___363_q $tmp956 	%argrw{"wrr"}
@@ -3353,26 +3353,26 @@ code ___main___
 	max		$tmp958 $tmp959 $tmp960 	%argrw{"wrr"}
 	min		$tmp957 $tmp958 $const3 	%argrw{"wrr"}
 	add		___364_d1 $tmp954 $tmp957 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:19
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:19
 #   d = min(d, d1);
 	lt		$tmp963 ___364_d1 ___364_d 	%line{19} %argrw{"wrr"}
 	if		$tmp963 1267 1267 	%argrw{"r"}
 	assign		___365__ $const12 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:20
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:20
 # 
 	min		___364_d ___364_d ___364_d1 	%line{20} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:24
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:24
 #   p1[1] = abs(p1[1]);
 	assign		___364_p1 $tmp928 	%line{24} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:25
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:25
 #   p1 = p1 - vector(0,.5,-.25);
 	compref		$tmp965 ___364_p1 $const10 	%line{25} %argrw{"wrr"}
 	abs		$tmp964 $tmp965 	%argrw{"wr"}
 	compassign	___364_p1 $const10 $tmp964 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:26
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:26
 #   p1[0] = mod(p1[0] + 1.5, 3) - 1.5 ;
 	sub		___364_p1 ___364_p1 $const15 	%line{26} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:27
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:27
 #   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
 	compref		$tmp968 ___364_p1 $const2 	%line{27} %argrw{"wrr"}
 	add		$tmp969 $tmp968 $const16 	%argrw{"wrr"}
@@ -3383,19 +3383,19 @@ code ___main___
 	floor		$tmp970 $tmp971 	%argrw{"wr"}
 	mul		$tmp972 $const18 $tmp970 	%argrw{"wrr"}
 	sub		$tmp967 $tmp969 $tmp972 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:27
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:27
 #   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
-	sub		$tmp973 $tmp967 $const16 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{27} %argrw{"wrr"}
+	sub		$tmp973 $tmp967 $const16 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{27} %argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp973 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:28
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:28
 #   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
 	functioncall	$const7 1296 	%line{28} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp976 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp977 $const19 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp976 $tmp977 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp980 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp979 ___363_q $tmp980 	%argrw{"wrr"}
@@ -3407,18 +3407,18 @@ code ___main___
 	max		$tmp982 $tmp983 $tmp984 	%argrw{"wrr"}
 	min		$tmp981 $tmp982 $const3 	%argrw{"wrr"}
 	add		$tmp974 $tmp978 $tmp981 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:28
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:28
 #   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
 	sub		___364_d1 $tmp974 $const20 	%line{28} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:29
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:29
 #   d1 = max(d1, -d2);
 	functioncall	$const7 1311 	%line{29} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp989 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp990 $const21 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp989 $tmp990 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp993 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp992 ___363_q $tmp993 	%argrw{"wrr"}
@@ -3430,23 +3430,23 @@ code ___main___
 	max		$tmp995 $tmp996 $tmp997 	%argrw{"wrr"}
 	min		$tmp994 $tmp995 $const3 	%argrw{"wrr"}
 	add		$tmp987 $tmp991 $tmp994 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:29
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:29
 #   d1 = max(d1, -d2);
 	sub		___364_d2 $tmp987 $const20 	%line{29} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:30
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:30
 #   d2 = sdBox(p1 - vector(0,0,0), vector(.8,.1,1.4)) - .02;
 	neg		$tmp1000 ___364_d2 	%line{30} %argrw{"wr"}
 	max		___364_d1 ___364_d1 $tmp1000 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:31
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:31
 #   d1 = min(d1,d2);
 	sub		$tmp1003 ___364_p1 $const1 	%line{31} %argrw{"wrr"}
 	functioncall	$const7 1329 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp1005 $tmp1003 	%line{5} %argrw{"wr"}
 	div		$tmp1006 $const22 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp1005 $tmp1006 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp1009 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp1008 ___363_q $tmp1009 	%argrw{"wrr"}
@@ -3458,32 +3458,32 @@ code ___main___
 	max		$tmp1011 $tmp1012 $tmp1013 	%argrw{"wrr"}
 	min		$tmp1010 $tmp1011 $const3 	%argrw{"wrr"}
 	add		$tmp1001 $tmp1007 $tmp1010 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:31
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:31
 #   d1 = min(d1,d2);
 	sub		___364_d2 $tmp1001 $const20 	%line{31} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:32
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:32
 # 
 	min		___364_d1 ___364_d1 ___364_d2 	%line{32} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:34
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:34
 #   d = min(d, d1);
 	lt		$tmp1016 ___364_d1 ___364_d 	%line{34} %argrw{"wrr"}
 	if		$tmp1016 1334 1334 	%argrw{"r"}
 	assign		___365__ $const9 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:35
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:35
 # 
 	min		___364_d ___364_d ___364_d1 	%line{35} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:38
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:38
 #   d1 = sdBox(p1, vector(INFINITY,.7,.05)) - .02;
 	sub		___364_p1 $tmp928 $const23 	%line{38} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:39
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:39
 # 
 	functioncall	$const7 1350 	%line{39} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp1020 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp1021 $const24 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp1020 $tmp1021 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp1024 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp1023 ___363_q $tmp1024 	%argrw{"wrr"}
@@ -3495,29 +3495,29 @@ code ___main___
 	max		$tmp1026 $tmp1027 $tmp1028 	%argrw{"wrr"}
 	min		$tmp1025 $tmp1026 $const3 	%argrw{"wrr"}
 	add		$tmp1018 $tmp1022 $tmp1025 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:39
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:39
 # 
 	sub		___364_d1 $tmp1018 $const20 	%line{39} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:41
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:41
 #   d = min(d, d1);
 	lt		$tmp1031 ___364_d1 ___364_d 	%line{41} %argrw{"wrr"}
 	if		$tmp1031 1354 1354 	%argrw{"r"}
 	assign		___365__ $const18 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:42
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:42
 # 
 	min		___364_d ___364_d ___364_d1 	%line{42} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:45
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:45
 #   d1 = sdBox(p1, vector(INFINITY,1,.005)) - .02;
 	sub		___364_p1 $tmp928 $const5 	%line{45} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:46
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:46
 # 
 	functioncall	$const7 1370 	%line{46} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp1035 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp1036 $const25 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp1035 $tmp1036 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp1039 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp1038 ___363_q $tmp1039 	%argrw{"wrr"}
@@ -3529,29 +3529,29 @@ code ___main___
 	max		$tmp1041 $tmp1042 $tmp1043 	%argrw{"wrr"}
 	min		$tmp1040 $tmp1041 $const3 	%argrw{"wrr"}
 	add		$tmp1033 $tmp1037 $tmp1040 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:46
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:46
 # 
 	sub		___364_d1 $tmp1033 $const20 	%line{46} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:48
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:48
 #   d = min(d, d1);
 	lt		$tmp1046 ___364_d1 ___364_d 	%line{48} %argrw{"wrr"}
 	if		$tmp1046 1374 1374 	%argrw{"r"}
 	assign		___365__ $const26 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:49
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:49
 # 
 	min		___364_d ___364_d ___364_d1 	%line{49} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:52
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:52
 #   p1[1] = abs(p1[1]);
 	assign		___364_p1 $tmp928 	%line{52} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:53
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:53
 #   p1 = p1 - vector(0,.5,-.1);
 	compref		$tmp1048 ___364_p1 $const10 	%line{53} %argrw{"wrr"}
 	abs		$tmp1047 $tmp1048 	%argrw{"wr"}
 	compassign	___364_p1 $const10 $tmp1047 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:54
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:54
 #   p1[0] = mod(p1[0] + 4.5 , 9) - 3 + 3*(sign(-pos[1])/2 + .5) ;
 	sub		___364_p1 ___364_p1 $const27 	%line{54} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:55
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:55
 #   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
 	compref		$tmp1051 ___364_p1 $const2 	%line{55} %argrw{"wrr"}
 	add		$tmp1052 $tmp1051 $const28 	%argrw{"wrr"}
@@ -3562,9 +3562,9 @@ code ___main___
 	floor		$tmp1053 $tmp1054 	%argrw{"wr"}
 	mul		$tmp1055 $const30 $tmp1053 	%argrw{"wrr"}
 	sub		$tmp1050 $tmp1052 $tmp1055 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:55
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:55
 #   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
-	sub		$tmp1056 $tmp1050 $const18 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{55} %argrw{"wrr"}
+	sub		$tmp1056 $tmp1050 $const18 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{55} %argrw{"wrr"}
 	compref		$tmp1058 $tmp928 $const10 	%argrw{"wrr"}
 	neg		$tmp1059 $tmp1058 	%argrw{"wr"}
 	sign		$tmp1057 $tmp1059 	%argrw{"wr"}
@@ -3573,15 +3573,15 @@ code ___main___
 	mul		$tmp1062 $const18 $tmp1061 	%argrw{"wrr"}
 	add		$tmp1063 $tmp1056 $tmp1062 	%argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp1063 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:56
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:56
 # 
 	functioncall	$const7 1410 	%line{56} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp1066 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp1067 $const31 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp1066 $tmp1067 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp1070 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp1069 ___363_q $tmp1070 	%argrw{"wrr"}
@@ -3593,34 +3593,34 @@ code ___main___
 	max		$tmp1072 $tmp1073 $tmp1074 	%argrw{"wrr"}
 	min		$tmp1071 $tmp1072 $const3 	%argrw{"wrr"}
 	add		$tmp1064 $tmp1068 $tmp1071 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:56
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:56
 # 
 	sub		___364_d1 $tmp1064 $const20 	%line{56} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:58
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:58
 #   d = min(d, d1);
 	lt		$tmp1077 ___364_d1 ___364_d 	%line{58} %argrw{"wrr"}
 	if		$tmp1077 1414 1414 	%argrw{"r"}
 	assign		___365__ $const32 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:59
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:59
 # 
 	min		___364_d ___364_d ___364_d1 	%line{59} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:61
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:61
 # }
 	assign		$tmp926 ___364_d 	%line{61} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:70
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:70
 #                           ));
 	sub		$tmp1078 $tmp774 $tmp926 	%line{70} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:67
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:67
 #                           map(pos + vector(e,0,0),_) - map(pos - vector(e,0,0),_),
 	vector		$tmp163 $tmp468 $tmp773 $tmp1078 	%line{67} %argrw{"wrrr"}
 	normalize	___371_norm $tmp163 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:151
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:151
 #     float spot_diff = clamp(dot(norm, spot_dir), 0.0, 1.0);
 	compref		$tmp1080 ___371_pos $const2 	%line{151} %argrw{"wrr"}
 	vector		$tmp1079 $tmp1080 $const3 $const45 	%argrw{"wrrr"}
 	sub		$tmp1081 $tmp1079 ___371_pos 	%argrw{"wrr"}
 	normalize	___371_spot_dir $tmp1081 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:152
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:152
 #     float spot_sha = castShadow(pos + plank*norm, spot_dir, plank,
 	dot		$tmp1082 ___371_norm ___371_spot_dir 	%line{152} %argrw{"wrr"}
 	functioncall	$const46 1427 	%argrw{"r"}
@@ -3628,50 +3628,50 @@ code ___main___
 # float  clamp (float x, float minval, float maxval) { return max(min(x,maxval),minval); }
 	min		$tmp1083 $tmp1082 $const12 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{163} %argrw{"wrr"}
 	max		___371_spot_diff $tmp1083 $const3 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:153
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:153
 #                                  length(vector(pos[0],0,1.7) - pos), 4);
-	mul		$tmp1084 plank ___371_norm 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{153} %argrw{"wrr"}
+	mul		$tmp1084 plank ___371_norm 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{153} %argrw{"wrr"}
 	add		$tmp1085 ___371_pos $tmp1084 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:154
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:154
 #     float sky_diff = clamp(.6 + .4*dot(norm, vector(0,0,1)), 0.0, 1.0);
 	compref		$tmp1088 ___371_pos $const2 	%line{154} %argrw{"wrr"}
 	vector		$tmp1087 $tmp1088 $const3 $const45 	%argrw{"wrrr"}
 	sub		$tmp1089 $tmp1087 ___371_pos 	%argrw{"wrr"}
 	length		$tmp1086 $tmp1089 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:153
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:153
 #                                  length(vector(pos[0],0,1.7) - pos), 4);
 	functioncall	$const48 1644 	%line{153} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:83
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:83
 #   for ( float t=plank; t<tmax; ){
 	assign		___366_res $const12 	%line{83} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:84
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:84
 #     vector pos = ro + rd * t;
 	for		$tmp1091 1437 1439 1643 1643 	%line{84} %argrw{"r"}
 	assign		___367_t plank 	%argrw{"wr"}
 	lt		$tmp1090 ___367_t $tmp1086 	%argrw{"wrr"}
 	neq		$tmp1091 $tmp1090 $const2 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:85
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:85
 # 
 	mul		$tmp1092 ___371_spot_dir ___367_t 	%line{85} %argrw{"wrr"}
 	add		___368_pos $tmp1085 $tmp1092 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:88
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:88
 # 
 	functioncall	$const4 1635 	%line{88} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:10
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:10
 #   pos -= vector(0,0,1);
 	assign		___368__ $const3 	%line{10} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:11
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:11
 #   float d = -sdBox(pos, vector(INFINITY,1,2));
 	sub		___368_pos ___368_pos $const5 	%line{11} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:12
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:12
 # 
 	functioncall	$const7 1458 	%line{12} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp1096 ___368_pos 	%line{5} %argrw{"wr"}
 	div		$tmp1097 $const6 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp1096 $tmp1097 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp1100 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp1099 ___363_q $tmp1100 	%argrw{"wrr"}
@@ -3683,13 +3683,13 @@ code ___main___
 	max		$tmp1102 $tmp1103 $tmp1104 	%argrw{"wrr"}
 	min		$tmp1101 $tmp1102 $const3 	%argrw{"wrr"}
 	add		$tmp1094 $tmp1098 $tmp1101 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:12
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:12
 # 
 	neg		___364_d $tmp1094 	%line{12} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:15
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:15
 #   p1[0] = mod(p1[0] + .5, 1) - .5 ;
 	sub		___364_p1 ___368_pos $const5 	%line{15} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:16
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:16
 #   float d1 = sdBox(p1, vector(.4,.4,.2));
 	compref		$tmp1109 ___364_p1 $const2 	%line{16} %argrw{"wrr"}
 	add		$tmp1110 $tmp1109 $const11 	%argrw{"wrr"}
@@ -3700,19 +3700,19 @@ code ___main___
 	floor		$tmp1111 $tmp1112 	%argrw{"wr"}
 	mul		$tmp1113 $const12 $tmp1111 	%argrw{"wrr"}
 	sub		$tmp1108 $tmp1110 $tmp1113 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:16
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:16
 #   float d1 = sdBox(p1, vector(.4,.4,.2));
-	sub		$tmp1114 $tmp1108 $const11 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{16} %argrw{"wrr"}
+	sub		$tmp1114 $tmp1108 $const11 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{16} %argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp1114 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:17
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:17
 # 
 	functioncall	$const7 1483 	%line{17} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp1116 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp1117 $const14 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp1116 $tmp1117 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp1120 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp1119 ___363_q $tmp1120 	%argrw{"wrr"}
@@ -3724,26 +3724,26 @@ code ___main___
 	max		$tmp1122 $tmp1123 $tmp1124 	%argrw{"wrr"}
 	min		$tmp1121 $tmp1122 $const3 	%argrw{"wrr"}
 	add		___364_d1 $tmp1118 $tmp1121 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:19
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:19
 #   d = min(d, d1);
 	lt		$tmp1127 ___364_d1 ___364_d 	%line{19} %argrw{"wrr"}
 	if		$tmp1127 1486 1486 	%argrw{"r"}
 	assign		___368__ $const12 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:20
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:20
 # 
 	min		___364_d ___364_d ___364_d1 	%line{20} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:24
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:24
 #   p1[1] = abs(p1[1]);
 	assign		___364_p1 ___368_pos 	%line{24} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:25
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:25
 #   p1 = p1 - vector(0,.5,-.25);
 	compref		$tmp1129 ___364_p1 $const10 	%line{25} %argrw{"wrr"}
 	abs		$tmp1128 $tmp1129 	%argrw{"wr"}
 	compassign	___364_p1 $const10 $tmp1128 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:26
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:26
 #   p1[0] = mod(p1[0] + 1.5, 3) - 1.5 ;
 	sub		___364_p1 ___364_p1 $const15 	%line{26} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:27
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:27
 #   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
 	compref		$tmp1132 ___364_p1 $const2 	%line{27} %argrw{"wrr"}
 	add		$tmp1133 $tmp1132 $const16 	%argrw{"wrr"}
@@ -3754,19 +3754,19 @@ code ___main___
 	floor		$tmp1134 $tmp1135 	%argrw{"wr"}
 	mul		$tmp1136 $const18 $tmp1134 	%argrw{"wrr"}
 	sub		$tmp1131 $tmp1133 $tmp1136 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:27
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:27
 #   d1 = sdBox(p1, vector(.9,.2,1.5)) - .02;
-	sub		$tmp1137 $tmp1131 $const16 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{27} %argrw{"wrr"}
+	sub		$tmp1137 $tmp1131 $const16 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{27} %argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp1137 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:28
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:28
 #   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
 	functioncall	$const7 1515 	%line{28} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp1140 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp1141 $const19 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp1140 $tmp1141 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp1144 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp1143 ___363_q $tmp1144 	%argrw{"wrr"}
@@ -3778,18 +3778,18 @@ code ___main___
 	max		$tmp1146 $tmp1147 $tmp1148 	%argrw{"wrr"}
 	min		$tmp1145 $tmp1146 $const3 	%argrw{"wrr"}
 	add		$tmp1138 $tmp1142 $tmp1145 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:28
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:28
 #   float d2 = sdBox(p1, vector(.8,.21,1.4)) - .02;
 	sub		___364_d1 $tmp1138 $const20 	%line{28} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:29
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:29
 #   d1 = max(d1, -d2);
 	functioncall	$const7 1530 	%line{29} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp1153 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp1154 $const21 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp1153 $tmp1154 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp1157 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp1156 ___363_q $tmp1157 	%argrw{"wrr"}
@@ -3801,23 +3801,23 @@ code ___main___
 	max		$tmp1159 $tmp1160 $tmp1161 	%argrw{"wrr"}
 	min		$tmp1158 $tmp1159 $const3 	%argrw{"wrr"}
 	add		$tmp1151 $tmp1155 $tmp1158 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:29
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:29
 #   d1 = max(d1, -d2);
 	sub		___364_d2 $tmp1151 $const20 	%line{29} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:30
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:30
 #   d2 = sdBox(p1 - vector(0,0,0), vector(.8,.1,1.4)) - .02;
 	neg		$tmp1164 ___364_d2 	%line{30} %argrw{"wr"}
 	max		___364_d1 ___364_d1 $tmp1164 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:31
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:31
 #   d1 = min(d1,d2);
 	sub		$tmp1167 ___364_p1 $const1 	%line{31} %argrw{"wrr"}
 	functioncall	$const7 1548 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp1169 $tmp1167 	%line{5} %argrw{"wr"}
 	div		$tmp1170 $const22 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp1169 $tmp1170 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp1173 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp1172 ___363_q $tmp1173 	%argrw{"wrr"}
@@ -3829,32 +3829,32 @@ code ___main___
 	max		$tmp1175 $tmp1176 $tmp1177 	%argrw{"wrr"}
 	min		$tmp1174 $tmp1175 $const3 	%argrw{"wrr"}
 	add		$tmp1165 $tmp1171 $tmp1174 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:31
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:31
 #   d1 = min(d1,d2);
 	sub		___364_d2 $tmp1165 $const20 	%line{31} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:32
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:32
 # 
 	min		___364_d1 ___364_d1 ___364_d2 	%line{32} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:34
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:34
 #   d = min(d, d1);
 	lt		$tmp1180 ___364_d1 ___364_d 	%line{34} %argrw{"wrr"}
 	if		$tmp1180 1553 1553 	%argrw{"r"}
 	assign		___368__ $const9 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:35
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:35
 # 
 	min		___364_d ___364_d ___364_d1 	%line{35} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:38
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:38
 #   d1 = sdBox(p1, vector(INFINITY,.7,.05)) - .02;
 	sub		___364_p1 ___368_pos $const23 	%line{38} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:39
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:39
 # 
 	functioncall	$const7 1569 	%line{39} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp1184 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp1185 $const24 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp1184 $tmp1185 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp1188 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp1187 ___363_q $tmp1188 	%argrw{"wrr"}
@@ -3866,29 +3866,29 @@ code ___main___
 	max		$tmp1190 $tmp1191 $tmp1192 	%argrw{"wrr"}
 	min		$tmp1189 $tmp1190 $const3 	%argrw{"wrr"}
 	add		$tmp1182 $tmp1186 $tmp1189 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:39
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:39
 # 
 	sub		___364_d1 $tmp1182 $const20 	%line{39} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:41
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:41
 #   d = min(d, d1);
 	lt		$tmp1195 ___364_d1 ___364_d 	%line{41} %argrw{"wrr"}
 	if		$tmp1195 1573 1573 	%argrw{"r"}
 	assign		___368__ $const18 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:42
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:42
 # 
 	min		___364_d ___364_d ___364_d1 	%line{42} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:45
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:45
 #   d1 = sdBox(p1, vector(INFINITY,1,.005)) - .02;
 	sub		___364_p1 ___368_pos $const5 	%line{45} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:46
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:46
 # 
 	functioncall	$const7 1589 	%line{46} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp1199 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp1200 $const25 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp1199 $tmp1200 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp1203 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp1202 ___363_q $tmp1203 	%argrw{"wrr"}
@@ -3900,29 +3900,29 @@ code ___main___
 	max		$tmp1205 $tmp1206 $tmp1207 	%argrw{"wrr"}
 	min		$tmp1204 $tmp1205 $const3 	%argrw{"wrr"}
 	add		$tmp1197 $tmp1201 $tmp1204 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:46
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:46
 # 
 	sub		___364_d1 $tmp1197 $const20 	%line{46} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:48
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:48
 #   d = min(d, d1);
 	lt		$tmp1210 ___364_d1 ___364_d 	%line{48} %argrw{"wrr"}
 	if		$tmp1210 1593 1593 	%argrw{"r"}
 	assign		___368__ $const26 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:49
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:49
 # 
 	min		___364_d ___364_d ___364_d1 	%line{49} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:52
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:52
 #   p1[1] = abs(p1[1]);
 	assign		___364_p1 ___368_pos 	%line{52} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:53
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:53
 #   p1 = p1 - vector(0,.5,-.1);
 	compref		$tmp1212 ___364_p1 $const10 	%line{53} %argrw{"wrr"}
 	abs		$tmp1211 $tmp1212 	%argrw{"wr"}
 	compassign	___364_p1 $const10 $tmp1211 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:54
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:54
 #   p1[0] = mod(p1[0] + 4.5 , 9) - 3 + 3*(sign(-pos[1])/2 + .5) ;
 	sub		___364_p1 ___364_p1 $const27 	%line{54} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:55
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:55
 #   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
 	compref		$tmp1215 ___364_p1 $const2 	%line{55} %argrw{"wrr"}
 	add		$tmp1216 $tmp1215 $const28 	%argrw{"wrr"}
@@ -3933,9 +3933,9 @@ code ___main___
 	floor		$tmp1217 $tmp1218 	%argrw{"wr"}
 	mul		$tmp1219 $const30 $tmp1217 	%argrw{"wrr"}
 	sub		$tmp1214 $tmp1216 $tmp1219 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:55
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:55
 #   d1 = sdBox(p1, vector(.6,.3,.6)) - .02;
-	sub		$tmp1220 $tmp1214 $const18 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{55} %argrw{"wrr"}
+	sub		$tmp1220 $tmp1214 $const18 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{55} %argrw{"wrr"}
 	compref		$tmp1222 ___368_pos $const10 	%argrw{"wrr"}
 	neg		$tmp1223 $tmp1222 	%argrw{"wr"}
 	sign		$tmp1221 $tmp1223 	%argrw{"wr"}
@@ -3944,15 +3944,15 @@ code ___main___
 	mul		$tmp1226 $const18 $tmp1225 	%argrw{"wrr"}
 	add		$tmp1227 $tmp1220 $tmp1226 	%argrw{"wrr"}
 	compassign	___364_p1 $const2 $tmp1227 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:56
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:56
 # 
 	functioncall	$const7 1629 	%line{56} %argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:5
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:5
 #   return length(max(q, 0.0)) + min(max(q[0],max(q[1],q[2])), 0.0);
 	abs		$tmp1230 ___364_p1 	%line{5} %argrw{"wr"}
 	div		$tmp1231 $const31 $const9 	%argrw{"wrr"}
 	sub		___363_q $tmp1230 $tmp1231 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:6
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:6
 # }
 	assign		$tmp1234 $const3 	%line{6} %argrw{"wr"}
 	max		$tmp1233 ___363_q $tmp1234 	%argrw{"wrr"}
@@ -3964,40 +3964,40 @@ code ___main___
 	max		$tmp1236 $tmp1237 $tmp1238 	%argrw{"wrr"}
 	min		$tmp1235 $tmp1236 $const3 	%argrw{"wrr"}
 	add		$tmp1228 $tmp1232 $tmp1235 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:56
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:56
 # 
 	sub		___364_d1 $tmp1228 $const20 	%line{56} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:58
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:58
 #   d = min(d, d1);
 	lt		$tmp1241 ___364_d1 ___364_d 	%line{58} %argrw{"wrr"}
 	if		$tmp1241 1633 1633 	%argrw{"r"}
 	assign		___368__ $const32 	%argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:59
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:59
 # 
 	min		___364_d ___364_d ___364_d1 	%line{59} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:61
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:61
 # }
 	assign		___368_h ___364_d 	%line{61} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:90
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:90
 #       return 0.0;
 	lt		$tmp1242 ___368_h plank 	%line{90} %argrw{"wrr"}
 	if		$tmp1242 1639 1639 	%argrw{"r"}
-# code/blender/liquidknot/dev/lk_coridor.osl:91
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:91
 # 
 	assign		___371_spot_sha $const3 	%line{91} %argrw{"wr"}
 	return
-# code/blender/liquidknot/dev/lk_coridor.osl:93
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:93
 # 
 	mul		$tmp1243 $const26 ___368_h 	%line{93} %argrw{"wrr"}
 	div		$tmp1244 $tmp1243 ___367_t 	%argrw{"wrr"}
 	min		___366_res ___366_res $tmp1244 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:95
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:95
 #   }
 	add		___367_t ___367_t ___368_h 	%line{95} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:97
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:97
 # }
 	assign		___371_spot_sha ___366_res 	%line{97} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:155
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:155
 # 
 	dot		$tmp1245 ___371_norm $const5 	%line{155} %argrw{"wrr"}
 	mul		$tmp1247 $const50 $tmp1245 	%argrw{"wrr"}
@@ -4007,25 +4007,25 @@ code ___main___
 # float  clamp (float x, float minval, float maxval) { return max(min(x,maxval),minval); }
 	min		$tmp1249 $tmp1248 $const12 	%filename{".bfs/blender/latest/2.90/scripts/addons/cycles/shader/stdosl.h"} %line{163} %argrw{"wrr"}
 	max		___371_sky_diff $tmp1249 $const3 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:157
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:157
 #     col += mate * sky_diff * vector(0.051);
-	mul		$tmp1250 ___371_mate ___371_spot_diff 	%filename{"code/blender/liquidknot/dev/lk_coridor.osl"} %line{157} %argrw{"wrr"}
+	mul		$tmp1250 ___371_mate ___371_spot_diff 	%filename{"code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl"} %line{157} %argrw{"wrr"}
 	mul		col $tmp1250 ___371_spot_sha 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:158
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:158
 # 
 	mul		$tmp1251 ___371_mate ___371_sky_diff 	%line{158} %argrw{"wrr"}
 	mul		$tmp1253 $tmp1251 $const51 	%argrw{"wrr"}
 	add		col col $tmp1253 	%argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:160
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:160
 #   }
 	assign		alpha $const10 	%line{160} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:163
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:163
 # 
 	pow		col col $const52 	%line{163} %argrw{"wrr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:165
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:165
 #   Alpha = alpha;
 	assign		FragColor col 	%line{165} %argrw{"wr"}
-# code/blender/liquidknot/dev/lk_coridor.osl:166
+# code/blender/liquidknot/dev/blend/../osl/lk_coridor.osl:166
 # }
 	assign		Alpha alpha 	%line{166} %argrw{"wr"}
 	end
