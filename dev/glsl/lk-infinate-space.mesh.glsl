@@ -9,14 +9,47 @@ uniform vec3 sun_color = vec3(.5, .8, .1);
 uniform vec3 sky_color = vec3(.001, .08, .3);
 uniform vec3 mate = vec3(.2);
 
+uniform float radius = .8;
+
+uniform int soft_fac = 2;
+
+uniform bool tiled = false;
+uniform float cell_size = 3.0;
+
+uniform float blend_fac = 0.001;
+
+
+float smin( float a, float b, float k )
+{
+    float h = max(k-abs(a-b),0.0);
+    return min(a, b) - h*h*0.25/k;
+}
+
+float smax( float a, float b, float k )
+{
+    float h = max(k-abs(a-b),0.0);
+    return max(a, b) + h*h*0.25/k;
+}
+
+// ---------------
+float sdBox( in vec2 p, in vec2 b )
+{
+    vec2 d = abs(p)-b;
+    return length(max(d,0.0)) + min(max(d.x,d.y),0.0);
+}
 
 float map( in vec3 pos )
 {
-    float d = length(pos) - 0.8;
-    d = min(d, pos.z+.8);
+    vec3 q = pos;
+    if(tiled)
+        q.xy = mod(pos.xy+0.5*cell_size,cell_size)-0.5*cell_size;
+    float d = length(q+vec3(0,0,.8-radius)) - radius;
+    d = smin(d, pos.z+.8, blend_fac);
 
     return d;
+
 }
+
 
 vec3 calc_normal( in vec3 p ){
    vec2 e = vec2 (light_plank, 0.0);
@@ -34,14 +67,36 @@ float castRay(vec3 ro, vec3 rd)
     for (int i=0; i<iters; i++)
     {
         vec3 pos = ro + rd * t;
-        float d = map ( pos );
-        t +=  d;
+        float h = map ( pos );
+        t +=  h;
 
-        if ( d < plank )
+        if ( h < plank )
             break;
 
     }
     return t;
+}
+
+float castShadow(
+                 vec3 ro,
+                 vec3 rd,
+                 float k
+                 )
+{
+  float res = 1.0;
+  for ( float t=plank; t<iters; ){
+    vec3 pos = ro + rd * t;
+
+    float h = map( pos );
+
+    if ( h < plank)
+      return 0.0;
+
+    res = min(res, k*h/t);
+
+    t+=h;
+  }
+  return res;
 }
 
 void COMMON_PIXEL_SHADER(Surface S, inout PixelOutput PO)
@@ -62,7 +117,7 @@ void COMMON_PIXEL_SHADER(Surface S, inout PixelOutput PO)
         vec3 sun_dir = normalize(vec3(sun_pos));
         vec3 nor = calc_normal(pos);
         float sun_diff = clamp(dot(nor, sun_dir), 0.0, 1.0);
-        float sun_sha = step(clipping, castRay(pos + nor * plank, sun_dir));
+        float sun_sha = castShadow(pos + nor * plank, sun_dir, soft_fac);
         float sky_diff = .5 + .5*clamp(dot(nor, vec3(0,0,1)), 0.0, 1.0);
 
         col = mate * sun_diff * sun_sha * sun_color;
